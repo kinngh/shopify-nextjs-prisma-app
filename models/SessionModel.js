@@ -1,0 +1,16 @@
+const mongoose = require("mongoose");
+
+const sessionSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+});
+
+const SessionModel = mongoose.model("Session", sessionSchema);
+
+module.exports = SessionModel;
