@@ -25,8 +25,8 @@ The Shopify CLI generates an amazing starter app, but I wanted a quickstart app 
 - The `dev` script in `package.json` contains `rm -rf .next` to remove the generated `.next` file because it can cause erros and deleting the file usually fixes it.
 
 ## TO-DO
-- Add Bcrypt to encrypt session string. 
 - Tests.
 - Add webhooks implementation.
 - Better error handling in `models/SessionModel.js`.
 - CONTRIBUTIONS.md
+- [x] Add Cryptr to encrypt session string. 

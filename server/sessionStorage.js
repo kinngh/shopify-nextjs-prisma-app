@@ -1,5 +1,7 @@
 const SessionModel = require("../models/SessionModel.js");
 const { Shopify } = require("@shopify/shopify-api");
+const Cryptr = require("cryptr");
+const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 
 const storeCallback = async (session) => {
   const result = await SessionModel.findOne({ id: session.id });
@@ -7,13 +9,13 @@ const storeCallback = async (session) => {
   if (result === null) {
     await SessionModel.create({
       id: session.id,
-      content: JSON.stringify(session),
+      content: cryption.encrypt(JSON.stringify(session)),
     });
   } else {
     await SessionModel.findOneAndUpdate(
       { id: session.id },
       {
-        content: JSON.stringify(session),
+        content: cryption.encrypt(JSON.stringify(session)),
       }
     );
   }
@@ -24,7 +26,7 @@ const storeCallback = async (session) => {
 const loadCallback = async (id) => {
   const sessionResult = await SessionModel.findOne({ id });
   if (sessionResult.content.length > 0) {
-    return JSON.parse(sessionResult.content);
+    return JSON.parse(cryption.decrypt(sessionResult.content));
   }
   return undefined;
 };

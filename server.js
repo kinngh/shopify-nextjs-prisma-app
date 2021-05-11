@@ -10,6 +10,8 @@ const getSubscriptionUrl = require("./server/getSubscriptionUrl");
 const mongoose = require("mongoose");
 const sessionStorage = require("./server/sessionStorage.js");
 const SessionModel = require("./models/SessionModel.js");
+const Cryptr = require("cryptr");
+const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost:27017/shopify-app";
@@ -44,7 +46,7 @@ const ACTIVE_SHOPIFY_SHOPS = {};
 SessionModel.find({})
   .then((results) => {
     results.forEach((res) => {
-      const { shop, scope } = JSON.parse(res.content);
+      const { shop, scope } = JSON.parse(cryption.decrypt(res.content));
       ACTIVE_SHOPIFY_SHOPS[shop] = scope;
     });
   })
