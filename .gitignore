@@ -6,6 +6,9 @@ yeet-here-comes-my-teeth/
 # macOS
 .DS_Store
 
+# Package-Lock
+package-lock.json
+
 # Logs
 logs
 *.log
