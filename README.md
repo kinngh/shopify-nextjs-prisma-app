@@ -33,13 +33,13 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 ## TO-DO
 
 - [ ] Better error handling in `server/sessionStorage.js`.
-- [ ] Custom Koa Routes.
+- [ ] Custom Koa REST Routes.
 - [ ] Script Tags.
 - [ ] Webhooks implementation.
   - [ ] GDPR Webhooks
   - [ ] Uninstall Webhook
-  - [ ] Template Webhook
 - [ ] Tests (Jest).
 - [ ] CONTRIBUTIONS.md
 - [ ] External pricing page.
+- [x] Next.js Routing.
 - [x] Cryptr for encryption.

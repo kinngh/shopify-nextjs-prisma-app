@@ -1,16 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
+import { useRouter } from "next/router";
+import { EmptyState, Card } from "@shopify/polaris";
 
-class Index extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        If you're reading this, it works.
-        {/*
-      If you're a Shopify Dev, please release Sections Everywhere™
-      */}
-      </React.Fragment>
-    );
-  }
-}
+const Index = () => {
+  const router = useRouter();
+  return (
+    <Card sectioned>
+      <EmptyState
+        heading="Home of something cool"
+        action={{
+          content: "Build Something",
+          onAction: () => {
+            router.push("/somethingCool");
+          },
+        }}
+        image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
+      ></EmptyState>
+    </Card>
+  );
+};
 
 export default Index;
