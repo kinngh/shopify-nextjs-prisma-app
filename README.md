@@ -29,6 +29,7 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 ### Misc notes
 
 - Most scripts in `package.json` contain `rm -rf .next` to remove the generated `.next` folder to reduce caching errors.
+- MongoDB collections are kept separate to allow for flexibility while building applications. 
 
 ## TO-DO
 
@@ -37,7 +38,7 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 - [ ] Script Tags.
 - [ ] Webhooks implementation.
   - [ ] GDPR Webhooks
-  - [ ] Uninstall Webhook
+  - [x] Uninstall Webhook
 - [ ] Tests (Jest).
 - [ ] CONTRIBUTIONS.md
 - [ ] External pricing page.

@@ -1,4 +1,5 @@
 const { default: Shopify } = require("@shopify/shopify-api");
+const StoreDetailsModel = require("../models/StoreDetailsModel.js");
 
 const getSubscriptionUrl = async (accessToken, shop, returnUrl) => {
   const query = `mutation {
@@ -32,6 +33,25 @@ const getSubscriptionUrl = async (accessToken, shop, returnUrl) => {
   const response = await client.query({
     data: query,
   });
+
+  const result = await StoreDetailsModel.findOne({ shop });
+
+  if (result === null) {
+    await StoreDetailsModel.create({
+      shop: shop,
+      subscriptionChargeId:
+        response.body.data.appSubscriptionCreate.appSubscription.id,
+    });
+  } else {
+    await StoreDetailsModel.findOneAndUpdate(
+      { shop },
+      {
+        subscriptionChargeId:
+          response.body.data.appSubscriptionCreate.appSubscription.id,
+      }
+    );
+  }
+
   return response.body.data.appSubscriptionCreate.confirmationUrl;
 };
 

@@ -13,6 +13,9 @@ const SessionModel = require("./models/SessionModel.js");
 const Cryptr = require("cryptr");
 const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 
+const webhookRouters = require("./webhooks");
+const { appUninstallWebhook } = require("./webhooks/app_uninstalled.js");
+
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost:27017/shopify-app";
 
@@ -74,6 +77,9 @@ app.prepare().then(() => {
 
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
 
+        //Webhooks
+        appUninstallWebhook(shop, accessToken);
+
         const returnUrl = `https://${Shopify.Context.HOST_NAME}?host=${host}&shop=${shop}`;
         const subscriptionUrl = await getSubscriptionUrl(
           accessToken,
@@ -107,6 +113,8 @@ app.prepare().then(() => {
       await handleRequest(ctx);
     }
   });
+
+  server.use(webhookRouters());
 
   router.get("(/_next/static/.*)", handleRequest);
   router.get("/_next/webpack-hmr", handleRequest);

@@ -1,6 +1,6 @@
 {
   "name": "shopify-node-mongodb-next-app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Shopify Boilerplate Code written in Next, Node, MongoDB and GraphQL",
   "main": "server.js",
   "scripts": {
@@ -11,7 +11,6 @@
   },
   "author": {
     "name": "Harshdeep Singh Hura",
-    "email": "harshdeephura@heuramedia.com",
     "url": "https://harshdeephura.com"
   },
   "dependencies": {
@@ -19,6 +18,7 @@
     "@shopify/app-bridge-react": "^2.0.2",
     "@shopify/app-bridge-utils": "^2.0.2",
     "@shopify/koa-shopify-auth": "^4.1.3",
+    "@shopify/koa-shopify-webhooks": "^2.6.4",
     "@shopify/polaris": "^6.3.0",
     "apollo-boost": "^0.4.9",
     "cryptr": "^6.0.2",
@@ -26,6 +26,7 @@
     "graphql": "^15.5.0",
     "isomorphic-fetch": "^3.0.0",
     "koa": "^2.13.1",
+    "koa-combine-routers": "^4.0.2",
     "koa-router": "^10.0.0",
     "koa-session": "^6.2.0",
     "mongoose": "^5.12.7",

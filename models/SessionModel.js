@@ -9,6 +9,10 @@ const sessionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  shop: {
+    type: String,
+    required: true,
+  },
 });
 
 const SessionModel = mongoose.model("Session", sessionSchema);

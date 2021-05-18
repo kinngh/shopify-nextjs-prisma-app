@@ -10,12 +10,14 @@ const storeCallback = async (session) => {
     await SessionModel.create({
       id: session.id,
       content: cryption.encrypt(JSON.stringify(session)),
+      shop: session.shop,
     });
   } else {
     await SessionModel.findOneAndUpdate(
       { id: session.id },
       {
         content: cryption.encrypt(JSON.stringify(session)),
+        shop: session.shop,
       }
     );
   }
