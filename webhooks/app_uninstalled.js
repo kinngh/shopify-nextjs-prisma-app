@@ -17,7 +17,7 @@ const SessionModel = require("../models/SessionModel.js");
 const webhookUrl = "/webhooks/app/uninstall";
 
 //
-//Webhook
+//MARK:- Webhook
 //
 
 const appUninstallWebhook = async (shop, accessToken) => {
@@ -40,7 +40,7 @@ const appUninstallWebhook = async (shop, accessToken) => {
 };
 
 //
-//Route
+//MARK:- Route
 //
 
 appUninstallRoute.post(`${webhookUrl}`, webhook, async (ctx) => {

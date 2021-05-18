@@ -1,3 +1,8 @@
+/**
+ * Based on the Redis example from shopify-node-api [Accessed: May 19, 2021]
+ * https://github.com/Shopify/shopify-node-api/blob/main/docs/usage/customsessions.md
+ */
+
 const SessionModel = require("../models/SessionModel.js");
 const { Shopify } = require("@shopify/shopify-api");
 const Cryptr = require("cryptr");

@@ -1,4 +1,6 @@
-//Store transactional IDs and other content here
+/**
+ * Model to store transactional IDs irrespective of current store status.
+ */
 const mongoose = require("mongoose");
 
 const StoreDetailsSchema = new mongoose.Schema({

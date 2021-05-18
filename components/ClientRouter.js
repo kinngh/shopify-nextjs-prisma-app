@@ -1,3 +1,7 @@
+/**
+ * Enable client side routing
+ */
+
 import { withRouter } from "next/router";
 import { ClientRouter as AppBridgeClientRouter } from "@shopify/app-bridge-react";
 

@@ -16,6 +16,7 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 const webhookRouters = require("./webhooks");
 const { appUninstallWebhook } = require("./webhooks/app_uninstalled.js");
 
+//MARK:- MongoDB Init
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost:27017/shopify-app";
 
@@ -29,6 +30,7 @@ mongoose.connect(
   () => console.log("--> Connected To Mongo")
 );
 
+//MARK:- Shopify Init
 Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
   API_SECRET_KEY: process.env.SHOPIFY_API_SECRET,
@@ -44,6 +46,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+//MARK:- Get currently active stores. Persists store sessions after a sever restart
 const ACTIVE_SHOPIFY_SHOPS = {};
 
 SessionModel.find({})
@@ -57,6 +60,7 @@ SessionModel.find({})
     console.log("An error occured", err.message);
   });
 
+  //MARK:- Koa Server
 app.prepare().then(() => {
   const server = new Koa();
   const router = new Router();
@@ -77,7 +81,7 @@ app.prepare().then(() => {
 
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
 
-        //Webhooks
+        //MARK:- Webhooks
         appUninstallWebhook(shop, accessToken);
 
         const returnUrl = `https://${Shopify.Context.HOST_NAME}?host=${host}&shop=${shop}`;
@@ -114,6 +118,7 @@ app.prepare().then(() => {
     }
   });
 
+  //MARK:- Routes and routers
   server.use(webhookRouters());
 
   router.get("(/_next/static/.*)", handleRequest);

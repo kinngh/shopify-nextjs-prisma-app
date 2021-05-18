@@ -1,3 +1,6 @@
+/**
+ * Encrypted Mongo Model to persist sessions across restarts.
+ */
 const mongoose = require("mongoose");
 
 const sessionSchema = new mongoose.Schema({

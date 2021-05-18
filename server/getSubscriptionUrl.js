@@ -34,6 +34,7 @@ const getSubscriptionUrl = async (accessToken, shop, returnUrl) => {
     data: query,
   });
 
+  //MARK:- Save charge ID to the database
   const result = await StoreDetailsModel.findOne({ shop });
 
   if (result === null) {
