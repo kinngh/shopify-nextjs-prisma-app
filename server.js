@@ -59,13 +59,22 @@ app.prepare().then(() => {
   const router = new Router();
   server.keys = [Shopify.Context.API_SECRET_KEY];
 
+  const getHost = (ctx) => {
+    const baseUrl = new URL(
+      `https://${ctx.request.header.host}${ctx.request.url}`
+    );
+    return baseUrl.searchParams.get("host");
+  };
+
   server.use(
     createShopifyAuth({
       async afterAuth(ctx) {
         const { shop, scope, accessToken } = ctx.state.shopify;
+        const host = getHost(ctx);
+
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
 
-        const returnUrl = `https://${Shopify.Context.HOST_NAME}?shop=${shop}`;
+        const returnUrl = `https://${Shopify.Context.HOST_NAME}?host=${host}&shop=${shop}`;
         const subscriptionUrl = await getSubscriptionUrl(
           accessToken,
           shop,

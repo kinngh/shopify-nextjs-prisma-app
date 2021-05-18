@@ -1,6 +1,6 @@
 # Shopify Node x Next x MongoDB Boilerplate
 
-An embedded app starter template based on [Shopify.dev Tutorial](https://shopify.dev/tutorials/build-a-shopify-app-with-node-and-react), but with MongoDB more boilerplate code.
+An embedded app starter template based on [Shopify.dev Tutorial](https://shopify.dev/tutorials/build-a-shopify-app-with-node-and-react), but with MongoDB, more boilerplate code and _App Bridge 2.0.x_.
 
 ## Why I made this
 
@@ -41,5 +41,6 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 - [ ] Tests (Jest).
 - [ ] CONTRIBUTIONS.md
 - [ ] External pricing page.
+- [x] AppBridge 2.0 Update.
 - [x] Next.js Routing.
 - [x] Cryptr for encryption.

@@ -32,7 +32,6 @@ const getSubscriptionUrl = async (accessToken, shop, returnUrl) => {
   const response = await client.query({
     data: query,
   });
-
   return response.body.data.appSubscriptionCreate.confirmationUrl;
 };
 

@@ -9,13 +9,13 @@ import translations from "@shopify/polaris/locales/en.json";
 import ClientRouter from "../components/ClientRouter";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import { Redirect } from "@shopify/app-bridge/actions";
 
 function userLoggedInFetch(app) {
   const fetchFunction = authenticatedFetch(app);
 
   return async (uri, options) => {
     const response = await fetchFunction(uri, options);
-
     if (
       response.headers.get("X-Shopify-API-Request-Failure-Reauthorize") === "1"
     ) {
@@ -27,7 +27,6 @@ function userLoggedInFetch(app) {
       redirect.dispatch(Redirect.Action.APP, authUrlHeader || `/auth`);
       return null;
     }
-
     return response;
   };
 }
@@ -53,11 +52,12 @@ class MyProvider extends React.Component {
 
 class MyApp extends App {
   render() {
-    const { Component, pageProps, shopOrigin } = this.props;
+    const { Component, pageProps, shopOrigin, host } = this.props;
 
     const config = {
       apiKey: API_KEY,
-      shopOrigin: shopOrigin,
+      shopOrigin,
+      host,
       forceRedirect: true,
     };
     return (
@@ -82,7 +82,7 @@ class MyApp extends App {
 MyApp.getInitialProps = async ({ ctx }) => {
   return {
     shopOrigin: ctx.query.shop,
+    host: ctx.query.host,
   };
 };
-
 export default MyApp;
