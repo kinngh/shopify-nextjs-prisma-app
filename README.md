@@ -33,6 +33,7 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 ## TO-DO
 
+- [ ] ‼️JSON Web Tokens
 - [ ] Better error handling in `server/sessionStorage.js`.
 - [ ] Custom Koa REST Routes.
 - [ ] Script Tags.
