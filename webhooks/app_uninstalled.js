@@ -1,6 +1,9 @@
 /**
  * Use this as a template for creating new webhooks
- * 
+ *
+ * Add the webhook to server.js
+ * Add router to webhooks/index.js
+ *
  * Webhook subscription topics can be found here [Accessed: May 19, 2021]
  * https://shopify.dev/docs/admin-api/graphql/reference/events/webhooksubscriptiontopic
  */
@@ -8,9 +11,9 @@ const {
   receiveWebhook,
   registerWebhook,
 } = require("@shopify/koa-shopify-webhooks");
-const webhook = receiveWebhook({ secret: process.env.SHOPIFY_API_SECRET }); //Middleware
+const webhook = receiveWebhook({ secret: process.env.SHOPIFY_API_SECRET });
 const Router = require("koa-router");
-const appUninstallRoute = new Router();
+const appUninstallRoute = new Router(); //Update route variable
 const { ApiVersion } = require("@shopify/shopify-api");
 const SessionModel = require("../models/SessionModel.js");
 
@@ -21,7 +24,7 @@ const webhookUrl = "/webhooks/app/uninstall";
 //
 
 const appUninstallWebhook = async (shop, accessToken) => {
-  const registerAppUninstallWebhook = await registerWebhook({
+  const webhookStatus = await registerWebhook({
     address: `${process.env.SHOPIFY_APP_URL}${webhookUrl}`,
     topic: "APP_UNINSTALLED",
     accessToken,
@@ -29,14 +32,12 @@ const appUninstallWebhook = async (shop, accessToken) => {
     apiVersion: ApiVersion.April21,
   });
 
-  if (registerAppUninstallWebhook.success) {
-    console.log(`Successfully registered webhook! for ${shop}`);
-  } else {
-    console.log(
-      "Failed to register webhook",
-      registerAppUninstallWebhook.result
-    );
-  }
+  webhookStatus.success
+    ? console.log(`--> Successfully registered uninstall webhook! for ${shop}`)
+    : console.log(
+        "--> Failed to register uninstall webhook",
+        webhookStatus.result
+      );
 };
 
 //
@@ -44,12 +45,11 @@ const appUninstallWebhook = async (shop, accessToken) => {
 //
 
 appUninstallRoute.post(`${webhookUrl}`, webhook, async (ctx) => {
-  const SessionModel = require("../models/SessionModel.js");
   const shop = ctx.state.webhook.payload.domain;
-  await SessionModel.remove({ shop }, (error, data) => {
+  await SessionModel.deleteMany({ shop }, (error, data) => {
     error
       ? console.log("--> An error occured: ", error.message)
-      : console.log("--> Successfully delete sessions data");
+      : console.log(`--> Successfully delete sessions data for ${shop}`);
   });
 });
 

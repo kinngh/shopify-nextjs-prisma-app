@@ -25,6 +25,7 @@ const getSubscriptionUrl = async (accessToken, shop, returnUrl) => {
       confirmationUrl
       appSubscription {
         id
+        status
       }
     }
   }`;
@@ -34,21 +35,26 @@ const getSubscriptionUrl = async (accessToken, shop, returnUrl) => {
     data: query,
   });
 
+  const { id, status } =
+    response.body.data.appSubscriptionCreate.appSubscription;
+
   //MARK:- Save charge ID to the database
-  const result = await StoreDetailsModel.findOne({ shop });
+  const result = await StoreDetailsModel.findOne({
+    subscriptionChargeId: id,
+  });
 
   if (result === null) {
     await StoreDetailsModel.create({
-      shop: shop,
-      subscriptionChargeId:
-        response.body.data.appSubscriptionCreate.appSubscription.id,
+      shop,
+      subscriptionChargeId: id,
+      status,
     });
   } else {
     await StoreDetailsModel.findOneAndUpdate(
       { shop },
       {
-        subscriptionChargeId:
-          response.body.data.appSubscriptionCreate.appSubscription.id,
+        subscriptionChargeId: id,
+        status,
       }
     );
   }

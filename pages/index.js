@@ -9,9 +9,9 @@ const Index = () => {
       <EmptyState
         heading="Home of something cool"
         action={{
-          content: "Build Something",
+          content: "Check for current subscriptions",
           onAction: () => {
-            router.push("/somethingCool");
+            router.push("/activeSubscriptions");
           },
         }}
         image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"

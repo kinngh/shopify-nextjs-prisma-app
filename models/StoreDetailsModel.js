@@ -11,6 +11,12 @@ const StoreDetailsSchema = new mongoose.Schema({
   subscriptionChargeId: {
     type: String,
   },
+  status: {
+    type: String,
+  },
+  updated_at: {
+    type: Date,
+  },
 });
 
 const StoreDetailsModel = mongoose.model("store-detail", StoreDetailsSchema);

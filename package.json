@@ -1,6 +1,6 @@
 {
   "name": "shopify-node-mongodb-next-app",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Shopify Boilerplate Code written in Next, Node, MongoDB and GraphQL",
   "main": "server.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "cryptr": "^6.0.2",
     "dotenv": "^9.0.1",
     "graphql": "^15.5.0",
+    "graphql-tag": "^2.12.4",
     "isomorphic-fetch": "^3.0.0",
     "koa": "^2.13.1",
     "koa-combine-routers": "^4.0.2",

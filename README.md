@@ -29,20 +29,30 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 ### Misc notes
 
 - Most scripts in `package.json` contain `rm -rf .next` to remove the generated `.next` folder to reduce caching errors.
-- MongoDB collections are kept separate to allow for flexibility while building applications. 
+- MongoDB collections are kept separate to allow for flexibility while building applications.
 
 ## TO-DO
 
+### In Progress
+
+- [ ] ‼️App Subscription Update Webhook.
+- [ ] Refactor Code.
+
+### Up Next
+
 - [ ] ‼️JSON Web Tokens
-- [ ] Better error handling in `server/sessionStorage.js`.
-- [ ] Custom Koa REST Routes.
 - [ ] Script Tags.
-- [ ] Webhooks implementation.
-  - [ ] GDPR Webhooks
-  - [x] Uninstall Webhook
+- [ ] GDPR Webhooks.
+- [ ] Switch to `@apollo/client`
+- [ ] Documentation.
 - [ ] Tests (Jest).
-- [ ] CONTRIBUTIONS.md
+- [ ] One click deploy to Heroku.
 - [ ] External pricing page.
+
+### Done
+
 - [x] AppBridge 2.0 Update.
 - [x] Next.js Routing.
 - [x] Cryptr for encryption.
+- [x] Uninstall Webhook.
+- [x] Custom Koa REST Routes.

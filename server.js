@@ -1,4 +1,3 @@
-require("isomorphic-fetch");
 require("dotenv").config();
 const Koa = require("koa");
 const next = require("next");
@@ -6,15 +5,20 @@ const { default: createShopifyAuth } = require("@shopify/koa-shopify-auth");
 const { verifyRequest } = require("@shopify/koa-shopify-auth");
 const { default: Shopify, ApiVersion } = require("@shopify/shopify-api");
 const Router = require("koa-router");
+
 const getSubscriptionUrl = require("./server/getSubscriptionUrl");
+
 const mongoose = require("mongoose");
 const sessionStorage = require("./server/sessionStorage.js");
 const SessionModel = require("./models/SessionModel.js");
-const Cryptr = require("cryptr");
-const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
+const StoreDetailsModel = require("./models/StoreDetailsModel.js");
 
+const userRoutes = require("./routes");
 const webhookRouters = require("./webhooks");
 const { appUninstallWebhook } = require("./webhooks/app_uninstalled.js");
+const {
+  subscriptionsUpdateWebhook,
+} = require("./webhooks/app_subscriptions_update.js");
 
 //MARK:- MongoDB Init
 const mongoUrl =
@@ -46,21 +50,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-//MARK:- Get currently active stores. Persists store sessions after a sever restart
-const ACTIVE_SHOPIFY_SHOPS = {};
-
-SessionModel.find({})
-  .then((results) => {
-    results.forEach((res) => {
-      const { shop, scope } = JSON.parse(cryption.decrypt(res.content));
-      ACTIVE_SHOPIFY_SHOPS[shop] = scope;
-    });
-  })
-  .catch((err) => {
-    console.log("An error occured", err.message);
-  });
-
-  //MARK:- Koa Server
+//MARK:- Koa Server
 app.prepare().then(() => {
   const server = new Koa();
   const router = new Router();
@@ -79,10 +69,9 @@ app.prepare().then(() => {
         const { shop, scope, accessToken } = ctx.state.shopify;
         const host = getHost(ctx);
 
-        ACTIVE_SHOPIFY_SHOPS[shop] = scope;
-
         //MARK:- Webhooks
         appUninstallWebhook(shop, accessToken);
+        subscriptionsUpdateWebhook(shop, accessToken);
 
         const returnUrl = `https://${Shopify.Context.HOST_NAME}?host=${host}&shop=${shop}`;
         const subscriptionUrl = await getSubscriptionUrl(
@@ -109,9 +98,12 @@ app.prepare().then(() => {
     ctx.res.statusCode = 200;
   };
   router.get("/", async (ctx) => {
+    //TODO: Add a check if the subscription for shop is active
     const shop = ctx.query.shop;
+    const findShopCount = await SessionModel.countDocuments({ shop });
 
-    if (ACTIVE_SHOPIFY_SHOPS[shop] === undefined) {
+    if (findShopCount < 2) {
+      await SessionModel.deleteMany({ shop });
       ctx.redirect(`/auth?shop=${shop}`);
     } else {
       await handleRequest(ctx);
@@ -120,6 +112,7 @@ app.prepare().then(() => {
 
   //MARK:- Routes and routers
   server.use(webhookRouters());
+  server.use(userRoutes());
 
   router.get("(/_next/static/.*)", handleRequest);
   router.get("/_next/webpack-hmr", handleRequest);
