@@ -1,8 +1,10 @@
 require("dotenv").config();
 const Koa = require("koa");
 const next = require("next");
-const { default: createShopifyAuth } = require("@shopify/koa-shopify-auth");
-const { verifyRequest } = require("@shopify/koa-shopify-auth");
+const {
+  verifyRequest,
+  default: createShopifyAuth,
+} = require("@shopify/koa-shopify-auth");
 const { default: Shopify, ApiVersion } = require("@shopify/shopify-api");
 const Router = require("koa-router");
 
