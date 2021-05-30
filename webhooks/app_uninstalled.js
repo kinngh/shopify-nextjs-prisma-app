@@ -4,8 +4,6 @@
  * Add the webhook to server.js
  * Add router to webhooks/index.js
  *
- * Webhook subscription topics can be found here [Accessed: May 19, 2021]
- * https://shopify.dev/docs/admin-api/graphql/reference/events/webhooksubscriptiontopic
  */
 const {
   receiveWebhook,
@@ -16,6 +14,7 @@ const Router = require("koa-router");
 const appUninstallRoute = new Router(); //Update route variable
 const { ApiVersion } = require("@shopify/shopify-api");
 const SessionModel = require("../models/SessionModel.js");
+const StoreDetailsModel = require("../models/StoreDetailsModel.js");
 
 const webhookUrl = "/webhooks/app/uninstall";
 
@@ -36,7 +35,7 @@ const appUninstallWebhook = async (shop, accessToken) => {
     ? console.log(`--> Successfully registered uninstall webhook! for ${shop}`)
     : console.log(
         "--> Failed to register uninstall webhook",
-        webhookStatus.result
+        webhookStatus.result.data.webhookSubscriptionCreate.userErrors.message
       );
 };
 
@@ -51,6 +50,16 @@ appUninstallRoute.post(`${webhookUrl}`, webhook, async (ctx) => {
       ? console.log("--> An error occured: ", error.message)
       : console.log(`--> Successfully delete sessions data for ${shop}`);
   });
+
+  await StoreDetailsModel.updateMany(
+    { shop, status: "ACTIVE" },
+    { status: "CANCELLED", updated_at: Date.now() },
+    (error, data) => {
+      error
+        ? console.log("--> An error occured: ", error.message)
+        : console.log(`--> Successfully updated subscription status for ${shop}`);
+    }
+  );
 });
 
 module.exports = { appUninstallWebhook, appUninstallRoute };

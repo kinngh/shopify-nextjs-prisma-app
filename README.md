@@ -18,7 +18,7 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 - Run `npm i --force` to install all dependencies.
 - Create `.env` file based on `.env.example`.
 - Add `--subdomain <your-subdomain-name>` to the `tunnel` script in `package.json` to have a static subdomain and update the value at `SHOPIFY_APP_URL` in `.env` and your App Settings in your Partner Dashboard.
-- Update the `--port` in `tunnel` script in `package.json` if you're using a different port than `8081`.
+- [Local Only] Update the `--port` in `tunnel` script in `package.json` if you're using a different port than `8081`.
 
 ### Run
 
@@ -35,19 +35,19 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 ### In Progress
 
-- [ ] ‼️App Subscription Update Webhook.
-- [ ] Refactor Code.
+- [ ] ‼️JSON Web Tokens
+- [ ] Add a check to ensure if the merchant cancels the subscription page, they're either taken back to their store or back to pricing page. The current setup allows the merchant to use the app if they click on cancel.
 
 ### Up Next
 
-- [ ] ‼️JSON Web Tokens
-- [ ] Script Tags.
 - [ ] GDPR Webhooks.
+- [ ] Refactor code.
 - [ ] Switch to `@apollo/client`
-- [ ] Documentation.
-- [ ] Tests (Jest).
-- [ ] One click deploy to Heroku.
+  - While the current setup with `apollo/boost` works, the Apollo community seems to have moved to `@apollo/client` package.
 - [ ] External pricing page.
+- [ ] Documentation.
+- [ ] Tests (Jest and Cypress).
+- [ ] One click deploy to Heroku.
 
 ### Done
 
@@ -56,3 +56,4 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 - [x] Cryptr for encryption.
 - [x] Uninstall Webhook.
 - [x] Custom Koa REST Routes.
+- [x] ‼️App Subscription Update Webhook.

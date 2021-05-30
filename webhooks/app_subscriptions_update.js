@@ -26,11 +26,11 @@ const subscriptionsUpdateWebhook = async (shop, accessToken) => {
 
   webhookStatus.success
     ? console.log(
-        `Successfully registered subscriptions_update webhook! for ${shop}`
+        `--> Successfully registered subscriptions_update webhook! for ${shop}`
       )
     : console.log(
-        "Failed to register subscriptions_update webhook",
-        webhookStatus.result
+        "--> Failed to register subscriptions_update webhook",
+        webhookStatus.result.data.webhookSubscriptionCreate.userErrors.message
       );
 };
 
@@ -39,20 +39,21 @@ const subscriptionsUpdateWebhook = async (shop, accessToken) => {
 //
 
 subscriptionsUpdateRoute.post(`${webhookUrl}`, webhook, async (ctx) => {
+  const { admin_graphql_api_id, updated_at, status } =
+    ctx.request.body.app_subscription;
+
   const findSubscription = await StoreDetailsModel.find({
-    subscriptionChargeId:
-      ctx.request.body.app_subscription.admin_graphql_api_id,
+    subscriptionChargeId: admin_graphql_api_id,
   });
 
   if (findSubscription) {
     await StoreDetailsModel.findOneAndUpdate(
       {
-        subscriptionChargeId:
-          ctx.request.body.app_subscription.admin_graphql_api_id,
+        subscriptionChargeId: admin_graphql_api_id,
       },
       {
-        updated_at: ctx.request.body.app_subscription.updated_at,
-        status: ctx.request.body.app_subscription.status,
+        updated_at,
+        status,
       }
     );
   } else {

@@ -1,9 +1,11 @@
 import React from "react";
-import { Page, Card, Layout } from "@shopify/polaris";
+import { Page, Card, Layout, Button } from "@shopify/polaris";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import { useRouter } from "next/router";
 
-const cancelSubscription = () => {
+const ActiveSubscriptions = () => {
+  const router = new useRouter();
   const getActiveSubscriptions = gql`
     {
       currentAppInstallation {
@@ -36,6 +38,15 @@ const cancelSubscription = () => {
                   );
                 }}
               </Query>
+              <br />
+              <Button
+                size="large"
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
+                Home
+              </Button>
             </Card>
           </Layout.Section>
         </Layout>
@@ -44,4 +55,4 @@ const cancelSubscription = () => {
   );
 };
 
-export default cancelSubscription;
+export default ActiveSubscriptions;

@@ -11,7 +11,6 @@ const getSubscriptionUrl = require("./server/getSubscriptionUrl");
 const mongoose = require("mongoose");
 const sessionStorage = require("./server/sessionStorage.js");
 const SessionModel = require("./models/SessionModel.js");
-const StoreDetailsModel = require("./models/StoreDetailsModel.js");
 
 const userRoutes = require("./routes");
 const webhookRouters = require("./webhooks");
@@ -56,18 +55,11 @@ app.prepare().then(() => {
   const router = new Router();
   server.keys = [Shopify.Context.API_SECRET_KEY];
 
-  const getHost = (ctx) => {
-    const baseUrl = new URL(
-      `https://${ctx.request.header.host}${ctx.request.url}`
-    );
-    return baseUrl.searchParams.get("host");
-  };
-
   server.use(
     createShopifyAuth({
       async afterAuth(ctx) {
         const { shop, scope, accessToken } = ctx.state.shopify;
-        const host = getHost(ctx);
+        const { host } = ctx.query;
 
         //MARK:- Webhooks
         appUninstallWebhook(shop, accessToken);
@@ -98,7 +90,6 @@ app.prepare().then(() => {
     ctx.res.statusCode = 200;
   };
   router.get("/", async (ctx) => {
-    //TODO: Add a check if the subscription for shop is active
     const shop = ctx.query.shop;
     const findShopCount = await SessionModel.countDocuments({ shop });
 
