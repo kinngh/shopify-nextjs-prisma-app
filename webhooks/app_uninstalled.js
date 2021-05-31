@@ -35,7 +35,7 @@ const appUninstallWebhook = async (shop, accessToken) => {
     ? console.log(`--> Successfully registered uninstall webhook! for ${shop}`)
     : console.log(
         "--> Failed to register uninstall webhook",
-        webhookStatus.result.data.webhookSubscriptionCreate.userErrors.message
+        webhookStatus.result.data.webhookSubscriptionCreate.userErrors
       );
 };
 

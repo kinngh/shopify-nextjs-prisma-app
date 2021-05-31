@@ -30,7 +30,7 @@ const subscriptionsUpdateWebhook = async (shop, accessToken) => {
       )
     : console.log(
         "--> Failed to register subscriptions_update webhook",
-        webhookStatus.result.data.webhookSubscriptionCreate.userErrors.message
+        webhookStatus.result.data.webhookSubscriptionCreate.userErrors
       );
 };
 
