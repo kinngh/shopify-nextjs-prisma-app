@@ -27,7 +27,7 @@
     "apollo-boost": "^0.4.9",
     "cryptr": "^6.0.2",
     "dotenv": "^10.0.0",
-    "graphql": "^15.5.0",
+    "graphql": "^15.5.1",
     "graphql-tag": "^2.12.4",
     "isomorphic-fetch": "^3.0.0",
     "koa": "^2.13.1",
@@ -40,7 +40,7 @@
     "react-apollo": "^3.1.5",
     "react-dom": "^17.0.2",
     "store-js": "^2.0.4",
-    "webpack": "^5.36.2"
+    "webpack": "^5.40.0"
   },
   "devDependencies": {
     "localtunnel": "^2.0.1",
