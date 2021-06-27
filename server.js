@@ -15,11 +15,8 @@ const sessionStorage = require("./server/sessionStorage.js");
 const SessionModel = require("./models/SessionModel.js");
 
 const userRoutes = require("./routes");
-const webhookRouters = require("./webhooks");
-const { appUninstallWebhook } = require("./webhooks/app_uninstalled.js");
-const {
-  subscriptionsUpdateWebhook,
-} = require("./webhooks/app_subscriptions_update.js");
+const webhookRouters = require("./webhooks/_webhookRouters.js");
+const webhooksRegistrar = require("./webhooks/_webhooksRegistrar.js");
 
 //MARK:- MongoDB Init
 const mongoUrl =
@@ -64,8 +61,7 @@ app.prepare().then(() => {
         const { host } = ctx.query;
 
         //MARK:- Webhooks
-        appUninstallWebhook(shop, accessToken);
-        subscriptionsUpdateWebhook(shop, accessToken);
+        webhooksRegistrar(shop, accessToken);
 
         const returnUrl = `https://${Shopify.Context.HOST_NAME}?host=${host}&shop=${shop}`;
         const subscriptionUrl = await getSubscriptionUrl(

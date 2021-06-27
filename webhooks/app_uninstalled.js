@@ -1,17 +1,10 @@
-/**
- * Use this as a template for creating new webhooks
- *
- * Add the webhook to server.js
- * Add router to webhooks/index.js
- *
- */
 const {
   receiveWebhook,
   registerWebhook,
 } = require("@shopify/koa-shopify-webhooks");
 const webhook = receiveWebhook({ secret: process.env.SHOPIFY_API_SECRET });
 const Router = require("koa-router");
-const appUninstallRoute = new Router(); //Update route variable
+const appUninstallRoute = new Router();
 const { ApiVersion } = require("@shopify/shopify-api");
 const SessionModel = require("../models/SessionModel.js");
 const StoreDetailsModel = require("../models/StoreDetailsModel.js");
