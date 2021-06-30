@@ -4,8 +4,14 @@
 
 const combineRouters = require("koa-combine-routers");
 
-const templateRoute = require("./templateRoute.js");
+const shopRedact = require("./gdpr/shop_redact.js");
+const customersRedact = require("./gdpr/customers_redact.js");
+const customersDataRequest = require("./gdpr/customers_data_request.js");
 
-const userRoutes = combineRouters(templateRoute); //add routers seaprated by a `,`
+const userRoutes = combineRouters(
+  shopRedact,
+  customersRedact,
+  customersDataRequest
+); //add routers seaprated by a `,`
 
 module.exports = userRoutes;
