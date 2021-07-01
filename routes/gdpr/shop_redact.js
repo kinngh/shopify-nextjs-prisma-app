@@ -9,7 +9,7 @@ Payload
 const Router = require("koa-router");
 const shopRedact = new Router();
 
-shopRedact.post("/app/gdpr/shopRedact", async (ctx) => {
+shopRedact.post("/app/gdpr/shop_redact", async (ctx) => {
   console.log(ctx.request.body);
 });
 

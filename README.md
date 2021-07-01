@@ -22,7 +22,7 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 - The GDPR endpoints are available in `routes/gdpr/` folder. Add the following URLs in the GDPR section of your App Setup
   - Data Request Endpoint: `https://your.app.url/app/gdpr/customers_data_request`
   - Data Erasure Endpoint: `https://your.app.url/app/gdpr/customers_redact`
-  - Shop Data Erasuer Endpoint: `https://your.app.url/app/gdpr/shopRedact`
+  - Shop Data Erasuer Endpoint: `https://your.app.url/app/gdpr/shop_redact`
 
 ### Run
 
