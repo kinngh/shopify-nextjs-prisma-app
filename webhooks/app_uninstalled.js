@@ -50,7 +50,9 @@ appUninstallRoute.post(`${webhookUrl}`, webhook, async (ctx) => {
     (error, data) => {
       error
         ? console.log("--> An error occured: ", error.message)
-        : console.log(`--> Successfully updated subscription status for ${shop}`);
+        : console.log(
+            `--> Successfully updated subscription status for ${shop}`
+          );
     }
   );
 });
