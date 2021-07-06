@@ -13,3 +13,12 @@
 ---
 - [ ] Documentation.
 - [ ] One click deploy to Heroku.
+
+### Long Term
+- [ ] TypeScript version.
+- [ ] Pure Next.js version.
+  - A version exists from Thomas Kelly, available [here](https://github.com/t-kelly/nextjs-shopify-app).
+- [ ] A variant that uses GraphQL server instead of Koa.
+  - Reminder: Check if it's actually possible, because it looks like it can be.
+- [ ] Extensions.
+- [ ] Emotional Stability.
