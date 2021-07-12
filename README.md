@@ -15,10 +15,9 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 ### Setup
 
-- Run `npm i` to install all dependencies.
+- Run `npm i --force` to install all dependencies.
 - Create `.env` file based on `.env.example`.
 - Add `--subdomain <your-subdomain-name>` to the `tunnel` script in `package.json` to have a static subdomain and update the value at `SHOPIFY_APP_URL` in `.env` and your App Settings in your Partner Dashboard.
-- [Local Only] Update the `--port` in `tunnel` script in `package.json` if you're using a different port than `8081`.
 - The GDPR endpoints are available in `routes/gdpr/` folder. Add the following URLs in the GDPR section of your App Setup
   - Data Request Endpoint: `https://your.app.url/app/gdpr/customers_data_request`
   - Data Erase Endpoint: `https://your.app.url/app/gdpr/customers_redact`

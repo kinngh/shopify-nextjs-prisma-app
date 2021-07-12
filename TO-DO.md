@@ -7,8 +7,6 @@
 - [ ] Refactor Code.
 - [ ] Better sessions handling.
 ---
-- [ ] Switch to `@apollo/client`
-  - While the current setup with `apollo/boost` works, the Apollo community seems to have moved to `@apollo/client` package.
 - [ ] Babel.
 ---
 - [ ] Documentation.
@@ -18,7 +16,3 @@
 - [ ] TypeScript version.
 - [ ] Pure Next.js version.
   - A version exists from Thomas Kelly, available [here](https://github.com/t-kelly/nextjs-shopify-app).
-- [ ] A variant that uses GraphQL server instead of Koa.
-  - Reminder: Check if it's actually possible, because it looks like it can be.
-- [ ] Extensions.
-- [ ] Emotional Stability.

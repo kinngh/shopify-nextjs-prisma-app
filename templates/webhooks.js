@@ -34,7 +34,7 @@ const webhookNameWebhook = async (shop, accessToken) => {
     topic: "WEBHOOK_TOPIC", //Get the list of webhook topics from https://shopify.dev/docs/admin-api/graphql/reference/events/webhooksubscriptiontopic
     accessToken,
     shop,
-    apiVersion: ApiVersion.April21,
+    apiVersion: ApiVersion.July21,
   });
 
   webhookStatus.success
