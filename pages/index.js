@@ -1,22 +1,43 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { EmptyState, Card } from "@shopify/polaris";
+import { Page, Card } from "@shopify/polaris";
 
 const Index = () => {
   const router = useRouter();
   return (
-    <Card sectioned>
-      <EmptyState
-        heading="Home of something cool"
-        action={{
-          content: "Check for current subscriptions",
+    <Page>
+      <Card title="DEBUG" sectioned>
+        <p>
+          These are temporary placeholders to debug content. Once you're in the
+          page, please check the console for more information.
+        </p>
+      </Card>
+      <Card
+        title="Subscriptions"
+        sectioned
+        primaryFooterAction={{
+          content: "Subscriptions",
           onAction: () => {
             router.push("/activeSubscriptions");
           },
         }}
-        image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
-      ></EmptyState>
-    </Card>
+      >
+        <p>Check for active/cancelled/expired subscriptions for your app.</p>
+      </Card>
+
+      <Card
+        title="Code Injection"
+        sectioned
+        primaryFooterAction={{
+          content: "Code Injection",
+          onAction: () => {
+            router.push("/codeManagement");
+          },
+        }}
+      >
+        <p>Manage script tags and other code installations.</p>
+      </Card>
+    </Page>
   );
 };
 
