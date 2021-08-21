@@ -24,19 +24,6 @@ const Index = () => {
       >
         <p>Check for active/cancelled/expired subscriptions for your app.</p>
       </Card>
-
-      <Card
-        title="Code Injection"
-        sectioned
-        primaryFooterAction={{
-          content: "Code Injection",
-          onAction: () => {
-            router.push("/codeManagement");
-          },
-        }}
-      >
-        <p>Manage script tags and other code installations.</p>
-      </Card>
     </Page>
   );
 };
