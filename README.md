@@ -1,15 +1,15 @@
-# Shopify Node x Next x MongoDB Boilerplate
+# Shopify Node.js x Next.js x MongoDB Boilerplate
 
-An embedded app starter template based on [Shopify.dev Tutorial](https://shopify.dev/tutorials/build-a-shopify-app-with-node-and-react), but with MongoDB, boilerplate code, _App Bridge 2_ and more.
+An embedded app starter template to get up and ready with Shopify app development with JavaScript. A TypeScript variant is in progress.
 
 ## Why I made this
 
 The Shopify CLI generates an amazing starter app, but I wanted a quick-start app that had:
 
 - MongoDB based sessions/persistence.
-- `getSubscriptionUrl` hooked up with an external pricing page.
-- Local Tunnel instead of Ngrok to speed up _my_ dev process.
-- Starter files and templates to get up to speed with development.
+- inApp Subscriptions setup and ready to go.
+- Local Tunnel instead of Ngrok to move towards a pure Open Source experience.
+- Misc boilerplate code and templates to quickly setup routes, webhooks and more.
 
 ## Notes
 
@@ -32,4 +32,4 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 ### Misc notes
 
 - Most scripts in `package.json` contain `rm -rf .next` to remove the generated `.next` folder to reduce caching errors.
-- MongoDB collections are kept separate to allow for flexibility while building applications.
+- MongoDB collections are kept separate to allow for flexibility while building applications. Feel free to rewrite them.

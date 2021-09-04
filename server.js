@@ -1,36 +1,46 @@
 require("dotenv").config();
 const Koa = require("koa");
-const next = require("next");
 const {
-  verifyRequest,
   default: createShopifyAuth,
+  verifyRequest,
 } = require("@shopify/koa-shopify-auth");
-const { default: Shopify, ApiVersion } = require("@shopify/shopify-api");
+const { default: Shopify } = require("@shopify/shopify-api");
+const next = require("next");
 const Router = require("koa-router");
 
-const getSubscriptionUrl = require("./server/getSubscriptionUrl");
-
 const mongoose = require("mongoose");
-const sessionStorage = require("./server/sessionStorage.js");
+const sessionStorage = require("./utils/sessionStorage.js");
 const SessionModel = require("./models/SessionModel.js");
 
-const userRoutes = require("./routes");
-const webhookRouters = require("./webhooks/_webhookRouters.js");
 const webhooksRegistrar = require("./webhooks/_webhooksRegistrar.js");
+const webhookRouters = require("./webhooks/_webhookRouters.js")
+const userRoutes = require("./routes/index.js");
 
-//MARK:- MongoDB Init
+const port = parseInt(process.env.PORT, 10) || 8081;
+const dev = process.env.NODE_ENV !== "production";
+const app = next({
+  dev,
+});
+const handle = app.getRequestHandler();
+
 const mongoUrl =
-  process.env.MONGO_URL || "mongodb://localhost:27017/shopify-app";
+  process.env.mongoUrl || "mongodb://localhost:27017/shopify-app";
 
 mongoose.connect(
   mongoUrl,
   {
-    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
-  () => console.log("--> Connected To Mongo")
+  () => {
+    console.log("--> Connected to MongoDB");
+  }
 );
+
+mongoose.connection.on("error", (err) => {
+  console.log("--> An error occured while connecting to MongoDB");
+  console.log(err);
+});
 
 //MARK:- Shopify Init
 Shopify.Context.initialize({
@@ -38,18 +48,13 @@ Shopify.Context.initialize({
   API_SECRET_KEY: process.env.SHOPIFY_API_SECRET,
   SCOPES: process.env.SHOPIFY_API_SCOPES.split(","),
   HOST_NAME: process.env.SHOPIFY_APP_URL.replace(/https:\/\//, ""),
-  API_VERSION: ApiVersion.July21,
+  API_VERSION: process.env.SHOPIFY_API_VERSION,
   IS_EMBEDDED_APP: true,
   SESSION_STORAGE: sessionStorage,
 });
 
-const port = parseInt(process.env.PORT, 10) || 8081;
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-const handle = app.getRequestHandler();
 
-//MARK:- Koa Server
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = new Koa();
   const router = new Router();
   server.keys = [Shopify.Context.API_SECRET_KEY];
@@ -57,22 +62,21 @@ app.prepare().then(() => {
   server.use(
     createShopifyAuth({
       async afterAuth(ctx) {
-        const { shop, scope, accessToken } = ctx.state.shopify;
-        const { host } = ctx.query;
+        const { shop, accessToken, scope } = ctx.state.shopify;
+        const host = ctx.query.host;
 
-        //MARK:- Webhooks
         webhooksRegistrar(shop, accessToken);
 
-        const returnUrl = `https://${Shopify.Context.HOST_NAME}?host=${host}&shop=${shop}`;
-        const subscriptionUrl = await getSubscriptionUrl(
-          accessToken,
-          shop,
-          returnUrl
-        );
-        ctx.redirect(subscriptionUrl);
+        ctx.redirect(`/?shop=${shop}&host=${host}`);
       },
     })
   );
+
+  const handleRequest = async (ctx) => {
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+    ctx.res.statusCode = 200;
+  };
 
   router.post(
     "/graphql",
@@ -82,12 +86,9 @@ app.prepare().then(() => {
     }
   );
 
-  const handleRequest = async (ctx) => {
-    await handle(ctx.req, ctx.res);
-    ctx.respond = false;
-    ctx.res.statusCode = 200;
-  };
-  router.get("/", async (ctx) => {
+  router.get("(/_next/static/.*)", handleRequest); // Static content is clear
+  router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
+  router.get("(.*)", async (ctx) => {
     const shop = ctx.query.shop;
     const findShopCount = await SessionModel.countDocuments({ shop });
 
@@ -103,13 +104,8 @@ app.prepare().then(() => {
   server.use(webhookRouters());
   server.use(userRoutes());
 
-  router.get("(/_next/static/.*)", handleRequest);
-  router.get("/_next/webpack-hmr", handleRequest);
-  router.get("(.*)", verifyRequest(), handleRequest);
-
   server.use(router.allowedMethods());
   server.use(router.routes());
-
   server.listen(port, () => {
     console.log(`--> Ready on http://localhost:${port}`);
   });

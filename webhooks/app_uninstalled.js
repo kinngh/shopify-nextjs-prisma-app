@@ -5,9 +5,7 @@ const {
 const webhook = receiveWebhook({ secret: process.env.SHOPIFY_API_SECRET });
 const Router = require("koa-router");
 const appUninstallRoute = new Router();
-const { ApiVersion } = require("@shopify/shopify-api");
 const SessionModel = require("../models/SessionModel.js");
-const StoreDetailsModel = require("../models/StoreDetailsModel.js");
 
 const webhookUrl = "/webhooks/app/uninstall";
 
@@ -21,11 +19,11 @@ const appUninstallWebhook = async (shop, accessToken) => {
     topic: "APP_UNINSTALLED",
     accessToken,
     shop,
-    apiVersion: ApiVersion.July21,
+    apiVersion: process.env.SHOPIFY_API_VERSION,
   });
 
   webhookStatus.success
-    ? console.log(`--> Successfully registered uninstall webhook! for ${shop}`)
+    ? console.log(`--> Successfully registered uninstall webhook for ${shop}`)
     : console.log(
         "--> Failed to register uninstall webhook",
         webhookStatus.result.data.webhookSubscriptionCreate.userErrors
@@ -38,23 +36,8 @@ const appUninstallWebhook = async (shop, accessToken) => {
 
 appUninstallRoute.post(`${webhookUrl}`, webhook, async (ctx) => {
   const shop = ctx.state.webhook.payload.domain;
-  await SessionModel.deleteMany({ shop }, (error, data) => {
-    error
-      ? console.log("--> An error occured: ", error.message)
-      : console.log(`--> Successfully delete sessions data for ${shop}`);
-  });
-
-  await StoreDetailsModel.updateMany(
-    { shop, status: "ACTIVE" },
-    { status: "CANCELLED", updated_at: Date.now() },
-    (error, data) => {
-      error
-        ? console.log("--> An error occured: ", error.message)
-        : console.log(
-            `--> Successfully updated subscription status for ${shop}`
-          );
-    }
-  );
+  await SessionModel.deleteMany({ shop });
+  console.log(`--> Deleted records for ${shop}`);
 });
 
 module.exports = { appUninstallWebhook, appUninstallRoute };

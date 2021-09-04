@@ -39,7 +39,7 @@ const loadCallback = async (id) => {
 };
 
 const deleteCallback = async (id) => {
-  await SessionModel.deleteOne({ id });
+  await SessionModel.deleteMany({ id });
   return true;
 };
 

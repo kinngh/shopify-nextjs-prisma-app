@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import { useRouter } from "next/router";
 
 const ActiveSubscriptions = () => {
-  const router = new useRouter();
+  const router = useRouter();
   const getActiveSubscriptions = gql`
     {
       currentAppInstallation {
