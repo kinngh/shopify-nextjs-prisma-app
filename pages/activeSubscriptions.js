@@ -2,7 +2,7 @@ import React from "react";
 import { Page, Card, Layout, Button } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useQuery, gql } from "@apollo/client";
-import SubscriptionData from "../component/subscriptionData";
+import SubscriptionData from "../components/subscriptionData";
 
 const ActiveSubscriptions = () => {
   const router = useRouter();
