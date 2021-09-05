@@ -4,40 +4,25 @@ import { Provider, useAppBridge } from "@shopify/app-bridge-react";
 import { authenticatedFetch } from "@shopify/app-bridge-utils";
 import "@shopify/polaris/dist/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
-import { Redirect } from "@shopify/app-bridge/actions";
-
-function userLoggedInFetch(app) {
-  const fetchFunction = authenticatedFetch(app);
-
-  return async (uri, options) => {
-    const response = await fetchFunction(uri, options);
-
-    if (
-      response.headers.get("X-Shopify-API-Request-Failure-Reauthorize") === "1"
-    ) {
-      const authUrlHeader = response.headers.get(
-        "X-Shopify-API-Request-Failure-Reauthorize-Url"
-      );
-
-      const redirect = Redirect.create(app);
-      redirect.dispatch(Redirect.Action.APP, authUrlHeader || `/auth`);
-      return null;
-    }
-
-    return response;
-  };
-}
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
 
 function MyProvider(props) {
   const app = useAppBridge();
 
   const client = new ApolloClient({
-    fetch: userLoggedInFetch(app),
-    fetchOptions: {
+    cache: new InMemoryCache(),
+    link: createHttpLink({
       credentials: "include",
-    },
+      headers: {
+        "Content-Type": "application/graphql",
+      },
+      fetch: authenticatedFetch(app),
+    }),
   });
 
   const Component = props.Component;
