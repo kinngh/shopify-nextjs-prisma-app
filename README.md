@@ -1,6 +1,6 @@
 # Shopify Node.js x Next.js x MongoDB Boilerplate
 
-An embedded app starter template to get up and ready with Shopify app development with JavaScript. A TypeScript variant is in progress.
+An embedded app starter template to get up and ready with Shopify app development with JavaScript.
 
 ## Why I made this
 
@@ -8,8 +8,8 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 - MongoDB based sessions/persistence.
 - inApp Subscriptions setup and ready to go.
-- Local Tunnel instead of Ngrok to move towards a pure Open Source experience.
-- Misc boilerplate code and templates to quickly setup routes, webhooks and more.
+- Local Tunnel instead of Ngrok to avoid use of commercial software.
+- Misc boilerplate code and templates to quickly setup inApp subscriptions, routes, webhooks and more.
 
 ## Notes
 
@@ -17,11 +17,15 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 - Run `npm i --force` to install all dependencies.
 - Create `.env` file based on `.env.example`.
-- Add `--subdomain <your-subdomain-name>` to the `tunnel` script in `package.json` to have a static subdomain and update the value at `SHOPIFY_APP_URL` in `.env` and your App Settings in your Partner Dashboard.
+- Run `npm run tunnel` and add the URL at `SHOPIFY_APP_URL` in `.env` and your app settings in your Partner Dashboard.
+   - If you don't update the URL in `.env` and app settings, you're going to run into "URI Not Whitelisted" error.
+
+---
+
 - The GDPR endpoints are available in `routes/gdpr/` folder. Add the following URLs in the GDPR section of your App Setup
-  - Data Request Endpoint: `https://your.app.url/app/gdpr/customers_data_request`
-  - Data Erase Endpoint: `https://your.app.url/app/gdpr/customers_redact`
-  - Shop Data Erase Endpoint: `https://your.app.url/app/gdpr/shop_redact`
+  - Data Request Endpoint: `/app/gdpr/customers_data_request`
+  - Data Erase Endpoint: `/app/gdpr/customers_redact`
+  - Shop Data Erase Endpoint: `/app/gdpr/shop_redact`
 
 ### Run
 
@@ -31,5 +35,5 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 ### Misc notes
 
-- Most scripts in `package.json` contain `rm -rf .next` to remove the generated `.next` folder to reduce caching errors.
+- Most scripts in `package.json` contain `rm -rf .next` to remove the generated `.next` folder to reduce caching errors. If you're on Windows, please switch them out to `rmdir .next`
 - MongoDB collections are kept separate to allow for flexibility while building applications. Feel free to rewrite them.
