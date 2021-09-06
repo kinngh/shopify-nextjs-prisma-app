@@ -39,3 +39,4 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 - Most scripts in `package.json` contain `rm -rf .next` to remove the generated `.next` folder to reduce caching errors. If you're on Windows, please switch them out to `rmdir .next`
 - MongoDB collections are kept separate to allow for flexibility while building applications. Feel free to rewrite them.
+- When pushing to production, add `__templates` to `.gitignore`.
