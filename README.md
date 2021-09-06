@@ -15,6 +15,8 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 
 ### Setup
 
+- If you're new to Shopify app dev or need an in-depth guide, refer [SETUP.md](/SETUP.md) instead.
+
 - Run `npm i --force` to install all dependencies.
 - Create `.env` file based on `.env.example`.
 - Run `npm run tunnel` and add the URL at `SHOPIFY_APP_URL` in `.env` and your app settings in your Partner Dashboard.
