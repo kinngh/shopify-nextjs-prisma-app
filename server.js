@@ -24,7 +24,7 @@ const app = next({
 const handle = app.getRequestHandler();
 
 const mongoUrl =
-  process.env.mongoUrl || "mongodb://localhost:27017/shopify-app";
+  process.env.MONGO_URL || "mongodb://localhost:27017/shopify-app";
 
 mongoose.connect(
   mongoUrl,
