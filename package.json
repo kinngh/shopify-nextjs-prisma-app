@@ -22,28 +22,28 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@apollo/client": "^3.4.10",
-    "@shopify/app-bridge-react": "^2.0.3",
-    "@shopify/app-bridge-utils": "^2.0.3",
+    "@apollo/client": "^3.4.15",
+    "@shopify/app-bridge-react": "^2.0.4",
+    "@shopify/app-bridge-utils": "^2.0.4",
     "@shopify/koa-shopify-auth": "^4.1.4",
-    "@shopify/koa-shopify-webhooks": "^4.0.2",
-    "@shopify/polaris": "^6.6.0",
+    "@shopify/koa-shopify-webhooks": "^4.2.1",
+    "@shopify/polaris": "^7.0.0",
     "cryptr": "^6.0.2",
     "dotenv": "^10.0.0",
-    "graphql": "^15.5.2",
-    "koa": "^2.13.1",
+    "graphql": "^15.6.0",
+    "koa": "^2.13.3",
     "koa-combine-routers": "^4.0.2",
     "koa-router": "^10.1.1",
-    "mongoose": "^6.0.4",
+    "mongoose": "^6.0.8",
     "next": "^11.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "webpack": "^5.52.0"
+    "webpack": "^5.56.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
-    "localtunnel": "^2.0.1",
+    "localtunnel": "^2.0.2",
     "npm-check-updates": "^11.8.5"
   }
 }
