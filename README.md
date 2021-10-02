@@ -7,11 +7,15 @@ An embedded app starter template to get up and ready with Shopify app developmen
 The Shopify CLI generates an amazing starter app, but I wanted a quick-start app that had:
 
 - MongoDB based sessions/persistence.
-- inApp Subscriptions setup and ready to go.
+- Recurring Subscriptions setup and ready to go.
 - Local Tunnel instead of Ngrok to avoid use of commercial software.
 - Misc boilerplate code and templates to quickly setup inApp subscriptions, routes, webhooks and more.
 
 ## Notes
+
+### Temp
+
+- I'm still working on a reliable way to build return url for creating app susbcription. If you are aware of an option that directly calls via APIs and not cookies/local storage, please open a pull request.
 
 ### Setup
 
@@ -20,7 +24,7 @@ The Shopify CLI generates an amazing starter app, but I wanted a quick-start app
 - Run `npm i --force` to install all dependencies.
 - Create `.env` file based on `.env.example`.
 - Run `npm run tunnel` and add the URL at `SHOPIFY_APP_URL` in `.env` and your app settings in your Partner Dashboard.
-   - If you don't update the URL in `.env` and app settings, you're going to run into "URI Not Whitelisted" error.
+  - If you don't update the URL in `.env` and app settings, you're going to run into "URI Not Whitelisted" error.
 
 ---
 

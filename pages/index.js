@@ -2,8 +2,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Page, Card } from "@shopify/polaris";
 
-const Index = () => {
+const Index = (...props) => {
   const router = useRouter();
+  // const { shop } = props[0];
   return (
     <Page>
       <Card title="DEBUG" sectioned>
@@ -23,6 +24,19 @@ const Index = () => {
         }}
       >
         <p>Check for active/cancelled/expired subscriptions for your app.</p>
+      </Card>
+
+      <Card
+        title="Create Subscriptions"
+        sectioned
+        primaryFooterAction={{
+          content: "Recurring",
+          onAction: () => {
+            router.push("/recurringSubscription");
+          },
+        }}
+      >
+        <p>Create recurring susbcriptions for your merchants.</p>
       </Card>
     </Page>
   );

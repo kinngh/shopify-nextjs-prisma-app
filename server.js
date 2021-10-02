@@ -13,7 +13,7 @@ const sessionStorage = require("./utils/sessionStorage.js");
 const SessionModel = require("./models/SessionModel.js");
 
 const webhooksRegistrar = require("./webhooks/_webhooksRegistrar.js");
-const webhookRouters = require("./webhooks/_webhookRouters.js")
+const webhookRouters = require("./webhooks/_webhookRouters.js");
 const userRoutes = require("./routes/index.js");
 
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -52,7 +52,6 @@ Shopify.Context.initialize({
   IS_EMBEDDED_APP: true,
   SESSION_STORAGE: sessionStorage,
 });
-
 
 app.prepare().then(async () => {
   const server = new Koa();
