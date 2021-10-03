@@ -1,3 +1,8 @@
+/*
+  MARK:- Bug (Minor)
+  The returnURL will trigger webhooks again, but not auth dialog to merchant.
+  Better update coming soon™*/
+
 import { Page, Card, Button } from "@shopify/polaris";
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -42,7 +47,7 @@ const RecurringSubscription = () => {
   const abContext = useAppBridge();
   const redirect = Redirect.create(abContext);
   const shopOrigin = store.get("myshopifyUrl");
-  const returnUrl = `${appOrigin}/auth?shop=${shopOrigin}`; //Will trigger webhooks again, but not auth dialog to merchant. Better update coming soon™
+  const returnUrl = `${appOrigin}/auth?shop=${shopOrigin}`;
 
   const [subMerchant, { data, loading, error }] = useMutation(
     subscribeMerchantMutation

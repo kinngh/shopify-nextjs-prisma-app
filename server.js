@@ -23,6 +23,7 @@ const app = next({
 });
 const handle = app.getRequestHandler();
 
+//MARK:- MongoDB Connection
 const mongoUrl =
   process.env.MONGO_URL || "mongodb://localhost:27017/shopify-app";
 
@@ -32,15 +33,14 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
-  () => {
-    console.log("--> Connected to MongoDB");
+  (err) => {
+    if (err) {
+      console.log("--> There was an error connecting to MongoDB:", err.message);
+    } else {
+      console.log("--> Connected to MongoDB");
+    }
   }
 );
-
-mongoose.connection.on("error", (err) => {
-  console.log("--> An error occured while connecting to MongoDB");
-  console.log(err);
-});
 
 //MARK:- Shopify Init
 Shopify.Context.initialize({

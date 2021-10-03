@@ -1,3 +1,7 @@
+/*
+  Security note: Don't expose any secret env values here.
+*/
+
 const webpack = require("webpack");
 const apiKey = JSON.stringify(process.env.SHOPIFY_API_KEY);
 const appUrl = JSON.stringify(process.env.SHOPIFY_APP_URL);

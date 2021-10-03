@@ -24,6 +24,7 @@
 
 ## Finished
 
+- [x] MongoDB connection `console.log` bug
 - [x] Switch from `apollo-boost` to `@apollo/client`
 - [x] Depreciate `ClientRouter`
 - [x] Refactoring
