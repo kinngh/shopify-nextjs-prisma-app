@@ -1,28 +1,29 @@
 # To-Do
 
-## QoL
-
-- [ ] Templates
-- [ ] One Click Deployment
-  - [ ] Heroku
-  - [ ] AWS
-- [ ] Tracking and Analytics boilerplate
-
 ## Engineering
 
 - [ ] PoS Support
+- [ ] Subscriptions
+  - [x] Recurring
+  - [ ] Usage Based
+  - [ ] One Time
+  - [ ] Store subscription data in MongoDB
+
+## QoL
+
+- [ ] One Click Deployment
+  - [ ] Heroku
+- [ ] Tracking and Analytics boilerplate
 
 ## Variants
 
 - [ ] TypeScript Variant
-- [ ] Redis + PostgreSQL Variant
-- [ ] Prisma Variant
+- [ ] Redis + Prisma Variant
 
 ---
 
 ## Finished
 
-- [x] Recurring subscriptions
 - [x] Switch from `apollo-boost` to `@apollo/client`
 - [x] Depreciate `ClientRouter`
 - [x] Refactoring

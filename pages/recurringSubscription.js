@@ -3,20 +3,23 @@ import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import { Redirect } from "@shopify/app-bridge/actions";
 import { useAppBridge } from "@shopify/app-bridge-react";
-
-const returnUrl = "https://github.com/kinngh/shopify-node-mongodb-next-app";
+const store = require("store");
 
 const subscribeMerchantMutation = gql`
-  mutation {
+  mutation CreateSubscription(
+    $returnString: URL!
+    $planName: String!
+    $planPrice: Decimal!
+  ) {
     appSubscriptionCreate(
-      name: "Basic Plan"
-      returnUrl: "${returnUrl}"
+      name: $planName
+      returnUrl: $returnString
       test: true
       lineItems: [
         {
           plan: {
             appRecurringPricingDetails: {
-              price: { amount: 10, currencyCode: USD }
+              price: { amount: $planPrice, currencyCode: USD }
             }
           }
         }
@@ -38,6 +41,8 @@ const RecurringSubscription = () => {
   const router = useRouter();
   const abContext = useAppBridge();
   const redirect = Redirect.create(abContext);
+  const shopOrigin = store.get("myshopifyUrl");
+  const returnUrl = `${appOrigin}/auth?shop=${shopOrigin}`; //Will trigger webhooks again, but not auth dialog to merchant. Better update coming soon™
 
   const [subMerchant, { data, loading, error }] = useMutation(
     subscribeMerchantMutation
@@ -67,7 +72,13 @@ const RecurringSubscription = () => {
         </Button>{" "}
         <Button
           onClick={() => {
-            subMerchant();
+            subMerchant({
+              variables: {
+                returnString: returnUrl,
+                planName: "Tester Plan",
+                planPrice: 10.0,
+              },
+            });
           }}
         >
           Subscribe Merchant

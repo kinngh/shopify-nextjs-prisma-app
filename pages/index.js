@@ -1,12 +1,14 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Page, Card } from "@shopify/polaris";
+import UtilityComponent from "../components/utilComponent";
 
 const Index = (...props) => {
   const router = useRouter();
   // const { shop } = props[0];
   return (
     <Page>
+      <UtilityComponent />
       <Card title="DEBUG" sectioned>
         <p>
           These are temporary placeholders to debug content. Once you're in the
