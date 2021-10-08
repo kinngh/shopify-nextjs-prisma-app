@@ -1,6 +1,6 @@
 {
   "name": "shopify-node-mongodb-next-app",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Shopify Boilerplate Code written in Next, Node, MongoDB and GraphQL",
   "main": "server.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@apollo/client": "^3.4.15",
+    "@apollo/client": "^3.4.16",
     "@shopify/app-bridge-react": "^2.0.4",
     "@shopify/app-bridge-utils": "^2.0.4",
     "@shopify/koa-shopify-auth": "^4.1.4",
@@ -30,16 +30,16 @@
     "@shopify/polaris": "^7.0.0",
     "cryptr": "^6.0.2",
     "dotenv": "^10.0.0",
-    "graphql": "^15.6.0",
+    "graphql": "^15.6.1",
     "koa": "^2.13.3",
     "koa-combine-routers": "^4.0.2",
     "koa-router": "^10.1.1",
-    "mongoose": "^6.0.8",
+    "mongoose": "^6.0.10",
     "next": "^11.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "store": "^2.0.12",
-    "webpack": "^5.56.0"
+    "webpack": "^5.58.1"
   },
   "devDependencies": {
     "eslint": "7.32.0",
