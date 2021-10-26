@@ -9,7 +9,7 @@ const SubscriptionData = ({ error, loading, data }) => {
   if (error) return <p>{error.message}</p>;
   if (loading) return <p>Loading</p>;
 
-  if (data) {
+  if (data && data.currentAppInstallation.activeSubscriptions[0]) {
     const { id, name, status } =
       data.currentAppInstallation.activeSubscriptions[0];
     return (
@@ -25,6 +25,12 @@ const SubscriptionData = ({ error, loading, data }) => {
         </p>
       </React.Fragment>
     );
+  } else {
+    return (
+      <p>
+        No active subscriptions found
+      </p>
+    )
   }
 };
 
