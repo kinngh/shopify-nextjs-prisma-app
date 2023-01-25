@@ -70,5 +70,6 @@ This is an in-depth guide on using this repo. This goes over getting the base re
     - A common _gotcha_ is if you're creating multiple apps that all use the same subpath (`next-proxy` in this case), all susbequent installs will throw a `404` error because Shopify serializes routes based on installation. To avoid this, please change the subpath to something that's unique to your app. I prefer using the format `<<appname>>-proxy`
 
 - [ ] Running App
+  - If it's your first time connecting to said database, run `npx prisma db push` to get your database working.
   - Run `npm run dev`, your database and ngrok.
   - Install the app by heading over to `https://ngrokurl.io/api/auth?shop=mystorename.myshopify.com`.
