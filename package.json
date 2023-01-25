@@ -1,0 +1,72 @@
+{
+  "name": "shopify-nextjs-prisma-app",
+  "version": "0.0.1",
+  "type": "module",
+  "author": {
+    "name": "Harshdeep Singh Hura",
+    "url": "https://harshdeephura.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kinngh/shopify-nextjs-prisma-app.git"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "pretty": "prettier --write ./",
+    "update": "ncu -u",
+    "update:url": "node _developer/updateDashboard.js",
+    "ngrok:auth": "ngrok authtoken <auth-token-goes-here>",
+    "ngrok": "ngrok http 3000",
+    "-----> Shopify <-----": "",
+    "shopify": "shopify",
+    "s:e:create": "shopify app generate extension",
+    "s:e:deploy": "shopify app deploy",
+    "-----> Database <-----": "",
+    "pg:create": "mkdir database; pg_ctl -D database init",
+    "pg:start": "pg_ctl -D database start",
+    "pg:stop": "pg_ctl -D database stop",
+    "-----> Prisma <-----": "",
+    "prisma": "npx prisma",
+    "prisma:push": "npx prisma db push",
+    "prisma:pull": "npx prisma db pull",
+    "-----> Reserved Scripts <-----": "",
+    "prepare": "npx prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.9.0",
+    "@shopify/app-bridge": "^3.7.0",
+    "@shopify/app-bridge-react": "^3.7.0",
+    "@shopify/app-bridge-utils": "^3.5.0",
+    "@shopify/polaris": "^10.22.0",
+    "@shopify/shopify-api": "^6.1.0",
+    "cryptr": "^6.1.0",
+    "graphql": "^16.6.0",
+    "next": "13.1.5",
+    "next-api-middleware": "^2.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@shopify/app": "^3.36.2",
+    "@shopify/cli": "^3.36.2",
+    "@shopify/cli-kit": "^3.36.2",
+    "dotenv": "^16.0.3",
+    "ngrok": "^4.3.3",
+    "npm-check-updates": "^16.6.3",
+    "prettier": "^2.8.3",
+    "prisma": "^4.9.0"
+  },
+  "overrides": {
+    "@shopify/cli-kit": {
+      "react": "18.2.0"
+    },
+    "@shopify/cli": {
+      "react": "18.2.0"
+    },
+    "@shopify/app": {
+      "react": "18.2.0"
+    }
+  }
+}
