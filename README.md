@@ -6,8 +6,6 @@ Unstable:
 
 - [ ] Webhooks
   - Use Cloudflare Workers instead if you really need webhooks right now, but I'd wait to use in prod
-- [ ] Extensions
-  - Haven't tested enough, but _shouldn't_ be a problem.
 
 An embedded app starter template to get up and ready with Shopify app development with Next.js and Prisma.
 
