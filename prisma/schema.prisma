@@ -17,6 +17,6 @@ model active_stores {
 
 model session {
   id      String  @id
-  content String?
+  content String? //MySQL requires adding @db.Text
   shop    String?
 }
