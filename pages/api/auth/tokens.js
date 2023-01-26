@@ -1,7 +1,6 @@
 import prisma from "@/utils/prisma.js";
 import sessionHandler from "@/utils/sessionHandler.js";
 import shopify from "@/utils/shopify.js";
-import webhookRegistrar from "@/utils/webhooks";
 import {
   CookieNotFound,
   InvalidOAuthError,
@@ -19,7 +18,6 @@ export default async function handler(req, res) {
 
     await sessionHandler.storeSession(session);
 
-    webhookRegistrar();
     const webhookRegisterResponse = await shopify.webhooks.register({
       session,
     });

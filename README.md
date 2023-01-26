@@ -1,11 +1,6 @@
-# Shopify Next.js x Prisma Boilerplate | WIP
+# Shopify Next.js x Prisma Boilerplate
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkinngh%2Fshopify-nextjs-prisma-app&env=SHOPIFY_API_KEY,SHOPIFY_API_SECRET,SHOPIFY_API_SCOPES,SHOPIFY_APP_URL,SHOPIFY_API_VERSION,DATABASE_URL,ENCRYPTION_STRING&project-name=shopify-next-prisma-app&repository-name=kinngh-shopify-next-prisma-app&redirect-url=https%3A%2F%2Ftwitter.com%2Fkinngh)
-
-Unstable:
-
-- [ ] Webhooks
-  - Use Cloudflare Workers instead if you really need webhooks right now, but I'd wait to use in prod
 
 An embedded app starter template to get up and ready with Shopify app development with Next.js and Prisma.
 

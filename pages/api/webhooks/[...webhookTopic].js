@@ -1,7 +1,9 @@
+/*
+  Webhook handlers are registered at `./utils/shopify.js`
+*/
 import shopify from "@/utils/shopify.js";
 
 export default async function handler(req, res) {
-  console.log("webhooks", req.method);
   if (req.method !== "POST") {
     return res.status(400).send("It ain't POST mate.");
   }

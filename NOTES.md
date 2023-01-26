@@ -8,4 +8,6 @@
 
 ## Webhooks
 
-- I wouldn't recommend processing webhooks from a Next.js/Vercel environment unless it's essential topics like `APP_UNINSTALLED`. Instead, offloading them to a platform like Cloudflare Workers _should_ technically be cheaper. An implementation for it will be available once I'm happy with it, or I forget to update this side of the documentation.
+- Processing webhooks has changed a bit, if you're coming from the Mongo repo available [here](https://github.com/kinngh/shopify-node-express-mongodb-app).
+- To add your webhooks, head over to `utils/shopify.js` and at the bottom add all your webhooks and handlers.
+- I recommend offloading webhooks handling (except `APP_UNINSTALLED`) to a different service like Google PubSub, AWS EventBridge or Cloudflare Workers so if you're building at scale, you can handle the insane amounts of webhooks that you could be processing, during times like Black Friday when your app is put to test.
