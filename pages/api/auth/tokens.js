@@ -32,6 +32,13 @@ export default async function handler(req, res) {
     });
   } catch (e) {
     console.error(`---> Error at /auth/tokens`, e);
+    
+    await prisma.active_stores.upsert({
+      where: { shop: shop },
+      update: { isActive: false },
+      create: { shop: shop, isActive: false },
+    });
+
     const { shop } = req.query;
     switch (true) {
       case e instanceof InvalidOAuthError:
