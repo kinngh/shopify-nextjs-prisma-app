@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 const ExitFrame = () => {
   const app = useAppBridge();
-  console.log("In exit frame");
 
   useEffect(() => {
     console.log(window.location.href);
@@ -15,7 +14,6 @@ const ExitFrame = () => {
       ""
     );
     const redirect = Redirect.create(app);
-    console.log("Redirecting");
     redirect.dispatch(
       Redirect.Action.REMOTE,
       `${process.env.NEXT_PUBLIC_APPORIGIN}/api/auth?shop=${shop}`
