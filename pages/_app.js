@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
             },
             {
               label: "Billing API",
-              destination: "/debug/billingAPI",
+              destination: "/debug/billing",
             },
           ]}
         />

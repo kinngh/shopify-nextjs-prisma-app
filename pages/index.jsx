@@ -4,6 +4,11 @@ import { Redirect } from "@shopify/app-bridge/actions";
 import { Card, Layout, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
 
+//On first install, check if the store is installed and redirect accordingly
+export async function getServerSideProps(context) {
+  return await isShopAvailable(context);
+}
+
 const HomePage = () => {
   const router = useRouter();
   const app = useAppBridge();
@@ -150,8 +155,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-//On first install, check if the store is installed and redirect accordingly
-export async function getServerSideProps(context) {
-  return await isShopAvailable(context);
-}
