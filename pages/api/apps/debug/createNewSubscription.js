@@ -1,7 +1,7 @@
 import clientProvider from "@/utils/clientProvider";
 import withMiddleware from "@/utils/middleware/withMiddleware";
 
-async function handler(req, res) {
+const handler = async (req, res) => {
   //false for offline session, true for online session
   const { client, shop } = await clientProvider.graphqlClient({
     req,
@@ -56,6 +56,6 @@ async function handler(req, res) {
     confirmationUrl: `${response.body.data.appSubscriptionCreate.confirmationUrl}`,
   });
   return;
-}
+};
 
 export default withMiddleware("verifyRequest")(handler);

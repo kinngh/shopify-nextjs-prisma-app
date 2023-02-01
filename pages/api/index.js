@@ -3,7 +3,7 @@
 import clientProvider from "@/utils/clientProvider";
 import withMiddleware from "@/utils/middleware/withMiddleware.js";
 
-async function handler(req, res) {
+const handler = async (req, res) => {
   if (req.method === "GET") {
     try {
       const { client } = await clientProvider.graphqlClient({
@@ -36,6 +36,6 @@ async function handler(req, res) {
   } else {
     res.status(400).send({ text: "Bad request" });
   }
-}
+};
 
 export default withMiddleware("verifyRequest")(handler);

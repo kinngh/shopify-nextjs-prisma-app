@@ -2,7 +2,7 @@ import withMiddleware from "@/utils/middleware/withMiddleware.js";
 import shopify from "@/utils/shopify.js";
 import sessionHandler from "@/utils/sessionHandler.js";
 
-async function handler(req, res) {
+const handler = async (req, res) => {
   //Reject anything that's not a POST
   if (req.method !== "POST") {
     return res.status(400).send({ text: "We don't do that here." });
@@ -25,6 +25,6 @@ async function handler(req, res) {
     console.error("An error occured at /api/graphql", e);
     return res.status(403).send(e);
   }
-}
+};
 
 withMiddleware("verifyRequest")(handler);

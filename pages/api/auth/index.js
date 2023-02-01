@@ -6,7 +6,7 @@ import {
 import shopify from "@/utils/shopify.js";
 import prisma from "@/utils/prisma.js";
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   try {
     if (!req.query.shop) {
       res.status(500);
@@ -60,4 +60,6 @@ export default async function handler(req, res) {
         break;
     }
   }
-}
+};
+
+export default handler;

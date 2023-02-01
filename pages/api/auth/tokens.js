@@ -7,7 +7,7 @@ import {
   InvalidSession,
 } from "@shopify/shopify-api";
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   try {
     const callbackResponse = await shopify.auth.callback({
       rawRequest: req,
@@ -33,13 +33,13 @@ export default async function handler(req, res) {
   } catch (e) {
     console.error(`---> Error at /auth/tokens`, e);
 
+    const { shop } = req.query;
     await prisma.active_stores.upsert({
       where: { shop: shop },
       update: { isActive: false },
       create: { shop: shop, isActive: false },
     });
 
-    const { shop } = req.query;
     switch (true) {
       case e instanceof InvalidOAuthError:
         res.status(400).send(e.message);
@@ -58,4 +58,6 @@ export default async function handler(req, res) {
         break;
     }
   }
-}
+};
+
+export default handler;
