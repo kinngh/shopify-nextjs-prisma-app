@@ -1,3 +1,5 @@
+// If you have the recommended extension installed, create a new page and type `createapi` to generate api endpoint boilerplate
+
 //TEMP
 
 import clientProvider from "@/utils/clientProvider";

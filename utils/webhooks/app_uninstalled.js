@@ -1,3 +1,5 @@
+// If you have the recommended extension installed, create a new page and type `createwebhook` to generate webhook boilerplate
+
 import prisma from "@/utils/prisma.js";
 
 const appUninstallHandler = async (topic, shop, webhookRequestBody) => {

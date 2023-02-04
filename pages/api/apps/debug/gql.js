@@ -1,3 +1,5 @@
+// If you have the recommended extension installed, create a new page and type `createclientgql` to generate GraphQL provider endpoint boilerplate
+
 import clientProvider from "@/utils/clientProvider";
 import withMiddleware from "@/utils/middleware/withMiddleware.js";
 

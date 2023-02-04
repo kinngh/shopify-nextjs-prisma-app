@@ -6,6 +6,14 @@ An embedded app starter template to get up and ready with Shopify app developmen
 
 I've included [notes](/NOTES.md) on this repo which goes over the repo on why certain choices were made.
 
+## VSCode extension
+
+The VSCode extension has a collection of snippets that is used to quickly generate boilerplate code for creating `/api`, `/proxy_route`, webhook functions and client provider endpoints to speed up your dev process.
+
+[DOWNLOAD](https://marketplace.visualstudio.com/items?itemName=kinngh.simple-shop-snippets-nextjs)
+
+![Snippets snippeting](https://github.com/kinngh/csa-vscode-extension/raw/main/assets/snippets.gif)
+
 ## Supporting repositories
 
 - [`@kinngh/shopify-node-express-mongodb-app`](https://github.com/kinngh/shopify-node-express-mongodb-app): Shopify app starter repo built with Express.js, React.js and Vite.
