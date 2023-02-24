@@ -1,18 +1,18 @@
 /*
 
-DEV ONLY --> `npm run update:url`
+  DEV ONLY --> `npm run update:url`
 
-LIMITATION:
-- [OEM] Cannot update GDPR URLs.
-- [OEM] Cannot update App Proxy URL.
-- May break with a future update to `@shopify/cli-kit`.
+  LIMITATION:
+  - [OEM] Cannot update GDPR URLs.
+  - [OEM] Cannot update App Proxy URL.
+  - May break with a future update to `@shopify/cli-kit`.
+ */
 
-*/
-
-import { ui as cliUI } from "@shopify/cli-kit";
 import { partnersRequest } from "@shopify/cli-kit/node/api/partners";
+import { AbortError } from "@shopify/cli-kit/node/error";
 import { ensureAuthenticatedPartners } from "@shopify/cli-kit/node/session";
-import "dotenv/config"; //Dev dependency
+import { renderSelectPrompt } from "@shopify/cli-kit/node/ui";
+import "dotenv/config";
 
 const UpdateAppURLQuery = `
   mutation appUpdate($apiKey: String!, $applicationUrl: Url!, $redirectUrlWhitelist: [Url]!) {
@@ -61,10 +61,9 @@ const getOrgs = async (accessToken) => {
   const response = await partnersRequest(AllOrganizationsQuery, accessToken);
   const orgs = response.organizations.nodes;
   if (orgs.length === 0) {
-    console.error(
-      `There was a problem connecting to the org. Please check that the org exists and/or you have access. You can logout using\n npm run shopify auth logout`
+    throw new AbortError(
+      `---> There was a problem connecting to the org. Please check that the org exists and/or you have access. You can logout using\n npm run shopify auth logout`
     );
-    return;
   }
   return orgs;
 };
@@ -74,20 +73,17 @@ const selectOrgCLI = async (orgs) => {
     return orgs[0];
   }
   const orgList = orgs.map((org) => ({
-    name: org.businessName,
+    label: org.businessName,
     value: org.id,
+    id: org.id,
   }));
 
-  const choice = await cliUI.prompt([
-    {
-      type: "autocomplete",
-      name: "id",
-      message: "Select a Shopify Partner org for this app",
-      choices: orgList,
-    },
-  ]);
+  const choice = await renderSelectPrompt({
+    message: "Select a Shopify Partner org for this app",
+    choices: orgList,
+  });
 
-  return orgs.find((org) => org.id === choice.id);
+  return orgs.find((org) => org.id === choice);
 };
 
 const getApp = async (apiKey, accessToken) => {
@@ -99,12 +95,13 @@ const getApp = async (apiKey, accessToken) => {
 const updateDashboardURLs = async (apiKey, appUrl) => {
   const accessToken = await ensureAuthenticatedPartners();
 
+  const redirectURLs = appUrl.endsWith("/")
+    ? [`${appUrl}api/auth/tokens`, `${appUrl}api/auth/callback`]
+    : [`${appUrl}/api/auth/tokens`, `${appUrl}/api/auth/callback`];
+
   const urls = {
     applicationUrl: appUrl,
-    redirectUrlWhitelist: [
-      `${appUrl}/api/auth/tokens`,
-      `${appUrl}/api/auth/callback`,
-    ],
+    redirectUrlWhitelist: redirectURLs,
   };
 
   const result = await partnersRequest(UpdateAppURLQuery, accessToken, {
