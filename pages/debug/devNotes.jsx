@@ -1,9 +1,7 @@
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { Redirect } from "@shopify/app-bridge/actions";
-import { Card, Layout, Link, Page } from "@shopify/polaris";
+import { Layout, LegacyCard, Link, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
-
-import React from "react";
 
 const DevNotes = () => {
   const router = useRouter();
@@ -20,8 +18,8 @@ const DevNotes = () => {
       >
         <Layout>
           <Layout.Section>
-            <Card title="Notes">
-              <Card.Section title="Creating Extensions">
+            <LegacyCard title="Notes">
+              <LegacyCard.Section title="Creating Extensions">
                 <li>
                   Run <code>npm run s:e:create</code> to create an extension and{" "}
                   <code>npm run s:e:deploy</code> to deploy said extension.
@@ -37,8 +35,8 @@ const DevNotes = () => {
                   <code>overrides</code> area in <code>package.json</code> or
                   downgrade <code>React</code> to <code>17.x.x</code>.
                 </li>
-              </Card.Section>
-              <Card.Section title="Creating GraphQL and REST Clients">
+              </LegacyCard.Section>
+              <LegacyCard.Section title="Creating GraphQL and REST Clients">
                 <li>
                   Starting <code>Shopify API v6</code>, client providers require
                   an additional few lines of setup. To avoid that, there's a new
@@ -58,8 +56,8 @@ const DevNotes = () => {
                 <li>
                   Examples can be found in <code>./server/routes/index.js</code>
                 </li>
-              </Card.Section>
-              <Card.Section title="Opening Issues and Asking for Help">
+              </LegacyCard.Section>
+              <LegacyCard.Section title="Opening Issues and Asking for Help">
                 <p>
                   The idea behind creating the repo was to make it easier for
                   you to get started with Shopify app dev and/or understand how
@@ -86,8 +84,8 @@ const DevNotes = () => {
                     us.
                   </strong>
                 </li>
-              </Card.Section>
-              <Card.Section>
+              </LegacyCard.Section>
+              <LegacyCard.Section>
                 <p>
                   To have other common issues added here,{" "}
                   <Link
@@ -102,8 +100,8 @@ const DevNotes = () => {
                   </Link>{" "}
                   here
                 </p>
-              </Card.Section>
-            </Card>
+              </LegacyCard.Section>
+            </LegacyCard>
           </Layout.Section>
         </Layout>
       </Page>

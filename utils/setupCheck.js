@@ -7,19 +7,10 @@ const setupCheck = () => {
     SHOPIFY_API_VERSION: apiVersion,
     ENCRYPTION_STRING: encString,
     DATABASE_URL: databaseURL,
-    NEXT_PUBLIC_APPORIGIN,
-    NEXT_PUBLIC_APIKEY,
   } = process.env;
 
   let errorCount = 0;
-  if (typeof NEXT_PUBLIC_APPORIGIN === "undefined") {
-    console.error("---> NEXT_PUBLIC_APPORIGIN is undefined");
-    errorCount++;
-  }
-  if (typeof NEXT_PUBLIC_APIKEY === "undefined") {
-    console.error("---> NEXT_PUBLIC_APIKEY is undefined");
-    errorCount++;
-  }
+
   if (typeof apiKey === "undefined") {
     console.error("---> API Key is undefined.");
     errorCount++;

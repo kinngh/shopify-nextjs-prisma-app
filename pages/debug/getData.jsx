@@ -1,7 +1,7 @@
 import useFetch from "@/components/hooks/useFetch";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { Redirect } from "@shopify/app-bridge/actions";
-import { Card, Layout, Link, Page } from "@shopify/polaris";
+import { Layout, LegacyCard, Link, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -56,7 +56,7 @@ const GetData = () => {
     >
       <Layout>
         <Layout.Section>
-          <Card
+          <LegacyCard
             sectioned
             primaryFooterAction={{
               content: "Refetch",
@@ -68,10 +68,10 @@ const GetData = () => {
             <p>
               GET <code>"/apps/api"</code>: {responseData}
             </p>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section>
-          <Card
+          <LegacyCard
             sectioned
             primaryFooterAction={{
               content: "Refetch",
@@ -83,10 +83,10 @@ const GetData = () => {
             <p>
               POST <code>"/apps/api" </code>: {responseDataPost}
             </p>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section>
-          <Card
+          <LegacyCard
             sectioned
             primaryFooterAction={{
               content: "Refetch",
@@ -98,9 +98,9 @@ const GetData = () => {
             <p>
               GET <code>"/apps/api/debug/gql"</code>: {responseDataGQL}
             </p>
-          </Card>
-          <Card title="Developer Notes">
-            <Card.Section title="Making Requests">
+          </LegacyCard>
+          <LegacyCard title="Developer Notes">
+            <LegacyCard.Section title="Making Requests">
               <li>
                 Create a new route in <code>pages/api/apps</code> and export it
                 with
@@ -138,8 +138,8 @@ const GetData = () => {
                 </Link>{" "}
                 for client side data fetching state management.
               </li>
-            </Card.Section>
-          </Card>
+            </LegacyCard.Section>
+          </LegacyCard>
         </Layout.Section>
       </Layout>
     </Page>

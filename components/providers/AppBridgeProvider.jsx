@@ -15,7 +15,7 @@ function AppBridgeProvider({ children }) {
     if (host) {
       setConfig({
         host: host,
-        apiKey: process.env.NEXT_PUBLIC_APIKEY,
+        apiKey: process.env.CONFIG_SHOPIFY_API_KEY,
         forceRedirect: true,
       });
     }

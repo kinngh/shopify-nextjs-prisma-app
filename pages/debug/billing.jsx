@@ -1,7 +1,7 @@
 import useFetch from "@/components/hooks/useFetch";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { Redirect } from "@shopify/app-bridge/actions";
-import { Card, DataTable, Layout, Page } from "@shopify/polaris";
+import { DataTable, Layout, LegacyCard, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -32,7 +32,7 @@ const BillingAPI = () => {
     >
       <Layout>
         <Layout.Section>
-          <Card
+          <LegacyCard
             sectioned
             primaryFooterAction={{
               content: "Subscribe merchant",
@@ -50,7 +50,7 @@ const BillingAPI = () => {
               /* If we have an error, it'll pop up here. */
               responseData && <p>{responseData}</p>
             }
-          </Card>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section>
           <ActiveSubscriptions />
@@ -91,13 +91,13 @@ const ActiveSubscriptions = () => {
   }, []);
 
   return (
-    <Card title="Active Subscriptions" sectioned>
+    <LegacyCard title="Active Subscriptions" sectioned>
       <DataTable
         columnContentTypes={["text", "text", "text", "text"]}
         headings={["Plan Name", "Status", "Test", "Amount"]}
         rows={rows}
       />
-    </Card>
+    </LegacyCard>
   );
 };
 

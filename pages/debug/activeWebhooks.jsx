@@ -1,5 +1,5 @@
 import useFetch from "@/components/hooks/useFetch";
-import { Card, DataTable, Page } from "@shopify/polaris";
+import { DataTable, LegacyCard, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -38,14 +38,14 @@ const ActiveWebhooks = () => {
           { content: "Home", onAction: () => router.push("/debug") },
         ]}
       >
-        <Card>
+        <LegacyCard>
           <DataTable
             columnContentTypes={["text", "text"]}
             headings={["Topic", "Callback Url"]}
             rows={rows}
           />
-        </Card>
-        <Card title="Webhook URLs" sectioned>
+        </LegacyCard>
+        <LegacyCard title="Webhook URLs" sectioned>
           <p>
             Webhooks are registered when the app is installed, or when tokens
             are refetched by going through the authentication process. If your
@@ -53,7 +53,7 @@ const ActiveWebhooks = () => {
             during dev when using ngrok), you need to go through the auth
             process again.
           </p>
-        </Card>
+        </LegacyCard>
       </Page>
     </>
   );

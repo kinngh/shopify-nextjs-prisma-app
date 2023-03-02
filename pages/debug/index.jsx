@@ -1,4 +1,4 @@
-import { Card, Layout, Page } from "@shopify/polaris";
+import { Layout, LegacyCard, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
 
 const DebugIndex = () => {
@@ -11,7 +11,7 @@ const DebugIndex = () => {
     >
       <Layout>
         <Layout.Section oneHalf>
-          <Card
+          <LegacyCard
             sectioned
             title="Webhooks"
             primaryFooterAction={{
@@ -22,10 +22,10 @@ const DebugIndex = () => {
             }}
           >
             <p>Explore registered webhooks and endpoints.</p>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section oneHalf>
-          <Card
+          <LegacyCard
             sectioned
             title="Data Fetching"
             primaryFooterAction={{
@@ -39,10 +39,10 @@ const DebugIndex = () => {
               Run GET and POST requests to your server along with GraphQL
               queries.
             </p>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section oneHalf>
-          <Card
+          <LegacyCard
             sectioned
             title="Billing API"
             primaryFooterAction={{
@@ -53,10 +53,10 @@ const DebugIndex = () => {
             }}
           >
             <p>Subscribe merchant to a plan and explore existing plans.</p>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section oneHalf>
-          <Card
+          <LegacyCard
             sectioned
             title="Dev Notes"
             primaryFooterAction={{
@@ -67,7 +67,7 @@ const DebugIndex = () => {
             }}
           >
             <p>Notes for devs on expectations.</p>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
       </Layout>
     </Page>
