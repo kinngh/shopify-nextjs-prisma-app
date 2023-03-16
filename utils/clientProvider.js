@@ -1,6 +1,6 @@
 import { ApiVersion } from "@shopify/shopify-api";
 import sessionHandler from "./sessionHandler.js";
-import shopify from "./shopifyConfig.js";
+import shopify from "./shopify.js";
 
 const fetchSession = async ({ req, res, isOnline }) => {
   //false for offline session, true for online session
