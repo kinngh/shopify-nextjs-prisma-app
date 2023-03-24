@@ -62,10 +62,10 @@ This is an in-depth guide on using this repo. This goes over getting the base re
 
     - Subpath Prefix: `apps`
     - Subpath: `next-proxy`
-    - Proxy URL: `https://<your-url>/proxy_route`
+    - Proxy URL: `https://<your-url>/api/proxy_route`
 
-    - So when a merchant visits `https://shop-url.com/apps/next-proxy/`, the response to that request will come from `https://<your-url>/proxy_route`. A middleware has already been setup to check signatures so you don't have to worry about authenticating proxy calls, and is available at `utils/middleware/verifyProxy.js`.
-    - Subsequently, any child requests will be mapped the same way. A call to `https://shop-url.com/apps/next-proxy/json` will be routed to `https://<your-url>/proxy_route/json`.
+    - So when a merchant visits `https://shop-url.com/apps/next-proxy/`, the response to that request will come from `https://<your-url>/api/proxy_route`. A middleware has already been setup to check signatures so you don't have to worry about authenticating proxy calls, and is available at `utils/middleware/verifyProxy.js`.
+    - Subsequently, any child requests will be mapped the same way. A call to `https://shop-url.com/apps/next-proxy/json` will be routed to `https://<your-url>/api/proxy_route/json`.
     - To confirm if you've setup app proxy properly, head over to `https://shop-url.myshopify.com/apps/next-proxy/json` to confirm if you get a JSON being returned with the configuration set above^
     - A common _gotcha_ is if you're creating multiple apps that all use the same subpath (`next-proxy` in this case), all susbequent installs will throw a `404` error because Shopify serializes routes based on installation. To avoid this, please change the subpath to something that's unique to your app. I prefer using the format `<<appname>>-proxy`
 
