@@ -7,6 +7,13 @@ setupCheck();
 
 console.log(`--> Running in ${process.env.NODE_ENV} mode`);
 
+if (process.env.NODE_ENV === "development" ){
+    console.log("Use this link to access and install your app in your store: ");
+    console.log("================================================");
+    console.log(`${process.env.SHOPIFY_APP_URL}/api/auth?shop=${process.env.SHOPIFY_DEV_STORE_URL}`);
+    console.log("================================================");
+  }
+
 const nextConfig = {
   reactStrictMode: true,
   env: {
