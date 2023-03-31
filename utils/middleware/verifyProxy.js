@@ -17,6 +17,7 @@ const verifyProxy = async (req, res, next) => {
     .digest("hex");
 
   if (calculatedSignature === signature) {
+    req.user_shop = req.query.shop; //myshopify domain
     await next();
   } else {
     return res.status(401).send({
