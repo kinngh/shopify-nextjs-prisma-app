@@ -1,5 +1,5 @@
 import { useAppBridge } from "@shopify/app-bridge-react";
-import { authenticatedFetch } from "@shopify/app-bridge-utils";
+import { authenticatedFetch } from "@shopify/app-bridge/utilities";
 import { Redirect } from "@shopify/app-bridge/actions";
 
 function useFetch() {
