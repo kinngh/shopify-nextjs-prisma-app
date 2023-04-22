@@ -1,0 +1,199 @@
+{
+  "Arrow Function Component": {
+    "prefix": "sfc",
+    "body": [
+      "const $1 = ($2) => {",
+      "\treturn ( $0 );",
+      "}",
+      " ",
+      "export default $1;"
+    ],
+    "description": "Arrow Function Component"
+  },
+
+  "Polaris Page": {
+    "prefix": "createNewPage",
+    "body": [
+      "import { Page, Layout, LegacyCard } from \"@shopify/polaris\";",
+      "",
+      "const $1 = ($2) => {",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t<Page>",
+      "\t\t\t\t<Layout>",
+      "\t\t\t\t\t<Layout.Section>",
+      "\t\t\t\t\t\t<LegacyCard sectioned title=\"$3\">",
+      "\t\t\t\t\t\t\t<p>$4</p>",
+      "\t\t\t\t\t\t</LegacyCard>",
+      "\t\t\t\t\t</Layout.Section>",
+      "\t\t\t\t</Layout>",
+      "\t\t\t</Page>",
+      "\t\t</>",
+      "\t);",
+      "};",
+      "",
+      "export default $1;"
+    ],
+    "description": "Create a new page with a sectioned LegacyCard component."
+  },
+
+  "Polaris Page with Empty State": {
+    "prefix": "createNewPageEmpty",
+    "body": [
+      "import { Page, Layout, LegacyCard, EmptyState } from \"@shopify/polaris\";",
+      "",
+      "const $1 = ($2) => {",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t<Page>",
+      "\t\t\t\t<Layout>",
+      "\t\t\t\t\t<Layout.Section>",
+      "\t\t\t\t\t\t<LegacyCard sectioned>",
+      "\t\t\t\t\t\t\t{/* Taken from Shopify Polaris */}",
+      "\t\t\t\t\t\t\t<EmptyState",
+      "\t\t\t\t\t\t\t\theading=\"Manage your inventory transfers\"",
+      "\t\t\t\t\t\t\t\taction={{ content: \"Add transfer\" }}",
+      "\t\t\t\t\t\t\t\tsecondaryAction={{",
+      "\t\t\t\t\t\t\t\t\tcontent: \"Learn more\",",
+      "\t\t\t\t\t\t\t\t\turl: \"https://help.shopify.com\",",
+      "\t\t\t\t\t\t\t\t}}",
+      "\t\t\t\t\t\t\t\timage=\"https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png\"",
+      "\t\t\t\t\t\t\t>",
+      "\t\t\t\t\t\t\t\t<p>Track and receive your incoming inventory from suppliers.</p>",
+      "\t\t\t\t\t\t\t</EmptyState>",
+      "\t\t\t\t\t\t</LegacyCard>",
+      "\t\t\t\t\t</Layout.Section>",
+      "\t\t\t\t</Layout>",
+      "\t\t\t</Page>",
+      "\t\t</>",
+      "\t);",
+      "};",
+      "",
+      "export default $1;"
+    ],
+    "description": "Create a new page with an Empty State and sectioned LegacyCard component."
+  },
+
+  "api/ route with middleware": {
+    "prefix": "createapi",
+    "body": [
+      "import withMiddleware from \"@/utils/middleware/withMiddleware.js\";",
+      "",
+      "const $1 = async (req, res) => {",
+      "\tif (req.method !== \"GET\") {",
+      "\t\t//GET, POST, PUT, DELETE",
+      "\t\tconsole.log(\"Serve this only if the request method is GET\");",
+      "\t\treturn res.status(401).send({ error: true });",
+      "\t}",
+      "",
+      "\ttry {",
+      "\t\t$2",
+      "\t\treturn res.status(200).send({ text: \"Success!\" });",
+      "\t} catch (e) {",
+      "\t\tconsole.error(e);",
+      "\t\treturn res.status(401).send({ error: true });",
+      "\t}",
+      "};",
+      "",
+      "export default withMiddleware(\"verifyRequest\")($1);"
+    ],
+    "description": "api/ route with middleware"
+  },
+
+  "app_proxy/ route with middleware": {
+    "prefix": "createproxy",
+    "body": [
+      "import withMiddleware from \"@/utils/middleware/withMiddleware.js\";",
+      "",
+      "const $1 = async (req, res) => {",
+      "\tif (req.method !== \"GET\") {",
+      "\t\t//GET, POST, PUT, DELETE",
+      "\t\tconsole.log(\"Serve this request only if method type is GET\");",
+      "\t\treturn res.status(401).send({ error: true });",
+      "\t}",
+      "\ttry {",
+      "\t\t$2",
+      "\t\tres.status(200).send({ content: \"Proxy Be Working\" });",
+      "\t} catch (e) {",
+      "\t\tconsole.error(e);",
+      "\t\treturn res.status(401).send({ error: true });",
+      "\t}",
+      "};",
+      "",
+      "export default withMiddleware(\"verifyProxy\")($1);"
+    ],
+    "description": "app_proxy/ route with middleware"
+  },
+
+  "Webhook function": {
+    "prefix": "createwebhook",
+    "body": [
+      "const $1 = async (topic, shop, webhookRequestBody, webhookId, apiVersion) => {",
+      "\ttry {",
+      "\t\tconst webhookBody = JSON.parse(webhookRequestBody);",
+      "\t\t$2",
+      "\t} catch (e) {",
+      "\t\tconsole.error(e);",
+      "\t}",
+      "};",
+      "",
+      "export default $1;"
+    ],
+    "description": "Webhook function"
+  },
+
+  "GraphQL Client Provider": {
+    "prefix": "createClientGql",
+    "body": [
+      "import clientProvider from \"@/utils/clientProvider\";",
+      "import withMiddleware from \"@/utils/middleware/withMiddleware\";",
+      "",
+      "const $1 = async (req, res) => {",
+      "\ttry {",
+      "\t\tconst { client } = await clientProvider.graphqlClient({",
+      "\t\t\treq,",
+      "\t\t\tres,",
+      "\t\t\tisOnline: $2, //false for offline session, true for online session",
+      "\t\t});",
+      "",
+      "\t\tconst response = await client.query({",
+      "\t\t\tdata: `{}`, //Paste your GraphQL query/mutation here",
+      "\t\t});",
+      "",
+      "\t\tres.status(200).send(response);",
+      "\t} catch (e) {",
+      "\t\tconsole.error(e);",
+      "\t\treturn res.status(400).send({ error: true });",
+      "\t}",
+      "};",
+      "",
+      "export default withMiddleware(\"verifyRequest\")($1);"
+    ],
+    "description": "GraphQL Client Provider"
+  },
+  "Offline GraphQL Client Provider": {
+    "prefix": "createOfflineClientGql",
+    "body": [
+      "import clientProvider from \"@/utils/clientProvider\";",
+      "import withMiddleware from \"@/utils/middleware/withMiddleware\";",
+      "",
+      "const $1 = async (req, res) => {",
+      "\ttry {",
+      "\t\tconst { client } = await clientProvider.offline.graphqlClient({shop: req.user_shop}); //Only available in app proxy routes",
+      "",
+      "\t\tconst response = await client.query({",
+      "\t\t\tdata: `{}`, //Paste your GraphQL query/mutation here",
+      "\t\t});",
+      "",
+      "\t\treturn res.status(200).send(response);",
+      "\t} catch (e) {",
+      "\t\tconsole.error(e);",
+      "\t\treturn res.status(400).send({ error: true });",
+      "\t}",
+      "};",
+      "",
+      "export default withMiddleware(\"verifyRequest\")($1);"
+    ],
+    "description": "Offline GraphQL Client Provider"
+  }
+}
