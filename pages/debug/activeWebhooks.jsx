@@ -34,9 +34,7 @@ const ActiveWebhooks = () => {
     <>
       <Page
         title="Webhooks"
-        breadcrumbs={[
-          { content: "Home", onAction: () => router.push("/debug") },
-        ]}
+        backAction={{ content: "Home", onAction: () => router.push("/debug") }}
       >
         <LegacyCard>
           <DataTable

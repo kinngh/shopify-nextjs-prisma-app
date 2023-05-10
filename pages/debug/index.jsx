@@ -7,7 +7,7 @@ const DebugIndex = () => {
     <Page
       title="Debug Cards"
       subtitle="Interact and explore the current installation"
-      breadcrumbs={[{ content: "Home", onAction: () => router.push("/") }]}
+      backAction={{ content: "Home", onAction: () => router.push("/") }}
     >
       <Layout>
         <Layout.Section oneHalf>

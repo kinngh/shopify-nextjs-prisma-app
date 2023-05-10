@@ -52,7 +52,7 @@ const GetData = () => {
   return (
     <Page
       title="Data Fetching"
-      breadcrumbs={[{ content: "Home", onAction: () => router.push("/debug") }]}
+      backAction={{ content: "Home", onAction: () => router.push("/debug") }}
     >
       <Layout>
         <Layout.Section>

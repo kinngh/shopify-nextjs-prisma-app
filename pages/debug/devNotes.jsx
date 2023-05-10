@@ -12,9 +12,7 @@ const DevNotes = () => {
       <Page
         title="Developer Notes"
         subtitle=""
-        breadcrumbs={[
-          { content: "Home", onAction: () => router.push("/debug") },
-        ]}
+        backAction={{ content: "Home", onAction: () => router.push("/debug") }}
       >
         <Layout>
           <Layout.Section>

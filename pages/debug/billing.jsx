@@ -28,7 +28,7 @@ const BillingAPI = () => {
   return (
     <Page
       title="Billing API"
-      breadcrumbs={[{ content: "Home", onAction: () => router.push("/debug") }]}
+      backAction={{ content: "Home", onAction: () => router.push("/debug") }}
     >
       <Layout>
         <Layout.Section>
