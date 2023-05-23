@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
+/** @type {PrismaClient} */
 let prisma;
 let isProd = process.env.NODE_ENV === "production";
 
