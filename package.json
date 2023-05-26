@@ -17,6 +17,9 @@
     "pretty": "prettier --write ./",
     "update": "ncu -u",
     "update:url": "node _developer/updateDashboard.js",
+    "ssl:install": "mkcert -install",
+    "ssl:create": "node _developer/generateSSL.js",
+    "tunnel": "local-ssl-proxy --config proxy-config.json",
     "ngrok:auth": "ngrok authtoken <auth-token-goes-here>",
     "ngrok": "ngrok http 3000",
     "-----> Shopify <-----": "",
@@ -51,11 +54,16 @@
     "@shopify/app": "^3.46.0",
     "@shopify/cli": "^3.46.0",
     "@shopify/cli-kit": "^3.46.0",
+    "@types/node": "^20.2.3",
+    "@types/react": "^18.2.7",
+    "chalk": "^5.2.0",
     "dotenv": "^16.0.3",
+    "local-ssl-proxy": "^2.0.5",
     "ngrok": "^4.3.3",
     "npm-check-updates": "^16.10.12",
     "prettier": "^2.8.8",
-    "prisma": "^4.14.1"
+    "prisma": "^4.14.1",
+    "typescript": "^5.0.4"
   },
   "overrides": {
     "@shopify/cli-kit": {

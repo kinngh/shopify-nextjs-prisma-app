@@ -6,6 +6,20 @@ An embedded app starter template to get up and ready with Shopify app developmen
 
 I've included [notes](/docs/NOTES.md) on this repo which goes over the repo on why certain choices were made.
 
+## Setup ssl locally
+
+1- Install mkcert `(choco install mkcert / brew install mkcert)`
+
+2- Run `mkcert -install` or `npm run ssl:install`
+
+3- Run `npm run ssl:create your-app-name.test`
+
+4- Add `127.0.0.1 your-app-name.test` to the hosts file
+
+## Running the local ssl tunnel
+
+Run `npm run tunnel`
+
 ## Video
 
 I made a video that goes over the entire repo, creating theme extension and deploying with Vercel and PlanetScale.
