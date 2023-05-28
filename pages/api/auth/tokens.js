@@ -21,7 +21,7 @@ const handler = async (req, res) => {
     const webhookRegisterResponse = await shopify.webhooks.register({
       session,
     });
-    console.log(webhookRegisterResponse);
+    console.dir(webhookRegisterResponse, { depth: null });
 
     return await shopify.auth.begin({
       shop: session.shop,
