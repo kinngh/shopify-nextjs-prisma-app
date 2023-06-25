@@ -35,24 +35,11 @@ const handler = async (req, res) => {
     console.error(`---> Error at /auth`, e);
     const { shop } = req.query;
     switch (true) {
-      case e instanceof InvalidOAuthError:
-        res.status(400).send(e.message);
-        break;
       case e instanceof CookieNotFound:
+        res.redirect(`/exitframe/${shop}`);
+        break;
+      case e instanceof InvalidOAuthError:
       case e instanceof InvalidSession:
-        await prisma.active_store.update({
-          where: {
-            shop: shop,
-          },
-          data: {
-            isActive: false,
-          },
-        });
-        await prisma.session.deleteMany({
-          where: {
-            shop: shop,
-          },
-        });
         res.redirect(`/api/auth?shop=${shop}`);
         break;
       default:

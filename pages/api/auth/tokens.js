@@ -41,16 +41,11 @@ const handler = async (req, res) => {
     });
 
     switch (true) {
-      case e instanceof InvalidOAuthError:
-        res.status(400).send(e.message);
-        break;
       case e instanceof CookieNotFound:
+        res.redirect(`/exitframe/${shop}`);
+        break;
+      case e instanceof InvalidOAuthError:
       case e instanceof InvalidSession:
-        await prisma.session.deleteMany({
-          where: {
-            shop: shop,
-          },
-        });
         res.redirect(`/api/auth?shop=${shop}`);
         break;
       default:
