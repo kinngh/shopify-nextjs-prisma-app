@@ -1,10 +1,9 @@
+import shopify from "@/utils/shopify.js";
 import {
   CookieNotFound,
   InvalidOAuthError,
   InvalidSession,
 } from "@shopify/shopify-api";
-import shopify from "@/utils/shopify.js";
-import prisma from "@/utils/prisma.js";
 
 const handler = async (req, res) => {
   try {

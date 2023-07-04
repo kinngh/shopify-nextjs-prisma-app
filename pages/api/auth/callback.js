@@ -30,6 +30,7 @@ const handler = async (req, res) => {
     res.redirect(`/?shop=${shop}&host=${host}`);
   } catch (e) {
     console.error("---> An error occured at /auth/callback", e);
+    const { shop } = req.query;
     switch (true) {
       case e instanceof CookieNotFound:
         res.redirect(`/exitframe/${shop}`);

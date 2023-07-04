@@ -1,4 +1,3 @@
-import prisma from "@/utils/prisma.js";
 import sessionHandler from "@/utils/sessionHandler.js";
 import shopify from "@/utils/shopify.js";
 import {
@@ -34,12 +33,6 @@ const handler = async (req, res) => {
     console.error(`---> Error at /auth/tokens`, e);
 
     const { shop } = req.query;
-    await prisma.active_stores.upsert({
-      where: { shop: shop },
-      update: { isActive: false },
-      create: { shop: shop, isActive: false },
-    });
-
     switch (true) {
       case e instanceof CookieNotFound:
         res.redirect(`/exitframe/${shop}`);
