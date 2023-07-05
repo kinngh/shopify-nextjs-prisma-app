@@ -35,27 +35,27 @@
     "prepare": "npx prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^4.16.1",
-    "@shopify/app-bridge": "^3.7.7",
-    "@shopify/app-bridge-react": "^3.7.7",
-    "@shopify/polaris": "^11.2.2",
+    "@prisma/client": "^4.16.2",
+    "@shopify/app-bridge": "^3.7.8",
+    "@shopify/app-bridge-react": "^3.7.8",
+    "@shopify/polaris": "^11.4.0",
     "@shopify/shopify-api": "^7.4.0",
     "cryptr": "^6.2.0",
     "graphql": "^16.7.1",
-    "next": "13.4.7",
+    "next": "13.4.8",
     "next-api-middleware": "^2.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@shopify/app": "^3.46.5",
-    "@shopify/cli": "^3.46.5",
-    "@shopify/cli-kit": "^3.46.5",
+    "@shopify/app": "^3.47.3",
+    "@shopify/cli": "^3.47.3",
+    "@shopify/cli-kit": "^3.47.3",
     "dotenv": "^16.3.1",
     "ngrok": "^4.3.3",
     "npm-check-updates": "^16.10.13",
-    "prettier": "^2.8.8",
-    "prisma": "^4.16.1"
+    "prettier": "^3.0.0",
+    "prisma": "^4.16.2"
   },
   "overrides": {
     "@shopify/cli-kit": {
