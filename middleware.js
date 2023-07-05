@@ -2,7 +2,7 @@
     Add Content Security Policy headers to all relevant requests.
 */
 
-import NextServer from "next/server";
+import { NextResponse } from "next/server";
 
 export const config = {
   matcher: [
@@ -16,7 +16,6 @@ export const config = {
 };
 
 export function middleware(request) {
-  const { NextResponse } = NextServer;
   const {
     nextUrl: { search },
   } = request;
