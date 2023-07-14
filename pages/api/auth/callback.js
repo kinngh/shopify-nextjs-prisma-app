@@ -20,7 +20,7 @@ const handler = async (req, res) => {
     const host = req.query.host;
     const { shop } = session;
 
-    await prisma.active_stores.upsert({
+    await prisma.stores.upsert({
       where: { shop: shop },
       update: { isActive: true },
       create: { shop: shop, isActive: true },

@@ -4,7 +4,7 @@ const isShopAvailable = async (context) => {
   const shop = context.query.shop;
 
   if (shop) {
-    const isShopAvailable = await prisma.active_stores.findUnique({
+    const isShopAvailable = await prisma.stores.findUnique({
       where: { shop: shop },
     });
 

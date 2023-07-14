@@ -6,17 +6,17 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model active_stores {
+model stores {
   shop     String   @id
   isActive Boolean? @default(false)
 }
 
 model session {
   id      String  @id
-  content String? //MySQL requires adding @db.Text
+  content String? @db.Text
   shop    String?
 }
