@@ -128,10 +128,16 @@
   "Webhook function": {
     "prefix": "createwebhook",
     "body": [
+      "/**",
+      "* Replace TOPIC_NAME with a Webhook Topic to enable autocomplete",
+      "* @typedef { import(\"@/_developer/types/2023-07/webhooks.js\").${2:TOPIC_NAME} } webhookTopic",
+      "*/",
+      "",
       "const $1 = async (topic, shop, webhookRequestBody, webhookId, apiVersion) => {",
       "\ttry {",
+      "\t\t/** @type {webhookTopic} */",
       "\t\tconst webhookBody = JSON.parse(webhookRequestBody);",
-      "\t\t$2",
+      "\t\t$3",
       "\t} catch (e) {",
       "\t\tconsole.error(e);",
       "\t}",
