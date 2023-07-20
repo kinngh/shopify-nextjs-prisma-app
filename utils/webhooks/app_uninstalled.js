@@ -1,4 +1,5 @@
-// If you have the recommended extension installed, create a new page and type `createwebhook` to generate webhook boilerplate
+// To create a new webhook, create a new `.js` folder in /utils/webhooks/ and use the project snippet
+// `createwebhook` to generate webhook boilerplate
 
 /**
  * @typedef { import("@/_developer/types/2023-07/webhooks.js").APP_UNINSTALLED} AppUninstalled
