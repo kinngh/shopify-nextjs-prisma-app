@@ -20,7 +20,7 @@ const handler = async (req, res) => {
         redirectUri: `/api/auth?shop=${shop}&host=${req.query.host}`,
       }).toString();
 
-      return res.redirect(`/exitframe?${queryParams}`);
+      return res.redirect(`/exitframe/${queryParams}`);
     }
 
     return await shopify.auth.begin({
