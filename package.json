@@ -48,9 +48,9 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@shopify/app": "^3.48.0",
-    "@shopify/cli": "^3.48.0",
-    "@shopify/cli-kit": "^3.48.0",
+    "@shopify/app": "^3.48.1",
+    "@shopify/cli": "^3.48.1",
+    "@shopify/cli-kit": "^3.48.1",
     "dotenv": "^16.3.1",
     "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^16.10.17",
