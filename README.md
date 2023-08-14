@@ -1,5 +1,7 @@
 # Shopify Next.js x Prisma Boilerplate
 
+[![Shopify Course](https://raw.githubusercontent.com/kinngh/extras/main/shopify_course_promo_github.png)](https://kinngh.gumroad.com/l/how-to-make-shopify-apps?offer_code=PREORDER)
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkinngh%2Fshopify-nextjs-prisma-app&env=SHOPIFY_API_KEY,SHOPIFY_API_SECRET,SHOPIFY_API_SCOPES,SHOPIFY_APP_URL,SHOPIFY_API_VERSION,DATABASE_URL,ENCRYPTION_STRING&project-name=shopify-next-prisma-app&repository-name=kinngh-shopify-next-prisma-app&redirect-url=https%3A%2F%2Ftwitter.com%2Fkinngh)
 
 An embedded app starter template to get up and ready with Shopify app development with Next.js and Prisma.
