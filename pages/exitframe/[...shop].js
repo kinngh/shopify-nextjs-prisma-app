@@ -1,28 +1,49 @@
-import { useAppBridge } from "@shopify/app-bridge-react";
-import { Redirect } from "@shopify/app-bridge/actions";
-import { Spinner } from "@shopify/polaris";
+// By using `dynamic`, we force ExitFrame to not render on server and only on the client.
+
+import {
+  Card,
+  Layout,
+  Page,
+  Spinner,
+  Text,
+  VerticalStack,
+} from "@shopify/polaris";
+import dynamic from "next/dynamic";
 import { useEffect } from "react";
 
-const ExitFrame = () => {
-  const app = useAppBridge();
-
+const ExitFrameComponent = () => {
   useEffect(() => {
-    const shop = window.location.href.replace(
-      `${process.env.CONFIG_SHOPIFY_APP_URL}/exitframe/`,
-      ""
-    );
-    const redirect = Redirect.create(app);
-    redirect.dispatch(
-      Redirect.Action.REMOTE,
-      `${process.env.CONFIG_SHOPIFY_APP_URL}/api/auth?shop=${shop}`
-    );
+    if (typeof window !== "undefined") {
+      const shop = window?.shopify?.config?.shop;
+
+      open(
+        `${process.env.CONFIG_SHOPIFY_APP_URL}/api/auth?shop=${shop}`,
+        "_top"
+      );
+    }
   }, []);
 
   return (
     <>
-      <Spinner />
+      <Page>
+        <Layout>
+          <Layout.Section>
+            <Card>
+              <VerticalStack gap="2">
+                <Text variant="headingMd">Security Checkpoint</Text>
+                <Text variant="bodyMd">Reauthorizing your tokens</Text>
+                <Spinner />
+              </VerticalStack>
+            </Card>
+          </Layout.Section>
+        </Layout>
+      </Page>
     </>
   );
 };
 
-export default ExitFrame;
+const DynamicExitFrame = dynamic(() => Promise.resolve(ExitFrameComponent), {
+  ssr: false,
+});
+
+export default DynamicExitFrame;

@@ -19,7 +19,11 @@ const verifyRequest = async (req, res, next) => {
 
     const session = await sessionHandler.loadSession(sessionId);
 
-    if (new Date(session?.expires) > new Date()) {
+    //Check if the session has expired OR if scopes have changed
+    if (
+      new Date(session?.expires) > new Date() &&
+      shopify.config.scopes.equals(session.scope)
+    ) {
       const client = new shopify.clients.Graphql({ session });
       await client.query({ data: TEST_QUERY });
       req.user_session = session;
@@ -45,21 +49,22 @@ const verifyRequest = async (req, res, next) => {
           }
         }
       }
-      res.status(403);
-      res.setHeader("X-Shopify-API-Request-Failure-Reauthorize", "1");
-      res.setHeader(
-        "X-Shopify-API-Request-Failure-Reauthorize-Url",
-        `/exitframe/${shop}`
-      );
-      res.end();
-      return;
+      console.log("Sending 403");
+      return res
+        .status(403)
+        .setHeader("Verify-Request-Failure", "1")
+        .setHeader("Verify-Request-Reauth-URL", `/exitframe/${shop}`)
+        .end();
     } else {
       res.redirect(`/exitframe/${shop}`);
       return;
     }
   } catch (e) {
-    console.error(e);
-    return res.status(401).send({ error: "Nah I ain't serving this request" });
+    console.error(
+      `---> An error happened at verifyRequest middleware: ${e.message}`,
+      e
+    );
+    return res.status(401).send({ error: true });
   }
 };
 

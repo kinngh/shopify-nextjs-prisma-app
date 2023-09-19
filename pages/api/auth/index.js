@@ -1,5 +1,6 @@
 import shopify from "@/utils/shopify.js";
 import {
+  BotActivityDetected,
   CookieNotFound,
   InvalidOAuthError,
   InvalidSession,
@@ -26,7 +27,7 @@ const handler = async (req, res) => {
     return await shopify.auth.begin({
       shop: req.query.shop,
       callbackPath: `/api/auth/tokens`,
-      isOnline: false,
+      isOnline: true,
       rawRequest: req,
       rawResponse: res,
     });
@@ -35,11 +36,12 @@ const handler = async (req, res) => {
     const { shop } = req.query;
     switch (true) {
       case e instanceof CookieNotFound:
-        res.redirect(`/exitframe/${shop}`);
-        break;
       case e instanceof InvalidOAuthError:
       case e instanceof InvalidSession:
         res.redirect(`/api/auth?shop=${shop}`);
+        break;
+      case e instanceof BotActivityDetected:
+        res.status(410).send(e.message);
         break;
       default:
         res.status(500).send(e.message);

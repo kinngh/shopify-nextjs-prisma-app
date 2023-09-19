@@ -1,7 +1,14 @@
 import isShopAvailable from "@/utils/middleware/isShopAvailable";
-import { useAppBridge } from "@shopify/app-bridge-react";
-import { Redirect } from "@shopify/app-bridge/actions";
-import { Layout, LegacyCard, Page } from "@shopify/polaris";
+import {
+  Button,
+  Card,
+  HorizontalStack,
+  Layout,
+  Page,
+  Text,
+  VerticalStack,
+} from "@shopify/polaris";
+import { ExternalMinor } from "@shopify/polaris-icons";
 import { useRouter } from "next/router";
 
 //On first install, check if the store is installed and redirect accordingly
@@ -11,146 +18,134 @@ export async function getServerSideProps(context) {
 
 const HomePage = () => {
   const router = useRouter();
-  const app = useAppBridge();
-  const redirect = Redirect.create(app);
 
   return (
-    <Page title="Home">
-      <Layout>
-        <Layout.Section fullWidth>
-          <LegacyCard
-            title="Debug Cards"
-            sectioned
-            primaryFooterAction={{
-              content: "Debug Cards",
-              onAction: () => {
-                router.push("/debug");
-              },
-            }}
-          >
-            <p>
-              Explore how the repository handles data fetching from the backend,
-              App Proxy, making GraphQL requests, Billing API and more.
-            </p>
-          </LegacyCard>
-        </Layout.Section>
-        <Layout.Section oneHalf>
-          <LegacyCard
-            sectioned
-            title="Repository"
-            primaryFooterAction={{
-              content: "GitHub",
-              onAction: () => {
-                redirect.dispatch(Redirect.Action.REMOTE, {
-                  url: "https://github.com/kinngh/shopify-nextjs-prisma-app",
-                  newContext: true,
-                });
-              },
-            }}
-            secondaryFooterActions={[
-              {
-                content: "Open Issue",
-                onAction: () => {
-                  redirect.dispatch(Redirect.Action.REMOTE, {
-                    url: "https://github.com/kinngh/shopify-nextjs-prisma-app/issues?q=is%3Aissue",
-                    newContext: true,
-                  });
-                },
-              },
-            ]}
-          >
-            <p>Star the repository, open a new issue or start a discussion.</p>
-          </LegacyCard>
-          <LegacyCard
-            sectioned
-            title="Changelog"
-            primaryFooterAction={{
-              content: "Explore",
-              onAction: () => {
-                redirect.dispatch(Redirect.Action.REMOTE, {
-                  url: "https://shopify.dev/changelog/",
-                  newContext: true,
-                });
-              },
-            }}
-          >
-            <p>Explore changelog on Shopify.dev and follow updates.</p>
-          </LegacyCard>
-        </Layout.Section>
-        <Layout.Section oneHalf>
-          <LegacyCard
-            sectioned
-            title="Documentation"
-            primaryFooterAction={{
-              content: "Explore APIs",
-              onAction: () => {
-                redirect.dispatch(Redirect.Action.REMOTE, {
-                  url: "https://shopify.dev/graphiql/admin-graphiql",
-                  newContext: true,
-                });
-              },
-            }}
-            secondaryFooterActions={[
-              {
-                content: "Design Guidelines",
-                onAction: () => {
-                  redirect.dispatch(Redirect.Action.REMOTE, {
-                    url: "https://shopify.dev/apps/design-guidelines",
-                    newContext: true,
-                  });
-                },
-              },
-            ]}
-          >
-            <p>
-              Explore the GraphQL APIs in Graphiql or read design guidelines.
-            </p>
-          </LegacyCard>
-          <LegacyCard
-            sectioned
-            title="Hiring?"
-            primaryFooterAction={{
-              content: "Twitter",
-              onAction: () => {
-                redirect.dispatch(Redirect.Action.REMOTE, {
-                  url: "https://www.twitter.com/kinngh",
-                  newContext: true,
-                });
-              },
-            }}
-            secondaryFooterActions={[
-              {
-                content: "LinkedIn",
-                onAction: () => {
-                  redirect.dispatch(Redirect.Action.REMOTE, {
-                    url: "https://www.linkedin.com/in/theharshdeep/",
-                    newContext: true,
-                  });
-                },
-              },
-            ]}
-          >
-            <p>🌎 / 🇨🇦 and looking to expand your engineering team?</p>
-          </LegacyCard>
-        </Layout.Section>
-        <Layout.Section fullWidth>
-          <LegacyCard
-            sectioned
-            title="Developer Notes"
-            primaryFooterAction={{
-              content: "Read More",
-              onAction: () => {
-                router.push("/debug/devNotes");
-              },
-            }}
-          >
-            <p>
-              Read notes on opening an issue, creating App Extensions and more.
-            </p>
-          </LegacyCard>
-        </Layout.Section>
-      </Layout>
-    </Page>
+    <>
+      <Page title="Home">
+        <Layout>
+          <Layout.Section fullWidth>
+            <Card>
+              <VerticalStack gap="2">
+                <Text as="h2" variant="headingMd">
+                  Debug Cards
+                </Text>
+                <Text>
+                  Explore how the repository handles data fetching from the
+                  backend, App Proxy, making GraphQL requests, Billing API and
+                  more.
+                </Text>
+                <HorizontalStack wrap={false} align="end">
+                  <Button
+                    primary
+                    onClick={() => {
+                      router.push("/debug");
+                    }}
+                  >
+                    Debug Cards
+                  </Button>
+                </HorizontalStack>
+              </VerticalStack>
+            </Card>
+          </Layout.Section>
+          <Layout.Section oneHalf>
+            <Card>
+              <VerticalStack gap="2">
+                <Text as="h2" variant="headingMd">
+                  App Bridge CDN
+                </Text>
+                <Text>
+                  App Bridge has changed. Read more about it in the docs
+                </Text>
+                <HorizontalStack wrap={false} align="end">
+                  <Button
+                    primary
+                    external
+                    icon={ExternalMinor}
+                    onClick={() => {
+                      open(
+                        "https://shopify.dev/docs/api/app-bridge-library/reference",
+                        "_blank"
+                      );
+                    }}
+                  >
+                    Explore
+                  </Button>
+                </HorizontalStack>
+              </VerticalStack>
+            </Card>
+          </Layout.Section>
+          <Layout.Section oneHalf>
+            <Card>
+              <VerticalStack gap="2">
+                <Text as="h2" variant="headingMd">
+                  Repository
+                </Text>
+                <Text>
+                  Found a bug? Open an issue on the repository, or star on
+                  GitHub
+                </Text>
+                <HorizontalStack wrap={false} align="end" gap="2">
+                  <Button
+                    external
+                    icon={ExternalMinor}
+                    onClick={() => {
+                      open(
+                        "https://github.com/kinngh/shopify-nextjs-prisma-app/issues?q=is%3Aissue",
+                        "_blank"
+                      );
+                    }}
+                  >
+                    Issues
+                  </Button>
+                  <Button
+                    external
+                    primary
+                    icon={ExternalMinor}
+                    onClick={() => {
+                      open(
+                        "https://github.com/kinngh/shopify-nextjs-prisma-app",
+                        "_blank"
+                      );
+                    }}
+                  >
+                    Star
+                  </Button>
+                </HorizontalStack>
+              </VerticalStack>
+            </Card>
+          </Layout.Section>
+          <Layout.Section oneHalf>
+            <Card>
+              <VerticalStack gap="2">
+                <Text as="h2" variant="headingMd">
+                  Course
+                </Text>
+                <Text>
+                  [BETA] I'm building course as a live service on How To Build
+                  Shopify Apps
+                </Text>
+                <HorizontalStack wrap={false} align="end">
+                  <Button
+                    external
+                    primary
+                    icon={ExternalMinor}
+                    onClick={() => {
+                      open(
+                        "https://kinngh.gumroad.com/l/how-to-make-shopify-apps?utm_source=boilerplate&utm_medium=nextjs",
+                        "_blank"
+                      );
+                    }}
+                  >
+                    Buy
+                  </Button>
+                </HorizontalStack>
+              </VerticalStack>
+            </Card>
+          </Layout.Section>
+          <Layout.Section oneHalf />
+        </Layout>
+      </Page>
+    </>
   );
 };
 

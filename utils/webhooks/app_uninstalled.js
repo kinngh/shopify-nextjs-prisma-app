@@ -7,12 +7,11 @@
 
 import prisma from "@/utils/prisma.js";
 
-
 const appUninstallHandler = async (topic, shop, webhookRequestBody) => {
   try {
-
     /** @type {AppUninstalled} */
     const webhookBody = JSON.parse(webhookRequestBody);
+
     await prisma.session.deleteMany({ where: { shop } });
     await prisma.stores.upsert({
       where: { shop: shop },

@@ -1,27 +1,24 @@
 # Shopify Next.js x Prisma Boilerplate
 
-[![Shopify Course](https://raw.githubusercontent.com/kinngh/extras/main/shopify_course_promo_github.png)](https://kinngh.gumroad.com/l/how-to-make-shopify-apps?offer_code=PREORDER)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkinngh%2Fshopify-nextjs-prisma-app&env=SHOPIFY_API_KEY,SHOPIFY_API_SECRET,SHOPIFY_API_SCOPES,SHOPIFY_APP_URL,SHOPIFY_API_VERSION,DATABASE_URL,ENCRYPTION_STRING&project-name=shopify-next-prisma-app&repository-name=kinngh-shopify-next-prisma-app&redirect-url=https%3A%2F%2Ftwitter.com%2Fkinngh)
-
 An embedded app starter template to get up and ready with Shopify app development with Next.js and Prisma.
 
 I've included [notes](/docs/NOTES.md) on this repo which goes over the repo on why certain choices were made.
 
 ## Video
 
-I made a video that goes over the entire repo, creating theme extension and deploying with Vercel and PlanetScale.
+I made a video that goes over the entire repo, creating theme extension and deploying with Vercel and PlanetScale. If you want to learn Shopify app dev in-depth, I also sell a course _[How To Build Shopify Apps](https://kinngh.gumroad.com/l/how-to-make-shopify-apps?utm_source=github&utm_medium=nextjs-repo)_
 
 [![Creating a Shopify app from scratch](http://i3.ytimg.com/vi/Z_JFpEJRh_g/hqdefault.jpg)](https://www.youtube.com/watch?v=Z_JFpEJRh_g)
 
 ## Supporting repositories
 
 - [`@kinngh/shopify-node-express-mongodb-app`](https://github.com/kinngh/shopify-node-express-mongodb-app): Shopify app starter repo built with Express.js, React.js and Vite.
+- [`@kinngh/shopify-polaris-playground`](https://github.com/kinngh/shopify-polaris-playground): Build your app's UI using Polaris, without an internet connection.
 
 ## Tech Stack
 
 - Next.js 13
-- Prisma (Postgresql)
+- Prisma ORM
 
 ## Why I made this
 
@@ -31,3 +28,4 @@ Building with Express and React was great but eventually there comes a time wher
 
 - Refer to [SETUP](/docs/SETUP.md)
 - The project comes with snippets to speed up development. Refer to [Snippets](/docs/SNIPPETS.md).
+- App Bridge CDN migration guide is available [here](/docs/migration/app-bridge-cdn.md)

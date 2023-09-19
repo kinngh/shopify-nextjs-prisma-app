@@ -25,7 +25,7 @@ const handler = async (req, res) => {
     return await shopify.auth.begin({
       shop: session.shop,
       callbackPath: `/api/auth/callback`,
-      isOnline: true,
+      isOnline: false,
       rawRequest: req,
       rawResponse: res,
     });
@@ -35,11 +35,12 @@ const handler = async (req, res) => {
     const { shop } = req.query;
     switch (true) {
       case e instanceof CookieNotFound:
-        res.redirect(`/exitframe/${shop}`);
-        break;
       case e instanceof InvalidOAuthError:
       case e instanceof InvalidSession:
         res.redirect(`/api/auth?shop=${shop}`);
+        break;
+      case e instanceof BotActivityDetected:
+        res.status(410).send(e.message);
         break;
       default:
         res.status(500).send(e.message);

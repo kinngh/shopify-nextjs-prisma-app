@@ -1,16 +1,12 @@
 import useFetch from "@/components/hooks/useFetch";
-import { useAppBridge } from "@shopify/app-bridge-react";
-import { Redirect } from "@shopify/app-bridge/actions";
 import { DataTable, Layout, LegacyCard, Page } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const BillingAPI = () => {
   const router = useRouter();
-  const [responseData, setResponseData] = useState("");
-  const app = useAppBridge();
   const fetch = useFetch();
-  const redirect = Redirect.create(app);
+  const [responseData, setResponseData] = useState("");
 
   async function fetchContent() {
     setResponseData("loading...");
@@ -21,7 +17,7 @@ const BillingAPI = () => {
     } else if (data.confirmationUrl) {
       setResponseData("Redirecting");
       const { confirmationUrl } = data;
-      redirect.dispatch(Redirect.Action.REMOTE, confirmationUrl);
+      open(confirmationUrl, "_top");
     }
   }
 
@@ -61,7 +57,6 @@ const BillingAPI = () => {
 };
 
 const ActiveSubscriptions = () => {
-  const fetch = useFetch();
   const [rows, setRows] = useState([]);
 
   async function getActiveSubscriptions() {

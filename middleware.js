@@ -30,6 +30,5 @@ export function middleware(request) {
     `frame-ancestors https://${shop} https://admin.shopify.com;`
   );
 
-  // You can also set request headers in NextResponse.rewrite
   return res;
 }
