@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
       >
         <AppBridgeProvider>
           <ui-nav-menu>
-            <Link href="/debug/getData">Fetch Data</Link>
+            <Link href="/debug/data">Fetch Data</Link>
             <Link href="/debug/billing">Billing API</Link>
           </ui-nav-menu>
           <Component {...pageProps} />
