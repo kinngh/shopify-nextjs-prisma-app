@@ -1,6 +1,7 @@
 import sessionHandler from "@/utils/sessionHandler.js";
 import shopify from "@/utils/shopify.js";
 import {
+  BotActivityDetected,
   CookieNotFound,
   InvalidOAuthError,
   InvalidSession,

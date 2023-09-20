@@ -1,11 +1,12 @@
+import prisma from "@/utils/prisma";
+import sessionHandler from "@/utils/sessionHandler.js";
+import shopify from "@/utils/shopify.js";
 import {
+  BotActivityDetected,
   CookieNotFound,
   InvalidOAuthError,
   InvalidSession,
 } from "@shopify/shopify-api";
-import prisma from "@/utils/prisma";
-import sessionHandler from "@/utils/sessionHandler.js";
-import shopify from "@/utils/shopify.js";
 
 const handler = async (req, res) => {
   try {
