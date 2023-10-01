@@ -20,9 +20,8 @@
     "ngrok:auth": "ngrok authtoken <auth-token-goes-here>",
     "ngrok": "ngrok http 3000",
     "-----> Shopify <-----": "",
+    "g:install": "npm i -g @shopify/app@latest @shopify/cli@latest",
     "shopify": "shopify",
-    "s:e:create": "shopify app generate extension",
-    "s:e:deploy": "shopify app deploy",
     "-----> Database <-----": "",
     "pg:create": "mkdir database; pg_ctl -D database init",
     "pg:start": "pg_ctl -D database start",
@@ -45,24 +44,11 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@shopify/app": "^3.49.3",
-    "@shopify/cli": "^3.49.3",
     "@shopify/cli-kit": "^3.49.3",
     "dotenv": "^16.3.1",
     "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^16.14.4",
     "prettier": "^3.0.3",
     "prisma": "^5.3.1"
-  },
-  "overrides": {
-    "@shopify/cli-kit": {
-      "react": "18.2.0"
-    },
-    "@shopify/cli": {
-      "react": "18.2.0"
-    },
-    "@shopify/app": {
-      "react": "18.2.0"
-    }
   }
 }

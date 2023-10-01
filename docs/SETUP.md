@@ -2,6 +2,10 @@
 
 This is an in-depth guide on using this repo. This goes over getting the base repo up and running, to understand how to add your own customizations server side like registering webhooks, routes, etc, refer to [Notes](/docs/NOTES.md).
 
+- [ ] Run `npm g:install` to install global dependencies.
+
+  - This isn't required to be run every single time, but is necessary for local development - Installing the Shopify/app and Shopify/cli packages. Please see `package.json` for more info.
+
 - [ ] Run `npm i --force` to install dependencies.
 
   - Substantial efforts have gone into ensuring we're using the latest package versions, and some incompatibility issues always pop up while installing. There are no negative effects on the functionality just yet, but if you find anything please open an issue.
@@ -32,6 +36,7 @@ This is an in-depth guide on using this repo. This goes over getting the base re
   - `update:url`: Use `@shopify/cli-kit` to update URLs to your Shopify partner dashboard. Requires a proper setup of `.env` file.
   - `ngrok:auth`: Replace `<auth-token-goes-here>` with your ngrok token and run it to activate ngrok.
   - `ngrok`: Starts ngrok on port 3000.
+  - `g:install`: Required global installs for buildling Shopify apps.
   - `shopify`: Allows you to accesss Shopify CLI commands. Try `npm run shopify help` for more info.
   - `s:e:create`: Create a Shopify extension.
   - `s:e:deploy`: Deploy extension to Shopify.
@@ -70,6 +75,9 @@ This is an in-depth guide on using this repo. This goes over getting the base re
     - A common _gotcha_ is if you're creating multiple apps that all use the same subpath (`next-proxy` in this case), all susbequent installs will throw a `404` error because Shopify serializes routes based on installation. To avoid this, please change the subpath to something that's unique to your app. I prefer using the format `<<appname>>-proxy`
 
 - [ ] Running App
+
   - If it's your first time connecting to said database, run `npx prisma db push` to get your database working.
   - Run `npm run dev`, your database and ngrok.
   - Install the app by heading over to `https://ngrokurl.io/api/auth?shop=mystorename.myshopify.com`.
+
+- [ ] Working with extensions requires a different folder structure. See [docs/Extensions](./EXTENSIONS.md)
