@@ -8,6 +8,8 @@ I've included [notes](/docs/NOTES.md) on this repo which goes over the repo on w
 
 I made a video that goes over the entire repo, creating theme extension and deploying with Vercel and PlanetScale. If you want to learn Shopify app dev in-depth, I also sell a course _[How To Build Shopify Apps](https://kinngh.gumroad.com/l/how-to-make-shopify-apps?utm_source=github&utm_medium=nextjs-repo)_
 
+[![How To Build Shopify Apps Course](https://raw.githubusercontent.com/kinngh/extras/main/csa_promo.png)](https://kinngh.gumroad.com/l/how-to-make-shopify-apps)
+
 [![Creating a Shopify app from scratch](http://i3.ytimg.com/vi/Z_JFpEJRh_g/hqdefault.jpg)](https://www.youtube.com/watch?v=Z_JFpEJRh_g)
 
 ## Supporting repositories
