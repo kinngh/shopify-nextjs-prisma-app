@@ -2,6 +2,10 @@ import withMiddleware from "@/utils/middleware/withMiddleware.js";
 import shopify from "@/utils/shopify.js";
 import sessionHandler from "@/utils/sessionHandler.js";
 
+/**
+ * @param {import("next").NextApiRequest} req - The HTTP request object.
+ * @param {import("next").NextApiResponse} res - The HTTP response object.
+ */
 const handler = async (req, res) => {
   //Reject anything that's not a POST
   if (req.method !== "POST") {

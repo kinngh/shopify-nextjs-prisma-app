@@ -11,7 +11,8 @@ import {
 import { ExternalMinor } from "@shopify/polaris-icons";
 import { useRouter } from "next/router";
 
-//On first install, check if the store is installed and redirect accordingly
+//On first install, check if the store is installed and redirect accordingly.
+//DO NOT REMOVE.
 export async function getServerSideProps(context) {
   return await isShopAvailable(context);
 }

@@ -10,9 +10,6 @@ export default function App({ Component, pageProps }) {
       <PolarisProvider
         i18n={translations}
         features={{
-          //This is what enables the new monochrome style.
-          //If you want to be on bleeding edge, run `npm install @shopify/polaris@beta`
-          //  instead to install Polaris v12
           polarisSummerEditions2023: true,
         }}
       >

@@ -6,6 +6,10 @@ import {
   InvalidSession,
 } from "@shopify/shopify-api";
 
+/**
+ * @param {import("next").NextApiRequest} req - The HTTP request object.
+ * @param {import("next").NextApiResponse} res - The HTTP response object.
+ */
 const handler = async (req, res) => {
   try {
     if (!req.query.shop) {

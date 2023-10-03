@@ -1,6 +1,10 @@
 import clientProvider from "@/utils/clientProvider";
 import withMiddleware from "@/utils/middleware/withMiddleware";
 
+/**
+ * @param {import("next").NextApiRequest} req - The HTTP request object.
+ * @param {import("next").NextApiResponse} res - The HTTP response object.
+ */
 const handler = async (req, res) => {
   //false for offline session, true for online session
   const { client, shop } = await clientProvider.graphqlClient({
