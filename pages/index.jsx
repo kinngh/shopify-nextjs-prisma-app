@@ -1,3 +1,4 @@
+import useFetch from "@/components/hooks/useFetch";
 import isShopAvailable from "@/utils/middleware/isShopAvailable";
 import {
   Button,
@@ -19,10 +20,19 @@ export async function getServerSideProps(context) {
 
 const HomePage = () => {
   const router = useRouter();
+  const fetch = useFetch();
 
   return (
     <>
-      <Page title="Home">
+      <Page
+        title="Home"
+        primaryAction={{
+          content: "Yeet",
+          onAction: () => {
+            fetch("/api/apps");
+          },
+        }}
+      >
         <Layout>
           <Layout.Section fullWidth>
             <Card>

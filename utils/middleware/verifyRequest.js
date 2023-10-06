@@ -49,7 +49,6 @@ const verifyRequest = async (req, res, next) => {
           }
         }
       }
-      console.log("Sending 403");
       return res
         .status(403)
         .setHeader("Verify-Request-Failure", "1")
