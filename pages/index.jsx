@@ -24,15 +24,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Page
-        title="Home"
-        primaryAction={{
-          content: "Yeet",
-          onAction: () => {
-            fetch("/api/apps");
-          },
-        }}
-      >
+      <Page title="Home">
         <Layout>
           <Layout.Section fullWidth>
             <Card>
