@@ -6,7 +6,7 @@ import {
   Page,
   Spinner,
   Text,
-  VerticalStack,
+  BlockStack,
 } from "@shopify/polaris";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
@@ -29,11 +29,11 @@ const ExitFrameComponent = () => {
         <Layout>
           <Layout.Section>
             <Card>
-              <VerticalStack gap="2">
+              <BlockStack gap="200">
                 <Text variant="headingMd">Security Checkpoint</Text>
                 <Text variant="bodyMd">Reauthorizing your tokens</Text>
                 <Spinner />
-              </VerticalStack>
+              </BlockStack>
             </Card>
           </Layout.Section>
         </Layout>

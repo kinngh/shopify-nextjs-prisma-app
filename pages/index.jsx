@@ -3,11 +3,11 @@ import isShopAvailable from "@/utils/middleware/isShopAvailable";
 import {
   Button,
   Card,
-  HorizontalStack,
+  InlineStack,
   Layout,
   Page,
   Text,
-  VerticalStack,
+  BlockStack,
 } from "@shopify/polaris";
 import { ExternalMinor } from "@shopify/polaris-icons";
 import { useRouter } from "next/router";
@@ -26,9 +26,9 @@ const HomePage = () => {
     <>
       <Page title="Home">
         <Layout>
-          <Layout.Section fullWidth>
+          <Layout.Section variant="fullWidth">
             <Card>
-              <VerticalStack gap="2">
+              <BlockStack gap="200">
                 <Text as="h2" variant="headingMd">
                   Debug Cards
                 </Text>
@@ -37,31 +37,31 @@ const HomePage = () => {
                   backend, App Proxy, making GraphQL requests, Billing API and
                   more.
                 </Text>
-                <HorizontalStack wrap={false} align="end">
+                <InlineStack wrap={false} align="end">
                   <Button
-                    primary
+                    variant="primary"
                     onClick={() => {
                       router.push("/debug");
                     }}
                   >
                     Debug Cards
                   </Button>
-                </HorizontalStack>
-              </VerticalStack>
+                </InlineStack>
+              </BlockStack>
             </Card>
           </Layout.Section>
-          <Layout.Section oneHalf>
+          <Layout.Section variant="oneHalf">
             <Card>
-              <VerticalStack gap="2">
+              <BlockStack gap="200">
                 <Text as="h2" variant="headingMd">
                   App Bridge CDN
                 </Text>
                 <Text>
                   App Bridge has changed. Read more about it in the docs
                 </Text>
-                <HorizontalStack wrap={false} align="end">
+                <InlineStack wrap={false} align="end">
                   <Button
-                    primary
+                    variant="primary"
                     external
                     icon={ExternalMinor}
                     onClick={() => {
@@ -73,13 +73,13 @@ const HomePage = () => {
                   >
                     Explore
                   </Button>
-                </HorizontalStack>
-              </VerticalStack>
+                </InlineStack>
+              </BlockStack>
             </Card>
           </Layout.Section>
-          <Layout.Section oneHalf>
+          <Layout.Section variant="oneHalf">
             <Card>
-              <VerticalStack gap="2">
+              <BlockStack gap="200">
                 <Text as="h2" variant="headingMd">
                   Repository
                 </Text>
@@ -87,7 +87,7 @@ const HomePage = () => {
                   Found a bug? Open an issue on the repository, or star on
                   GitHub
                 </Text>
-                <HorizontalStack wrap={false} align="end" gap="2">
+                <InlineStack wrap={false} align="end" gap="200">
                   <Button
                     external
                     icon={ExternalMinor}
@@ -102,7 +102,7 @@ const HomePage = () => {
                   </Button>
                   <Button
                     external
-                    primary
+                    variant="primary"
                     icon={ExternalMinor}
                     onClick={() => {
                       open(
@@ -113,13 +113,13 @@ const HomePage = () => {
                   >
                     Star
                   </Button>
-                </HorizontalStack>
-              </VerticalStack>
+                </InlineStack>
+              </BlockStack>
             </Card>
           </Layout.Section>
-          <Layout.Section oneHalf>
+          <Layout.Section variant="oneHalf">
             <Card>
-              <VerticalStack gap="2">
+              <BlockStack gap="200">
                 <Text as="h2" variant="headingMd">
                   Course
                 </Text>
@@ -127,10 +127,10 @@ const HomePage = () => {
                   [BETA] I'm building course as a live service on How To Build
                   Shopify Apps
                 </Text>
-                <HorizontalStack wrap={false} align="end">
+                <InlineStack wrap={false} align="end">
                   <Button
                     external
-                    primary
+                    variant="primary"
                     icon={ExternalMinor}
                     onClick={() => {
                       open(
@@ -141,11 +141,11 @@ const HomePage = () => {
                   >
                     Buy
                   </Button>
-                </HorizontalStack>
-              </VerticalStack>
+                </InlineStack>
+              </BlockStack>
             </Card>
           </Layout.Section>
-          <Layout.Section oneHalf />
+          <Layout.Section variant="oneHalf" />
         </Layout>
       </Page>
     </>

@@ -5,7 +5,7 @@ import {
   Layout,
   Page,
   Text,
-  VerticalStack,
+  BlockStack,
 } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -54,7 +54,7 @@ const ActiveWebhooks = () => {
           </Layout.Section>
           <Layout.Section>
             <Card>
-              <VerticalStack gap="2">
+              <BlockStack gap="200">
                 <Text as="h2" variant="headingMd">
                   Note
                 </Text>
@@ -65,7 +65,7 @@ const ActiveWebhooks = () => {
                   URL (happens usually during dev when using ngrok), you need to
                   go through the auth process again.
                 </Text>
-              </VerticalStack>
+              </BlockStack>
             </Card>
           </Layout.Section>
         </Layout>
