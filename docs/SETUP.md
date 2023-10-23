@@ -2,7 +2,7 @@
 
 This is an in-depth guide on using this repo. This goes over getting the base repo up and running, to understand how to add your own customizations server side like registering webhooks, routes, etc, refer to [Notes](/docs/NOTES.md).
 
-- [ ] Run `npm g:install` to install global dependencies.
+- [ ] Run `npm run g:install` to install global dependencies.
 
   - This isn't required to be run every single time, but is necessary for local development - Installing the Shopify/app and Shopify/cli packages. Please see `package.json` for more info.
 
