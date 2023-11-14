@@ -4,7 +4,6 @@
 
   LIMITATION:
   - [OEM] Cannot update GDPR URLs.
-  - [OEM] Cannot update App Proxy URL.
   - May break with a future update to `@shopify/cli-kit`.
  */
 
@@ -14,9 +13,18 @@ import { ensureAuthenticatedPartners } from "@shopify/cli-kit/node/session";
 import { renderSelectPrompt } from "@shopify/cli-kit/node/ui";
 import "dotenv/config";
 
+const AppProxyConfig = {
+  proxyUrl: process.env.SHOPIFY_APP_URL.endsWith('/') ? `${process.env.SHOPIFY_APP_URL}api/proxy_route` : `${process.env.SHOPIFY_APP_URL}/api/proxy_route`,
+  proxySubPathPrefix: 'apps',
+  proxySubPath: 'next-url-proxy',
+};
+
+// Use this, if you don't use App Proxy
+// const AppProxyConfig = null;
+
 const UpdateAppURLQuery = `
-  mutation appUpdate($apiKey: String!, $applicationUrl: Url!, $redirectUrlWhitelist: [Url]!) {
-    appUpdate(input: {apiKey: $apiKey, applicationUrl: $applicationUrl, redirectUrlWhitelist: $redirectUrlWhitelist}) {
+  mutation appUpdate($apiKey: String!, $applicationUrl: Url!, $redirectUrlWhitelist: [Url]!, $appProxy: AppProxyInput) {
+    appUpdate(input: {apiKey: $apiKey, applicationUrl: $applicationUrl, redirectUrlWhitelist: $redirectUrlWhitelist, appProxy: $appProxy}) {
       userErrors {
         message
         field
@@ -102,6 +110,10 @@ const updateDashboardURLs = async (apiKey, appUrl) => {
     applicationUrl: appUrl,
     redirectUrlWhitelist: redirectURLs,
   };
+
+  if (AppProxyConfig) {
+    urls.appProxy = AppProxyConfig;
+  }
 
   const result = await partnersRequest(UpdateAppURLQuery, accessToken, {
     apiKey,
