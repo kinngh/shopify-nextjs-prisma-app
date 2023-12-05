@@ -9,9 +9,6 @@ export default function App({ Component, pageProps }) {
     <>
       <PolarisProvider
         i18n={translations}
-        features={{
-          polarisSummerEditions2023: true,
-        }}
       >
         <AppBridgeProvider>
           <ui-nav-menu>
