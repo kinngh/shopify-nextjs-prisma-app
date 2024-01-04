@@ -38,8 +38,6 @@ This is an in-depth guide on using this repo. This goes over getting the base re
   - `ngrok`: Starts ngrok on port 3000.
   - `g:install`: Required global installs for buildling Shopify apps.
   - `shopify`: Allows you to accesss Shopify CLI commands. Try `npm run shopify help` for more info.
-  - `s:e:create`: Create a Shopify extension.
-  - `s:e:deploy`: Deploy extension to Shopify.
   - `pg:create`: Create a new folder `database` and init a PostgreSQL instance. Requires you to have postgres installed.
     - Run `brew install postgresql`
   - `pg:start`: Start a PostgreSQL instance on `database`. Requires you to run `npm run pg:create` before you can do this.
@@ -80,4 +78,5 @@ This is an in-depth guide on using this repo. This goes over getting the base re
   - Run `npm run dev`, your database and ngrok.
   - Install the app by heading over to `https://ngrokurl.io/api/auth?shop=mystorename.myshopify.com`.
 
-- [ ] Working with extensions requires a different folder structure. See [docs/Extensions](./EXTENSIONS.md)
+- [ ] Creating Extensions
+  - See [`kinngh/shopify-app-js`](https://github.com/kinngh/shopify-app-js/) to understand extensions implementation.
