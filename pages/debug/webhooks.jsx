@@ -22,7 +22,7 @@ const ActiveWebhooks = () => {
     const res = await fetch("/api/apps/debug/activeWebhooks");
     const data = await res.json();
     let rowData = [];
-    Object.entries(data.body.data.webhookSubscriptions.edges).map(
+    Object.entries(data.data.webhookSubscriptions.edges).map(
       ([key, value]) => {
         const topic = value.node.topic;
         const callbackUrl = value.node.endpoint.callbackUrl;

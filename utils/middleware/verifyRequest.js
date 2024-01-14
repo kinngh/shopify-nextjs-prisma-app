@@ -25,7 +25,7 @@ const verifyRequest = async (req, res, next) => {
       shopify.config.scopes.equals(session.scope)
     ) {
       const client = new shopify.clients.Graphql({ session });
-      await client.query({ data: TEST_QUERY });
+      await client.request(TEST_QUERY);
       req.user_session = session;
       res.setHeader(
         "Content-Security-Policy",

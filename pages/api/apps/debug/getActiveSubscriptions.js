@@ -13,8 +13,8 @@ const handler = async (req, res) => {
     isOnline: true,
   });
 
-  const response = await client.query({
-    data: `{
+  const response = await client.request(
+    `{
       appInstallation {
         activeSubscriptions {
           name
@@ -37,7 +37,7 @@ const handler = async (req, res) => {
         }
       }
     }`,
-  });
+  );
 
   res.status(200).send(response);
 };

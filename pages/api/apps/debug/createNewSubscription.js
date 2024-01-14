@@ -17,8 +17,8 @@ const handler = async (req, res) => {
   const planName = "$10.25 plan";
   const planPrice = 10.25; //Always a decimal
 
-  const response = await client.query({
-    data: `mutation CreateSubscription{
+  const response = await client.request(
+    `mutation CreateSubscription{
     appSubscriptionCreate(
       name: "${planName}"
       returnUrl: "${returnUrl}"
@@ -45,19 +45,19 @@ const handler = async (req, res) => {
     }
   }
 `,
-  });
+  );
 
-  if (response.body.data.appSubscriptionCreate.userErrors.length > 0) {
+  if (response.data.appSubscriptionCreate.userErrors.length > 0) {
     console.log(
       `--> Error subscribing ${shop} to plan:`,
-      response.body.data.appSubscriptionCreate.userErrors
+      response.data.appSubscriptionCreate.userErrors
     );
     res.status(400).send({ error: "An error occured." });
     return;
   }
 
   res.status(200).send({
-    confirmationUrl: `${response.body.data.appSubscriptionCreate.confirmationUrl}`,
+    confirmationUrl: `${response.data.appSubscriptionCreate.confirmationUrl}`,
   });
   return;
 };

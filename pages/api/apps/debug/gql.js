@@ -15,8 +15,8 @@ const handler = async (req, res) => {
         res,
         isOnline: true,
       });
-      const shop = await client.query({ data: `{shop{name}}` });
-      return res.status(200).send({ text: shop.body.data.shop.name });
+      const shop = await client.request(`{shop{name}}` );
+      return res.status(200).send({ text: shop.data.shop.name });
     } catch (e) {
       console.error(`---> An error occured`, e);
       return res.status(400).send({ text: "Bad request" });

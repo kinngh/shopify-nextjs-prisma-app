@@ -15,8 +15,8 @@ const handler = async (req, res) => {
         res,
         isOnline: true,
       });
-      const activeWebhooks = await client.query({
-        data: `{
+      const activeWebhooks = await client.request(
+        `{
       webhookSubscriptions(first: 25) {
         edges {
           node {
@@ -31,7 +31,7 @@ const handler = async (req, res) => {
         }
       }
     }`,
-      });
+      );
       return res.status(200).send(activeWebhooks);
     } catch (e) {
       console.error(`---> An error occured`, e);

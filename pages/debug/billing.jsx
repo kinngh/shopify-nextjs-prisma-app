@@ -66,7 +66,7 @@ const ActiveSubscriptions = () => {
     //MARK:- Replace this yet another amazing implementation with swr or react-query
     let rowsData = [];
     const activeSubscriptions =
-      data.body.data.appInstallation.activeSubscriptions;
+      data.data.appInstallation.activeSubscriptions;
 
     if (activeSubscriptions.length === 0) {
       rowsData.push(["No Plan", "N/A", "N/A", "USD 0.00"]);
