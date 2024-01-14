@@ -9,7 +9,6 @@
  */
 
 import { partnersRequest } from "@shopify/cli-kit/node/api/partners";
-import { AbortError } from "@shopify/cli-kit/node/error";
 import { ensureAuthenticatedPartners } from "@shopify/cli-kit/node/session";
 import { renderSelectPrompt } from "@shopify/cli-kit/node/ui";
 import "dotenv/config";
@@ -60,7 +59,7 @@ const getOrgs = async (accessToken) => {
   const response = await partnersRequest(AllOrganizationsQuery, accessToken);
   const orgs = response.organizations.nodes;
   if (orgs.length === 0) {
-    throw new AbortError(
+    throw new Error(
       `---> There was a problem connecting to the org. Please check that the org exists and/or you have access. You can logout using\n npm run shopify auth logout`
     );
   }
