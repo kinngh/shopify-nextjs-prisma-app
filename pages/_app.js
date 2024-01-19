@@ -7,9 +7,7 @@ import Link from "next/link";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <PolarisProvider
-        i18n={translations}
-      >
+      <PolarisProvider i18n={translations}>
         <AppBridgeProvider>
           <ui-nav-menu>
             <Link href="/debug/data">Fetch Data</Link>

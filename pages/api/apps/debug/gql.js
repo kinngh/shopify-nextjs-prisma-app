@@ -15,7 +15,7 @@ const handler = async (req, res) => {
         res,
         isOnline: true,
       });
-      const shop = await client.request(`{shop{name}}` );
+      const shop = await client.request(`{shop{name}}`);
       return res.status(200).send({ text: shop.data.shop.name });
     } catch (e) {
       console.error(`---> An error occured`, e);

@@ -36,7 +36,7 @@ const handler = async (req, res) => {
           test
         }
       }
-    }`,
+    }`
   );
 
   res.status(200).send(response);

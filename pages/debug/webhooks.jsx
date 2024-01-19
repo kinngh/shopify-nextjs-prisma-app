@@ -22,13 +22,11 @@ const ActiveWebhooks = () => {
     const res = await fetch("/api/apps/debug/activeWebhooks");
     const data = await res.json();
     let rowData = [];
-    Object.entries(data.data.webhookSubscriptions.edges).map(
-      ([key, value]) => {
-        const topic = value.node.topic;
-        const callbackUrl = value.node.endpoint.callbackUrl;
-        rowData.push([topic, callbackUrl]);
-      }
-    );
+    Object.entries(data.data.webhookSubscriptions.edges).map(([key, value]) => {
+      const topic = value.node.topic;
+      const callbackUrl = value.node.endpoint.callbackUrl;
+      rowData.push([topic, callbackUrl]);
+    });
     setRows(rowData);
   }
 

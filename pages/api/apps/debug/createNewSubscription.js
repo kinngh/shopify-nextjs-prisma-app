@@ -44,7 +44,7 @@ const handler = async (req, res) => {
       }
     }
   }
-`,
+`
   );
 
   if (response.data.appSubscriptionCreate.userErrors.length > 0) {
