@@ -8,13 +8,12 @@ If you don't want the snippets, delete the [snippets file](../.vscode/snippets.c
 
 ## Snippets
 
-| Snippet                  | Description                                                 |
-| ------------------------ | ----------------------------------------------------------- |
-| `sfc`                    | Create an arrow function component                          |
-| `createNewPage`          | Create a new Polaris page with a LegacyCard                 |
-| `createNewPageEmpty`     | Create a new Polaris page with a LegacyCard and Empty State |
-| `createapi`              | Create a new endpoint for `/api`                            |
-| `createproxy`            | Create a new endpoint for `/api/proxy_route`                |
-| `createwebhook`          | Create a new webhook function                               |
-| `createClientGql`        | Create a new GraphQL Client with online tokens              |
-| `createOfflineClientGql` | Create a new GraphQL Client with offline tokens             |
+| Snippet                  | Description                                     |
+| ------------------------ | ----------------------------------------------- |
+| `sfc`                    | Create an arrow function component              |
+| `createNewPage`          | Create a new Polaris page with a Card           |
+| `createapi`              | Create a new endpoint for `/api`                |
+| `createproxy`            | Create a new endpoint for `/api/proxy_route`    |
+| `createwebhook`          | Create a new webhook function                   |
+| `createClientGql`        | Create a new GraphQL Client with online tokens  |
+| `createOfflineClientGql` | Create a new GraphQL Client with offline tokens |
