@@ -19,6 +19,7 @@
     "update:url": "node _developer/updateDashboard.js",
     "ngrok:auth": "ngrok authtoken <auth-token-goes-here>",
     "ngrok": "ngrok http 3000",
+    "cloudflare": "cloudflared tunnel --url localhost:3000",
     "-----> Shopify <-----": "",
     "g:install": "npm i -g @shopify/app@latest @shopify/cli@latest",
     "shopify": "shopify",
@@ -35,19 +36,19 @@
   },
   "dependencies": {
     "@prisma/client": "^5.8.1",
-    "@shopify/polaris": "^12.10.0",
+    "@shopify/polaris": "^12.11.1",
     "@shopify/shopify-api": "^9.0.2",
     "cryptr": "^6.3.0",
     "next": "14.1.0",
-    "next-api-middleware": "^2.0.1",
+    "next-api-middleware": "^3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@shopify/cli-kit": "^3.53.1",
-    "dotenv": "^16.3.1",
+    "@shopify/cli-kit": "^3.54.0",
+    "dotenv": "^16.4.1",
     "ngrok": "^5.0.0-beta.2",
-    "npm-check-updates": "^16.14.12",
+    "npm-check-updates": "^16.14.14",
     "prettier": "^3.2.4",
     "prisma": "^5.8.1"
   }
