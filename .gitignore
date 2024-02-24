@@ -1,9 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-## Dev only folders
+## Dev only files and folders
 # _developer/
-# docs/
 database/
+shopify.*.toml
 
 # dependencies
 package-lock.json

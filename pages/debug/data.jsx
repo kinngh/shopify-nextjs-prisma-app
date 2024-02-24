@@ -1,11 +1,17 @@
-import useFetch from "@/components/hooks/useFetch";
-import { Layout, LegacyCard, Page } from "@shopify/polaris";
+import {
+  Layout,
+  Card,
+  Page,
+  BlockStack,
+  Text,
+  InlineStack,
+  Button,
+} from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const useDataFetcher = (initialState, url, options) => {
   const [data, setData] = useState(initialState);
-  const fetch = useFetch();
 
   const fetchData = async () => {
     setData("loading...");
@@ -18,17 +24,18 @@ const useDataFetcher = (initialState, url, options) => {
 
 const DataCard = ({ method, url, data, onRefetch }) => (
   <Layout.Section>
-    <LegacyCard
-      sectioned
-      primaryFooterAction={{
-        content: "Refetch",
-        onAction: onRefetch,
-      }}
-    >
-      <p>
-        {method} <code>{url}</code>: {data}
-      </p>
-    </LegacyCard>
+    <Card>
+      <BlockStack gap="200">
+        <Text>
+          {method} <code>{url}</code>: {data}
+        </Text>
+        <InlineStack align="end">
+          <Button variant="primary" onClick={onRefetch}>
+            Refetch
+          </Button>
+        </InlineStack>
+      </BlockStack>
+    </Card>
   </Layout.Section>
 );
 
@@ -64,7 +71,8 @@ const GetData = () => {
   return (
     <Page
       title="Data Fetching"
-      backAction={{ content: "Home", onAction: () => router.push("/debug") }}
+      subtitle="Make an authenticated GET, POST and GraphQL request to the apps backend"
+      backAction={{ onAction: () => router.push("/debug") }}
     >
       <Layout>
         <DataCard

@@ -1,11 +1,18 @@
-import useFetch from "@/components/hooks/useFetch";
-import { DataTable, Layout, LegacyCard, Page } from "@shopify/polaris";
+import {
+  BlockStack,
+  Button,
+  Card,
+  DataTable,
+  InlineStack,
+  Layout,
+  Page,
+  Text,
+} from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const BillingAPI = () => {
   const router = useRouter();
-  const fetch = useFetch();
   const [responseData, setResponseData] = useState("");
 
   async function fetchContent() {
@@ -24,29 +31,36 @@ const BillingAPI = () => {
   return (
     <Page
       title="Billing API"
-      backAction={{ content: "Home", onAction: () => router.push("/debug") }}
+      subtitle="Ensure your app is set to `public distribution` to use Billing API"
+      backAction={{
+        onAction: () => router.push("/debug"),
+      }}
     >
       <Layout>
         <Layout.Section>
-          <LegacyCard
-            sectioned
-            primaryFooterAction={{
-              content: "Subscribe merchant",
-              onAction: () => {
-                fetchContent();
-              },
-            }}
-          >
-            <p>
-              Subscribe your merchant to a test $10.25 plan and redirect to your
-              home page.
-            </p>
+          <Card>
+            <BlockStack gap="200">
+              <Text>
+                Subscribe your merchant to a test $10.25 plan and redirect to
+                your home page.
+              </Text>
 
-            {
-              /* If we have an error, it'll pop up here. */
-              responseData && <p>{responseData}</p>
-            }
-          </LegacyCard>
+              {
+                /* If we have an error, it'll pop up here. */
+                responseData && <p>{responseData}</p>
+              }
+              <InlineStack align="end">
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    fetchContent();
+                  }}
+                >
+                  Subscribe Merchant
+                </Button>
+              </InlineStack>
+            </BlockStack>
+          </Card>
         </Layout.Section>
         <Layout.Section>
           <ActiveSubscriptions />
@@ -85,13 +99,16 @@ const ActiveSubscriptions = () => {
   }, []);
 
   return (
-    <LegacyCard title="Active Subscriptions" sectioned>
-      <DataTable
-        columnContentTypes={["text", "text", "text", "text"]}
-        headings={["Plan Name", "Status", "Test", "Amount"]}
-        rows={rows}
-      />
-    </LegacyCard>
+    <Card>
+      <BlockStack gap="200">
+        <Text fontWeight="bold">Active Subscriptions</Text>
+        <DataTable
+          columnContentTypes={["text", "text", "text", "text"]}
+          headings={["Plan Name", "Status", "Test", "Amount"]}
+          rows={rows}
+        />
+      </BlockStack>
+    </Card>
   );
 };
 

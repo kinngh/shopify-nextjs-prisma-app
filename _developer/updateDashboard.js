@@ -8,6 +8,8 @@
   - May break with a future update to `@shopify/cli-kit`.
  */
 
+/*
+
 import { partnersRequest } from "@shopify/cli-kit/node/api/partners";
 import { ensureAuthenticatedPartners } from "@shopify/cli-kit/node/session";
 import { renderSelectPrompt } from "@shopify/cli-kit/node/ui";
@@ -111,7 +113,7 @@ const updateDashboardURLs = async (apiKey, appUrl) => {
       .map((error) => error.message)
       .join(", ");
 
-    throw new errors.Abort(errors);
+    throw new Error(errors);
   }
 };
 
@@ -126,3 +128,9 @@ console.log("--> Updating URLs");
 await updateDashboardURLs(app.apiKey, process.env.SHOPIFY_APP_URL);
 console.log("--> URLs updated. Please update GDPR and Proxy routes manually");
 console.log("--> Done");
+
+*/
+
+throw new Error(
+  "\n\n\n\n\n---> npm run update:url is now `npm run update:config`. Please refer to setup for more information. If you're not using managed auth, head into `_developer/updateDashboard.js` and uncomment the file\n\n\n\n\n"
+);

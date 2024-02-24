@@ -2,6 +2,11 @@ import crypto from "crypto";
 import { NextResponse } from "next/server.js";
 import shopify from "@/utils/shopify.js";
 
+/**
+ * @param {import('next').NextApiRequest} req - The incoming request object.
+ * @param {import('next').NextApiResponse} res - The response object.
+ * @param {import('next').NextApiHandler} next - Callback to pass control to the next middleware function in the Next.js API route.
+ */
 const verifyHmac = async (req, res, next) => {
   try {
     const generateHash = crypto

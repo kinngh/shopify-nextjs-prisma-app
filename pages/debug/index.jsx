@@ -17,7 +17,7 @@ const DebugIndex = () => {
       <Page
         title="Debug Cards"
         subtitle="Interact and explore the current installation"
-        backAction={{ content: "Home", onAction: () => router.push("/") }}
+        backAction={{ onAction: () => router.push("/") }}
       >
         <Layout>
           <Layout.Section variant="oneHalf">
@@ -84,7 +84,26 @@ const DebugIndex = () => {
               </BlockStack>
             </Card>
           </Layout.Section>
-          <Layout.Section variant="oneHalf" />
+          <Layout.Section variant="oneHalf">
+            <Card>
+              <BlockStack gap="200">
+                <Text as="h2" variant="headingMd">
+                  Resource Picker
+                </Text>
+                <Text>See how to use AppBridge CDN's Resource Picker</Text>
+                <InlineStack wrap={false} align="end">
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      router.push("/debug/resourcePicker");
+                    }}
+                  >
+                    Explore
+                  </Button>
+                </InlineStack>
+              </BlockStack>
+            </Card>
+          </Layout.Section>
         </Layout>
       </Page>
     </>

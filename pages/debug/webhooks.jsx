@@ -1,18 +1,16 @@
-import useFetch from "@/components/hooks/useFetch";
 import {
+  BlockStack,
   Card,
   DataTable,
   Layout,
   Page,
   Text,
-  BlockStack,
 } from "@shopify/polaris";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const ActiveWebhooks = () => {
   const router = useRouter();
-  const fetch = useFetch();
 
   const [rows, setRows] = useState([
     ["Loading", "I haven't implemented swr or react query yet."],

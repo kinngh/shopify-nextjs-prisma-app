@@ -1,11 +1,9 @@
 import crypto from "crypto";
 
 /**
- * Middleware to verify the request's signature coming through Shopify's proxy.
- *
  * @param {import('next').NextApiRequest} req - The incoming request object.
  * @param {import('next').NextApiResponse} res - The response object.
- * @param {Function} next - The next middleware function to execute.
+ * @param {import('next').NextApiHandler} next - Callback to pass control to the next middleware function in the Next.js API route.
  */
 const verifyProxy = async (req, res, next) => {
   const { signature } = req.query;
