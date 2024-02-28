@@ -1,4 +1,8 @@
-# Notes WIP
+# Notes
+
+## JSDocs
+
+- If you come from a TypeScript background or you'd prefer some sort of type checking / safety in your code, head over to `jsconfig.json` and swap `checkJs` and `noEmit` options to be `true`. This will enable TS like typechecking in your project that relies on JSDocs, without the complexity of a full TypeScript setup and compiler time.
 
 ## APIs
 
