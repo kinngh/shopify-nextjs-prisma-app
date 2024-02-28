@@ -13,5 +13,5 @@ I selected these snippets from my regular use and code that I was writing over a
 | `createapi`              | Create a new endpoint for `/api`                |
 | `createproxy`            | Create a new endpoint for `/api/proxy_route`    |
 | `createwebhook`          | Create a new webhook function                   |
-| `createClientGql`        | Create a new GraphQL Client with online tokens  |
+| `createOnlineClientGql`  | Create a new GraphQL Client with online tokens  |
 | `createOfflineClientGql` | Create a new GraphQL Client with offline tokens |

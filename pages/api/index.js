@@ -1,5 +1,4 @@
 //TEMP
-// If you have the recommended extension installed, create a new page and type `createapi` to generate api endpoint boilerplate
 import clientProvider from "@/utils/clientProvider";
 import withMiddleware from "@/utils/middleware/withMiddleware.js";
 
@@ -10,10 +9,9 @@ import withMiddleware from "@/utils/middleware/withMiddleware.js";
 const handler = async (req, res) => {
   if (req.method === "GET") {
     try {
-      const { client } = await clientProvider.graphqlClient({
+      const { client } = await clientProvider.online.graphqlClient({
         req,
         res,
-        isOnline: true,
       });
       const activeWebhooks = await client.request(
         `{

@@ -13,10 +13,15 @@ datasource db {
 model stores {
   shop     String   @id
   isActive Boolean? @default(false)
+
+  @@index([shop])
 }
 
 model session {
   id      String  @id
   content String? @db.Text
   shop    String?
+  
+  @@index([id])
+  @@index([shop])
 }

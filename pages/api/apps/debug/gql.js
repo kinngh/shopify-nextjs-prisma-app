@@ -1,5 +1,3 @@
-// If you have the recommended extension installed, create a new page and type `createclientgql` to generate GraphQL provider endpoint boilerplate
-
 import clientProvider from "@/utils/clientProvider";
 import withMiddleware from "@/utils/middleware/withMiddleware.js";
 
@@ -10,10 +8,9 @@ import withMiddleware from "@/utils/middleware/withMiddleware.js";
 const handler = async (req, res) => {
   if (req.method === "GET") {
     try {
-      const { client } = await clientProvider.graphqlClient({
+      const { client } = await clientProvider.online.graphqlClient({
         req,
         res,
-        isOnline: true,
       });
       const shop = await client.request(`{shop{name}}`);
       return res.status(200).send({ text: shop.data.shop.name });

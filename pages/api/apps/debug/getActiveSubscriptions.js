@@ -7,10 +7,9 @@ import withMiddleware from "@/utils/middleware/withMiddleware";
  */
 const handler = async (req, res) => {
   //false for offline session, true for online session
-  const { client } = await clientProvider.graphqlClient({
+  const { client } = await clientProvider.online.graphqlClient({
     req,
     res,
-    isOnline: true,
   });
 
   const response = await client.request(

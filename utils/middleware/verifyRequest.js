@@ -45,7 +45,10 @@ const verifyRequest = async (req, res, next) => {
       session = await getSession({ shop, authHeader });
     }
 
+    //Add session and shop to the request object so any subsequent routes that use this middleware can access it
     req.user_session = session;
+    req.user_shop = session.shop;
+
     await next();
 
     return;

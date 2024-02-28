@@ -7,12 +7,11 @@ import withMiddleware from "@/utils/middleware/withMiddleware";
  */
 const handler = async (req, res) => {
   //false for offline session, true for online session
-  const { client, shop } = await clientProvider.graphqlClient({
+  const { client } = await clientProvider.online.graphqlClient({
     req,
     res,
-    isOnline: true,
   });
-  const returnUrl = `${process.env.SHOPIFY_APP_URL}/api/auth?shop=${shop}`;
+  const returnUrl = `${process.env.SHOPIFY_APP_URL}/api/auth?shop=${req.user_shop}`;
 
   const planName = "$10.25 plan";
   const planPrice = 10.25; //Always a decimal
@@ -49,7 +48,7 @@ const handler = async (req, res) => {
 
   if (response.data.appSubscriptionCreate.userErrors.length > 0) {
     console.log(
-      `--> Error subscribing ${shop} to plan:`,
+      `--> Error subscribing ${req.user_shop} to plan:`,
       response.data.appSubscriptionCreate.userErrors
     );
     res.status(400).send({ error: "An error occured." });

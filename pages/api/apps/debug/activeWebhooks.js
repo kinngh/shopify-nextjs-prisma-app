@@ -8,10 +8,9 @@ import withMiddleware from "@/utils/middleware/withMiddleware.js";
 const handler = async (req, res) => {
   if (req.method === "GET") {
     try {
-      const { client } = await clientProvider.graphqlClient({
+      const { client } = await clientProvider.online.graphqlClient({
         req,
         res,
-        isOnline: true,
       });
       const activeWebhooks = await client.request(
         `{

@@ -1,56 +1,110 @@
+/**
+ * Handles session management for Shopify integration.
+ * @module clientProvider
+ */
+
 import sessionHandler from "./sessionHandler.js";
 import shopify from "./shopify.js";
 
-const fetchSession = async ({ req, res, isOnline }) => {
-  //false for offline session, true for online session
-  const sessionId = await shopify.session.getCurrentId({
-    isOnline: isOnline,
-    rawRequest: req,
-    rawResponse: res,
-  });
-  const session = await sessionHandler.loadSession(sessionId);
-  return session;
-};
-
-const graphqlClient = async ({ req, res, isOnline }) => {
-  const session = await fetchSession({ req, res, isOnline });
-  const client = new shopify.clients.Graphql({ session });
-  const { shop } = session;
-  return { client, shop, session };
-};
-
-const restClient = async ({ req, res, isOnline }) => {
-  const session = await fetchSession({ req, res, isOnline });
-  const client = new shopify.clients.Rest({
-    session,
-    apiVersion: process.env.SHOPIFY_API_VERSION,
-  });
-  const { shop } = session;
-  return { client, shop, session };
-};
-
+/**
+ * Fetches the offline session associated with a shop.
+ * @async
+ * @param {string} shop - The shop's domain.
+ * @returns {Promise<Object>} The session object for the shop.
+ */
 const fetchOfflineSession = async (shop) => {
   const sessionID = shopify.session.getOfflineId(shop);
   const session = await sessionHandler.loadSession(sessionID);
   return session;
 };
 
+/**
+ * Provides methods to create Shopify REST clients for offline access.
+ * @namespace offline
+ */
 const offline = {
-  graphqlClient: async ({ shop }) => {
-    const session = await fetchOfflineSession(shop);
-    const client = new shopify.clients.Graphql({ session });
-    return { client, shop, session };
-  },
+  /**
+   * Creates a Shopify REST client for offline access.
+   * @async
+   * @param {Object} params - The parameters.
+   * @param {string} params.shop - The shop's domain.
+   * @returns {Promise<Object>} An object containing the REST client, shop domain, and session.
+   */
   restClient: async ({ shop }) => {
     const session = await fetchOfflineSession(shop);
     const client = new shopify.clients.Rest({
       session,
+      //@ts-ignore
       apiVersion: process.env.SHOPIFY_API_VERSION,
     });
     return { client, shop, session };
   },
 };
 
-const clientProvider = { graphqlClient, restClient, offline };
+/**
+ * Fetches the online session associated with a request.
+ * @async
+ * @param {Object} params - The request and response objects.
+ * @param {import('next').NextApiRequest} params.req - The Next.js API request object
+ * @param {import('next').NextApiResponse} params.res - The Next.js API response object
+ * @returns {Promise<Object>} The session object for the request.
+ */
+const fetchOnlineSession = async ({ req, res }) => {
+  const sessionID = await shopify.session.getCurrentId({
+    isOnline: true,
+    rawRequest: req,
+    rawResponse: res,
+  });
+  const session = await sessionHandler.loadSession(sessionID);
+  return session;
+};
+
+/**
+ * Provides methods to create Shopify clients for online access.
+ * @namespace online
+ */
+const online = {
+  /**
+   * Creates a Shopify GraphQL client for online access.
+   * @async
+   * @param {Object} params - The request and response objects.
+   * @param {import('next').NextApiRequest} params.req - The Next.js API request object
+   * @param {import('next').NextApiResponse} params.res - The Next.js API response object
+   * @returns {Promise<Object>} An object containing the GraphQL client, shop domain, and session.
+   */
+  graphqlClient: async ({ req, res }) => {
+    const session = await fetchOnlineSession({ req, res });
+    const client = new shopify.clients.Graphql({ session });
+    const { shop } = session;
+    return { client, shop, session };
+  },
+  /**
+   * Creates a Shopify REST client for online access.
+   * @async
+   * @param {Object} params - The request and response objects.
+   * @param {import('next').NextApiRequest} params.req - The Next.js API request object
+   * @param {import('next').NextApiResponse} params.res - The Next.js API response object
+   * @returns {Promise<Object>} An object containing the REST client, shop domain, and session.
+   */
+  restClient: async ({ req, res }) => {
+    const session = await fetchOnlineSession({ req, res });
+    const { shop } = session;
+    const client = new shopify.clients.Rest({
+      session,
+      //@ts-ignore
+      apiVersion: process.env.SHOPIFY_API_VERSION,
+    });
+    return { client, shop, session };
+  },
+};
+
+/**
+ * Provides Shopify client providers for both online and offline access.
+ * @namespace clientProvider
+ */
+const clientProvider = {
+  offline,
+  online,
+};
 
 export default clientProvider;
