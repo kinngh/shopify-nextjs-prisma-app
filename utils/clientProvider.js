@@ -24,6 +24,19 @@ const fetchOfflineSession = async (shop) => {
  */
 const offline = {
   /**
+   * Creates a Shopify GraphQL client for offline access.
+   * @async
+   * @param {Object} params - The request and response objects.
+   * @param {import('next').NextApiRequest} params.req - The Next.js API request object
+   * @param {import('next').NextApiResponse} params.res - The Next.js API response object
+   * @returns {Promise<Object>} An object containing the GraphQL client, shop domain, and session.
+   */
+  graphqlClient: async ({ shop }) => {
+    const session = await fetchOfflineSession(shop);
+    const client = new shopify.clients.Graphql({ session });
+    return { client, shop, session };
+  },
+  /**
    * Creates a Shopify REST client for offline access.
    * @async
    * @param {Object} params - The parameters.
