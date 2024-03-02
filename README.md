@@ -10,7 +10,7 @@ I made a video that goes over the entire repo, creating theme extension and depl
 
 [![How To Build Shopify Apps Course](https://raw.githubusercontent.com/kinngh/extras/main/csa_promo.png)](https://kinngh.gumroad.com/l/how-to-make-shopify-apps)
 
-[![Creating a Shopify app from scratch](http://i3.ytimg.com/vi/Z_JFpEJRh_g/hqdefault.jpg)](https://www.youtube.com/watch?v=Z_JFpEJRh_g)
+[![Creating a Shopify app from scratch](https://i3.ytimg.com/vi/vm8RTN-QSEk/maxresdefault.jpg)](https://www.youtube.com/watch?v=vm8RTN-QSEk)
 
 ## Supporting repositories
 
