@@ -10,7 +10,6 @@ import shopify from "./shopify.js";
  * Fetches the offline session associated with a shop.
  * @async
  * @param {string} shop - The shop's domain.
- * @returns {Promise<Object>} The session object for the shop.
  */
 const fetchOfflineSession = async (shop) => {
   const sessionID = shopify.session.getOfflineId(shop);
@@ -27,9 +26,7 @@ const offline = {
    * Creates a Shopify GraphQL client for offline access.
    * @async
    * @param {Object} params - The request and response objects.
-   * @param {import('next').NextApiRequest} params.req - The Next.js API request object
-   * @param {import('next').NextApiResponse} params.res - The Next.js API response object
-   * @returns {Promise<Object>} An object containing the GraphQL client, shop domain, and session.
+   * @param {string} params.shop - The shop's domain
    */
   graphqlClient: async ({ shop }) => {
     const session = await fetchOfflineSession(shop);
@@ -41,7 +38,6 @@ const offline = {
    * @async
    * @param {Object} params - The parameters.
    * @param {string} params.shop - The shop's domain.
-   * @returns {Promise<Object>} An object containing the REST client, shop domain, and session.
    */
   restClient: async ({ shop }) => {
     const session = await fetchOfflineSession(shop);
@@ -60,7 +56,6 @@ const offline = {
  * @param {Object} params - The request and response objects.
  * @param {import('next').NextApiRequest} params.req - The Next.js API request object
  * @param {import('next').NextApiResponse} params.res - The Next.js API response object
- * @returns {Promise<Object>} The session object for the request.
  */
 const fetchOnlineSession = async ({ req, res }) => {
   const sessionID = await shopify.session.getCurrentId({
@@ -83,7 +78,6 @@ const online = {
    * @param {Object} params - The request and response objects.
    * @param {import('next').NextApiRequest} params.req - The Next.js API request object
    * @param {import('next').NextApiResponse} params.res - The Next.js API response object
-   * @returns {Promise<Object>} An object containing the GraphQL client, shop domain, and session.
    */
   graphqlClient: async ({ req, res }) => {
     const session = await fetchOnlineSession({ req, res });
@@ -97,7 +91,6 @@ const online = {
    * @param {Object} params - The request and response objects.
    * @param {import('next').NextApiRequest} params.req - The Next.js API request object
    * @param {import('next').NextApiResponse} params.res - The Next.js API response object
-   * @returns {Promise<Object>} An object containing the REST client, shop domain, and session.
    */
   restClient: async ({ req, res }) => {
     const session = await fetchOnlineSession({ req, res });
