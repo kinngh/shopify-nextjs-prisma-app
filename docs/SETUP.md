@@ -84,3 +84,6 @@ This is an in-depth guide on using this repo. This goes over getting the base re
   - If it's your first time connecting to said database, run `npx prisma db push` to get your database working.
   - Run `npm run dev`, your database and ngrok/cloudflare.
   - Install the app by heading over to `https://storename.myshopify.com/admin/oauth/install?client_id=SHOPIFY_API_KEY`.
+
+- [ ] Setting up extensions
+  - See [Extensions](./EXTENSIONS.md)
