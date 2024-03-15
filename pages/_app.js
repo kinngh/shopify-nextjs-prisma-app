@@ -4,7 +4,7 @@ import "@shopify/polaris/build/esm/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
 import Link from "next/link";
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <PolarisProvider i18n={translations}>
@@ -17,4 +17,6 @@ export default function App({ Component, pageProps }) {
       </PolarisProvider>
     </>
   );
-}
+};
+
+export default App;
