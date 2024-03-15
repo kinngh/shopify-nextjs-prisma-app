@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "checkJs": false, //<--- Enable this for TypeScript like checking
-    "noEmit": false, //<--- Enable this for TypeScript like checking
     "baseUrl": "./",
     "paths": {
       "@/*": ["./*"],
