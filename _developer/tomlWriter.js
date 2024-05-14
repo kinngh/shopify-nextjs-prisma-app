@@ -49,8 +49,8 @@ try {
 
   // App Proxy
   if (
-    process.env.APP_PROXY_PREFIX?.length > 1 &&
-    process.env.APP_PROXY_SUBPATH?.length > 1
+    process.env.APP_PROXY_PREFIX?.length > 0 &&
+    process.env.APP_PROXY_SUBPATH?.length > 0
   ) {
     config.app_proxy = {};
     config.app_proxy.url = `${appUrl}/api/proxy_route`;
