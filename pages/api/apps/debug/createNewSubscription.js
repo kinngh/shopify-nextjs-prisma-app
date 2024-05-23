@@ -11,7 +11,7 @@ const handler = async (req, res) => {
     req,
     res,
   });
-  const returnUrl = `${process.env.SHOPIFY_APP_URL}/api/auth?shop=${req.user_shop}`;
+  const returnUrl = `${process.env.SHOPIFY_APP_URL}/?shop=${req.user_shop}`;
 
   const planName = "$10.25 plan";
   const planPrice = 10.25; //Always a decimal
