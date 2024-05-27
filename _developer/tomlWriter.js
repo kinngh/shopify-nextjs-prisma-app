@@ -4,9 +4,7 @@ import "dotenv/config";
 import fs from "fs";
 import path from "path";
 
-/**
- * @typedef { import("@/_developer/types/toml.js").AppConfig} Config
- */
+/** @typedef {import("@/_developer/types/toml.js").AppConfig} Config */
 
 /** @type {Config} */
 let config = {};
@@ -24,7 +22,7 @@ try {
   config.client_id = process.env.SHOPIFY_API_KEY;
   config.application_url = appUrl;
   config.embedded = true;
-  config.extension_directories = ["extension/extensions/*"];
+  config.extension_directories = ["../extension/extensions/*"];
 
   // Auth
   config.auth = {};
@@ -85,10 +83,22 @@ try {
 
   const extensionsDir = path.join("..", "extension");
 
+  config.extension_directories = ["./extensions/*"];
+  let extensionStr = toml.stringify(config);
+  extensionStr =
+    "# Avoid writing to toml directly. Use your .env file instead\n\n" +
+    extensionStr;
+
+  config.extension_directories = ["extension/extensions/*"];
+  let globalStr = toml.stringify(config);
+  globalStr =
+    "# Avoid writing to toml directly. Use your .env file instead\n\n" +
+    globalStr;
+
   if (fs.existsSync(extensionsDir)) {
     fs.writeFileSync(
       path.join(process.cwd(), "..", "shopify.app.toml"),
-      str,
+      globalStr,
       (err) => {
         if (err) {
           console.log("An error occured while writing to file", e);
@@ -102,7 +112,7 @@ try {
 
     fs.writeFileSync(
       path.join(extensionsDir, "shopify.app.toml"),
-      str,
+      extensionStr,
       (err) => {
         if (err) {
           console.log("An error occured while writing to file", e);
