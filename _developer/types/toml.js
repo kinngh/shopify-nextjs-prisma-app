@@ -49,8 +49,18 @@
 /**
  * Webhook configuration
  * @typedef {Object} WebhooksConfig
- * @property {('2024-01'|'2023-10'|'2023-07'|'2023-04'|'2024-04')} api_version - The API version to be used for webhooks.
- * @property {PrivacyComplianceConfig} privacy_compliance - Configuration for webhooks.
+ * @property {('2024-07' | '2024-04' | '2024-01' | '2023-10')} api_version - The API version to be used for webhooks.
+ * @property {WebhookSubscription[]} subscriptions - Array of webhook subscriptions.
+ * @property {PrivacyComplianceConfig} privacy_compliance - Configuration for privacy compliance.
+ */
+
+/**
+ * Webhook subscription
+ * @typedef {Object} WebhookSubscription
+ * @property {string[]} topics - Array of webhook topics to subscribe to.
+ * @property {string} url - The URL to receive webhook events.
+ * @property {string} [filter] - Optional filter for webhook events.
+ * @property {string[]} [include_fields] - Optional array of fields to include in the webhook payload.
  */
 
 /**

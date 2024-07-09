@@ -1,6 +1,6 @@
 {
   "name": "shopify-nextjs-prisma-app",
-  "version": "2024.06.30",
+  "version": "2024.07.10",
   "type": "module",
   "author": {
     "name": "Harshdeep Singh Hura",
@@ -23,7 +23,7 @@
     "-----> Shopify <-----": "",
     "g:install": "npm i -g @shopify/app@latest @shopify/cli@latest",
     "shopify": "shopify",
-    "update:config": "node _developer/tomlWriter.js && shopify app deploy",
+    "update:config": "node _developer/tomlWriter.js && shopify app deploy; npm run pretty",
     "update:url": "node _developer/updateDashboard.js",
     "-----> Database <-----": "",
     "pg:create": "mkdir database; pg_ctl -D database init",
@@ -37,9 +37,9 @@
     "prepare": "npx prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^5.16.1",
-    "@shopify/polaris": "^13.6.0",
-    "@shopify/shopify-api": "^11.0.1",
+    "@prisma/client": "^5.16.2",
+    "@shopify/polaris": "^13.6.1",
+    "@shopify/shopify-api": "^11.1.0",
     "cryptr": "^6.3.0",
     "next": "14.2.4",
     "next-api-middleware": "^3.0.0",
@@ -48,11 +48,11 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@shopify/cli-kit": "^3.63.1",
+    "@shopify/cli-kit": "^3.63.2",
     "dotenv": "^16.4.5",
     "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^16.14.20",
     "prettier": "^3.3.2",
-    "prisma": "^5.16.1"
+    "prisma": "^5.16.2"
   }
 }

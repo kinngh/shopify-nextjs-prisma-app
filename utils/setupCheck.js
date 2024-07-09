@@ -57,7 +57,7 @@ const setupCheck = () => {
       );
     } else {
       if (typeof proxyPrefix === "undefined") {
-        throw Error ("---> App proxy prefix is undefined")
+        throw Error("---> App proxy prefix is undefined");
       }
       switch (proxyPrefix) {
         case "apps":

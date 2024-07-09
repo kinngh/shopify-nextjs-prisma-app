@@ -33,3 +33,4 @@ Building with Express and React was great but eventually there comes a time wher
 - App Bridge CDN migration guide is available [here](/docs/migration/app-bridge-cdn.md)
 - Shopify Managed Installation migration guide is available [here](/docs/migration/oauth-to-managed-installation.md)
 - Client Provider abstraction update guide is available [here](/docs/migration/clientProvider.md)
+- GraphQL to Managed Webhooks migration guide is available [here](/docs/migration/managed-webhooks.md)

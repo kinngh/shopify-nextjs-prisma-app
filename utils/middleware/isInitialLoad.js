@@ -39,12 +39,8 @@ const isInitialLoad = async (context) => {
         requestedTokenType: RequestedTokenType.OnlineAccessToken,
       });
 
-      sessionHandler.storeSession(offlineSession);
-      sessionHandler.storeSession(onlineSession);
-
-      const webhookRegisterResponse = await shopify.webhooks.register({
-        session: offlineSession,
-      });
+      await sessionHandler.storeSession(offlineSession);
+      await sessionHandler.storeSession(onlineSession);
 
       const isFreshInstall = await prisma.stores.findFirst({
         where: {
@@ -57,8 +53,6 @@ const isInitialLoad = async (context) => {
         // isFreshInstall?.isActive === false -> Reinstall
         await freshInstall({ shop: onlineSession.shop });
       }
-
-      console.dir(webhookRegisterResponse, { depth: null });
     } else {
       // The user has visited the page again.
       // We know this because we're not preserving any url params and idToken doesn't exist here

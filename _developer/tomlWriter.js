@@ -1,8 +1,9 @@
-import setupCheck from "../utils/setupCheck.js";
 import toml from "@iarna/toml";
 import "dotenv/config";
 import fs from "fs";
 import path from "path";
+import setupCheck from "../utils/setupCheck.js";
+import webhookWriter from "./webhookWriter.js";
 
 /** @typedef {import("@/_developer/types/toml.js").AppConfig} Config */
 
@@ -26,10 +27,7 @@ try {
 
   // Auth
   config.auth = {};
-  config.auth.redirect_urls = [
-    `${appUrl}/api/auth/tokens`,
-    `${appUrl}/api/auth/callback`,
-  ];
+  config.auth.redirect_urls = [`${appUrl}/api/`];
   //Scopes
   config.access_scopes = {};
   config.access_scopes.scopes = process.env.SHOPIFY_API_SCOPES;
@@ -38,6 +36,9 @@ try {
   // Webhook event version to always match the app API version
   config.webhooks = {};
   config.webhooks.api_version = process.env.SHOPIFY_API_VERSION;
+
+  // Webhooks
+  webhookWriter(config);
 
   // GDPR URLs
   config.webhooks.privacy_compliance = {};

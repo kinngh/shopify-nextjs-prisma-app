@@ -5,9 +5,15 @@
  * @typedef { import("@/_developer/types/2023-10/webhooks.js").APP_UNINSTALLED} AppUninstalled
  */
 
-import prisma from "@/utils/prisma.js";
+import prisma from "../prisma.js";
 
-const appUninstallHandler = async (topic, shop, webhookRequestBody) => {
+const appUninstallHandler = async (
+  topic,
+  shop,
+  webhookRequestBody,
+  webhookId,
+  apiVersion
+) => {
   try {
     /** @type {AppUninstalled} */
     const webhookBody = JSON.parse(webhookRequestBody);
@@ -19,7 +25,7 @@ const appUninstallHandler = async (topic, shop, webhookRequestBody) => {
       create: { shop: shop, isActive: false },
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
