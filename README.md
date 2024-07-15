@@ -17,11 +17,6 @@ I made a video that goes over the entire repo, creating theme extension and depl
 - [`@kinngh/shopify-node-express-mongodb-app`](https://github.com/kinngh/shopify-node-express-mongodb-app): Shopify app starter repo built with Express.js, React.js and Vite.
 - [`@kinngh/shopify-polaris-playground`](https://github.com/kinngh/shopify-polaris-playground): Build your app's UI using Polaris, without an internet connection.
 
-## Tech Stack
-
-- Next.js 13
-- Prisma ORM
-
 ## Why I made this
 
 Building with Express and React was great but eventually there comes a time where you have to remind yourself that you need to get on with the times and use what's new and stable. Serverless made sense, and Next.js made even more.
