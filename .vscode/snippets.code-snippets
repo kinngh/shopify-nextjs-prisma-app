@@ -154,7 +154,7 @@
     "body": [
       "// import clientProvider from \"@/utils/clientProvider\";",
       "",
-      "  const { client } = await clientProvider.online.graphqlClient({",
+      "  const { client } = await clientProvider.offline.graphqlClient({",
       "   shop: req.user_shop,",
       "  });",
       "",
