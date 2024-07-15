@@ -115,7 +115,7 @@
     "body": [
       "/**",
       "* Replace TOPIC_NAME with a Webhook Topic to enable autocomplete",
-      "* @typedef { import(\"@/_developer/types/2023-10/webhooks.js\").${2:TOPIC_NAME} } webhookTopic",
+      "* @typedef { import(\"@/_developer/types/2024-07/webhooks.js\").${2:TOPIC_NAME} } webhookTopic",
       "*/",
       "",
       "const $1 = async (topic, shop, webhookRequestBody, webhookId, apiVersion) => {",
