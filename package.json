@@ -1,6 +1,6 @@
 {
   "name": "shopify-nextjs-prisma-app",
-  "version": "2024.07.10",
+  "version": "2024.07.25",
   "type": "module",
   "author": {
     "name": "Harshdeep Singh Hura",
@@ -37,22 +37,22 @@
     "prepare": "npx prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^5.16.2",
-    "@shopify/polaris": "^13.6.1",
+    "@prisma/client": "^5.17.0",
+    "@shopify/polaris": "^13.8.0",
     "@shopify/shopify-api": "^11.1.0",
     "cryptr": "^6.3.0",
-    "next": "14.2.4",
+    "next": "14.2.5",
     "next-api-middleware": "^3.0.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@shopify/cli-kit": "^3.63.2",
+    "@shopify/cli-kit": "^3.64.1",
     "dotenv": "^16.4.5",
     "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^16.14.20",
-    "prettier": "^3.3.2",
-    "prisma": "^5.16.2"
+    "prettier": "^3.3.3",
+    "prisma": "^5.17.0"
   }
 }
