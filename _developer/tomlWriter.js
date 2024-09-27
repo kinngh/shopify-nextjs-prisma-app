@@ -28,10 +28,20 @@ try {
   // Auth
   config.auth = {};
   config.auth.redirect_urls = [`${appUrl}/api/`];
-  //Scopes
+  // Scopes
   config.access_scopes = {};
   config.access_scopes.scopes = process.env.SHOPIFY_API_SCOPES;
   config.access_scopes.use_legacy_install_flow = false;
+
+  // Access
+  config.access = {};
+  process.env.DIRECT_API_MODE
+    ? (config.access.direct_api_mode = process.env.DIRECT_API_MODE)
+    : null;
+  process.env.EMBEDDED_APP_DIRECT_API_ACCESS
+    ? (config.access.embedded_app_direct_api_access =
+        process.env.EMBEDDED_APP_DIRECT_API_ACCESS === "true")
+    : null;
 
   // Webhook event version to always match the app API version
   config.webhooks = {};

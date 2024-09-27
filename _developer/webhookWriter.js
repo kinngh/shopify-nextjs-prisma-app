@@ -1154,41 +1154,69 @@ async function writeToApi() {
     // Add the comment at the top of the file
     webhookTopicFileContent = topComment + webhookTopicFileContent;
 
-    // Add the imports to the webhookTopic file if they are not already present
-    webhookImports.forEach((importStatement) => {
-      const formattedImportStatement = importStatement.replace(
-        "./webhooks",
-        "@/utils/webhooks"
-      );
-      if (!webhookTopicFileContent.includes(formattedImportStatement)) {
+    // Remove all existing webhook imports
+    webhookTopicFileContent = webhookTopicFileContent.replace(
+      /import .* from "@\/utils\/webhooks\/.*";\n/g,
+      ""
+    );
+
+    // Add new imports
+    if (webhookImports) {
+      webhookImports.forEach((importStatement) => {
+        const formattedImportStatement = importStatement.replace(
+          "./webhooks",
+          "@/utils/webhooks"
+        );
         webhookTopicFileContent =
           topComment +
           formattedImportStatement +
           "\n" +
           webhookTopicFileContent.replace(topComment, "");
-      }
+      });
+    }
+
+    // Check for duplicate topics
+    const topicCounts = {};
+    shopify.user.webhooks.forEach((webhook) => {
+      webhook.topics.forEach((topic) => {
+        topicCounts[topic] = (topicCounts[topic] || 0) + 1;
+      });
     });
 
+    const hasDuplicateTopics = Object.values(topicCounts).some(
+      (count) => count > 1
+    );
+
     // Generate the switch/case statement
-    let switchCaseStatement = "switch (validateWebhook.topic) {\n";
+    let switchCaseStatement = hasDuplicateTopics
+      ? "switch (req.url) {\n"
+      : "switch (validateWebhook.topic) {\n";
+
     for (const entry of shopify.user.webhooks) {
       if (entry.url.startsWith("/api/webhooks")) {
         const handlerName = entry.callback.name;
-        entry.topics.forEach((topic, index) => {
-          const topicCase =
-            topicsAndScopes.find((t) => t.topic === topic)?.graphql_topic ||
-            topic.toUpperCase().replace("/", "_");
-          switchCaseStatement += `  case "${topicCase}":\n`;
-          // Add break only after the last case for this entry
-          if (index === entry.topics.length - 1) {
-            switchCaseStatement += `    ${handlerName}(validateWebhook.topic, shop, rawBody, webhookId, apiVersion);\n`;
-            switchCaseStatement += `    break;\n`;
-          }
-        });
+        if (hasDuplicateTopics) {
+          switchCaseStatement += `  case "${entry.url}":\n`;
+          switchCaseStatement += `    ${handlerName}(validateWebhook.topic, shop, rawBody, webhookId, apiVersion);\n`;
+          switchCaseStatement += `    break;\n`;
+        } else {
+          entry.topics.forEach((topic, index) => {
+            const topicCase =
+              topicsAndScopes.find((t) => t.topic === topic)?.graphql_topic ||
+              topic.toUpperCase().replace("/", "_");
+            switchCaseStatement += `  case "${topicCase}":\n`;
+            if (index === entry.topics.length - 1) {
+              switchCaseStatement += `    ${handlerName}(validateWebhook.topic, shop, rawBody, webhookId, apiVersion);\n`;
+              switchCaseStatement += `    break;\n`;
+            }
+          });
+        }
       }
     }
     switchCaseStatement += `  default:\n`;
-    switchCaseStatement += `    throw new Error(\`Can't find a handler for \${topic}\`);\n`;
+    switchCaseStatement += `    throw new Error(\`Can't find a handler for \${${
+      hasDuplicateTopics ? "req.url" : "topic"
+    }}\`);\n`;
     switchCaseStatement += "}\n";
 
     // Replace the existing switch/case statement

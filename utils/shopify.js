@@ -35,7 +35,7 @@ shopify = {
   user: {
     /**
      * @type {Array<{
-     *   topics: string[],
+     *   topics: import("@/_developer/types/webhookTopics.js").WebhookTopics["topic"],
      *   url: string,
      *   callback: Function,
      *   filter?: string,
