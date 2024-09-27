@@ -11,6 +11,7 @@ import shopify from "../utils/shopify.js";
  * @property {boolean} pii - Indicates if the endpoint requires customer data access.
  */
 
+//Ref: https://shopify.dev/docs/api/webhooks/2024-10?reference=toml
 /**
  * @type {ApiEndpoint[]}
  */
@@ -172,13 +173,13 @@ const topicsAndScopes = [
     graphql_topic: "COMPANY_LOCATIONS_UPDATE",
   },
   {
-    topic: "customer/tags_added",
+    topic: "customer.tags_added",
     scopes: ["read_customers", "write_customers"],
     pii: true,
     graphql_topic: "CUSTOMER_TAGS_ADDED",
   },
   {
-    topic: "customer/tags_removed",
+    topic: "customer.tags_removed",
     scopes: ["read_customers", "write_customers"],
     pii: true,
     graphql_topic: "CUSTOMER_TAGS_REMOVED",

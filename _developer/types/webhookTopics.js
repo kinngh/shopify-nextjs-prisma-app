@@ -1,3 +1,4 @@
+//Ref: https://shopify.dev/docs/api/webhooks/2024-10?reference=toml
 /**
  * @typedef {Object} WebhookTopics
  * @property {Array<(
@@ -32,8 +33,8 @@
  *    'company_locations/create' |
  *    'company_locations/delete' |
  *    'company_locations/update' |
- *    'customer/tags_added' |
- *    'customer/tags_removed' |
+ *    'customer.tags_added' |
+ *    'customer.tags_removed' |
  *    'customer_account_settings/update' |
  *    'customer_groups/create' |
  *    'customer_groups/delete' |

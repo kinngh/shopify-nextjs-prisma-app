@@ -5,17 +5,18 @@ import withMiddleware from "@/utils/middleware/withMiddleware.js";
  * @param {import("next").NextApiResponse} res - The HTTP response object.
  */
 const handler = async (req, res) => {
-  if (req.method === "GET") {
-    return res
-      .status(200)
-      .send({ text: "This text is coming from `/api/apps route`" });
+  if (req.method !== "GET") {
+    //GET, POST, PUT, DELETE
+    console.log("Serve this only if the request method is GET");
+    return res.status(405).send({ error: true });
   }
 
-  if (req.method === "POST") {
-    return res.status(200).send({ text: req.body.content });
+  try {
+    return res.status(200).send({ text: "This is an example route" });
+  } catch (e) {
+    console.error(`---> An error occured at /api/apps: ${e.message}`, e);
+    return res.status(403).send({ error: true });
   }
-
-  return res.status(400).send({ text: "Bad request" });
 };
 
 export default withMiddleware("verifyRequest")(handler);

@@ -63,9 +63,12 @@ const isInitialLoad = async (context) => {
       },
     };
   } catch (e) {
-    if (e.message.startsWith("InvalidJwtError")) {
-      console.error(
-        "JWT Error - happens in dev mode and can be safely ignored, even in prod."
+    if (
+      e.message.includes("Failed to parse session token") &&
+      process.env.NODE_ENV === "development"
+    ) {
+      console.warn(
+        "JWT Error - happens in dev mode and can be safely ignored, but not in prod."
       );
     } else {
       console.error(`---> An error occured at isInitialLoad: ${e.message}`, e);

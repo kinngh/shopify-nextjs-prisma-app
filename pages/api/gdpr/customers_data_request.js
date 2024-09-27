@@ -8,9 +8,18 @@ const handler = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(401).send("Must be POST");
   }
-  const { body } = req;
-  const shop = req.body.shop_domain;
-  console.log("gdpr/customers_data_request", body, shop);
+  try {
+    const { body } = req;
+    const shop = req.body.shop_domain;
+    console.log("gdpr/customers_data_request", body, shop);
+    return res.status(200).send({ message: "ok" });
+  } catch (e) {
+    console.error(
+      `---> An error occured at /api/gdpr/customers_data_request: ${e.message}`,
+      e
+    );
+    return res.status(500).send({ error: true });
+  }
 };
 
 export default withMiddleware("verifyHmac")(handler);
