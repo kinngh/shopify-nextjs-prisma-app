@@ -38,6 +38,11 @@ export default async function handler(req, res) {
       rawResponse: res,
     });
 
+    if (validateWebhook.valid) {
+    } else {
+      return res.status(400).send({ error: true });
+    }
+
     //SWITCHCASE
     switch (validateWebhook.topic) {
       case "APP_UNINSTALLED":
