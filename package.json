@@ -39,16 +39,16 @@
   "dependencies": {
     "@prisma/client": "^5.20.0",
     "@shopify/polaris": "^13.9.0",
-    "@shopify/shopify-api": "^11.4.1",
+    "@shopify/shopify-api": "^11.5.0",
     "cryptr": "^6.3.0",
-    "next": "14.2.13",
+    "next": "14.2.14",
     "next-api-middleware": "^3.0.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@shopify/cli-kit": "^3.67.2",
+    "@shopify/cli-kit": "^3.68.0",
     "dotenv": "^16.4.5",
     "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^17.1.3",
