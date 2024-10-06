@@ -1,8 +1,3 @@
-/**
- * Handles session management for Shopify integration.
- * @module clientProvider
- */
-
 import sessionHandler from "./sessionHandler.js";
 import shopify from "./shopify.js";
 
@@ -18,7 +13,7 @@ const fetchOfflineSession = async (shop) => {
 };
 
 /**
- * Provides methods to create Shopify REST clients for offline access.
+ * Provides methods to create clients for offline access.
  * @namespace offline
  */
 const offline = {
@@ -31,21 +26,6 @@ const offline = {
   graphqlClient: async ({ shop }) => {
     const session = await fetchOfflineSession(shop);
     const client = new shopify.clients.Graphql({ session });
-    return { client, shop, session };
-  },
-  /**
-   * Creates a Shopify REST client for offline access.
-   * @async
-   * @param {Object} params - The parameters.
-   * @param {string} params.shop - The shop's domain.
-   */
-  restClient: async ({ shop }) => {
-    const session = await fetchOfflineSession(shop);
-    const client = new shopify.clients.Rest({
-      session,
-      //@ts-ignore
-      apiVersion: process.env.SHOPIFY_API_VERSION,
-    });
     return { client, shop, session };
   },
 };
@@ -68,7 +48,7 @@ const fetchOnlineSession = async ({ req, res }) => {
 };
 
 /**
- * Provides methods to create Shopify clients for online access.
+ * Provides methods to create clients for online access.
  * @namespace online
  */
 const online = {
@@ -85,27 +65,10 @@ const online = {
     const { shop } = session;
     return { client, shop, session };
   },
-  /**
-   * Creates a Shopify REST client for online access.
-   * @async
-   * @param {Object} params - The request and response objects.
-   * @param {import('next').NextApiRequest} params.req - The Next.js API request object
-   * @param {import('next').NextApiResponse} params.res - The Next.js API response object
-   */
-  restClient: async ({ req, res }) => {
-    const session = await fetchOnlineSession({ req, res });
-    const { shop } = session;
-    const client = new shopify.clients.Rest({
-      session,
-      //@ts-ignore
-      apiVersion: process.env.SHOPIFY_API_VERSION,
-    });
-    return { client, shop, session };
-  },
 };
 
 /**
- * Provides Shopify client providers for both online and offline access.
+ * Provides GraphQL client providers for both online and offline access.
  * @namespace clientProvider
  */
 const clientProvider = {
