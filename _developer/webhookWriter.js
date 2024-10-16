@@ -1198,7 +1198,7 @@ async function writeToApi() {
         const handlerName = entry.callback.name;
         if (hasDuplicateTopics) {
           switchCaseStatement += `  case "${entry.url}":\n`;
-          switchCaseStatement += `    ${handlerName}(validateWebhook.topic, shop, rawBody, webhookId, apiVersion);\n`;
+          switchCaseStatement += `    await ${handlerName}(validateWebhook.topic, shop, rawBody, webhookId, apiVersion);\n`;
           switchCaseStatement += `    break;\n`;
         } else {
           entry.topics.forEach((topic, index) => {
@@ -1207,7 +1207,7 @@ async function writeToApi() {
               topic.toUpperCase().replace("/", "_");
             switchCaseStatement += `  case "${topicCase}":\n`;
             if (index === entry.topics.length - 1) {
-              switchCaseStatement += `    ${handlerName}(validateWebhook.topic, shop, rawBody, webhookId, apiVersion);\n`;
+              switchCaseStatement += `    await ${handlerName}(validateWebhook.topic, shop, rawBody, webhookId, apiVersion);\n`;
               switchCaseStatement += `    break;\n`;
             }
           });
