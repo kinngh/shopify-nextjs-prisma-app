@@ -2,7 +2,7 @@
 // `createwebhook` to generate webhook boilerplate
 
 /**
- * @typedef { import("@/_developer/types/2024-07/webhooks.js").APP_UNINSTALLED} AppUninstalled
+ * @typedef { import("@/_developer/types/2024-10/webhooks.js").APP_UNINSTALLED} AppUninstalled
  */
 
 import prisma from "../prisma.js";

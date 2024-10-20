@@ -49,7 +49,7 @@
 /**
  * Webhook configuration
  * @typedef {Object} WebhooksConfig
- * @property {('2024-07' | '2024-04' | '2024-01' | '2023-10')} api_version - The API version to be used for webhooks.
+ * @property {('2024-10' | '2024-07' | '2024-04' | '2024-01')} api_version - The API version to be used for webhooks.
  * @property {WebhookSubscription[]} subscriptions - Array of webhook subscriptions.
  * @property {PrivacyComplianceConfig} privacy_compliance - Configuration for privacy compliance.
  */
