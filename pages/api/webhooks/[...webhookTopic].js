@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     //SWITCHCASE
     switch (validateWebhook.topic) {
       case "APP_UNINSTALLED":
-        appUninstallHandler(
+        await appUninstallHandler(
           validateWebhook.topic,
           shop,
           rawBody,

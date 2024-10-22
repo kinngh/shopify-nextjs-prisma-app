@@ -83,7 +83,7 @@ async function getSession({ shop, authHeader }) {
       requestedTokenType: RequestedTokenType.OnlineAccessToken,
     });
 
-    sessionHandler.storeSession(onlineSession);
+    await sessionHandler.storeSession(onlineSession);
 
     const { session: offlineSession } = await shopify.auth.tokenExchange({
       sessionToken,
@@ -91,7 +91,7 @@ async function getSession({ shop, authHeader }) {
       requestedTokenType: RequestedTokenType.OfflineAccessToken,
     });
 
-    sessionHandler.storeSession(offlineSession);
+    await sessionHandler.storeSession(offlineSession);
 
     return new Session(onlineSession);
   } catch (e) {
