@@ -1152,29 +1152,29 @@ async function writeToApi() {
       ""
     );
 
-    // Add the comment at the top of the file
-    webhookTopicFileContent = topComment + webhookTopicFileContent;
+    // Start with the comment and shopify import
+    let newFileContent =
+      topComment + 'import shopify from "@/utils/shopify.js";\n';
 
-    // Remove all existing webhook imports
-    webhookTopicFileContent = webhookTopicFileContent.replace(
-      /import .* from "@\/utils\/webhooks\/.*";\n/g,
-      ""
-    );
-
-    // Add new imports
+    // Add new imports from webhook handlers
     if (webhookImports) {
       webhookImports.forEach((importStatement) => {
         const formattedImportStatement = importStatement.replace(
           "./webhooks",
           "@/utils/webhooks"
         );
-        webhookTopicFileContent =
-          topComment +
-          formattedImportStatement +
-          "\n" +
-          webhookTopicFileContent.replace(topComment, "");
+        newFileContent += formattedImportStatement + "\n";
       });
     }
+
+    // Get the rest of the file content after imports
+    const mainContent = webhookTopicFileContent.replace(
+      /^([\s\S]*?^import[^\n]*\n)+/m,
+      ""
+    );
+
+    // Combine everything
+    webhookTopicFileContent = newFileContent + mainContent;
 
     // Check for duplicate topics
     const topicCounts = {};
