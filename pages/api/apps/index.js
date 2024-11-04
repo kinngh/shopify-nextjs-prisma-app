@@ -1,4 +1,5 @@
 import withMiddleware from "@/utils/middleware/withMiddleware.js";
+import clientProvider from "@/utils/clientProvider";
 
 /**
  * @param {import("next").NextApiRequest} req - The HTTP request object.
@@ -12,9 +13,20 @@ const handler = async (req, res) => {
   }
 
   try {
-    return res.status(200).send({ text: "This is an example route" });
+    const { client } = await clientProvider.offline.graphqlClient({
+      shop: req.user_shop,
+    });
+
+    const response = await client.request(/* GraphQL */ `
+      {
+        shop {
+          id
+        }
+      }
+    `);
+    return res.status(200).send({ text: "Success!" });
   } catch (e) {
-    console.error(`---> An error occured at /api/apps: ${e.message}`, e);
+    console.error(`---> An error occured at /api/apps/ : ${e.message}`, e);
     return res.status(403).send({ error: true });
   }
 };

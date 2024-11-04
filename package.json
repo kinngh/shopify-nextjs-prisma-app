@@ -1,6 +1,6 @@
 {
   "name": "shopify-nextjs-prisma-app",
-  "version": "2024.10.24",
+  "version": "2024.11.04",
   "type": "module",
   "author": {
     "name": "Harshdeep Singh Hura",
@@ -25,6 +25,7 @@
     "shopify": "shopify",
     "update:config": "node _developer/tomlWriter.js && shopify app deploy; npm run pretty",
     "update:url": "node _developer/updateDashboard.js",
+    "schema": "get-graphql-schema https://shopify.dev/admin-graphql-direct-proxy/2024-10 > schema.graphql; node _developer/genGraphql.js",
     "-----> Database <-----": "",
     "pg:create": "mkdir database; pg_ctl -D database init",
     "pg:start": "pg_ctl -D database start",
@@ -50,6 +51,7 @@
     "@iarna/toml": "^2.2.5",
     "@shopify/cli-kit": "^3.68.1",
     "dotenv": "^16.4.5",
+    "get-graphql-schema": "^2.1.2",
     "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^17.1.3",
     "prettier": "^3.3.3",
