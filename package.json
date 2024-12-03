@@ -37,7 +37,7 @@
     "prepare": "npx prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.0.1",
     "@shopify/polaris": "^13.9.1",
     "@shopify/shopify-api": "^11.6.0",
     "cryptr": "^6.3.0",
@@ -49,10 +49,10 @@
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
     "@shopify/cli-kit": "^3.70.0",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.6",
     "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^17.1.11",
-    "prettier": "^3.3.3",
-    "prisma": "^5.22.0"
+    "prettier": "^3.4.1",
+    "prisma": "^6.0.1"
   }
 }
