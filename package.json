@@ -1,6 +1,6 @@
 {
   "name": "shopify-nextjs-prisma-app",
-  "version": "2024.11.21",
+  "version": "2024.12.05",
   "type": "module",
   "author": {
     "name": "Harshdeep Singh Hura",
@@ -23,7 +23,7 @@
     "-----> Shopify <-----": "",
     "g:install": "npm i -g @shopify/cli@latest",
     "shopify": "shopify",
-    "update:config": "node _developer/tomlWriter.js && shopify app deploy; npm run pretty",
+    "update:config": "node _developer/tomlWriter.js; npm run pretty; shopify app deploy;",
     "update:url": "node _developer/updateDashboard.js",
     "-----> Database <-----": "",
     "pg:create": "mkdir database; pg_ctl -D database init",

@@ -31,6 +31,10 @@ try {
   // Scopes
   config.access_scopes = {};
   config.access_scopes.scopes = process.env.SHOPIFY_API_SCOPES;
+  config.access_scopes.optional_scopes =
+    process.env.SHOPIFY_API_OPTIONAL_SCOPES.split(",").map((scope) =>
+      scope.trim()
+    );
   config.access_scopes.use_legacy_install_flow = false;
 
   if (

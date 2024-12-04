@@ -30,6 +30,7 @@
  * Access scopes
  * @typedef {Object} AccessScopes
  * @property {string} scopes - The scopes required for accessing resources.
+ * @property {string} optional_scopes - Optional access scopes for accessing resources.
  * @property {boolean} use_legacy_install_flow - Indicates if the legacy install flow should be used.
  */
 

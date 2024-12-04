@@ -17,7 +17,8 @@ This is an in-depth guide on using this repo. This goes over getting the base re
   - `SHOPIFY_API_KEY`: App API key.
   - `SHOPIFY_API_SECRET`: App secret.
   - `SHOPIFY_API_SCOPES`: Scopes required by your Shopify app. A list of access scopes can be found [here](https://shopify.dev/api/usage/access-scopes)
-  - `SHOPIFY_APP_URL`: URL generated from Ngrok.
+  - `SHOPIFY_API_OPTIONAL_SCOPES`: Optional scopes required by your Shopify app. You can see it in action at `/debug/scopes`.
+  - `SHOPIFY_APP_URL`: URL generated from Ngrok/Cloudflare.
   - `SHOPIFY_API_VERSION`: Pre-filled to the latest version. All the calls in the repo are based off this API version so if you're downgrading please refer to the official docs instead. The repo is always kept up to date with the newest practices so you can rely on the basic repo to almost always work without depriciation errors popping up.
   - `DATABASE_URL`: Database connection URL. Since we're using Prisma ORM with this repo, it supports SQL and noSQL databases. Read more about it [here](https://www.prisma.io/stack)
   - `ENCRYPTION_STRING`: String to use for Cryption for encrypting sessions token. Add a random salt (or a random string of letters and numbers) and save it. If you loose the string you cannot decrypt your sessions and must be kept safely.
