@@ -12,6 +12,7 @@ I selected these snippets from my regular use and code that I was writing over a
 | `createNewPage`          | Create a new Polaris page with a Card           |
 | `createapi`              | Create a new endpoint for `/api`                |
 | `createproxy`            | Create a new endpoint for `/api/proxy_route`    |
+| `createcheckout`         | Create a new endpoint for `/api/checkout`       |
 | `createwebhook`          | Create a new webhook function                   |
 | `createOnlineClientGql`  | Create a new GraphQL Client with online tokens  |
 | `createOfflineClientGql` | Create a new GraphQL Client with offline tokens |
