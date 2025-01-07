@@ -23,7 +23,7 @@ try {
   config.client_id = process.env.SHOPIFY_API_KEY;
   config.application_url = appUrl;
   config.embedded = true;
-  config.extension_directories = ["../extension/extensions/*"];
+  config.extension_directories = ["../extension/extensions/**"];
 
   // Auth
   config.auth = {};
@@ -106,13 +106,13 @@ try {
 
   const extensionsDir = path.join("..", "extension");
 
-  config.extension_directories = ["./extensions/*"];
+  config.extension_directories = ["./extensions/**"];
   let extensionStr = toml.stringify(config);
   extensionStr =
     "# Avoid writing to toml directly. Use your .env file instead\n\n" +
     extensionStr;
 
-  config.extension_directories = ["extension/extensions/*"];
+  config.extension_directories = ["extension/extensions/**"];
   let globalStr = toml.stringify(config);
   globalStr =
     "# Avoid writing to toml directly. Use your .env file instead\n\n" +
