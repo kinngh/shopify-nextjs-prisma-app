@@ -21,7 +21,7 @@ model session {
   id      String  @id
   content String? @db.Text
   shop    String?
-  
+
   @@index([id])
   @@index([shop])
 }

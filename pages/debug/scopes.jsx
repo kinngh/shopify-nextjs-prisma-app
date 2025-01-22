@@ -27,10 +27,9 @@ const OptionalScopes = () => {
   async function requestScopes() {
     setLoading(true);
     try {
-      const response = await window?.shopify?.scopes?.request([
-        "read_products",
-        "read_discounts",
-      ]);
+      const response = await window?.shopify?.scopes?.request(
+        JSON.parse(process.env.CONFIG_SHOPIFY_API_OPTIONAL_SCOPES)?.split(",")
+      ); //this comes from next.config.js so it's safe to use
       if (response?.result === "granted-all") {
         createRows();
       } else if (response?.result === "declined-all") {

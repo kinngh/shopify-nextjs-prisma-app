@@ -12,6 +12,9 @@ const nextConfig = {
   env: {
     CONFIG_SHOPIFY_API_KEY: process.env.SHOPIFY_API_KEY,
     CONFIG_SHOPIFY_APP_URL: process.env.SHOPIFY_APP_URL,
+    CONFIG_SHOPIFY_API_OPTIONAL_SCOPES: JSON.stringify(
+      process?.env?.SHOPIFY_API_OPTIONAL_SCOPES
+    ),
   },
 };
 
