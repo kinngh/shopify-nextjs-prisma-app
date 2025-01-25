@@ -48,13 +48,13 @@ const GetData = () => {
       "Content-Type": "application/json",
     },
     method: "POST",
-    body: JSON.stringify({ content: "Body of POST request" }),
+    body: JSON.stringify({ text: "Body of POST request" }),
   };
 
-  const [responseData, fetchContent] = useDataFetcher("", "/api/apps");
+  const [responseData, fetchContent] = useDataFetcher("", "/api/apps/debug");
   const [responseDataPost, fetchContentPost] = useDataFetcher(
     "",
-    "/api/apps",
+    "/api/apps/debug",
     postOptions
   );
   const [responseDataGQL, fetchContentGQL] = useDataFetcher(

@@ -16,3 +16,5 @@ I selected these snippets from my regular use and code that I was writing over a
 | `createwebhook`          | Create a new webhook function                   |
 | `createOnlineClientGql`  | Create a new GraphQL Client with online tokens  |
 | `createOfflineClientGql` | Create a new GraphQL Client with offline tokens |
+| `createpost`             | Create a new POST request                       |
+| `createget`              | Create a new GET request                        |

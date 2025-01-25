@@ -6,44 +6,62 @@ import withMiddleware from "@/utils/middleware/withMiddleware";
  * @param {import("next").NextApiResponse} res - The HTTP response object.
  */
 const handler = async (req, res) => {
-  //false for offline session, true for online session
-  const { client } = await clientProvider.online.graphqlClient({
-    req,
-    res,
+  const { client } = await clientProvider.offline.graphqlClient({
+    shop: req.user_shop,
   });
+
   const returnUrl = `${process.env.SHOPIFY_APP_URL}/?shop=${req.user_shop}`;
 
   const planName = "$10.25 plan";
   const planPrice = 10.25; //Always a decimal
 
   const response = await client.request(
-    `mutation CreateSubscription{
-    appSubscriptionCreate(
-      name: "${planName}"
-      returnUrl: "${returnUrl}"
-      test: true
-      lineItems: [
-        {
-          plan: {
-            appRecurringPricingDetails: {
-              price: { amount: ${planPrice}, currencyCode: USD }
-            }
+    /* GraphQL */ `
+      mutation CreateSubscription(
+        $name: String!
+        $lineItems: [AppSubscriptionLineItemInput!]!
+        $returnUrl: URL!
+        $test: Boolean
+      ) {
+        appSubscriptionCreate(
+          name: $name
+          returnUrl: $returnUrl
+          lineItems: $lineItems
+          test: $test
+        ) {
+          userErrors {
+            field
+            message
+          }
+          c
+          confirmationUrl
+          appSubscription {
+            id
+            status
           }
         }
-      ]
-    ) {
-      userErrors {
-        field
-        message
       }
-      confirmationUrl
-      appSubscription {
-        id
-        status
-      }
+    `,
+    {
+      variables: {
+        name: planName,
+        returnUrl: returnUrl,
+        test: true,
+        lineItems: [
+          {
+            plan: {
+              appRecurringPricingDetails: {
+                price: {
+                  amount: planPrice,
+                  currencyCode: "USD",
+                },
+                interval: "EVERY_30_DAYS",
+              },
+            },
+          },
+        ],
+      },
     }
-  }
-`
   );
 
   if (response.data.appSubscriptionCreate.userErrors.length > 0) {

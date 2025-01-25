@@ -6,14 +6,14 @@ import withMiddleware from "@/utils/middleware/withMiddleware";
  * @param {import("next").NextApiResponse} res - The HTTP response object.
  */
 const handler = async (req, res) => {
-  //false for offline session, true for online session
-  const { client } = await clientProvider.online.graphqlClient({
-    req,
-    res,
+  console.log("Hit the endpoint");
+
+  const { client } = await clientProvider.offline.graphqlClient({
+    shop: req.user_shop,
   });
 
-  const response = await client.request(
-    `{
+  const response = await client.request(/* GraphQL */ `
+    {
       appInstallation {
         activeSubscriptions {
           name
@@ -35,8 +35,8 @@ const handler = async (req, res) => {
           test
         }
       }
-    }`
-  );
+    }
+  `);
 
   res.status(200).send(response);
 };

@@ -8,27 +8,27 @@ import withMiddleware from "@/utils/middleware/withMiddleware.js";
 const handler = async (req, res) => {
   if (req.method === "GET") {
     try {
-      const { client } = await clientProvider.online.graphqlClient({
-        req,
-        res,
+      const { client } = await clientProvider.offline.graphqlClient({
+        shop: req.user_shop,
       });
-      const activeWebhooks = await client.request(
-        `{
-      webhookSubscriptions(first: 25) {
-        edges {
-          node {
-            topic
-            endpoint {
-              __typename
-              ... on WebhookHttpEndpoint {
-                callbackUrl
+
+      const activeWebhooks = await client.request(/* GraphQL */ `
+        {
+          webhookSubscriptions(first: 25) {
+            edges {
+              node {
+                topic
+                endpoint {
+                  __typename
+                  ... on WebhookHttpEndpoint {
+                    callbackUrl
+                  }
+                }
               }
             }
           }
         }
-      }
-    }`
-      );
+      `);
       return res.status(200).send(activeWebhooks);
     } catch (e) {
       console.error(`---> An error occured`, e);

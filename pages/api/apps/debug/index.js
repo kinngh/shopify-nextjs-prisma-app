@@ -10,7 +10,7 @@ const handler = async (req, res) => {
   if (req.method === "GET") {
     return res
       .status(200)
-      .send({ text: "This text is coming from `/api/apps route`" });
+      .send({ text: "This text is coming from `/api/apps/debug route`" });
   }
 
   if (req.method === "POST") {

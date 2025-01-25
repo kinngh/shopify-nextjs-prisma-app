@@ -12,7 +12,13 @@ const handler = async (req, res) => {
         req,
         res,
       });
-      const shop = await client.request(`{shop{name}}`);
+      const shop = await client.request(/* GraphQL */ `
+        {
+          shop {
+            name
+          }
+        }
+      `);
       return res.status(200).send({ text: shop.data.shop.name });
     } catch (e) {
       console.error(`---> An error occured`, e);
