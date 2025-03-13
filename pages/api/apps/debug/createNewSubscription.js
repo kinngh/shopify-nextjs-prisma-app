@@ -33,7 +33,6 @@ const handler = async (req, res) => {
             field
             message
           }
-          c
           confirmationUrl
           appSubscription {
             id
