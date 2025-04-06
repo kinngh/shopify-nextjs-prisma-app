@@ -4,49 +4,6 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} RETURNS_APPROVE_return_line_items_fulfillment_line_item_line_item
- * @property {number} id
- * @property {string} admin_graphql_api_id
- */
-/**
- * @typedef {Object} RETURNS_APPROVE_return_line_items_fulfillment_line_item
- * @property {number} id
- * @property {string} admin_graphql_api_id
- * @property {RETURNS_APPROVE_return_line_items_fulfillment_line_item_line_item} line_item
- */
-/**
- * @typedef {Object} RETURNS_APPROVE_return_line_items_restocking_fee_price_shop_money
- * @property {string} amount
- * @property {string} currency_code
- */
-/**
- * @typedef {Object} RETURNS_APPROVE_return_line_items_restocking_fee_price_presentment_money
- * @property {string} amount
- * @property {string} currency_code
- */
-/**
- * @typedef {Object} RETURNS_APPROVE_return_line_items_restocking_fee_price
- * @property {RETURNS_APPROVE_return_line_items_restocking_fee_price_shop_money} shop_money
- * @property {RETURNS_APPROVE_return_line_items_restocking_fee_price_presentment_money} presentment_money
- */
-/**
- * @typedef {Object} RETURNS_APPROVE_return_line_items_restocking_fee
- * @property {number} id
- * @property {string} admin_graphql_api_id
- * @property {RETURNS_APPROVE_return_line_items_restocking_fee_price} price
- */
-/**
- * @typedef {Object} RETURNS_APPROVE_return_line_items
- * @property {number} id
- * @property {string} admin_graphql_api_id
- * @property {RETURNS_APPROVE_return_line_items_fulfillment_line_item} fulfillment_line_item
- * @property {number} quantity
- * @property {string} return_reason
- * @property {string} return_reason_note
- * @property {null|string} customer_note
- * @property {RETURNS_APPROVE_return_line_items_restocking_fee} restocking_fee
- */
-/**
  * @typedef {Object} RETURNS_APPROVE_return_shipping_fees_price_shop_money
  * @property {string} amount
  * @property {string} currency_code
@@ -81,7 +38,7 @@
  * @property {RETURNS_APPROVE_order} order
  * @property {number} total_return_line_items
  * @property {null|string} name
- * @property {Array<RETURNS_APPROVE_return_line_items>} return_line_items
+ * @property {Array} return_line_items
  * @property {Array<RETURNS_APPROVE_return_shipping_fees>} return_shipping_fees
  * @property {Array<RETURNS_APPROVE_exchange_line_items>} exchange_line_items
  * @property {number} total_exchange_line_items
@@ -142,14 +99,18 @@
  */
 /**
  * @typedef {Object} PAYMENT_TERMS_UPDATE_payment_schedules
- * @property {number} id
- * @property {number} payment_terms_id
  * @property {string} amount
- * @property {string} currency
- * @property {string} issued_at
- * @property {string} due_at
+ * @property {string} balance_due
  * @property {string} completed_at
  * @property {string} created_at
+ * @property {string} currency
+ * @property {string} due_at
+ * @property {number} id
+ * @property {string} issued_at
+ * @property {number} payment_terms_id
+ * @property {string} presentment_currency
+ * @property {string} total_balance
+ * @property {string} total_price
  * @property {string} updated_at
  * @property {string} admin_graphql_api_id
  */
@@ -285,12 +246,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} CHECKOUTS_CREATE_customer_default_address
  * @property {null|string} id
  * @property {number} customer_id
@@ -318,21 +273,14 @@
  * @property {null|string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {null|string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} tax_exemptions
- * @property {CHECKOUTS_CREATE_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
  * @property {CHECKOUTS_CREATE_customer_default_address} default_address
  */
@@ -742,12 +690,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} ORDERS_PAID_customer_default_address
  * @property {number} id
  * @property {number} customer_id
@@ -781,9 +723,6 @@
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
  * @property {null|string} phone
- * @property {ORDERS_PAID_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
- * @property {string} tags
  * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
@@ -843,13 +782,14 @@
  * @property {Array} properties
  * @property {number} quantity
  * @property {boolean} requires_shipping
+ * @property {null|string} sales_line_item_group_id
  * @property {string} sku
  * @property {boolean} taxable
  * @property {string} title
  * @property {string} total_discount
  * @property {ORDERS_PAID_line_items_total_discount_set} total_discount_set
- * @property {number} variant_id
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_id
+ * @property {null|string} variant_inventory_management
  * @property {null|string} variant_title
  * @property {null|string} vendor
  * @property {Array} tax_lines
@@ -974,7 +914,7 @@
  * @property {string} email
  * @property {boolean} estimated_taxes
  * @property {string} financial_status
- * @property {string} fulfillment_status
+ * @property {null|string} fulfillment_status
  * @property {null|string} landing_site
  * @property {null|string} landing_site_ref
  * @property {null|string} location_id
@@ -1156,15 +1096,22 @@
  * @property {ORDERS_EDITED_order_edit} order_edit
  */
 /**
+ * @typedef {Object} FINANCE_APP_STAFF_MEMBER_UPDATE
+ */
+/**
  * @typedef {Object} PAYMENT_SCHEDULES_DUE
- * @property {number} id
- * @property {number} payment_terms_id
  * @property {string} amount
- * @property {string} currency
- * @property {string} issued_at
- * @property {string} due_at
+ * @property {string} balance_due
  * @property {string} completed_at
  * @property {string} created_at
+ * @property {string} currency
+ * @property {string} due_at
+ * @property {number} id
+ * @property {string} issued_at
+ * @property {number} payment_terms_id
+ * @property {string} presentment_currency
+ * @property {string} total_balance
+ * @property {string} total_price
  * @property {string} updated_at
  * @property {string} admin_graphql_api_id
  */
@@ -1221,6 +1168,12 @@
  * @property {Array<SELLING_PLAN_GROUPS_CREATE_selling_plans>} selling_plans
  * @property {Array} product_variants
  * @property {Array} products
+ */
+/**
+ * @typedef {Object} COMPANY_LOCATIONS_DELETE_tax_settings
+ * @property {string} tax_registration_id
+ * @property {null|string} tax_exempt
+ * @property {Array<string>} tax_exemptions
  */
 /**
  * @typedef {Object} COMPANY_LOCATIONS_DELETE_company
@@ -1287,10 +1240,14 @@
  * @property {null|string} buyer_experience_configuration
  * @property {string} admin_graphql_api_id
  * @property {Array<string>} tax_exemptions
+ * @property {COMPANY_LOCATIONS_DELETE_tax_settings} tax_settings
  * @property {COMPANY_LOCATIONS_DELETE_company} company
  * @property {COMPANY_LOCATIONS_DELETE_billing_address} billing_address
  * @property {COMPANY_LOCATIONS_DELETE_shipping_address} shipping_address
  * @property {COMPANY_LOCATIONS_DELETE_tax_registration} tax_registration
+ */
+/**
+ * @typedef {Object} SHIPPING_ADDRESSES_CREATE
  */
 /**
  * @typedef {Object} ORDERS_FULFILLED_current_shipping_price_set_shop_money
@@ -1506,12 +1463,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} ORDERS_FULFILLED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
@@ -1545,9 +1496,6 @@
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
  * @property {null|string} phone
- * @property {ORDERS_FULFILLED_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
- * @property {string} tags
  * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
@@ -1607,13 +1555,14 @@
  * @property {Array} properties
  * @property {number} quantity
  * @property {boolean} requires_shipping
+ * @property {null|string} sales_line_item_group_id
  * @property {string} sku
  * @property {boolean} taxable
  * @property {string} title
  * @property {string} total_discount
  * @property {ORDERS_FULFILLED_line_items_total_discount_set} total_discount_set
- * @property {number} variant_id
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_id
+ * @property {null|string} variant_inventory_management
  * @property {null|string} variant_title
  * @property {null|string} vendor
  * @property {Array} tax_lines
@@ -1738,7 +1687,7 @@
  * @property {string} email
  * @property {boolean} estimated_taxes
  * @property {string} financial_status
- * @property {string} fulfillment_status
+ * @property {null|string} fulfillment_status
  * @property {null|string} landing_site
  * @property {null|string} landing_site_ref
  * @property {null|string} location_id
@@ -1796,6 +1745,28 @@
  * @property {ORDERS_FULFILLED_shipping_address} shipping_address
  * @property {Array<ORDERS_FULFILLED_shipping_lines>} shipping_lines
  * @property {Array} returns
+ */
+/**
+ * @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_order
+ * @property {string} id
+ */
+/**
+ * @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_hold_held_by_app
+ * @property {string} id
+ */
+/**
+ * @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_hold
+ * @property {string} id
+ * @property {string} reason
+ * @property {string} reason_notes
+ * @property {boolean} held_by_requesting_app
+ * @property {string} handle
+ * @property {FULFILLMENT_HOLDS_RELEASED_fulfillment_hold_held_by_app} held_by_app
+ */
+/**
+ * @typedef {Object} FULFILLMENT_HOLDS_RELEASED
+ * @property {FULFILLMENT_HOLDS_RELEASED_fulfillment_order} fulfillment_order
+ * @property {FULFILLMENT_HOLDS_RELEASED_fulfillment_hold} fulfillment_hold
  */
 /**
  * @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP_fulfillment_order_delivery_method
@@ -2053,12 +2024,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
@@ -2092,9 +2057,6 @@
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
  * @property {null|string} phone
- * @property {ORDERS_PARTIALLY_FULFILLED_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
- * @property {string} tags
  * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
@@ -2154,13 +2116,14 @@
  * @property {Array} properties
  * @property {number} quantity
  * @property {boolean} requires_shipping
+ * @property {null|string} sales_line_item_group_id
  * @property {string} sku
  * @property {boolean} taxable
  * @property {string} title
  * @property {string} total_discount
  * @property {ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set} total_discount_set
- * @property {number} variant_id
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_id
+ * @property {null|string} variant_inventory_management
  * @property {null|string} variant_title
  * @property {null|string} vendor
  * @property {Array} tax_lines
@@ -2285,7 +2248,7 @@
  * @property {string} email
  * @property {boolean} estimated_taxes
  * @property {string} financial_status
- * @property {string} fulfillment_status
+ * @property {null|string} fulfillment_status
  * @property {null|string} landing_site
  * @property {null|string} landing_site_ref
  * @property {null|string} location_id
@@ -2415,6 +2378,12 @@
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_contact_company} company
  */
 /**
+ * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_tax_settings
+ * @property {string} tax_registration_id
+ * @property {null|string} tax_exempt
+ * @property {Array<string>} tax_exemptions
+ */
+/**
  * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_company
  * @property {string} name
  * @property {string} note
@@ -2479,6 +2448,7 @@
  * @property {null|string} buyer_experience_configuration
  * @property {string} admin_graphql_api_id
  * @property {Array<string>} tax_exemptions
+ * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_location_tax_settings} tax_settings
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_location_company} company
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_location_billing_address} billing_address
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_location_shipping_address} shipping_address
@@ -2503,46 +2473,26 @@
  * @property {string} query
  */
 /**
- * @typedef {Object} MARKETS_UPDATE_regions
- * @property {string} country_code
- */
-/**
  * @typedef {Object} MARKETS_UPDATE
  * @property {number} id
  * @property {string} name
- * @property {boolean} enabled
- * @property {Array<MARKETS_UPDATE_regions>} regions
+ * @property {string} type
+ * @property {string} status
  */
 /**
  * @typedef {Object} PRODUCT_PUBLICATIONS_DELETE
  * @property {null|string} id
  */
 /**
+ * @typedef {Object} METAFIELD_DEFINITIONS_DELETE
+ * @property {string} id
+ * @property {string} type
+ * @property {null|string} created_by_app_id
+ */
+/**
  * @typedef {Object} RETURNS_REQUEST_order
  * @property {number} id
  * @property {string} admin_graphql_api_id
- */
-/**
- * @typedef {Object} RETURNS_REQUEST_return_line_items_fulfillment_line_item_line_item
- * @property {number} id
- * @property {string} admin_graphql_api_id
- */
-/**
- * @typedef {Object} RETURNS_REQUEST_return_line_items_fulfillment_line_item
- * @property {number} id
- * @property {string} admin_graphql_api_id
- * @property {RETURNS_REQUEST_return_line_items_fulfillment_line_item_line_item} line_item
- */
-/**
- * @typedef {Object} RETURNS_REQUEST_return_line_items
- * @property {number} id
- * @property {string} admin_graphql_api_id
- * @property {RETURNS_REQUEST_return_line_items_fulfillment_line_item} fulfillment_line_item
- * @property {number} quantity
- * @property {string} return_reason
- * @property {string} return_reason_note
- * @property {null|string} customer_note
- * @property {null|string} restocking_fee
  */
 /**
  * @typedef {Object} RETURNS_REQUEST
@@ -2552,10 +2502,17 @@
  * @property {RETURNS_REQUEST_order} order
  * @property {number} total_return_line_items
  * @property {null|string} name
- * @property {Array<RETURNS_REQUEST_return_line_items>} return_line_items
+ * @property {Array} return_line_items
  * @property {Array} return_shipping_fees
  * @property {Array} exchange_line_items
  * @property {number} total_exchange_line_items
+ */
+/**
+ * @typedef {Object} APP_SCOPES_UPDATE
+ * @property {number} id
+ * @property {Array<string>} previous
+ * @property {Array<string>} current
+ * @property {string} updated_at
  */
 /**
  * @typedef {Object} DRAFT_ORDERS_CREATE_line_items
@@ -2654,6 +2611,8 @@
  * @property {string} total_price_currency
  * @property {string} balance_due
  * @property {string} balance_due_currency
+ * @property {string} total_balance
+ * @property {string} total_balance_currency
  * @property {string} outstanding_balance
  * @property {string} outstanding_balance_currency
  */
@@ -2667,12 +2626,6 @@
  * @property {string} updated_at
  * @property {Array<DRAFT_ORDERS_CREATE_payment_terms_payment_schedules>} payment_schedules
  * @property {boolean} can_pay_early
- */
-/**
- * @typedef {Object} DRAFT_ORDERS_CREATE_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
  */
 /**
  * @typedef {Object} DRAFT_ORDERS_CREATE_customer_default_address
@@ -2702,21 +2655,14 @@
  * @property {null|string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {null|string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} tax_exemptions
- * @property {DRAFT_ORDERS_CREATE_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
  * @property {DRAFT_ORDERS_CREATE_customer_default_address} default_address
  */
@@ -2733,11 +2679,15 @@
  * @property {boolean} tax_exempt
  * @property {null|string} completed_at
  * @property {string} name
+ * @property {boolean} allow_discount_codes_in_checkout?
+ * @property {boolean} b2b?
  * @property {string} status
  * @property {Array<DRAFT_ORDERS_CREATE_line_items>} line_items
+ * @property {null|string} api_client_id
  * @property {DRAFT_ORDERS_CREATE_shipping_address} shipping_address
  * @property {DRAFT_ORDERS_CREATE_billing_address} billing_address
  * @property {string} invoice_url
+ * @property {null|string} created_on_api_version_handle
  * @property {DRAFT_ORDERS_CREATE_applied_discount} applied_discount
  * @property {null|string} order_id
  * @property {DRAFT_ORDERS_CREATE_shipping_line} shipping_line
@@ -2987,12 +2937,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} ORDERS_CREATE_customer_default_address
  * @property {number} id
  * @property {number} customer_id
@@ -3026,9 +2970,6 @@
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
  * @property {null|string} phone
- * @property {ORDERS_CREATE_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
- * @property {string} tags
  * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
@@ -3088,13 +3029,14 @@
  * @property {Array} properties
  * @property {number} quantity
  * @property {boolean} requires_shipping
+ * @property {null|string} sales_line_item_group_id
  * @property {string} sku
  * @property {boolean} taxable
  * @property {string} title
  * @property {string} total_discount
  * @property {ORDERS_CREATE_line_items_total_discount_set} total_discount_set
- * @property {number} variant_id
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_id
+ * @property {null|string} variant_inventory_management
  * @property {null|string} variant_title
  * @property {null|string} vendor
  * @property {Array} tax_lines
@@ -3219,7 +3161,7 @@
  * @property {string} email
  * @property {boolean} estimated_taxes
  * @property {string} financial_status
- * @property {string} fulfillment_status
+ * @property {null|string} fulfillment_status
  * @property {null|string} landing_site
  * @property {null|string} landing_site_ref
  * @property {null|string} location_id
@@ -3549,12 +3491,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} ORDERS_UPDATED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
@@ -3588,9 +3524,6 @@
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
  * @property {null|string} phone
- * @property {ORDERS_UPDATED_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
- * @property {string} tags
  * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
@@ -3650,13 +3583,14 @@
  * @property {Array} properties
  * @property {number} quantity
  * @property {boolean} requires_shipping
+ * @property {null|string} sales_line_item_group_id
  * @property {string} sku
  * @property {boolean} taxable
  * @property {string} title
  * @property {string} total_discount
  * @property {ORDERS_UPDATED_line_items_total_discount_set} total_discount_set
- * @property {number} variant_id
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_id
+ * @property {null|string} variant_inventory_management
  * @property {null|string} variant_title
  * @property {null|string} vendor
  * @property {Array} tax_lines
@@ -3781,7 +3715,7 @@
  * @property {string} email
  * @property {boolean} estimated_taxes
  * @property {string} financial_status
- * @property {string} fulfillment_status
+ * @property {null|string} fulfillment_status
  * @property {null|string} landing_site
  * @property {null|string} landing_site_ref
  * @property {null|string} location_id
@@ -4016,7 +3950,7 @@
 /**
  * @typedef {Object} FULFILLMENTS_CREATE_line_items
  * @property {number} id
- * @property {number} variant_id
+ * @property {null|string} variant_id
  * @property {string} title
  * @property {number} quantity
  * @property {string} sku
@@ -4028,7 +3962,7 @@
  * @property {boolean} taxable
  * @property {boolean} gift_card
  * @property {string} name
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_inventory_management
  * @property {Array} properties
  * @property {boolean} product_exists
  * @property {number} fulfillable_quantity
@@ -4075,8 +4009,6 @@
  * @property {null|string} phone
  * @property {Array} addresses
  * @property {Array} tax_exemptions
- * @property {null|string} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
  */
 /**
@@ -4103,6 +4035,26 @@
  * @property {FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_fulfillment_order_merchant_request} fulfillment_order_merchant_request
  */
 /**
+ * @typedef {Object} CUSTOMERS_ENABLE_default_address
+ * @property {number} id
+ * @property {number} customer_id
+ * @property {string} first_name
+ * @property {string} last_name
+ * @property {null|string} company
+ * @property {string} address1
+ * @property {null|string} address2
+ * @property {string} city
+ * @property {string} province
+ * @property {string} country
+ * @property {string} zip
+ * @property {string} phone
+ * @property {string} name
+ * @property {string} province_code
+ * @property {string} country_code
+ * @property {string} country_name
+ * @property {boolean} default
+ */
+/**
  * @typedef {Object} CUSTOMERS_ENABLE
  * @property {number} id
  * @property {string} email
@@ -4110,23 +4062,17 @@
  * @property {string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} addresses
  * @property {Array} tax_exemptions
- * @property {null|string} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
+ * @property {CUSTOMERS_ENABLE_default_address} default_address
  */
 /**
  * @typedef {Object} SUBSCRIPTION_BILLING_CYCLES_SKIP
@@ -4230,14 +4176,18 @@
  */
 /**
  * @typedef {Object} PAYMENT_TERMS_CREATE_payment_schedules
- * @property {number} id
- * @property {number} payment_terms_id
  * @property {string} amount
- * @property {string} currency
- * @property {string} issued_at
- * @property {string} due_at
+ * @property {string} balance_due
  * @property {string} completed_at
  * @property {string} created_at
+ * @property {string} currency
+ * @property {string} due_at
+ * @property {number} id
+ * @property {string} issued_at
+ * @property {number} payment_terms_id
+ * @property {string} presentment_currency
+ * @property {string} total_balance
+ * @property {string} total_price
  * @property {string} updated_at
  * @property {string} admin_graphql_api_id
  */
@@ -4362,12 +4312,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} CHECKOUTS_UPDATE_customer_default_address
  * @property {null|string} id
  * @property {number} customer_id
@@ -4395,21 +4339,14 @@
  * @property {null|string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {null|string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} tax_exemptions
- * @property {CHECKOUTS_UPDATE_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
  * @property {CHECKOUTS_UPDATE_customer_default_address} default_address
  */
@@ -4471,6 +4408,9 @@
  * @property {string} updated_at
  * @property {string} currency
  * @property {string} capped_amount
+ * @property {string} price
+ * @property {string} interval
+ * @property {string} plan_handle
  */
 /**
  * @typedef {Object} APP_SUBSCRIPTIONS_UPDATE
@@ -4661,15 +4601,14 @@
  * @property {Array} products
  */
 /**
- * @typedef {Object} MARKETS_CREATE_regions
- * @property {string} country_code
+ * @typedef {Object} SHIPPING_ADDRESSES_UPDATE
  */
 /**
  * @typedef {Object} MARKETS_CREATE
  * @property {number} id
  * @property {string} name
- * @property {boolean} enabled
- * @property {Array<MARKETS_CREATE_regions>} regions
+ * @property {string} type
+ * @property {string} status
  */
 /**
  * @typedef {Object} DRAFT_ORDERS_UPDATE_line_items
@@ -4768,6 +4707,8 @@
  * @property {string} total_price_currency
  * @property {string} balance_due
  * @property {string} balance_due_currency
+ * @property {string} total_balance
+ * @property {string} total_balance_currency
  * @property {string} outstanding_balance
  * @property {string} outstanding_balance_currency
  */
@@ -4781,12 +4722,6 @@
  * @property {string} updated_at
  * @property {Array<DRAFT_ORDERS_UPDATE_payment_terms_payment_schedules>} payment_schedules
  * @property {boolean} can_pay_early
- */
-/**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
  */
 /**
  * @typedef {Object} DRAFT_ORDERS_UPDATE_customer_default_address
@@ -4816,21 +4751,14 @@
  * @property {null|string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {null|string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} tax_exemptions
- * @property {DRAFT_ORDERS_UPDATE_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
  * @property {DRAFT_ORDERS_UPDATE_customer_default_address} default_address
  */
@@ -4847,11 +4775,15 @@
  * @property {boolean} tax_exempt
  * @property {null|string} completed_at
  * @property {string} name
+ * @property {boolean} allow_discount_codes_in_checkout?
+ * @property {boolean} b2b?
  * @property {string} status
  * @property {Array<DRAFT_ORDERS_UPDATE_line_items>} line_items
+ * @property {null|string} api_client_id
  * @property {DRAFT_ORDERS_UPDATE_shipping_address} shipping_address
  * @property {DRAFT_ORDERS_UPDATE_billing_address} billing_address
  * @property {string} invoice_url
+ * @property {null|string} created_on_api_version_handle
  * @property {DRAFT_ORDERS_UPDATE_applied_discount} applied_discount
  * @property {null|string} order_id
  * @property {DRAFT_ORDERS_UPDATE_shipping_line} shipping_line
@@ -5056,7 +4988,7 @@
 /**
  * @typedef {Object} FULFILLMENTS_UPDATE_line_items
  * @property {number} id
- * @property {number} variant_id
+ * @property {null|string} variant_id
  * @property {string} title
  * @property {number} quantity
  * @property {string} sku
@@ -5068,7 +5000,7 @@
  * @property {boolean} taxable
  * @property {boolean} gift_card
  * @property {string} name
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_inventory_management
  * @property {Array} properties
  * @property {boolean} product_exists
  * @property {number} fulfillable_quantity
@@ -5207,7 +5139,7 @@
 /**
  * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item
  * @property {number} id
- * @property {number} variant_id
+ * @property {null|string} variant_id
  * @property {string} title
  * @property {number} quantity
  * @property {string} sku
@@ -5219,7 +5151,7 @@
  * @property {boolean} taxable
  * @property {boolean} gift_card
  * @property {string} name
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_inventory_management
  * @property {Array} properties
  * @property {boolean} product_exists
  * @property {number} fulfillable_quantity
@@ -5248,6 +5180,51 @@
  * @property {REFUNDS_CREATE_refund_line_items_line_item} line_item
  */
 /**
+ * @typedef {Object} REFUNDS_CREATE_transactions_receipt
+ */
+/**
+ * @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency
+ */
+/**
+ * @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set_shop_money
+ * @property {string} amount
+ * @property {string} currency
+ */
+/**
+ * @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set
+ * @property {REFUNDS_CREATE_transactions_total_unsettled_set_presentment_money} presentment_money
+ * @property {REFUNDS_CREATE_transactions_total_unsettled_set_shop_money} shop_money
+ */
+/**
+ * @typedef {Object} REFUNDS_CREATE_transactions
+ * @property {number} id
+ * @property {number} order_id
+ * @property {string} kind
+ * @property {string} gateway
+ * @property {string} status
+ * @property {string} message
+ * @property {string} created_at
+ * @property {boolean} test
+ * @property {null|string} authorization
+ * @property {null|string} location_id
+ * @property {null|string} user_id
+ * @property {null|string} parent_id
+ * @property {null|string} processed_at
+ * @property {null|string} device_id
+ * @property {null|string} error_code
+ * @property {string} source_name
+ * @property {REFUNDS_CREATE_transactions_receipt} receipt
+ * @property {string} amount
+ * @property {null|string} currency
+ * @property {string} payment_id
+ * @property {REFUNDS_CREATE_transactions_total_unsettled_set} total_unsettled_set
+ * @property {boolean} manual_payment_gateway
+ * @property {null|string} amount_rounding
+ * @property {string} admin_graphql_api_id
+ */
+/**
  * @typedef {Object} REFUNDS_CREATE
  * @property {number} id
  * @property {number} order_id
@@ -5263,7 +5240,7 @@
  * @property {string} admin_graphql_api_id
  * @property {Array} order_adjustments
  * @property {Array<REFUNDS_CREATE_refund_line_items>} refund_line_items
- * @property {Array} transactions
+ * @property {Array<REFUNDS_CREATE_transactions>} transactions
  */
 /**
  * @typedef {Object} PRODUCTS_UPDATE_variants
@@ -5319,6 +5296,26 @@
  * @property {null|string} category
  */
 /**
+ * @typedef {Object} CUSTOMERS_DISABLE_default_address
+ * @property {number} id
+ * @property {number} customer_id
+ * @property {string} first_name
+ * @property {string} last_name
+ * @property {null|string} company
+ * @property {string} address1
+ * @property {null|string} address2
+ * @property {string} city
+ * @property {string} province
+ * @property {string} country
+ * @property {string} zip
+ * @property {string} phone
+ * @property {string} name
+ * @property {string} province_code
+ * @property {string} country_code
+ * @property {string} country_name
+ * @property {boolean} default
+ */
+/**
  * @typedef {Object} CUSTOMERS_DISABLE
  * @property {number} id
  * @property {string} email
@@ -5326,23 +5323,17 @@
  * @property {string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} addresses
  * @property {Array} tax_exemptions
- * @property {null|string} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
+ * @property {CUSTOMERS_DISABLE_default_address} default_address
  */
 /**
  * @typedef {Object} CUSTOMER_PAYMENT_METHODS_REVOKE_payment_instrument
@@ -5367,7 +5358,7 @@
  */
 /**
  * @typedef {Object} METAOBJECTS_CREATE_fields
- * @property {string} key
+ * @property {string} example-key
  */
 /**
  * @typedef {Object} METAOBJECTS_CREATE_capabilities_publishable
@@ -5390,6 +5381,13 @@
  * @property {string} created_by_staff_id
  * @property {string} created_by_app_id
  * @property {METAOBJECTS_CREATE_capabilities} capabilities
+ */
+/**
+ * @typedef {Object} TAX_SERVICES_CREATE
+ * @property {null|string} id
+ * @property {string} name
+ * @property {string} url
+ * @property {boolean} active
  */
 /**
  * @typedef {Object} COLLECTION_LISTINGS_UPDATE_collection_listing
@@ -5473,6 +5471,12 @@
  * @property {string} updated_at
  * @property {string} customer_since
  * @property {string} admin_graphql_api_id
+ */
+/**
+ * @typedef {Object} CUSTOMER_LEFT_SEGMENT
+ * @property {string} shop_id
+ * @property {string} customer_id
+ * @property {string} segment_id
  */
 /**
  * @typedef {Object} COMPANY_CONTACTS_DELETE_company
@@ -5588,6 +5592,11 @@
  * @property {boolean} edited
  */
 /**
+ * @typedef {Object} MARKETS_BACKUP_REGION_UPDATE
+ * @property {string} admin_graphql_api_id
+ * @property {string} code
+ */
+/**
  * @typedef {Object} FULFILLMENT_EVENTS_DELETE
  * @property {number} id
  * @property {number} fulfillment_id
@@ -5607,6 +5616,12 @@
  * @property {null|string} estimated_delivery_at
  * @property {number} order_id
  * @property {string} admin_graphql_api_id
+ */
+/**
+ * @typedef {Object} DELIVERY_PROMISE_SETTINGS_UPDATE
+ * @property {string} shop_id
+ * @property {string} processing_time
+ * @property {boolean} delivery_dates_enabled
  */
 /**
  * @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing_variants_option_values
@@ -5719,6 +5734,34 @@
  * @property {number} product_id
  */
 /**
+ * @typedef {Object} METAFIELD_DEFINITIONS_CREATE
+ * @property {null|string} id
+ * @property {number} shop_id
+ * @property {string} namespace
+ * @property {string} key
+ * @property {string} name
+ * @property {null|string} description
+ * @property {string} owner_type
+ * @property {boolean} deleting
+ * @property {string} type_name
+ * @property {Array} options
+ * @property {null|string} api_client_id
+ * @property {null|string} created_at
+ * @property {null|string} updated_at
+ * @property {string} validation_status
+ * @property {number} pinned_position
+ * @property {null|string} standard_template_id
+ * @property {boolean} use_as_collection_condition
+ * @property {string} access
+ * @property {string} admin_filter_status
+ * @property {boolean} unique_values
+ * @property {boolean} smart_collection_condition
+ * @property {boolean} option_linkable
+ * @property {boolean} admin_filterable
+ * @property {null|string} admin_filterable_status
+ * @property {boolean} app_config_managed
+ */
+/**
  * @typedef {Object} INVENTORY_ITEMS_UPDATE
  * @property {number} id
  * @property {string} sku
@@ -5731,6 +5774,8 @@
  * @property {null|string} harmonized_system_code
  * @property {boolean} tracked
  * @property {Array} country_harmonized_system_codes
+ * @property {number} weight_value
+ * @property {string} weight_unit
  * @property {string} admin_graphql_api_id
  */
 /**
@@ -5852,9 +5897,37 @@
  * @property {number} id
  */
 /**
+ * @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_order
+ * @property {string} id
+ */
+/**
+ * @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_hold_held_by_app
+ * @property {string} id
+ */
+/**
+ * @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_hold
+ * @property {string} id
+ * @property {string} reason
+ * @property {string} reason_notes
+ * @property {boolean} held_by_requesting_app
+ * @property {string} handle
+ * @property {FULFILLMENT_HOLDS_ADDED_fulfillment_hold_held_by_app} held_by_app
+ */
+/**
+ * @typedef {Object} FULFILLMENT_HOLDS_ADDED
+ * @property {FULFILLMENT_HOLDS_ADDED_fulfillment_order} fulfillment_order
+ * @property {FULFILLMENT_HOLDS_ADDED_fulfillment_hold} fulfillment_hold
+ */
+/**
  * @typedef {Object} SELLING_PLAN_GROUPS_DELETE
  * @property {string} admin_graphql_api_id
  * @property {number} id
+ */
+/**
+ * @typedef {Object} COMPANY_LOCATIONS_CREATE_tax_settings
+ * @property {string} tax_registration_id
+ * @property {null|string} tax_exempt
+ * @property {Array<string>} tax_exemptions
  */
 /**
  * @typedef {Object} COMPANY_LOCATIONS_CREATE_company
@@ -5921,10 +5994,15 @@
  * @property {null|string} buyer_experience_configuration
  * @property {string} admin_graphql_api_id
  * @property {Array<string>} tax_exemptions
+ * @property {COMPANY_LOCATIONS_CREATE_tax_settings} tax_settings
  * @property {COMPANY_LOCATIONS_CREATE_company} company
  * @property {COMPANY_LOCATIONS_CREATE_billing_address} billing_address
  * @property {COMPANY_LOCATIONS_CREATE_shipping_address} shipping_address
  * @property {COMPANY_LOCATIONS_CREATE_tax_registration} tax_registration
+ */
+/**
+ * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds_held_by_app
+ * @property {string} id
  */
 /**
  * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds
@@ -5932,6 +6010,8 @@
  * @property {string} reason
  * @property {string} reason_notes
  * @property {boolean} held_by_requesting_app
+ * @property {string} handle
+ * @property {FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds_held_by_app} held_by_app
  */
 /**
  * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order
@@ -5950,11 +6030,17 @@
  * @property {number} quantity
  */
 /**
+ * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold_held_by_app
+ * @property {string} id
+ */
+/**
  * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold
  * @property {string} id
  * @property {string} reason
  * @property {string} reason_notes
  * @property {boolean} held_by_requesting_app
+ * @property {string} handle
+ * @property {FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold_held_by_app} held_by_app
  */
 /**
  * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD
@@ -6154,6 +6240,26 @@
  * @property {null|string} image_id
  */
 /**
+ * @typedef {Object} CUSTOMERS_CREATE_default_address
+ * @property {number} id
+ * @property {number} customer_id
+ * @property {string} first_name
+ * @property {string} last_name
+ * @property {null|string} company
+ * @property {string} address1
+ * @property {null|string} address2
+ * @property {string} city
+ * @property {string} province
+ * @property {string} country
+ * @property {string} zip
+ * @property {string} phone
+ * @property {string} name
+ * @property {string} province_code
+ * @property {string} country_code
+ * @property {string} country_name
+ * @property {boolean} default
+ */
+/**
  * @typedef {Object} CUSTOMERS_CREATE
  * @property {number} id
  * @property {string} email
@@ -6161,23 +6267,17 @@
  * @property {string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} addresses
  * @property {Array} tax_exemptions
- * @property {null|string} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
+ * @property {CUSTOMERS_CREATE_default_address} default_address
  */
 /**
  * @typedef {Object} RETURNS_REOPEN
@@ -6232,6 +6332,12 @@
  * @property {string} updated_at
  * @property {string} admin_graphql_api_id
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_contact_company} company
+ */
+/**
+ * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_tax_settings
+ * @property {string} tax_registration_id
+ * @property {null|string} tax_exempt
+ * @property {Array<string>} tax_exemptions
  */
 /**
  * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_company
@@ -6298,6 +6404,7 @@
  * @property {null|string} buyer_experience_configuration
  * @property {string} admin_graphql_api_id
  * @property {Array<string>} tax_exemptions
+ * @property {COMPANY_CONTACT_ROLES_REVOKE_company_location_tax_settings} tax_settings
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_location_company} company
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_location_billing_address} billing_address
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_location_shipping_address} shipping_address
@@ -6755,12 +6862,6 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_customer_email_marketing_consent
- * @property {string} state
- * @property {null|string} opt_in_level
- * @property {null|string} consent_updated_at
- */
-/**
  * @typedef {Object} ORDERS_CANCELLED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
@@ -6794,9 +6895,6 @@
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
  * @property {null|string} phone
- * @property {ORDERS_CANCELLED_customer_email_marketing_consent} email_marketing_consent
- * @property {null|string} sms_marketing_consent
- * @property {string} tags
  * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
@@ -6856,13 +6954,14 @@
  * @property {Array} properties
  * @property {number} quantity
  * @property {boolean} requires_shipping
+ * @property {null|string} sales_line_item_group_id
  * @property {string} sku
  * @property {boolean} taxable
  * @property {string} title
  * @property {string} total_discount
  * @property {ORDERS_CANCELLED_line_items_total_discount_set} total_discount_set
- * @property {number} variant_id
- * @property {string} variant_inventory_management
+ * @property {null|string} variant_id
+ * @property {null|string} variant_inventory_management
  * @property {null|string} variant_title
  * @property {null|string} vendor
  * @property {Array} tax_lines
@@ -6987,7 +7086,7 @@
  * @property {string} email
  * @property {boolean} estimated_taxes
  * @property {string} financial_status
- * @property {string} fulfillment_status
+ * @property {null|string} fulfillment_status
  * @property {null|string} landing_site
  * @property {null|string} landing_site_ref
  * @property {null|string} location_id
@@ -7053,6 +7152,13 @@
  * @property {string} occurredAt
  */
 /**
+ * @typedef {Object} TAX_SERVICES_UPDATE
+ * @property {null|string} id
+ * @property {string} name
+ * @property {string} url
+ * @property {boolean} active
+ */
+/**
  * @typedef {Object} INVENTORY_LEVELS_UPDATE
  * @property {number} inventory_item_id
  * @property {number} location_id
@@ -7062,7 +7168,7 @@
  */
 /**
  * @typedef {Object} METAOBJECTS_UPDATE_fields
- * @property {string} key
+ * @property {string} example-key
  */
 /**
  * @typedef {Object} METAOBJECTS_UPDATE_capabilities_publishable
@@ -7089,6 +7195,9 @@
 /**
  * @typedef {Object} PROFILES_CREATE
  * @property {number} id
+ */
+/**
+ * @typedef {Object} FINANCE_APP_STAFF_MEMBER_REVOKE
  */
 /**
  * @typedef {Object} THEMES_PUBLISH
@@ -7185,6 +7294,15 @@
  * @property {boolean} edited
  */
 /**
+ * @typedef {Object} FINANCE_APP_STAFF_MEMBER_DELETE
+ */
+/**
+ * @typedef {Object} CUSTOMER_JOINED_SEGMENT
+ * @property {string} shop_id
+ * @property {string} customer_id
+ * @property {string} segment_id
+ */
+/**
  * @typedef {Object} SUBSCRIPTION_CONTRACTS_CREATE_billing_policy
  * @property {string} interval
  * @property {number} interval_count
@@ -7209,6 +7327,9 @@
  * @property {string} admin_graphql_api_origin_order_id
  * @property {number} origin_order_id
  * @property {string} revision_id
+ */
+/**
+ * @typedef {Object} FINANCE_APP_STAFF_MEMBER_GRANT
  */
 /**
  * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_context_context_metadata
@@ -7355,6 +7476,34 @@
  * @property {number} product_id
  */
 /**
+ * @typedef {Object} METAFIELD_DEFINITIONS_UPDATE
+ * @property {null|string} id
+ * @property {number} shop_id
+ * @property {string} namespace
+ * @property {string} key
+ * @property {string} name
+ * @property {null|string} description
+ * @property {string} owner_type
+ * @property {boolean} deleting
+ * @property {string} type_name
+ * @property {Array} options
+ * @property {null|string} api_client_id
+ * @property {null|string} created_at
+ * @property {null|string} updated_at
+ * @property {string} validation_status
+ * @property {number} pinned_position
+ * @property {null|string} standard_template_id
+ * @property {boolean} use_as_collection_condition
+ * @property {string} access
+ * @property {string} admin_filter_status
+ * @property {boolean} unique_values
+ * @property {boolean} smart_collection_condition
+ * @property {boolean} option_linkable
+ * @property {boolean} admin_filterable
+ * @property {null|string} admin_filterable_status
+ * @property {boolean} app_config_managed
+ */
+/**
  * @typedef {Object} CARTS_CREATE_line_items_properties
  */
 /**
@@ -7481,6 +7630,8 @@
  * @property {null|string} harmonized_system_code
  * @property {boolean} tracked
  * @property {Array} country_harmonized_system_codes
+ * @property {number} weight_value
+ * @property {string} weight_unit
  * @property {string} admin_graphql_api_id
  */
 /**
@@ -7574,6 +7725,12 @@
  * @property {string} updated_at
  */
 /**
+ * @typedef {Object} COMPANY_LOCATIONS_UPDATE_tax_settings
+ * @property {string} tax_registration_id
+ * @property {null|string} tax_exempt
+ * @property {Array<string>} tax_exemptions
+ */
+/**
  * @typedef {Object} COMPANY_LOCATIONS_UPDATE_company
  * @property {string} name
  * @property {string} note
@@ -7638,6 +7795,7 @@
  * @property {null|string} buyer_experience_configuration
  * @property {string} admin_graphql_api_id
  * @property {Array<string>} tax_exemptions
+ * @property {COMPANY_LOCATIONS_UPDATE_tax_settings} tax_settings
  * @property {COMPANY_LOCATIONS_UPDATE_company} company
  * @property {COMPANY_LOCATIONS_UPDATE_billing_address} billing_address
  * @property {COMPANY_LOCATIONS_UPDATE_shipping_address} shipping_address
@@ -7661,6 +7819,19 @@
  * @property {string} status
  */
 /**
+ * @typedef {Object} CUSTOMERS_PURCHASING_SUMMARY_amountSpent
+ * @property {string} amount
+ * @property {string} currencyCode
+ */
+/**
+ * @typedef {Object} CUSTOMERS_PURCHASING_SUMMARY
+ * @property {string} customerId
+ * @property {number} numberOfOrders
+ * @property {CUSTOMERS_PURCHASING_SUMMARY_amountSpent} amountSpent
+ * @property {string} lastOrderId
+ * @property {string} occurredAt
+ */
+/**
  * @typedef {Object} CUSTOMERS_DATA_REQUEST_customer
  * @property {number} id
  * @property {string} email
@@ -7674,8 +7845,8 @@
  * @typedef {Object} CUSTOMERS_DATA_REQUEST
  * @property {number} shop_id
  * @property {string} shop_domain
- * @property {Array<number>} orders_requested
  * @property {CUSTOMERS_DATA_REQUEST_customer} customer
+ * @property {Array<number>} orders_requested
  * @property {CUSTOMERS_DATA_REQUEST_data_request} data_request
  */
 /**
@@ -7724,6 +7895,26 @@
  * @property {COLLECTION_LISTINGS_REMOVE_collection_listing} collection_listing
  */
 /**
+ * @typedef {Object} CUSTOMERS_UPDATE_default_address
+ * @property {number} id
+ * @property {number} customer_id
+ * @property {string} first_name
+ * @property {string} last_name
+ * @property {null|string} company
+ * @property {string} address1
+ * @property {null|string} address2
+ * @property {string} city
+ * @property {string} province
+ * @property {string} country
+ * @property {string} zip
+ * @property {string} phone
+ * @property {string} name
+ * @property {string} province_code
+ * @property {string} country_code
+ * @property {string} country_name
+ * @property {boolean} default
+ */
+/**
  * @typedef {Object} CUSTOMERS_UPDATE
  * @property {number} id
  * @property {string} email
@@ -7731,23 +7922,20 @@
  * @property {string} updated_at
  * @property {string} first_name
  * @property {string} last_name
- * @property {number} orders_count
  * @property {string} state
- * @property {string} total_spent
- * @property {null|string} last_order_id
  * @property {string} note
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} tags
- * @property {null|string} last_order_name
  * @property {string} currency
  * @property {null|string} phone
  * @property {Array} addresses
  * @property {Array} tax_exemptions
- * @property {null|string} email_marketing_consent
- * @property {null|string} sms_marketing_consent
  * @property {string} admin_graphql_api_id
+ * @property {CUSTOMERS_UPDATE_default_address} default_address
+ */
+/**
+ * @typedef {Object} FINANCE_KYC_INFORMATION_UPDATE
  */
 /**
  * @typedef {Object} FULFILLMENT_ORDERS_MERGED_merge_intents_fulfillment_order_line_items
@@ -7807,6 +7995,20 @@
  * @property {null|string} template_suffix
  * @property {string} published_scope
  * @property {string} admin_graphql_api_id
+ */
+/**
+ * @typedef {Object} CHECKOUT_AND_ACCOUNTS_CONFIGURATIONS_UPDATE_settings
+ * @property {boolean} typ_osp_pages_enabled
+ */
+/**
+ * @typedef {Object} CHECKOUT_AND_ACCOUNTS_CONFIGURATIONS_UPDATE
+ * @property {string} admin_graphql_api_id
+ * @property {string} name
+ * @property {string} created_at
+ * @property {string} edited_at
+ * @property {string} updated_at
+ * @property {boolean} is_published
+ * @property {CHECKOUT_AND_ACCOUNTS_CONFIGURATIONS_UPDATE_settings} settings
  */
 
 export {};
