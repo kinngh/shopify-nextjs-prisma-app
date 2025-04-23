@@ -28,6 +28,17 @@ const offline = {
     const client = new shopify.clients.Graphql({ session });
     return { client, shop, session };
   },
+  /**
+   * Creates a Shopify Storefront client for offline access.
+   * @async
+   * @param {Object} params - The request and response objects.
+   * @param {string} params.shop - The shop's domain
+   */
+  storefrontClient: async ({ shop }) => {
+    const session = await fetchOfflineSession(shop);
+    const client = new shopify.clients.Storefront({ session });
+    return { client, shop, session };
+  },
 };
 
 /**
@@ -62,6 +73,19 @@ const online = {
   graphqlClient: async ({ req, res }) => {
     const session = await fetchOnlineSession({ req, res });
     const client = new shopify.clients.Graphql({ session });
+    const { shop } = session;
+    return { client, shop, session };
+  },
+  /**
+   * Creates a Shopify Storefront client for online access.
+   * @async
+   * @param {Object} params - The request and response objects.
+   * @param {import('next').NextApiRequest} params.req - The Next.js API request object
+   * @param {import('next').NextApiResponse} params.res - The Next.js API response object
+   */
+  storefrontClient: async ({ req, res }) => {
+    const session = await fetchOnlineSession({ req, res });
+    const client = new shopify.clients.Storefront({ session });
     const { shop } = session;
     return { client, shop, session };
   },
