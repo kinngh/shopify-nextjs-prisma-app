@@ -2,6 +2,7 @@
 
 ## Dev only files and folders
 # _developer/
+.shopify/
 database/
 shopify.*.toml
 
