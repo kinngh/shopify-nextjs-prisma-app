@@ -790,6 +790,11 @@
     tslib "^2.8.1"
     uuid "^11.0.5"
 
+"@shopify/shopify-app-session-storage-prisma@^6.0.6":
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/@shopify/shopify-app-session-storage-prisma/-/shopify-app-session-storage-prisma-6.0.6.tgz#117831feb6649c40786ade86d1da3b262c8f1d39"
+  integrity sha512-qBsvUfrKCHvo/D1gfiFKROldqc9Za+n4yfFFtxBSlzwa/GSLi1JiCmyWoTkBi/gjUTH0c5mRTMcJnwn+qEIK+w==
+
 "@shopify/storefront-api-client@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@shopify/storefront-api-client/-/storefront-api-client-1.0.7.tgz#78a2869d11682102e9de44bc2bd07a7a766213fb"
