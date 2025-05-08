@@ -1,0 +1,75 @@
+{
+  "name": "@graphql-tools/prisma-loader",
+  "version": "8.0.17",
+  "description": "A set of utils for faster development of GraphQL tools",
+  "sideEffects": false,
+  "peerDependencies": {
+    "graphql": "^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
+  },
+  "dependencies": {
+    "@graphql-tools/url-loader": "^8.0.15",
+    "@graphql-tools/utils": "^10.5.6",
+    "@types/js-yaml": "^4.0.0",
+    "@whatwg-node/fetch": "^0.10.0",
+    "chalk": "^4.1.0",
+    "debug": "^4.3.1",
+    "dotenv": "^16.0.0",
+    "graphql-request": "^6.0.0",
+    "http-proxy-agent": "^7.0.0",
+    "https-proxy-agent": "^7.0.0",
+    "jose": "^5.0.0",
+    "js-yaml": "^4.0.0",
+    "lodash": "^4.17.20",
+    "scuid": "^1.1.0",
+    "tslib": "^2.4.0",
+    "yaml-ast-parser": "^0.0.43"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ardatan/graphql-tools",
+    "directory": "packages/loaders/prisma"
+  },
+  "author": "Dotan Simha <dotansimha@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "typings": "typings/index.d.ts",
+  "typescript": {
+    "definition": "typings/index.d.ts"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./typings/index.d.cts",
+        "default": "./cjs/index.js"
+      },
+      "import": {
+        "types": "./typings/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "default": {
+        "types": "./typings/index.d.ts",
+        "default": "./esm/index.js"
+      }
+    },
+    "./*": {
+      "require": {
+        "types": "./typings/*.d.cts",
+        "default": "./cjs/*.js"
+      },
+      "import": {
+        "types": "./typings/*.d.ts",
+        "default": "./esm/*.js"
+      },
+      "default": {
+        "types": "./typings/*.d.ts",
+        "default": "./esm/*.js"
+      }
+    },
+    "./package.json": "./package.json"
+  }
+}

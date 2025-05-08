@@ -1,0 +1,33 @@
+# Avoid writing to toml directly. Use your .env file instead
+
+name = "FC Elka Pieterman SA"
+handle = "fc-elka-pieterman-sa"
+client_id = "625a85b1f919a3217ff5c74b54ffa425"
+application_url = "https://74ab-94-247-4-243.ngrok-free.app"
+embedded = true
+extension_directories = [ "extension/extensions/**" ]
+
+[auth]
+redirect_urls = [ "https://74ab-94-247-4-243.ngrok-free.app/api/" ]
+
+[access_scopes]
+scopes = "read_cart_transforms,write_cart_transforms,read_products"
+use_legacy_install_flow = false
+
+[webhooks]
+api_version = "2025-04"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "https://74ab-94-247-4-243.ngrok-free.app/api/webhooks/app_uninstalled"
+
+  [webhooks.privacy_compliance]
+  customer_data_request_url = "https://74ab-94-247-4-243.ngrok-free.app/api/gdpr/customers_data_request"
+  customer_deletion_url = "https://74ab-94-247-4-243.ngrok-free.app/api/gdpr/customers_redact"
+  shop_deletion_url = "https://74ab-94-247-4-243.ngrok-free.app/api/gdpr/shop_redact"
+
+[pos]
+embedded = false
+
+[build]
+include_config_on_deploy = true

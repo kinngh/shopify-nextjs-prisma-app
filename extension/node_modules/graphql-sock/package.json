@@ -1,0 +1,75 @@
+{
+  "name": "graphql-sock",
+  "version": "1.0.1",
+  "description": "GraphQL Semantic Output Conversion Kit - converts a cutting edge SDL file that supports semantic nullability into a more traditional SDL file legacy tools can support.",
+  "main": "dist/index.js",
+  "bin": {
+    "semantic-to-nullable": "dist/cli/to-nullable.js",
+    "semantic-to-strict": "dist/cli/to-strict.js"
+  },
+  "scripts": {
+    "prepack": "tsc && chmod +x dist/cli/*.js",
+    "test": "node --test --experimental-test-module-mocks",
+    "watch": "tsc --watch",
+    "lint": "yarn prettier:check && eslint --ext .js,.jsx,.ts,.tsx,.graphql .",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.graphql . --fix; prettier --cache --ignore-path .eslintignore --write '**/*.{js,jsx,ts,tsx,graphql,md,json}'",
+    "prettier:check": "prettier --cache --ignore-path .eslintignore --check '**/*.{js,jsx,ts,tsx,graphql,md,json}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https+git://github.com/graphile/graphql-sock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/graphile/graphql-sock/issues"
+  },
+  "homepage": "https://github.com/graphile/graphql-sock",
+  "keywords": [
+    "graphql",
+    "throw",
+    "error",
+    "errors",
+    "raise",
+    "exception",
+    "semantic",
+    "null",
+    "non-null",
+    "nullability",
+    "null",
+    "only",
+    "on",
+    "error",
+    "sdl",
+    "schema",
+    "convert",
+    "strip"
+  ],
+  "author": "Benjie Gillam <code@benjiegillam.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "graphql": "15.x || 16.x || 17.x"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.7",
+    "@types/node": "^22.5.4",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint_d": "^13.0.0",
+    "graphql": "15.x | 16.x | 17.x",
+    "graphql-pr-4192": "npm:graphql@16.9.0-canary.pr.4192.1813397076f44a55e5798478e7321db9877de97a",
+    "graphql15": "npm:graphql@15.x",
+    "graphql16": "npm:graphql@16.x",
+    "graphql17": "npm:graphql@17.x",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
+  },
+  "prettier": {
+    "proseWrap": "always"
+  },
+  "files": [
+    "dist"
+  ]
+}

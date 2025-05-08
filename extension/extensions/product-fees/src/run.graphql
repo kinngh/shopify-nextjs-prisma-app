@@ -1,0 +1,8 @@
+query RunInput {
+  cart {
+    lines {
+      id
+      quantity
+    }
+  }
+}
