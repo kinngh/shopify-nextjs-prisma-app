@@ -3,6 +3,18 @@ query RunInput {
     lines {
       id
       quantity
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          title
+          product {
+            metafield(namespace: "custom", key: "disposal_fee") {
+              value
+            }
+          }
+        }
+      }
     }
   }
 }
