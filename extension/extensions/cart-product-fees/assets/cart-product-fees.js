@@ -108,8 +108,49 @@ async function _internalExecuteManageDisposalFee(eventSource) {
             } else {
                 console.log(`Cart updated successfully regarding disposal fee (triggered by ${eventSource}).`);
                 if (window.ajaxCart && typeof window.ajaxCart.load === 'function') {
-                    console.log(`Refreshing cart view (triggered by ${eventSource}).`);
-                    window.ajaxCart.load(false, true, false, true);
+                    console.log(`Refreshing cart view via ajaxCart.load (triggered by ${eventSource}).`);
+                    window.ajaxCart.load(false, false, false, true);
+                    
+                    // Attempt to manually refresh main cart page content if specific elements are found.
+                    // This is often needed if ajaxCart.load updates a mini-cart/drawer but not the main /cart page content.
+                    const cartFormElement = document.querySelector('form.form-cart, .cart-empty');
+                    
+                    if (cartFormElement) {
+                        const cartPageSection = cartFormElement.closest('[id^="shopify-section-"]');
+
+                        if (cartPageSection && cartPageSection.id) {
+                            const sectionId = cartPageSection.id;
+                            console.log(`Attempting to manually refresh Shopify section: ${sectionId} (triggered by ${eventSource})`);
+
+                            fetch(window.location.href) // Fetch current URL to get updated section content
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error ${response.status} when fetching page for section refresh.`);
+                                    }
+                                    return response.text();
+                                })
+                                .then(html => {
+                                    const parser = new DOMParser();
+                                    const doc = parser.parseFromString(html, 'text/html');
+                                    const newSectionElement = doc.querySelector(`#${sectionId}`);
+
+                                    if (newSectionElement) {
+                                        // Replace the content of the existing section with the content of the new one
+                                        cartPageSection.innerHTML = newSectionElement.innerHTML;
+                                        console.log(`Shopify section ${sectionId} manually refreshed from fetched HTML (triggered by ${eventSource}).`);
+                                    } else {
+                                        console.warn(`Could not find section #${sectionId} in the fetched HTML. Manual refresh failed for this section (triggered by ${eventSource}).`);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(`Error during manual refresh of Shopify section #${sectionId} (triggered by ${eventSource}):`, error);
+                                });
+                        } else {
+                            console.warn("Cart form element found, but it's not within a recognizable Shopify section (id starting with 'shopify-section-'). Manual DOM refresh for section skipped (triggered by ${eventSource}).");
+                        }
+                    } else {
+                        // console.log("Not on a page with 'form.form-cart' or '.cart-empty', likely not the main cart page. Skipping targeted manual DOM refresh. (triggered by ${eventSource})");
+                    }
                 } else {
                     console.warn(`window.ajaxCart.load function not found. Cart view may not auto-update. (triggered by ${eventSource})`);
                 }
