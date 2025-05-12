@@ -19,6 +19,17 @@ const PRODUCT_FEES = [
         propertyName: 'disposal_fee',    // Example: Property on products that triggers disposal fee
         description: 'Disposal Fee'
     },
+    {
+        variantId: '51567625568583', // Example: Recupel Fee Variant ID
+        propertyName: 'recupel_fee',    // Example: Property on products that triggers recupel fee
+        description: 'Recupel Fee'
+    },
+    {
+        variantId: '51567627075911', // Example: Fostplus Fee Variant ID
+        propertyName: 'fostplus_fee',    // Example: Property on products that triggers fostplus fee
+        description: 'Fostplus Fee'
+    }
+    
     // Add other fees here, for example:
     // {
     //     variantId: 'YOUR_NEXT_FEE_VARIANT_ID',

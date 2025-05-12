@@ -9,7 +9,13 @@ query RunInput {
           id
           title
           product {
-            metafield(namespace: "custom", key: "disposal_fee") {
+            metafield_disposal_fee: metafield(namespace: "custom", key: "disposal_fee") {
+              value
+            }
+            metafield_recupel_fee: metafield(namespace: "custom", key: "recupel_fee") {
+              value
+            }
+            metafield_fostplus_fee: metafield(namespace: "custom", key: "fostplus_fee") {
               value
             }
           }

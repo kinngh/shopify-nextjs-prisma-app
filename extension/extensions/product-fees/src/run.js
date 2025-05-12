@@ -4,12 +4,39 @@
  * @typedef {import("../generated/api").RunInput} RunInput
  * @typedef {import("../generated/api").FunctionRunResult} FunctionRunResult
  * @typedef {import("../generated/api").CartOperation} CartOperation
- * @typedef {import("../generated/api").UpdateOperation} UpdateOperation // Assuming this is the payload for an update, similar to ExpandOperation
+ * @typedef {import("../generated/api").UpdateOperation} UpdateOperation
  */
 
-// Constant for the Disposal Fee Product Variant ID
-// IMPORTANT: Ensure this ID is correct for your store.
-const DISPOSAL_FEE_VARIANT_ID = "gid://shopify/ProductVariant/51562986733895";
+// Configuration for multiple fee types
+// IMPORTANT: Ensure these IDs and metafield keys are correct for your store.
+const FEE_CONFIGURATIONS = [
+  {
+    name: "Disposal Fee",
+    variantId: "gid://shopify/ProductVariant/51562986733895", // Existing Disposal Fee Variant ID
+    metafieldNamespace: "custom",
+    metafieldKey: "disposal_fee"
+  },
+  {
+    name: "Recupel Fee",
+    variantId: "gid://shopify/ProductVariant/51567625568583", // Existing Disposal Fee Variant ID
+    metafieldNamespace: "custom",
+    metafieldKey: "recupel_fee"
+  },
+  {
+    name: "Fostplus Fee",
+    variantId: "gid://shopify/ProductVariant/51567627075911", // Existing Disposal Fee Variant ID
+    metafieldNamespace: "custom",
+    metafieldKey: "fostplus_fee"
+  },
+  // Example for a new fee type (uncomment and configure as needed):
+  // {
+  //   name: "Recycling Fee",
+  //   variantId: "gid://shopify/ProductVariant/YOUR_RECYCLING_FEE_VARIANT_ID",
+  //   metafieldNamespace: "custom",
+  //   metafieldKey: "recycling_fee"
+  // },
+  // Add more fee configurations here
+];
 
 /**
  * @type {FunctionRunResult}
@@ -23,82 +50,105 @@ const NO_CHANGES = {
  * @returns {FunctionRunResult}
  */
 export function run(input) {
-  let disposalFeeCartLineId = null;
-  let totalCalculatedFee = 0.0;
-
   if (!input.cart || !input.cart.lines || input.cart.lines.length === 0) {
     console.warn("Cart or cart lines are not available. No operations to perform.");
     return NO_CHANGES;
   }
 
+  // Initialize an object to store data for each fee type (cartLineId and calculatedFee)
+  // Keyed by feeConfig.variantId for easy lookup
+  const feeData = {};
+  FEE_CONFIGURATIONS.forEach(config => {
+    feeData[config.variantId] = {
+      name: config.name,
+      cartLineId: null,       // Will store the ID of the fee item in the cart
+      calculatedFee: 0.0,     // Will sum up fees from other products
+      metafieldNamespace: config.metafieldNamespace,
+      metafieldKey: config.metafieldKey,
+    };
+  });
+
+  // Iterate through cart lines to identify fee items and calculate fees from other products
   for (const line of input.cart.lines) {
-    // Ensure line.merchandise and line.merchandise.id are valid
     if (line.merchandise?.__typename === "ProductVariant" && line.merchandise.id) {
-      if (line.merchandise.id === DISPOSAL_FEE_VARIANT_ID) {
-        // Found the disposal fee line item. Capture its ID.
-        // If multiple instances exist, this will capture the first one.
-        if (disposalFeeCartLineId === null) {
-          disposalFeeCartLineId = line.id;
+      const currentLineVariantId = line.merchandise.id;
+      let isThisLineAFeeItem = false;
+
+      // Check if the current cart line is one of the configured fee products
+      if (feeData[currentLineVariantId]) {
+        // It's a known fee variant. If we haven't found its cart line ID yet, store it.
+        if (feeData[currentLineVariantId].cartLineId === null) {
+          feeData[currentLineVariantId].cartLineId = line.id;
         }
-        // The fee item itself does not contribute to the fee calculation.
-      } else if (line.merchandise.product) {
-        // This is a different product. Check for its 'custom.disposal_fee' metafield.
-        // Assumes 'line.merchandise.product.metafield' is the specific 'custom.disposal_fee'
-        // metafield, as configured by the Function's GraphQL query.
-        const productMetafield = line.merchandise.product.metafield;
+        isThisLineAFeeItem = true;
+        // This line is a fee item itself, so it doesn't contribute to fee calculations.
+      }
 
-        if (
-          productMetafield && // Check if the metafield object exists
-          typeof productMetafield.value === 'string' // Check if it has a string value
-        ) {
-          const feeValueString = productMetafield.value;
-          const feeValue = parseFloat(feeValueString);
+      // If this line is NOT a fee item, check if it has metafields that trigger any fees
+      if (!isThisLineAFeeItem && line.merchandise.product) {
+        // Access metafields directly by the aliases defined in run.graphql
+        // The product object from GraphQL will now have properties like 'metafield_disposal_fee',
+        // 'metafield_recycling_fee', etc.
 
-          if (!isNaN(feeValue) && feeValue > 0) {
-            totalCalculatedFee += feeValue * line.quantity;
-          } else {
-            console.warn(
-              `Invalid or non-positive fee value ("${feeValueString}") from 'custom.disposal_fee' metafield for product variant ${line.merchandise.id}.`
-            );
+        for (const config of FEE_CONFIGURATIONS) {
+          // Construct the expected property name from the config's metafieldKey
+          const metafieldPropertyName = `metafield_${config.metafieldKey}`;
+          const feeMetafield = line.merchandise.product[metafieldPropertyName];
+
+          if (
+            feeMetafield && // Check if the metafield object exists (it would be null if not found by GraphQL)
+            typeof feeMetafield.value === 'string' // Check if it has a string value
+          ) {
+            const feeValue = parseFloat(feeMetafield.value);
+            if (!isNaN(feeValue) && feeValue > 0) {
+              // Add this product's fee to the total for the specific fee type
+              feeData[config.variantId].calculatedFee += feeValue * line.quantity;
+            } else {
+              console.warn(
+                `Invalid or non-positive fee value ("${feeMetafield.value}") from '${config.metafieldNamespace}.${config.metafieldKey}' metafield for product variant ${currentLineVariantId}.`
+              );
+            }
           }
         }
-        // If your GraphQL query returns an array of metafields (e.g., line.merchandise.product.metafields),
-        // you would need to find the 'custom.disposal_fee' metafield within that array, for example:
-        // const metafields = line.merchandise.product.metafields;
-        // const targetMetafield = metafields?.find(
-        //   (mf) => mf.namespace === 'custom' && mf.key === 'disposal_fee'
-        // );
-        // if (targetMetafield && typeof targetMetafield.value === 'string') { /* ... process targetMetafield.value ... */ }
       }
     }
   }
 
-  // If the disposal fee product line was not found in the cart, no adjustment can be made.
-  if (!disposalFeeCartLineId) {
-    console.log(`Disposal fee product (variant ID: ${DISPOSAL_FEE_VARIANT_ID}) not found in cart. No price adjustment will be made.`);
+  const operations = [];
+
+  // Create update operations for each fee item found in the cart
+  for (const variantId in feeData) {
+    const currentFee = feeData[variantId];
+    if (currentFee.cartLineId) { // If the fee item product was found in the cart
+      /** @type {UpdateOperation} */
+      const updateOperationData = {
+        cartLineId: currentFee.cartLineId,
+        price: {
+          adjustment: {
+            fixedPricePerUnit: {
+              amount: currentFee.calculatedFee, // Use the specific fee's total
+            },
+          },
+        },
+      };
+      operations.push({ update: updateOperationData });
+      console.log(`Proposing update for ${currentFee.name} (cart line ${currentFee.cartLineId}): set total price to ${currentFee.calculatedFee.toFixed(2)}.`);
+    } else {
+      // Log if a fee was calculated but its corresponding fee item product wasn't in the cart
+      if (currentFee.calculatedFee > 0) {
+        console.log(
+          `${currentFee.name} (variant ID: ${variantId}) not found in cart, but a total fee of ${currentFee.calculatedFee.toFixed(2)} was calculated. This fee will not be applied.`
+        );
+      } else {
+         // console.log(`${currentFee.name} (variant ID: ${variantId}) not found in cart. No price adjustment needed.`);
+      }
+    }
+  }
+
+  if (operations.length === 0) {
+    console.log("No fee adjustments to make.");
     return NO_CHANGES;
   }
 
-  // If the fee item is in the cart, create an update operation.
-  // Its price will be the total sum of fees collected from other items.
-  // If totalCalculatedFee is 0.0 (no other items had valid fees), its price becomes 0.00.
-  /** @type {UpdateOperation} */
-  const updateOperationData = {
-    cartLineId: disposalFeeCartLineId,
-    price: {
-      adjustment: {
-        fixedPricePerUnit: {
-          amount: totalCalculatedFee,
-        },
-      },
-    },
-  };
-
-  /** @type {CartOperation} */
-  const cartOperation = {
-    update: updateOperationData,
-  };
-
-  console.log(`Proposing update for disposal fee line item ${disposalFeeCartLineId}: set total price to ${totalCalculatedFee.toFixed(2)}.`);
-  return { operations: [cartOperation] };
+  return { operations };
 }
