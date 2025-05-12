@@ -1,0 +1,8 @@
+import type {ConnectivityState, Device, Session} from '../../../point-of-sale';
+
+export interface BaseData {
+  connectivity: ConnectivityState;
+  device: Device;
+  locale: string;
+  session: Session;
+}

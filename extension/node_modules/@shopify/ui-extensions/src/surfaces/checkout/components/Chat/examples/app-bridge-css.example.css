@@ -1,0 +1,16 @@
+:root {
+  --shopify-checkout-chat-minimized-max-inline-size: 224px;
+  --shopify-checkout-chat-minimized-max-block-size: 72px;
+  --shopify-checkout-chat-maximized-max-inline-size: 415px;
+  --shopify-checkout-chat-maximized-max-block-size: 700px;
+
+  @media screen and (max-width: 569px) {
+    --shopify-checkout-chat-maximized-max-inline-size: 100dvi;
+    --shopify-checkout-chat-maximized-max-block-size: 93dvb;
+
+    @supports not (inline-size: 100dvi) {
+      --shopify-checkout-chat-maximized-max-inline-size: 100vi;
+      --shopify-checkout-chat-maximized-max-block-size: 93vb;
+    }
+  }
+}

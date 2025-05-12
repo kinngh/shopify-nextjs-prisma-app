@@ -1,6 +1,6 @@
 {
   "name": "@whatwg-node/fetch",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "description": "Cross Platform Smart Fetch Ponyfill",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   "browser": "dist/global-ponyfill.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@whatwg-node/node-fetch": "^0.7.18",
+    "@whatwg-node/node-fetch": "^0.7.19",
     "urlpattern-polyfill": "^10.0.0"
   },
   "publishConfig": {

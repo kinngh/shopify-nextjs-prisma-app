@@ -1,5 +1,30 @@
 # @whatwg-node/fetch
 
+## 0.10.7
+
+### Patch Changes
+
+- [#2383](https://github.com/ardatan/whatwg-node/pull/2383)
+  [`9527e8f`](https://github.com/ardatan/whatwg-node/commit/9527e8fe2dc73e362b38060f4a6decbb87a4f597)
+  Thanks [@ardatan](https://github.com/ardatan)! - Some implementations like `compression` npm
+  package do not implement `response.write(data, callback)` signature, but whatwg-node/server waits
+  for it to finish the response stream. Then it causes the response stream hangs when the
+  compression package takes the stream over when the response data is larger than its threshold.
+
+  It is actually a bug in `compression` package;
+  [expressjs/compression#46](https://github.com/expressjs/compression/issues/46) But since it is a
+  common mistake, we prefer to workaround this on our end.
+
+  Now after calling `response.write`, it no longer uses callback but first it checks the result;
+
+  if it is `true`, it means stream is drained and we can call `response.end` immediately. else if it
+  is `false`, it means the stream is not drained yet, so we can wait for the `drain` event to call
+  `response.end`.
+
+- Updated dependencies
+  [[`9527e8f`](https://github.com/ardatan/whatwg-node/commit/9527e8fe2dc73e362b38060f4a6decbb87a4f597)]:
+  - @whatwg-node/node-fetch@0.7.19
+
 ## 0.10.6
 
 ### Patch Changes

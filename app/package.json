@@ -43,11 +43,14 @@
     "@prisma/client": "^6.7.0",
     "@shopify/polaris": "^13.9.5",
     "@shopify/shopify-api": "^11.12.0",
+    "@shopify/ui-extensions": "2025.4.x",
+    "@shopify/ui-extensions-react": "2025.4.x",
     "cryptr": "^6.3.0",
     "next": "15.3.1",
     "next-api-middleware": "^3.0.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-reconciler": "0.29.0"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",

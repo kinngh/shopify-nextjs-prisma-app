@@ -1,0 +1,47 @@
+import { memo } from 'react';
+import { KIND_TEXT, KIND_COMPONENT } from '@remote-ui/core';
+import { useAttached } from './hooks.mjs';
+import { jsx, Fragment } from 'react/jsx-runtime';
+
+const RemoteRenderer = /*#__PURE__*/memo(function RemoteRenderer({
+  controller,
+  receiver
+}) {
+  const {
+    root
+  } = receiver.attached;
+  const {
+    children
+  } = useAttached(receiver, root);
+  const {
+    renderComponent,
+    renderText
+  } = controller.renderer;
+  return /*#__PURE__*/jsx(Fragment, {
+    children: children.map(child => {
+      switch (child.kind) {
+        case KIND_COMPONENT:
+          return renderComponent({
+            parent: root,
+            component: child,
+            receiver,
+            controller,
+            key: child.id
+          });
+
+        case KIND_TEXT:
+          return renderText({
+            parent: root,
+            text: child,
+            receiver,
+            key: child.id
+          });
+
+        default:
+          return null;
+      }
+    })
+  });
+});
+
+export { RemoteRenderer };

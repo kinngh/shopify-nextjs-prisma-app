@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/app-bridge-checkout.js"></script>
+    <style>
+      .dialog {
+        display: none;
+      }
+      .visible {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <dialog class="dialog">
+      How can we help you today?
+      <button class="btn-close">Close</button>
+    </dialog>
+    <button class="btn-activator">Chat with us</button>
+
+    <script type="text/javascript">
+      const btnActivator = document.querySelector('.btn-activator');
+      const btnClose = document.querySelector('.btn-close');
+      const dialog = document.querySelector('.dialog');
+
+      // bind actions to the buttons
+      btnActivator.addEventListener('click', toggleDialog);
+      btnClose.addEventListener('click', toggleDialog);
+
+      function toggleDialog() {
+        // if the dialog is visible,
+        // -  hide the dialog
+        // -  resize the iframe to the button's size
+        if (dialog.classList.contains('visible')) {
+          dialog.classList.remove('visible');
+          shopify !== undefined && window.resizeTo(150, 50);
+
+          // if the dialog is not visible,
+          // - resize the iframe to the desired dialog's size
+          // - then show the dialog
+        } else {
+          shopify !== undefined && window.resizeTo(415, 700);
+          dialog.classList.add('visible');
+        }
+      }
+    </script>
+  </body>
+</html>

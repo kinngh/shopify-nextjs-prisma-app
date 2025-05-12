@@ -1,0 +1,5 @@
+[[extensions.targeting]]
+target = "purchase.checkout.chat.render"
+
+  [extensions.targeting.preloads]
+  chat = "https://my-chat-application.com"

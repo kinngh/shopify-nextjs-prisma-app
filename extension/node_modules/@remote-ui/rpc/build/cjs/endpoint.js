@@ -1,0 +1,313 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var memory = require('./memory.js');
+var basic = require('./encoding/basic.js');
+
+const CALL = 0;
+const RESULT = 1;
+const TERMINATE = 2;
+const RELEASE = 3;
+const FUNCTION_APPLY = 5;
+const FUNCTION_RESULT = 6;
+
+/**
+ * An endpoint wraps around a messenger, acting as the intermediary for all
+ * messages both send from, and received by, that messenger. The endpoint sends
+ * all messages as arrays, where the first element is the message type, and the
+ * second is the arguments for that message (as an array). For messages that send
+ * meaningful content across the wire (e.g., arguments to function calls, return
+ * results), the endpoint first encodes these values.
+ *
+ * Encoding is done using a CBOR-like encoding scheme. The value is encoded into
+ * an array buffer, and is paired with an additional array buffer that contains all
+ * the strings used in that message (in the encoded value, strings are encoded as
+ * their index in the "strings" encoding to reduce the cost of heavily-duplicated
+ * strings, which is more likely in payloads containing UI). This encoding also takes
+ * care of encoding functions: it uses a "tagged" item in CBOR to represent a
+ * function as a string ID, which the opposite endpoint will be capable of turning
+ * into a consistent, memory-manageable function proxy.
+ *
+ * The main CBOR encoding is entirely take from the [cbor.js package](https://github.com/paroga/cbor-js).
+ * The special behavior for encoding strings and functions was then added in to the
+ * encoder and decoder. For additional details on CBOR:
+ *
+ * @see https://tools.ietf.org/html/rfc7049
+ */
+function createEndpoint(initialMessenger, {
+  uuid = defaultUuid,
+  createEncoder = basic.createBasicEncoder,
+  callable
+} = {}) {
+  let terminated = false;
+  let messenger = initialMessenger;
+  const activeApi = new Map();
+  const callIdsToResolver = new Map();
+  const call = createCallable(handlerForCall, callable);
+  const encoder = createEncoder({
+    uuid,
+
+    release(id) {
+      send(RELEASE, [id]);
+    },
+
+    call(id, args, retainedBy) {
+      const callId = uuid();
+      const done = waitForResult(callId, retainedBy);
+      const [encoded, transferables] = encoder.encode(args);
+      send(FUNCTION_APPLY, [callId, id, encoded], transferables);
+      return done;
+    }
+
+  });
+  messenger.addEventListener('message', listener);
+  return {
+    call,
+
+    replace(newMessenger) {
+      const oldMessenger = messenger;
+      messenger = newMessenger;
+      oldMessenger.removeEventListener('message', listener);
+      newMessenger.addEventListener('message', listener);
+    },
+
+    expose(api) {
+      for (const key of Object.keys(api)) {
+        const value = api[key];
+
+        if (typeof value === 'function') {
+          activeApi.set(key, value);
+        } else {
+          activeApi.delete(key);
+        }
+      }
+    },
+
+    callable(...newCallable) {
+      // If no callable methods are supplied initially, we use a Proxy instead,
+      // so all methods end up being treated as callable by default.
+      if (callable == null) return;
+
+      for (const method of newCallable) {
+        Object.defineProperty(call, method, {
+          value: handlerForCall(method),
+          writable: false,
+          configurable: true,
+          enumerable: true
+        });
+      }
+    },
+
+    terminate() {
+      send(TERMINATE, undefined);
+      terminate();
+
+      if (messenger.terminate) {
+        messenger.terminate();
+      }
+    }
+
+  };
+
+  function send(type, args, transferables) {
+    if (terminated) {
+      return;
+    }
+
+    messenger.postMessage(args ? [type, args] : [type], transferables);
+  }
+
+  async function listener(event) {
+    const {
+      data
+    } = event;
+
+    if (data == null || !Array.isArray(data)) {
+      return;
+    }
+
+    switch (data[0]) {
+      case TERMINATE:
+        {
+          terminate();
+          break;
+        }
+
+      case CALL:
+        {
+          const stackFrame = new memory.StackFrame();
+          const [id, property, args] = data[1];
+          const func = activeApi.get(property);
+
+          try {
+            if (func == null) {
+              throw new Error(`No '${property}' method is exposed on this endpoint`);
+            }
+
+            const [encoded, transferables] = encoder.encode(await func(...encoder.decode(args, [stackFrame])));
+            send(RESULT, [id, undefined, encoded], transferables);
+          } catch (error) {
+            const {
+              name,
+              message,
+              stack
+            } = error;
+            send(RESULT, [id, {
+              name,
+              message,
+              stack
+            }]);
+            throw error;
+          } finally {
+            stackFrame.release();
+          }
+
+          break;
+        }
+
+      case RESULT:
+        {
+          const [callId] = data[1];
+          callIdsToResolver.get(callId)(...data[1]);
+          callIdsToResolver.delete(callId);
+          break;
+        }
+
+      case RELEASE:
+        {
+          const [id] = data[1];
+          encoder.release(id);
+          break;
+        }
+
+      case FUNCTION_RESULT:
+        {
+          const [callId] = data[1];
+          callIdsToResolver.get(callId)(...data[1]);
+          callIdsToResolver.delete(callId);
+          break;
+        }
+
+      case FUNCTION_APPLY:
+        {
+          const [callId, funcId, args] = data[1];
+
+          try {
+            const result = await encoder.call(funcId, args);
+            const [encoded, transferables] = encoder.encode(result);
+            send(FUNCTION_RESULT, [callId, undefined, encoded], transferables);
+          } catch (error) {
+            const {
+              name,
+              message,
+              stack
+            } = error;
+            send(FUNCTION_RESULT, [callId, {
+              name,
+              message,
+              stack
+            }]);
+            throw error;
+          }
+
+          break;
+        }
+    }
+  }
+
+  function handlerForCall(property) {
+    return (...args) => {
+      if (terminated) {
+        return Promise.reject(new Error('You attempted to call a function on a terminated web worker.'));
+      }
+
+      if (typeof property !== 'string' && typeof property !== 'number') {
+        return Promise.reject(new Error(`Can’t call a symbol method on a remote endpoint: ${property.toString()}`));
+      }
+
+      const id = uuid();
+      const done = waitForResult(id);
+      const [encoded, transferables] = encoder.encode(args);
+      send(CALL, [id, property, encoded], transferables);
+      return done;
+    };
+  }
+
+  function waitForResult(id, retainedBy) {
+    return new Promise((resolve, reject) => {
+      callIdsToResolver.set(id, (_, errorResult, value) => {
+        if (errorResult == null) {
+          resolve(value && encoder.decode(value, retainedBy));
+        } else {
+          const error = new Error();
+          Object.assign(error, errorResult);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  function terminate() {
+    var _encoder$terminate;
+
+    terminated = true;
+    activeApi.clear();
+    callIdsToResolver.clear();
+    (_encoder$terminate = encoder.terminate) === null || _encoder$terminate === void 0 ? void 0 : _encoder$terminate.call(encoder);
+    messenger.removeEventListener('message', listener);
+  }
+}
+
+function defaultUuid() {
+  return `${uuidSegment()}-${uuidSegment()}-${uuidSegment()}-${uuidSegment()}`;
+}
+
+function uuidSegment() {
+  return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(16);
+}
+
+function createCallable(handlerForCall, callable) {
+  let call;
+
+  if (callable == null) {
+    if (typeof Proxy !== 'function') {
+      throw new Error(`You must pass an array of callable methods in environments without Proxies.`);
+    }
+
+    const cache = new Map();
+    call = new Proxy({}, {
+      get(_target, property) {
+        if (cache.has(property)) {
+          return cache.get(property);
+        }
+
+        const handler = handlerForCall(property);
+        cache.set(property, handler);
+        return handler;
+      }
+
+    });
+  } else {
+    call = {};
+
+    for (const method of callable) {
+      Object.defineProperty(call, method, {
+        value: handlerForCall(method),
+        writable: false,
+        configurable: true,
+        enumerable: true
+      });
+    }
+  }
+
+  return call;
+}
+
+exports.CALL = CALL;
+exports.FUNCTION_APPLY = FUNCTION_APPLY;
+exports.FUNCTION_RESULT = FUNCTION_RESULT;
+exports.RELEASE = RELEASE;
+exports.RESULT = RESULT;
+exports.TERMINATE = TERMINATE;
+exports.createEndpoint = createEndpoint;

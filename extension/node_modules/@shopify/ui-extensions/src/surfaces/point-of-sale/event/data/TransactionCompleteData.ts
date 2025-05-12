@@ -1,0 +1,11 @@
+import {BaseData} from './BaseData';
+import type {SaleTransactionData} from './SaleTransactionData';
+import type {ExchangeTransactionData} from './ExchangeTransactionData';
+import type {ReturnTransactionData} from './ReturnTransactionData';
+
+export interface TransactionCompleteData extends BaseData {
+  transaction:
+    | SaleTransactionData
+    | ReturnTransactionData
+    | ExchangeTransactionData;
+}

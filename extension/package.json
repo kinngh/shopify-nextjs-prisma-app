@@ -11,6 +11,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@shopify/shopify_function": "~1.0.0"
+    "@shopify/shopify_function": "~1.0.0",
+    "@shopify/ui-extensions": "^2025.4.0",
+    "@shopify/ui-extensions-react": "^2025.4.0",
+    "react": "^19.1.0",
+    "react-reconciler": "^0.32.0"
   }
 }
