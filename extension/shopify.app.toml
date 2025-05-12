@@ -11,7 +11,7 @@ extension_directories = [ "./extensions/**" ]
 redirect_urls = [ "https://74ab-94-247-4-243.ngrok-free.app/api/" ]
 
 [access_scopes]
-scopes = "read_cart_transforms,write_cart_transforms,read_products"
+scopes = "customer_read_companies,customer_read_customers,customer_read_locations,read_cart_transforms,write_cart_transforms,read_products"
 use_legacy_install_flow = false
 
 [webhooks]

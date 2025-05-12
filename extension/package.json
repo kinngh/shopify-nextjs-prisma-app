@@ -12,6 +12,9 @@
   "description": "",
   "dependencies": {
     "@shopify/shopify_function": "~1.0.0",
-    "@shopify/ui-extensions": "^2025.4.0"
+    "@shopify/ui-extensions": "^2025.4.0",
+    "@shopify/ui-extensions-react": "2025.4.x",
+    "react": "^18.0.0",
+    "react-reconciler": "0.29.0"
   }
 }

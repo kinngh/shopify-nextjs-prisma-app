@@ -1,0 +1,1 @@
+module.exports = require("./build/cjs/host/index.js");

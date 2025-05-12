@@ -1,0 +1,1 @@
+{"version":3,"file":"RemoteRenderer.d.ts","sourceRoot":"","sources":["../../../src/host/RemoteRenderer.tsx"],"names":[],"mappings":";AACA,OAAO,EAA4B,cAAc,EAAC,MAAM,iBAAiB,CAAC;AAE1E,OAAO,KAAK,EAAC,UAAU,EAAC,MAAM,SAAS,CAAC;AAGxC,MAAM,WAAW,mBAAmB;IAClC,QAAQ,EAAE,cAAc,CAAC;IACzB,UAAU,EAAE,UAAU,CAAC;CACxB;AAED,eAAO,MAAM,cAAc,2DAiCzB,CAAC"}
