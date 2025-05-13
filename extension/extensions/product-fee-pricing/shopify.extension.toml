@@ -2,7 +2,7 @@ api_version = "2025-01"
 
 [[extensions]]
 name = "t:name"
-handle = "product-fees"
+handle = "product-fee-pricing"
 type = "function"
 
 description = "t:description"

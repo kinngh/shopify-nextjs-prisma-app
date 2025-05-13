@@ -14,11 +14,17 @@ Requires that exactly one field must be supplied and that field must not be `nul
 directive @oneOf on INPUT_OBJECT
 
 """
-Represents a generic custom attribute, such as whether an order is a customer's first.
+A custom property. Attributes are used to store additional information about a Shopify resource, such as
+products, customers, or orders. Attributes are stored as key-value pairs.
+
+For example, a list of attributes might include whether a customer is a first-time buyer (`"customer_first_order": "true"`),
+whether an order is gift-wrapped (`"gift_wrapped": "true"`), a preferred delivery date
+(`"preferred_delivery_date": "2025-10-01"`), the discount applied (`"loyalty_discount_applied": "10%"`), and any
+notes provided by the customer (`"customer_notes": "Please leave at the front door"`).
 """
 type Attribute {
   """
-  The key or name of the attribute. For example, `"customersFirstOrder"`.
+  The key or name of the attribute. For example, `"customer_first_order"`.
   """
   key: String!
 
@@ -29,93 +35,119 @@ type Attribute {
 }
 
 """
-Key-value pairs that contains additional information.
+The custom attributes associated with a cart line to store additional information. Cart attributes
+allow you to collect specific information from customers on the **Cart** page, such as order notes,
+gift wrapping requests, or custom product details. Attributes are stored as key-value pairs.
 """
 input AttributeOutput {
   """
-  Key or name of the attribute.
+  The key of the cart line attribute to retrieve. For example, `"gift_wrapping"`.
   """
   key: String!
 
   """
-  Value of the attribute.
+  The value of the cart line attribute to retrieve. For example, `"true"`.
   """
   value: String!
 }
 
 """
-Represents information about the buyer that is interacting with the cart.
+Information about the customer that's interacting with the cart. It includes details such as the
+customer's email and phone number, and the total amount of money the customer has spent in the store.
+This information helps personalize the checkout experience and ensures that accurate pricing and delivery options
+are displayed to customers.
 """
 type BuyerIdentity {
   """
-  The customer associated with the cart.
+  The customer that's interacting with the cart. A customer is a buyer who has an
+  [account](https://help.shopify.com/manual/customers/customer-accounts) with the store.
   """
   customer: Customer
 
   """
-  The email address of the buyer that's interacting with the cart.
+  The email address of the customer that's interacting with the cart.
   """
   email: String
 
   """
-  Whether the buyer authenticated with a customer account.
+  Whether the customer is authenticated through their
+  [customer account](https://help.shopify.com/manual/customers/customer-accounts).
+  If the customer is authenticated, then the `customer` field returns the customer's information.
+  If the customer isn't authenticated, then the `customer` field returns `null`.
   """
   isAuthenticated: Boolean!
 
   """
-  The phone number of the buyer that's interacting with the cart.
+  The phone number of the customer that's interacting with the cart.
   """
   phone: String
 
   """
-  The purchasing company associated with the cart.
+  The company of a B2B customer that's interacting with the cart.
+  Used to manage and track purchases made by businesses rather than individual customers.
   """
   purchasingCompany: PurchasingCompany
 }
 
 """
-A cart represents the merchandise that a buyer intends to purchase, and the cost associated with the cart.
+The cart where the Function is running. A cart contains the merchandise that a customer intends to purchase
+and information about the customer, such as the customer's email address and phone number.
 """
 type Cart {
   """
-  The attributes associated with the cart. Attributes are represented as key-value pairs.
+  The custom attributes associated with a cart to store additional information. Cart attributes
+  allow you to collect specific information from customers on the **Cart** page, such as order notes,
+  gift wrapping requests, or custom product details. Attributes are stored as key-value pairs.
   """
   attribute(
     """
-    The key of the attribute to retrieve.
+    The key of the cart attribute to retrieve. For example, `"gift_wrapping"`.
     """
     key: String
   ): Attribute
 
   """
-  Information about the buyer that is interacting with the cart.
+  Information about the customer that's interacting with the cart. It includes details such as the
+  customer's email and phone number, and the total amount of money the customer has spent in the store.
+  This information helps personalize the checkout experience and ensures that accurate pricing and delivery options
+  are displayed to customers.
   """
   buyerIdentity: BuyerIdentity
 
   """
-  A list of lines containing information about the items the customer intends to purchase.
+  The items in a cart that the customer intends to purchase. A cart line is an entry in the
+  customer's cart that represents a single unit of a product variant. For example, if a customer adds two
+  different sizes of the same t-shirt to their cart, then each size is represented as a separate cart line.
   """
   lines: [CartLine!]! @scaleLimits(rate: 0.005)
 }
 
 """
-Represents information about the merchandise in the cart.
+Information about an item in a cart that a customer intends to purchase. A cart line is an entry in the
+customer's cart that represents a single unit of a product variant. For example, if a customer adds two
+different sizes of the same t-shirt to their cart, then each size is represented as a separate cart line.
 """
 type CartLine {
   """
-  Retrieve a cart line attribute by key.
+  The custom attributes associated with a cart to store additional information. Cart attributes
+  allow you to collect specific information from customers on the **Cart** page, such as order notes,
+  gift wrapping requests, or custom product details. Attributes are stored as key-value pairs.
 
-  Cart line attributes are also known as line item properties in Liquid.
+  Cart line attributes are equivalent to the
+  [`line_item`](https://shopify.dev/docs/apps/build/purchase-options/subscriptions/selling-plans)
+  object in Liquid.
   """
   attribute(
     """
-    The key of the attribute to retrieve.
+    The key of the cart attribute to retrieve. For example, `"gift_wrapping"`.
     """
     key: String
   ): Attribute
 
   """
-  The cost of the merchandise line that the buyer will pay at checkout.
+  The cost of an item in a cart that the customer intends to purchase. Cart lines are entries in the customer's
+  cart that represent a single unit of a product variant. For example, if a customer adds two different sizes of
+  the same t-shirt to their cart, then each size is represented as a separate cart line.
   """
   cost: CartLineCost!
 
@@ -125,51 +157,60 @@ type CartLine {
   id: ID!
 
   """
-  The merchandise that the buyer intends to purchase.
+  The item that the customer intends to purchase.
   """
   merchandise: Merchandise!
 
   """
-  The quantity of the merchandise that the customer intends to purchase.
+  The quantity of the item that the customer intends to purchase.
   """
   quantity: Int!
 
   """
-  The selling plan associated with the cart line and the effect that each
-  selling plan has on variants when they're purchased.
+  The [selling plan](https://shopify.dev/docs/apps/build/purchase-options/subscriptions/selling-plans)
+  associated with the cart line, including information about how a product variant can be sold and purchased.
   """
   sellingPlanAllocation: SellingPlanAllocation
 }
 
 """
-The cost of the merchandise line that the buyer will pay at checkout.
+The cost of an item in a cart that the customer intends to purchase. Cart lines are entries in the customer's
+cart that represent a single unit of a product variant. For example, if a customer adds two different sizes of
+the same t-shirt to their cart, then each size is represented as a separate cart line.
 """
 type CartLineCost {
   """
-  The amount of the merchandise line.
+  The cost of a single unit. For example, if a customer purchases three units of a product
+  that are priced at $10 each, then the `amountPerQuantity` is $10.
   """
   amountPerQuantity: MoneyV2!
 
   """
-  The compare at amount of the merchandise line. This value varies depending on
-  the buyer's identity, and is null when the value is hidden to buyers.
+  The cost of a single unit before any discounts are applied. This field is used to calculate and display
+  savings for customers. For example, if a product's `compareAtAmountPerQuantity` is $25 and its current price
+  is $20, then the customer sees a $5 discount. This value can change based on the buyer's identity and is
+  `null` when the value is hidden from buyers.
   """
   compareAtAmountPerQuantity: MoneyV2
 
   """
-  The cost of the merchandise line before line-level discounts.
+  The cost of items in the cart before applying any discounts to certain items.
+  This amount serves as the starting point for calculating any potential savings customers
+  might receive through promotions or discounts.
   """
   subtotalAmount: MoneyV2!
 
   """
-  The total cost of the merchandise line.
+  The total cost of items in a cart.
   """
   totalAmount: MoneyV2!
 }
 
 input CartLineInput {
   """
-  The ID of the cart line.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for a line item in a cart. A cart line represents a single unit of a
+  product variant that a customer intends to purchase.
   """
   cartLineId: ID!
 
@@ -180,56 +221,84 @@ input CartLineInput {
 }
 
 """
-An operation to apply to the Cart.
+An operation to apply to the cart. For example, you can expand a cart line item to display
+its [bundled items](https://shopify.dev/docs/apps/build/product-merchandising/bundles), merge
+multiple cart lines into a single line representing a bundle, and update the presentation of line items
+in the cart to override their price, title, or image.
 """
 input CartOperation @oneOf {
   """
-  A cart line expand operation.
+  An operation that expands a single cart line item to form a
+  [bundle](https://shopify.dev/docs/apps/build/product-merchandising/bundles)
+  of components.
   """
   expand: ExpandOperation
 
   """
-  A cart line merge operation.
+  An operation that merges multiple cart line items into a
+  single line, representing a
+  [bundle](https://shopify.dev/docs/apps/build/product-merchandising/bundles)
+  of components.
   """
   merge: MergeOperation
 
   """
-  A cart line update operation. Only stores on the Shopify Plus plan can use apps with update operations.
+  An operation that allows you to override the price, title,
+  and image of a cart line item. Only stores on a
+  [Shopify Plus plan](https://help.shopify.com/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan)
+  can use apps with `update` operations.
   """
   update: UpdateOperation
 }
 
 """
-A customization which applies cart transformations to the merchandise lines.
+A customization that changes the pricing and
+presentation of items in a cart. For example,
+you can modify the appearance of cart items,
+such as updating titles and images,
+or [bundling items](https://shopify.dev/docs/apps/build/product-merchandising/bundles).
 """
 type CartTransform implements HasMetafields {
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
 }
 
 """
-Represents whether the product is a member of the given collection.
+Whether the product is in the specified collection.
+
+A collection is a group of products that can be displayed in online stores and other sales channels in
+categories, which makes it easy for customers to find them. For example, an athletics store might create
+different collections for running attire and accessories.
 """
 type CollectionMembership {
   """
-  The ID of the collection.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for the collection.
   """
   collectionId: ID!
 
   """
-  Whether the product is a member of the collection.
+  Whether the product is in the specified collection.
   """
   isMember: Boolean!
 }
@@ -254,16 +323,24 @@ type Company implements HasMetafields {
   id: ID!
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
@@ -337,16 +414,24 @@ type CompanyLocation implements HasMetafields {
   locale: String
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
@@ -364,7 +449,9 @@ type CompanyLocation implements HasMetafields {
 }
 
 """
-A country.
+The country for which the store is customized, reflecting local preferences and regulations.
+Localization might influence the language, currency, and product offerings available in a store to enhance
+the shopping experience for customers in that region.
 """
 type Country {
   """
@@ -1607,9 +1694,8 @@ enum CountryCode {
 }
 
 """
-The three-letter currency codes that represent the world currencies used in
-stores. These include standard ISO 4217 codes, legacy codes,
-and non-standard codes.
+The three-letter currency codes that represent the world currencies used in stores. Currency codes include
+[standard ISO 4217 codes](https://en.wikipedia.org/wiki/ISO_4217), legacy codes, and non-standard codes.
 """
 enum CurrencyCode {
   """
@@ -2419,7 +2505,10 @@ enum CurrencyCode {
 }
 
 """
-A custom product.
+A custom product represents a product that doesn't map to Shopify's
+[standard product categories](https://help.shopify.com/manual/products/details/product-type).
+For example, you can use a custom product to manage gift cards, shipping requirements, localized product
+information, or weight measurements and conversions.
 """
 type CustomProduct {
   """
@@ -2428,43 +2517,51 @@ type CustomProduct {
   isGiftCard: Boolean!
 
   """
-  Whether the merchandise requires shipping.
+  Whether the item needs to be shipped to the customer. For example, a
+  digital gift card doesn't need to be shipped, but a t-shirt does
+  need to be shipped.
   """
   requiresShipping: Boolean!
 
   """
-  The localized title of the product in the customer’s locale.
+  The localized name for the product that displays to customers. The title is used to construct the product's
+  handle, which is a unique, human-readable string of the product's title. For example, if a product is titled
+  "Black Sunglasses", then the handle is `black-sunglasses`.
   """
   title: String!
 
   """
-  The weight of the product variant in the unit system specified with `weight_unit`.
+  The product variant's weight, in the system of measurement set in the `weightUnit` field.
   """
   weight: Float
 
   """
-  Unit of measurement for weight.
+  The unit of measurement for weight.
   """
   weightUnit: WeightUnit!
 }
 
 """
-Represents a customer with the shop.
+Represents a [customer](https://help.shopify.com/manual/customers/manage-customers)
+who has an [account](https://help.shopify.com/manual/customers/customer-accounts) with the store.
+`Customer` returns data including the customer's contact information and order history.
 """
 type Customer implements HasMetafields {
   """
-  The total amount of money spent by the customer. Converted from the shop's
-  currency to the currency of the cart using a market rate.
+  The total amount that the customer has spent on orders.
+  The amount is converted from the shop's currency to the currency of the cart using a market rate.
   """
   amountSpent: MoneyV2!
 
   """
-  The customer’s name, email or phone number.
+  The full name of the customer, based on the values for `firstName` and `lastName`.
+  If `firstName` and `lastName` aren't specified, then the value is the customer's email address.
+  If the email address isn't specified, then the value is the customer's phone number.
   """
   displayName: String!
 
   """
-  The customer’s email address.
+  The customer's email address.
   """
   email: String
 
@@ -2474,27 +2571,32 @@ type Customer implements HasMetafields {
   firstName: String
 
   """
-  Whether the customer has any of the given tags.
+  Whether the customer is associated with any of the specified tags. The customer must have at least one tag
+  from the list to return `true`.
   """
   hasAnyTag(
     """
-    The tags to search for.
+    A comma-separated list of searchable keywords that are associated with the customer. For example,
+    `"VIP, Gold"` returns customers with either the `VIP` or `Gold` tag.
     """
     tags: [String!]! = []
   ): Boolean!
 
   """
-  Whether the customer has the given tags.
+  Whether the customer is associated with the specified tags. The customer must have all of the tags in the list
+  to return `true`.
   """
   hasTags(
     """
-    The tags to check.
+    A comma-separated list of searchable keywords that are associated with the customer. For example,
+    `"VIP, Gold"` returns customers with both the `VIP` and `Gold` tags.
     """
     tags: [String!]! = []
   ): [HasTagResponse!]!
 
   """
-  A unique identifier for the customer.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for the customer.
   """
   id: ID!
 
@@ -2504,22 +2606,30 @@ type Customer implements HasMetafields {
   lastName: String
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
 
   """
-  The number of orders made by the customer.
+  The total number of orders that the customer has made at the store.
   """
   numberOfOrders: Int!
 }
@@ -2553,53 +2663,74 @@ Example values: `"29.99"`, `"29.999"`.
 scalar Decimal
 
 """
-A cart line expand operation.
+An operation that expands a single cart line item to form a
+[bundle](https://shopify.dev/docs/apps/build/product-merchandising/bundles)
+of components.
 """
 input ExpandOperation {
   """
-  The cart line id to expand.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for a line item in a cart. A cart line represents a single unit of a
+  product variant that a customer intends to purchase.
   """
   cartLineId: ID!
 
   """
-  The cart items to expand.
+  The cart items to expand. Each item in the list is a component of the
+  [bundle](https://shopify.dev/docs/apps/build/product-merchandising/bundles). A
+  bundle is a group of products that are sold together as a single unit.
   """
   expandedCartItems: [ExpandedItem!]!
 
   """
-  The image of the group.
+  The image that replaces the existing image for the group of cart line items.
+  The image must have a publicly accessible URL.
   """
   image: ImageInput
 
   """
-  The price adjustment to the group.
+  A change to the original price of a group of items. Price adjustments include discounts or additional charges that
+  affect the final price the customer pays. Price adjustments are often used for promotions, special offers,
+  or any price changes that the customer qualifies for.
   """
   price: PriceAdjustment
 
   """
-  Title override. If title is not provided, variant title is used.
+  The title that replaces the existing title for the cart line item.
+  If you don't provide a title, then the title of the product variant is used.
   """
   title: String
 }
 
+"""
+The cart item to expand. Each item is a component of the
+[bundle](https://shopify.dev/docs/apps/build/product-merchandising/bundles). A
+bundle is a group of products that are sold together as a single unit.
+"""
 input ExpandedItem {
   """
-  The CartLine attributes to be added to component line.
+  The custom attributes associated with a cart line to store additional information. Cart attributes
+  allow you to collect specific information from customers on the **Cart** page, such as order notes,
+  gift wrapping requests, or custom product details. Attributes are stored as key-value pairs.
   """
   attributes: [AttributeOutput!] = []
 
   """
-  The merchandise id of the expanded item.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for the product variant that represents the expanded item.
   """
   merchandiseId: ID!
 
   """
-  The price adjustment for the expanded item.
+  A change to the original price of the expanded item. Price adjustments include discounts or additional charges that
+  affect the final price the customer pays. Price adjustments are often used for promotions, special offers,
+  or any price changes that the customer qualifies for.
   """
   price: ExpandedItemPriceAdjustment
 
   """
-  The quantity of the expanded item.The max quantity is 2000.
+  The quantity of the expanded item. The maximum quantity is
+  2000.
   """
   quantity: Int!
 }
@@ -2615,11 +2746,13 @@ input ExpandedItemFixedPricePerUnitAdjustment {
 }
 
 """
-A price adjustment to apply to the expanded item.
+A change to the original price of the expanded item. Price adjustments include discounts or additional charges that
+affect the final price the customer pays. Price adjustments are often used for promotions, special offers,
+or any price changes that the customer qualifies for.
 """
 input ExpandedItemPriceAdjustment {
   """
-  The price adjustment for the expanded item.
+  The value of the price adjustment to apply to the expanded item.
   """
   adjustment: ExpandedItemPriceAdjustmentValue!
 }
@@ -2635,21 +2768,31 @@ input ExpandedItemPriceAdjustmentValue @oneOf {
 }
 
 """
-The run target result. In API versions 2023-10 and beyond, this type is deprecated in favor of `FunctionRunResult`.
+The output of the Function run target.
+The object contains the operations to change the pricing and presentation of items
+in a cart. In API versions 2023-10 and beyond, this type is deprecated in favor of `FunctionRunResult`.
 """
 input FunctionResult {
   """
-  Cart operations to run on Cart.
+  The ordered list of operations to apply to the cart. For example, you can expand a cart line item to display
+  its [bundled items](https://shopify.dev/docs/apps/build/product-merchandising/bundles), merge
+  multiple cart lines into a single line representing a bundle, and update the presentation of line items
+  in the cart to override their price, title, or image.
   """
   operations: [CartOperation!]!
 }
 
 """
-The run target result.
+The output of the Function run target.
+The object contains the operations to change the pricing and presentation of items
+in a cart.
 """
 input FunctionRunResult {
   """
-  Cart operations to run on Cart.
+  The ordered list of operations to apply to the cart. For example, you can expand a cart line item to display
+  its [bundled items](https://shopify.dev/docs/apps/build/product-merchandising/bundles), merge
+  multiple cart lines into a single line representing a bundle, and update the presentation of line items
+  in the cart to override their price, title, or image.
   """
   operations: [CartOperation!]!
 }
@@ -2666,32 +2809,42 @@ Represents information about the metafields associated to the specified resource
 """
 interface HasMetafields {
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
 }
 
 """
-Represents whether the current object has the given tag.
+Whether a Shopify resource, such as a product or customer, has a specified tag.
 """
 type HasTagResponse {
   """
-  Whether the current object has the tag.
+  Whether the Shopify resource has the tag.
   """
   hasTag: Boolean!
 
   """
-  The tag.
+  A searchable keyword that's associated with a Shopify resource, such as a product or customer. For example,
+  a merchant might apply the `sports` and `summer` tags to products that are associated with sportswear for
+  summer.
   """
   tag: String!
 }
@@ -2705,7 +2858,8 @@ Example value: `"gid://shopify/Product/10079785100"`
 scalar ID
 
 """
-The image of an object.
+An image that replaces the existing image for a single cart line item or group of cart line items.
+The image must have a publicly accessible URL.
 """
 input ImageInput {
   """
@@ -2716,27 +2870,39 @@ input ImageInput {
 
 type Input {
   """
-  The cart.
+  The cart where the Function is running. A cart contains the merchandise that a customer intends to purchase
+  and information about the customer, such as the customer's email address and phone number.
   """
   cart: Cart!
 
   """
-  The CartTransform containing the function.
+  A customization that changes the pricing and
+  presentation of items in a cart. For example,
+  you can modify the appearance of cart items,
+  such as updating titles and images,
+  or [bundling items](https://shopify.dev/docs/apps/build/product-merchandising/bundles).
   """
   cartTransform: CartTransform!
 
   """
-  The localization of the Function execution context.
+  The regional and language settings that determine how the Function
+  handles currency, numbers, dates, and other locale-specific values
+  during discount calculations. These settings are based on the store's configured
+  [localization practices](https://shopify.dev/docs/apps/build/functions/localization-practices-shopify-functions).
   """
   localization: Localization!
 
   """
-  The conversion rate between the shop's currency and the currency of the cart.
+  The exchange rate used to convert discounts between the shop's default
+  currency and the currency that displays to the customer during checkout.
+  For example, if a store operates in USD but a customer is viewing discounts in EUR,
+  then the presentment currency rate handles this conversion for accurate pricing.
   """
   presentmentCurrencyRate: Decimal!
 
   """
-  Information about the shop.
+  Information about the shop where the Function is running, including the shop's timezone
+  setting and associated [metafields](https://shopify.dev/docs/apps/build/custom-data).
   """
   shop: Shop!
 }
@@ -2759,7 +2925,8 @@ Example value:
 scalar JSON
 
 """
-A language.
+The language for which the store is customized, ensuring content is tailored to local customers.
+This includes product descriptions and customer communications that resonate with the target audience.
 """
 type Language {
   """
@@ -3479,7 +3646,8 @@ enum LanguageCode {
 }
 
 """
-Represents limited information about the current time relative to the parent object.
+The current time based on the
+[store's timezone setting](https://help.shopify.com/manual/intro-to-shopify/initial-setup/setup-business-settings).
 """
 type LocalTime {
   """
@@ -3559,16 +3727,22 @@ type LocalTime {
 }
 
 """
-Information about the localized experiences configured for the shop.
+Details about the localized experience for the store in a specific region, including country and language
+settings. The localized experience is determined by the store's settings and the customer's location.
+Localization ensures that customers can access relevant content and options while browsing or purchasing
+products in a store.
 """
 type Localization {
   """
-  The country of the active localized experience.
+  The country for which the store is customized, reflecting local preferences and regulations.
+  Localization might influence the language, currency, and product offerings available in a store to enhance
+  the shopping experience for customers in that region.
   """
   country: Country!
 
   """
-  The language of the active localized experience.
+  The language for which the store is customized, ensuring content is tailored to local customers.
+  This includes product descriptions and customer communications that resonate with the target audience.
   """
   language: Language!
 
@@ -3598,16 +3772,24 @@ type Market implements HasMetafields {
   id: ID!
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
@@ -3644,82 +3826,106 @@ type MarketRegionCountry implements MarketRegion {
 }
 
 """
-The merchandise to be purchased at checkout.
+The item that a customer intends to purchase. Merchandise can be a product variant or a custom
+product.
+
+A product variant is a specific version of a product that comes in more than one option, such as size or color.
+For example, if a merchant sells t-shirts with options for size and color, then a small, blue t-shirt would be
+one product variant and a large, blue t-shirt would be another.
+
+A custom product represents a product that doesn't map to Shopify's
+[standard product categories](https://help.shopify.com/manual/products/details/product-type).
+For example, you can use a custom product to manage gift cards, shipping requirements, localized product
+information, or weight measurements and conversions.
 """
 union Merchandise = CustomProduct | ProductVariant
 
 """
-A cart line merge operation.
+An operation that merges multiple cart line items into a
+single line, representing a
+[bundle](https://shopify.dev/docs/apps/build/product-merchandising/bundles)
+of components.
 """
 input MergeOperation {
   """
-  The CartLine attributes to be added to the parent line.
+  The custom attributes associated with a cart line to store additional information. Cart attributes
+  allow you to collect specific information from customers on the **Cart** page, such as order notes,
+  gift wrapping requests, or custom product details. Attributes are stored as key-value pairs.
   """
   attributes: [AttributeOutput!] = []
 
   """
-  The list of cart lines to merge.
+  The cart items to merge. Each item in the list is a component of the
+  [bundle](https://shopify.dev/docs/apps/build/product-merchandising/bundles).
   """
   cartLines: [CartLineInput!]!
 
   """
-  The image of the group.
+  The image that replaces the existing image for the group of cart line items.
+  The image must have a publicly accessible URL.
   """
   image: ImageInput
 
   """
-  The product variant that models the group of lines.
+  The [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  of the product variant that represents the collection of cart line items.
   """
   parentVariantId: ID!
 
   """
-  The price adjustment to the group.
+  A change to the original price of a group of items. Price adjustments include discounts or additional charges that
+  affect the final price the customer pays. Price adjustments are often used for promotions, special offers,
+  or any price changes that the customer qualifies for.
   """
   price: PriceAdjustment
 
   """
-  The name of the group of lines to merge. If it isn't specified, it will use the parent_variant' name.
+  The title that replaces the existing title for a group of cart line items.
+  If you don't provide a title, then the title of the parent variant is used.
   """
   title: String
 }
 
 """
-[Metafields](https://shopify.dev/apps/metafields)
-enable you to attach additional information to a
-Shopify resource, such as a [Product](https://shopify.dev/api/admin-graphql/latest/objects/product)
-or a [Collection](https://shopify.dev/api/admin-graphql/latest/objects/collection).
-For more information about the Shopify resources that you can attach metafields to, refer to
-[HasMetafields](https://shopify.dev/api/admin/graphql/reference/common-objects/HasMetafields).
+[Custom fields](https://shopify.dev/docs/apps/build/custom-data) that store additional information
+about a Shopify resource, such as products, orders, and
+[many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+enables you to customize the checkout experience.
 """
 type Metafield {
   """
-  The data stored in the metafield in JSON format.
+  The data that's stored in the metafield, using JSON format.
   """
   jsonValue: JSON!
 
   """
-  The type of data that the metafield stores in the `value` field.
-  Refer to the list of [supported types](https://shopify.dev/apps/metafields/types).
+  The [type of data](https://shopify.dev/apps/metafields/types) that the metafield stores in
+  the `value` field.
   """
   type: String!
 
   """
-  The data stored in the metafield. Always stored as a string, regardless of the metafield's type.
+  The data that's stored in the metafield. The data is always stored as a string,
+  regardless of the [metafield's type](https://shopify.dev/apps/metafields/types).
   """
   value: String!
 }
 
 """
-A monetary value with currency.
+A precise monetary value and its associated currency. For example, 12.99 USD.
 """
 type MoneyV2 {
   """
-  Decimal money amount.
+  A monetary value in decimal format, allowing for precise representation of cents or fractional
+  currency. For example, 12.99.
   """
   amount: Decimal!
 
   """
-  Currency of the money.
+  The three-letter currency code that represents a world currency used in a store. Currency codes
+  include standard [standard ISO 4217 codes](https://en.wikipedia.org/wiki/ISO_4217), legacy codes,
+  and non-standard codes. For example, USD.
   """
   currencyCode: CurrencyCode!
 }
@@ -3749,6 +3955,11 @@ type MutationRoot {
   ): Void!
 }
 
+"""
+A change to the original price of a group of items. Price adjustments include discounts or additional charges that
+affect the final price the customer pays. Price adjustments are often used for promotions, special offers,
+or any price changes that the customer qualifies for.
+"""
 input PriceAdjustment {
   """
   The percentage price decrease of the price adjustment.
@@ -3764,55 +3975,78 @@ input PriceAdjustmentValue {
 }
 
 """
-Represents a product.
+The goods and services that merchants offer to customers. Products can include details such as
+title, vendor, and custom data stored in [metafields](https://shopify.dev/docs/apps/build/custom-data).
+Products can be organized by grouping them into a collection.
+
+Learn more about [managing products in a merchant's store](https://help.shopify.com/manual/products).
 """
 type Product implements HasMetafields {
   """
-  A unique human-friendly string of the product's title.
+  A unique, human-readable string of the product's title. A handle can contain letters, hyphens (`-`), and
+  numbers, but not spaces. The handle is used in the online store URL for the product. For example, if a product
+  is titled "Black Sunglasses", then the handle is `black-sunglasses`.
   """
   handle: Handle!
 
   """
-  Whether the product has any of the given tags.
+  Whether the product is associated with any of the specified tags. The product must have at least one tag
+  from the list to return `true`.
   """
   hasAnyTag(
     """
-    The tags to check.
+    A comma-separated list of searchable keywords that are associated with the product. For example,
+    `"sports, summer"` returns products with either the `sports` or `summer` tag.
     """
     tags: [String!]! = []
   ): Boolean!
 
   """
-  Whether the product has the given tags.
+  Whether the product is associated with the specified tags. The product must have all of the tags in the list
+  to return `true`.
   """
   hasTags(
     """
-    The tags to check.
+    A comma-separated list of searchable keywords that are associated with the product. For example,
+    `"sports, summer"` returns products with both the `sports` and `summer` tags.
     """
     tags: [String!]! = []
   ): [HasTagResponse!]!
 
   """
-  A globally-unique identifier.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for the product.
   """
   id: ID!
 
   """
-  Whether the product is in any of the given collections.
+  Whether the product is in any of the specified collections. The product must be in at least one collection
+  from the list to return `true`.
+
+  A collection is a group of products that can be displayed in online stores and other sales channels in
+  categories, which makes it easy for customers to find them. For example, an athletics store might create
+  different collections for running attire and accessories.
   """
   inAnyCollection(
     """
-    The IDs of the collections to check.
+    A comma-separated list of [globally-unique collection IDs](https://shopify.dev/docs/api/usage/gids)
+    that are associated with the product. For example, `gid://shopify/Collection/123`, `gid://shopify/Collection/456`.
     """
     ids: [ID!]! = []
   ): Boolean!
 
   """
-  Whether the product is in the given collections.
+  Whether the product is in the specified collections. The product must be in all of the collections in the
+  list to return `true`.
+
+  A collection is a group of products that can be displayed in online stores and other sales channels in
+  categories, which makes it easy for customers to find them. For example, an athletics store might create
+  different collections for running attire and accessories.
   """
   inCollections(
     """
-    The IDs of the collections to check.
+    A comma-separated list of [globally-unique collection IDs](https://shopify.dev/docs/api/usage/gids)
+    that are associated with the product. For example, `gid://shopify/Collection/123`, `gid://shopify/Collection/456`.
     """
     ids: [ID!]! = []
   ): [CollectionMembership!]!
@@ -3823,27 +4057,39 @@ type Product implements HasMetafields {
   isGiftCard: Boolean!
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
 
   """
-  The product type specified by the merchant.
+  A custom category for a product. Product types allow merchants to define categories other than the
+  ones available in Shopify's
+  [standard product categories](https://help.shopify.com/manual/products/details/product-type).
   """
   productType: String
 
   """
-  The localized title of the product in the customer’s locale.
+  The localized name for the product that displays to customers. The title is used to construct the product's
+  handle, which is a unique, human-readable string of the product's title. For example, if a product is titled
+  "Black Sunglasses", then the handle is `black-sunglasses`.
   """
   title: String!
 
@@ -3854,62 +4100,81 @@ type Product implements HasMetafields {
 }
 
 """
-Represents a product variant.
+A specific version of a product that comes in more than one option, such as size or color. For example,
+if a merchant sells t-shirts with options for size and color, then a small, blue t-shirt would be one
+product variant and a large, blue t-shirt would be another.
 """
 type ProductVariant implements HasMetafields {
   """
-  A globally-unique identifier.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for the product variant.
   """
   id: ID!
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
 
   """
-  The product that this variant belongs to.
+  The product associated with the product variant. For example, if a
+  merchant sells t-shirts with options for size and color, then a small,
+  blue t-shirt would be one product variant and a large, blue t-shirt would be another.
+  The product associated with the product variant would be the t-shirt itself.
   """
   product: Product!
 
   """
-  Whether the merchandise requires shipping.
+  Whether the item needs to be shipped to the customer. For example, a
+  digital gift card doesn't need to be shipped, but a t-shirt does
+  need to be shipped.
   """
   requiresShipping: Boolean!
 
   """
-  An identifier for the product variant in the shop. Required in order to connect to a fulfillment service.
+  A case-sensitive identifier for the product variant in the merchant's store. For example, `"BBC-1"`.
+  A product variant must have a SKU to be connected to a
+  [fulfillment service](https://shopify.dev/docs/apps/build/orders-fulfillment/fulfillment-service-apps/build-for-fulfillment-services).
   """
   sku: String
 
   """
-  The localized title of the product variant in the customer’s locale.
+  The localized name for the product variant that displays to customers.
   """
   title: String
 
   """
-  The weight of the product variant in the unit system specified with `weight_unit`.
+  The product variant's weight, in the system of measurement set in the `weightUnit` field.
   """
   weight: Float
 
   """
-  Unit of measurement for weight.
+  The unit of measurement for weight.
   """
   weightUnit: WeightUnit!
 }
 
 """
-Represents information about the buyer that is interacting with the cart.
+The company of a B2B customer that's interacting with the cart.
+Used to manage and track purchases made by businesses rather than individual customers.
 """
 type PurchasingCompany {
   """
@@ -3943,16 +4208,24 @@ type SellingPlan implements HasMetafields {
   id: ID!
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
@@ -4012,25 +4285,35 @@ type SellingPlanAllocationPriceAdjustment {
 }
 
 """
-Information about the shop.
+Information about the store, including the store's timezone setting
+and custom data stored in [metafields](https://shopify.dev/docs/apps/build/custom-data).
 """
 type Shop implements HasMetafields {
   """
-  Information about the current time relative to the shop's timezone setting.
+  The current time based on the
+  [store's timezone setting](https://help.shopify.com/manual/intro-to-shopify/initial-setup/setup-business-settings).
   """
   localTime: LocalTime!
 
   """
-  Returns a metafield by namespace and key that belongs to the resource.
+  A [custom field](https://shopify.dev/docs/apps/build/custom-data) that stores additional information
+  about a Shopify resource, such as products, orders, and
+  [many more](https://shopify.dev/docs/api/admin-graphql/latest/enums/MetafieldOwnerType).
+  Using [metafields with Shopify Functions](https://shopify.dev/docs/apps/build/functions/input-output/metafields-for-input-queries)
+  enables you to customize the checkout experience.
   """
   metafield(
     """
-    The key for the metafield.
+    The unique identifier for the metafield within its namespace. A metafield is composed of a
+    namespace and a key, in the format `namespace.key`.
     """
     key: String!
 
     """
-    The container the metafield belongs to. If omitted, the app-reserved namespace will be used.
+    A category that organizes a group of metafields. Namespaces are used to prevent naming conflicts
+    between different apps or different parts of the same app. If omitted, then the
+    [app-reserved namespace](https://shopify.dev/docs/apps/build/custom-data/ownership)
+    is used.
     """
     namespace: String
   ): Metafield
@@ -4053,26 +4336,35 @@ For example, `"https://example.myshopify.com"` is a valid URL. It includes a sch
 scalar URL
 
 """
-A cart line update operation. Only stores on the Shopify Plus plan can use apps with update operations.
+An operation that allows you to override the price, title,
+and image of a cart line item. Only stores on a
+[Shopify Plus plan](https://help.shopify.com/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan)
+can use apps with `update` operations.
 """
 input UpdateOperation {
   """
-  The ID of the cart line.
+  A [globally-unique ID](https://shopify.dev/docs/api/usage/gids)
+  for a line item in a cart. A cart line represents a single unit of a
+  product variant that a customer intends to purchase.
   """
   cartLineId: ID!
 
   """
-  The image override for the cart line item.
+  The image that replaces the existing image for the cart line item.
+  The image must have a publicly accessible URL.
   """
   image: ImageInput
 
   """
-  The price adjustment for the cart line item.
+  A change to an item's original price. Price adjustments include discounts or additional charges that affect the final
+  price the customer pays. Price adjustments are often used for promotions, special offers, or any price changes
+  for which the customer qualifies.
   """
   price: UpdateOperationPriceAdjustment
 
   """
-  The title override for the cart line item.
+  The title that replaces the existing title for the cart line item.
+  If you don't provide a title, then the title of the product variant is used.
   """
   title: String
 }
@@ -4088,7 +4380,9 @@ input UpdateOperationFixedPricePerUnitAdjustment {
 }
 
 """
-A price adjustment to apply to a cart line item.
+A change to an item's original price. Price adjustments include discounts or additional charges that affect the final
+price the customer pays. Price adjustments are often used for promotions, special offers, or any price changes
+for which the customer qualifies.
 """
 input UpdateOperationPriceAdjustment {
   """
@@ -4098,7 +4392,7 @@ input UpdateOperationPriceAdjustment {
 }
 
 """
-A price adjustment to apply to a cart line item.
+The value of the price adjustment to apply to the updated item.
 """
 input UpdateOperationPriceAdjustmentValue @oneOf {
   """

@@ -27,15 +27,7 @@ const FEE_CONFIGURATIONS = [
     variantId: "gid://shopify/ProductVariant/51567627075911", // Existing Disposal Fee Variant ID
     metafieldNamespace: "custom",
     metafieldKey: "fostplus_fee"
-  },
-  // Example for a new fee type (uncomment and configure as needed):
-  // {
-  //   name: "Recycling Fee",
-  //   variantId: "gid://shopify/ProductVariant/YOUR_RECYCLING_FEE_VARIANT_ID",
-  //   metafieldNamespace: "custom",
-  //   metafieldKey: "recycling_fee"
-  // },
-  // Add more fee configurations here
+  }
 ];
 
 /**
