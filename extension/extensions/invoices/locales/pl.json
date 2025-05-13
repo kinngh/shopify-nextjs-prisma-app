@@ -1,0 +1,10 @@
+{
+  "earnPoints": "Zdobyłeś 1 000 punktów za to zamówienie. Awansowałeś do poziomu Platynowego.",
+  "invoicesTitle": "Faktury",
+  "invoiceNumber": "Numer faktury",
+  "date": "Data",
+  "amount": "Kwota",
+  "status": "Status",
+  "open": "Otwarte",
+  "closed": "Zamknięte"
+} 

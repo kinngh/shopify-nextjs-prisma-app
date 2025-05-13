@@ -8,6 +8,27 @@ import {
   reactExtension,
 } from "@shopify/ui-extensions-react/customer-account";
 
+// Simple translation utility
+import en from '../locales/en.default.json';
+import fr from '../locales/fr.json';
+import nl from '../locales/nl.json';
+import de from '../locales/de.json';
+import hu from '../locales/hu.json';
+import pl from '../locales/pl.json';
+import es from '../locales/es.json';
+
+const locales = { en, fr, nl, de, hu, pl, es };
+
+function getLocale() {
+  const lang = (navigator.language || 'en').split('-')[0];
+  return locales[lang] ? lang : 'en';
+}
+
+function t(key) {
+  const locale = getLocale();
+  return locales[locale][key] || locales['en'][key] || key;
+}
+
 const invoices = [
   {
     inv_cust_id: '140134',
@@ -102,20 +123,20 @@ function InvoicesPage() {
   }, []);
 
   return (
-    <Page title="Invoices">
-      <BlockStack spacing="loose">
-        <Grid columns={['fill', 'fill', 'fill', 'fill']} spacing="base">
+    <Page title={t('invoicesTitle')}>
+      <BlockStack>
+        <Grid background="subdued" cornerRadius="loose" columns={['fill', 'fill', 'fill', 'fill']} padding="loose" spacing="loose">
           {/* Table header: 4 columns */}
-          <Text appearance="info" padding="base" border="base" cornerRadius="base" background="subdued">Invoice Number</Text>
-          <Text appearance="info" padding="base" border="base" cornerRadius="base" background="subdued">Date</Text>
-          <Text appearance="info" padding="base" border="base" cornerRadius="base" background="subdued">Amount</Text>
-          <Text appearance="info" padding="base" border="base" cornerRadius="base" background="subdued">Status</Text>
+          <Text appearance="info">{t('invoiceNumber')}</Text>
+          <Text appearance="info">{t('date')}</Text>
+          <Text appearance="info">{t('amount')}</Text>
+          <Text appearance="info">{t('status')}</Text>
           {/* Table rows: 4 columns per row, even cells subdued */}
           {invoices.map((inv, rowIdx) => [
-            <Text key={`nr-${inv.inv_nr}`} padding="base" border="base" cornerRadius="base">{inv.inv_nr}</Text>,
-            <Text key={`date-${inv.inv_nr}`} padding="base" border="base" cornerRadius="base">{formatDate(inv.inv_date)}</Text>,
-            <Text key={`amount-${inv.inv_nr}`} padding="base" border="base" cornerRadius="base">{formatMoney(inv.inv_amount)}</Text>,
-            <Text key={`status-${inv.inv_nr}`} padding="base" border="base" cornerRadius="base" appearance={inv.inv_status === 'Open' ? "warning" : "info"}>{inv.inv_status}</Text>,
+            <Text key={`nr-${inv.inv_nr}`}>{inv.inv_nr}</Text>,
+            <Text key={`date-${inv.inv_nr}`}>{formatDate(inv.inv_date)}</Text>,
+            <Text key={`amount-${inv.inv_nr}`}>{formatMoney(inv.inv_amount)}</Text>,
+            <Text key={`status-${inv.inv_nr}`} appearance={inv.inv_status === 'Open' ? "warning" : "info"}>{t(inv.inv_status.toLowerCase())}</Text>,
           ])}
         </Grid>
       </BlockStack>

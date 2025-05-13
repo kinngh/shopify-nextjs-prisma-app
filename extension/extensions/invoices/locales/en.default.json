@@ -1,3 +1,10 @@
 {
-  "earnPoints": "You've earned 1,000 points from this order. You've been upgraded to Platinum tier."
+  "earnPoints": "You've earned 1,000 points from this order. You've been upgraded to Platinum tier.",
+  "invoicesTitle": "Invoices",
+  "invoiceNumber": "Invoice Number",
+  "date": "Date",
+  "amount": "Amount",
+  "status": "Status",
+  "open": "Open",
+  "closed": "Closed"
 }
