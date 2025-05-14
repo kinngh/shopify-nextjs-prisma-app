@@ -4,30 +4,11 @@ import {
   BlockStack,
   Grid,
   Page,
+  Spinner,
   Text,
   reactExtension,
+  useTranslate,
 } from "@shopify/ui-extensions-react/customer-account";
-
-// Simple translation utility
-import en from '../locales/en.default.json';
-import fr from '../locales/fr.json';
-import nl from '../locales/nl.json';
-import de from '../locales/de.json';
-import hu from '../locales/hu.json';
-import pl from '../locales/pl.json';
-import es from '../locales/es.json';
-
-const locales = { en, fr, nl, de, hu, pl, es };
-
-function getLocale() {
-  const lang = (navigator.language || 'en').split('-')[0];
-  return locales[lang] ? lang : 'en';
-}
-
-function t(key) {
-  const locale = getLocale();
-  return locales[locale][key] || locales['en'][key] || key;
-}
 
 function formatDate(dateStr) {
   // Expects YYYYMMDD
@@ -40,6 +21,7 @@ function formatMoney(amount) {
 }
 
 function InvoicesPage() {
+  const translate = useTranslate();
   const [invoices, setInvoices] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -89,54 +71,79 @@ function InvoicesPage() {
 
           // Helper function to parse metafield value
           const parseMetafieldValue = (metafield) => {
-            if (!metafield || !metafield.value) return null;
-            let value = metafield.value;
-            try {
-              // Check if it's a stringified JSON array
-              if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
-                const parsed = JSON.parse(value);
-                if (Array.isArray(parsed) && parsed.length > 0) {
-                  value = parsed[0]; // Take the first element
-                }
-              } else if (Array.isArray(value) && value.length > 0) {
-                value = value[0]; // Take the first element if it's already an array
+            if (!metafield?.value || typeof metafield.value !== 'string') {
+              if (metafield?.value) {
+                  console.warn("Metafield value is not a string:", metafield.value);
               }
-            } catch (e) {
-              console.error("Failed to parse metafield value:", value, e);
-              // Keep original value if parsing fails
+              return null;
             }
-            return typeof value === 'string' ? value : null;
+
+            const valueStr = metafield.value;
+
+            try {
+              const parsed = JSON.parse(valueStr);
+              if (Array.isArray(parsed)) {
+                if (parsed.length > 0 && typeof parsed[0] === 'string') {
+                  return parsed[0]; // Successfully extracted first string from list
+                } else {
+                  console.warn("Metafield parsed as array but no valid first string element:", parsed);
+                  return null; 
+                }
+              }
+              // If JSON.parse(valueStr) results in something that is NOT an array,
+              // it means the metafield was not a list-of-strings representation.
+              // We assume the original string 'valueStr' might be the direct value or a different JSON type.
+              // For this function's purpose (extracting a single string), we will fall through
+              // and return the original string if it wasn't a parsable array of strings.
+            } catch (e) {
+              // JSON.parse failed: valueStr is not a valid JSON string (e.g., it's a direct string like "actual_id").
+              // Fall through to return valueStr below.
+            }
+
+            // If parsing failed, or if it parsed to a non-array JSON, assume valueStr is the direct string.
+            return valueStr;
           };
 
           const customerIdValue = parseMetafieldValue(as400Metafield);
           const marketValue = parseMetafieldValue(eshopMetafield);
 
+          let hasError = false;
           if (customerIdValue) {
             setCustomerId(customerIdValue);
           } else {
             console.error("as400_customer_id not found, has no value, or is not a parsable string/array.");
-            setError("Could not retrieve customer ID.");
-            setIsLoading(false);
+            hasError = true;
           }
+
           if (marketValue) {
             setMarket(marketValue);
           } else {
             console.error("company_eshop not found, has no value, or is not a parsable string/array.");
-            setError("Could not retrieve market information.");
-            setIsLoading(false);
+            hasError = true;
           }
+
+          if (hasError) {
+            setError(translate('errorMissingCompanyMetafields')); // Use a generic error key
+            setIsLoading(false);
+          } else if (customerIdValue && marketValue) {
+            // Only proceed to fetch invoices if both are successfully retrieved
+            // The second useEffect will pick this up.
+            // We can remove setIsLoading(false) here if the second effect handles it
+            // However, if the second effect *only* runs when customerId/market change, this is fine.
+          }
+
         } else {
           console.error("Company data not found in GraphQL response");
-          setError("Could not retrieve company information.");
+          setError(translate('errorFetchingCompany')); // Use a generic error key
           setIsLoading(false);
         }
       })
       .catch(err => {
         console.error("Failed to fetch company metafields:", err);
-        setError(err.message);
+        setError(err.message); // Or a generic translate('errorFetching')
         setIsLoading(false);
       });
-  }, []); // Runs once on mount
+  }, [translate]); // Added translate to dependency array as it's used in error messages
 
   // Effect to fetch invoices once customerId and market are available
   useEffect(() => {
@@ -177,35 +184,35 @@ function InvoicesPage() {
   }, [customerId, market]); // Runs when customerId or market changes
 
   if (isLoading) {
-    return <Page title={t('invoicesTitle')}><Text>{t('loading')}</Text></Page>;
+    return <Page title={translate('invoicesTitle')}><Spinner /></Page>;
   }
 
   if (error) {
-    return <Page title={t('invoicesTitle')}><Text appearance="critical">{t('errorFetching')}: {error}</Text></Page>;
+    return <Page title={translate('invoicesTitle')}><Text appearance="critical">{translate('errorFetching')}: {error}</Text></Page>;
   }
 
   const renderInvoices = () => {
     return (
       <Grid background="subdued" cornerRadius="loose" columns={['fill', 'fill', 'fill', 'fill']} padding="loose" spacing="loose">
-        <Text appearance="info">{t('invoiceNumber')}</Text>
-        <Text appearance="info">{t('date')}</Text>
-        <Text appearance="info">{t('amount')}</Text>
-        <Text appearance="info">{t('status')}</Text>
+        <Text appearance="info">{translate('invoiceNumber')}</Text>
+        <Text appearance="info">{translate('date')}</Text>
+        <Text appearance="info">{translate('amount')}</Text>
+        <Text appearance="info">{translate('status')}</Text>
         {/* Table rows: 4 columns per row, even cells subdued */}
         {invoices.map((inv, rowIdx) => [
           <Text key={`nr-${inv.inv_nr}`}>{inv.inv_nr}</Text>,
           <Text key={`date-${inv.inv_nr}`}>{formatDate(inv.inv_date)}</Text>,
           <Text key={`amount-${inv.inv_nr}`}>{formatMoney(inv.inv_amount)}</Text>,
-          <Text key={`status-${inv.inv_nr}`} appearance={inv.inv_status === 'Open' ? "warning" : "info"}>{t(inv.inv_status.toLowerCase())}</Text>,
+          <Text key={`status-${inv.inv_nr}`} appearance={inv.inv_status === 'Open' ? "warning" : "info"}>{translate(inv.inv_status.toLowerCase())}</Text>,
         ])}
       </Grid>
     )
   }
 
   return (
-    <Page title={t('invoicesTitle')}>
+    <Page title={translate('invoicesTitle')}>
       <BlockStack>
-        {invoices.length > 0 ? renderInvoices() : <Text appearance="info">{t('noInvoicesFound')}</Text>}
+        {invoices.length > 0 ? renderInvoices() : <Text appearance="info">{translate('noInvoicesFound')}</Text>}
       </BlockStack>
     </Page>
   );

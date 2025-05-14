@@ -6,5 +6,9 @@
   "amount": "Bedrag",
   "status": "Status",
   "open": "Open",
-  "closed": "Gesloten"
+  "closed": "Gesloten",
+  "errorFetching": "Fout bij het ophalen van de facturen",
+  "errorFetchingCompany": "Fout bij het ophalen van de bedrijfsgegevens",
+  "errorMissingCompanyMetafields": "Fout bij het ophalen van de bedrijfsgegevens",
+  "noInvoicesFound": "Geen facturen gevonden"
 } 

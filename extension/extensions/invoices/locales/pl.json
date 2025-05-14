@@ -6,5 +6,9 @@
   "amount": "Kwota",
   "status": "Status",
   "open": "Otwarte",
-  "closed": "Zamknięte"
+  "closed": "Zamknięte",
+  "errorFetching": "Błąd podczas pobierania faktur",
+  "errorFetchingCompany": "Błąd podczas pobierania informacji o firmie",
+  "errorMissingCompanyMetafields": "Błąd podczas pobierania informacji o firmie",
+  "noInvoicesFound": "Nie znaleziono faktur"
 } 

@@ -6,5 +6,9 @@
   "amount": "Importe",
   "status": "Estado",
   "open": "Abierta",
-  "closed": "Cerrada"
+  "closed": "Cerrada",
+  "errorFetching": "Error al obtener las facturas",
+  "errorFetchingCompany": "Error al obtener la información de la empresa",
+  "errorMissingCompanyMetafields": "Error al obtener la información de la empresa",
+  "noInvoicesFound": "No se encontraron facturas"
 } 

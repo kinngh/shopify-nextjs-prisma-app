@@ -6,5 +6,9 @@
   "amount": "Montant",
   "status": "Statut",
   "open": "Ouverte",
-  "closed": "Clôturée"
+  "closed": "Clôturée",
+  "errorFetching": "Erreur lors de la récupération des factures",
+  "errorFetchingCompany": "Erreur lors de la récupération des informations de l'entreprise",
+  "errorMissingCompanyMetafields": "Erreur lors de la récupération des informations de l'entreprise",
+  "noInvoicesFound": "Aucune facture trouvée"
 }

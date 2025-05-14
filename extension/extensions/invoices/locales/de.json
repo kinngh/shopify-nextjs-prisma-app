@@ -6,5 +6,9 @@
   "amount": "Betrag",
   "status": "Status",
   "open": "Offen",
-  "closed": "Geschlossen"
+  "closed": "Geschlossen",
+  "errorFetching": "Fehler beim Abrufen der Rechnungen",
+  "errorFetchingCompany": "Fehler beim Abrufen der Unternehmensinformationen",
+  "errorMissingCompanyMetafields": "Fehler beim Abrufen der Unternehmensinformationen",
+  "noInvoicesFound": "Keine Rechnungen gefunden"
 } 

@@ -6,5 +6,9 @@
   "amount": "Összeg",
   "status": "Állapot",
   "open": "Nyitott",
-  "closed": "Lezárt"
+  "closed": "Lezárt",
+  "errorFetching": "Hiba történt a számlák lekérésekor",
+  "errorFetchingCompany": "Hiba történt a cég információinak lekérésekor",
+  "errorMissingCompanyMetafields": "Hiba történt a cég információinak lekérésekor",
+  "noInvoicesFound": "Nincs találat a számlák keresésekor"
 } 
