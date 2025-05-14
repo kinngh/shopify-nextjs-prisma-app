@@ -29,49 +29,6 @@ function t(key) {
   return locales[locale][key] || locales['en'][key] || key;
 }
 
-const invoices = [
-  {
-    inv_cust_id: '140134',
-    inv_nr: '2401257',
-    inv_year: '2024',
-    inv_date: '20240417',
-    inv_amount: '273.40',
-    inv_status: 'Open',
-  },
-  {
-    inv_cust_id: '140134',
-    inv_nr: '2500288',
-    inv_year: '2025',
-    inv_date: '20250218',
-    inv_amount: '231.72',
-    inv_status: 'Open',
-  },
-  {
-    inv_cust_id: '140134',
-    inv_nr: '2500289',
-    inv_year: '2025',
-    inv_date: '20250218',
-    inv_amount: '1868.20',
-    inv_status: 'Open',
-  },
-  {
-    inv_cust_id: '140134',
-    inv_nr: '2500290',
-    inv_year: '2025',
-    inv_date: '20250218',
-    inv_amount: '2474.89',
-    inv_status: 'Open',
-  },
-  {
-    inv_cust_id: '140134',
-    inv_nr: '2500291',
-    inv_year: '2025',
-    inv_date: '20250218',
-    inv_amount: '33.50',
-    inv_status: 'Open',
-  },
-];
-
 function formatDate(dateStr) {
   // Expects YYYYMMDD
   if (!dateStr || dateStr.length !== 8) return dateStr;
@@ -83,6 +40,13 @@ function formatMoney(amount) {
 }
 
 function InvoicesPage() {
+  const [invoices, setInvoices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [customerId, setCustomerId] = useState(null);
+  const [market, setMarket] = useState(null);
+
+  // Effect to fetch customerId and market
   useEffect(() => {
     const getCompanyMetafieldsQuery = {
       query: `
@@ -117,28 +81,131 @@ function InvoicesPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("GraphQL Data:", data);
+        const companyNode = data?.data?.customer?.companyContacts?.nodes?.[0]?.company;
+        if (companyNode) {
+          const as400Metafield = companyNode.metafields.find(metafield => metafield.key === "as400_customer_id");
+          const eshopMetafield = companyNode.metafields.find(metafield => metafield.key === "company_eshop");
+
+          // Helper function to parse metafield value
+          const parseMetafieldValue = (metafield) => {
+            if (!metafield || !metafield.value) return null;
+            let value = metafield.value;
+            try {
+              // Check if it's a stringified JSON array
+              if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
+                const parsed = JSON.parse(value);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                  value = parsed[0]; // Take the first element
+                }
+              } else if (Array.isArray(value) && value.length > 0) {
+                value = value[0]; // Take the first element if it's already an array
+              }
+            } catch (e) {
+              console.error("Failed to parse metafield value:", value, e);
+              // Keep original value if parsing fails
+            }
+            return typeof value === 'string' ? value : null;
+          };
+
+          const customerIdValue = parseMetafieldValue(as400Metafield);
+          const marketValue = parseMetafieldValue(eshopMetafield);
+
+          if (customerIdValue) {
+            setCustomerId(customerIdValue);
+          } else {
+            console.error("as400_customer_id not found, has no value, or is not a parsable string/array.");
+            setError("Could not retrieve customer ID.");
+            setIsLoading(false);
+          }
+          if (marketValue) {
+            setMarket(marketValue);
+          } else {
+            console.error("company_eshop not found, has no value, or is not a parsable string/array.");
+            setError("Could not retrieve market information.");
+            setIsLoading(false);
+          }
+        } else {
+          console.error("Company data not found in GraphQL response");
+          setError("Could not retrieve company information.");
+          setIsLoading(false);
+        }
       })
-      .catch(console.error);
-  }, []);
+      .catch(err => {
+        console.error("Failed to fetch company metafields:", err);
+        setError(err.message);
+        setIsLoading(false);
+      });
+  }, []); // Runs once on mount
+
+  // Effect to fetch invoices once customerId and market are available
+  useEffect(() => {
+    if (customerId && market) {
+      const fetchInvoices = async () => {
+        setIsLoading(true); // Set loading to true before fetching invoices
+        setError(null); // Clear previous errors
+        try {
+          // Construct the dynamic URL
+          const invoiceApiUrl = `https://c7a4-94-247-4-243.ngrok-free.app/invoices/${market}/${customerId}`;
+          console.log("Fetching invoices from:", invoiceApiUrl);
+
+          const response = await fetch(invoiceApiUrl, {
+            method: 'POST',
+            // Add headers or body here if your POST request requires them
+            // For example:
+            // headers: {
+            //   'Content-Type': 'application/json',
+            // },
+            // body: JSON.stringify({ key: 'value' }),
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          console.log("Invoices Data:", data);
+          setInvoices(data.invoices);
+        } catch (e) {
+          setError(e.message);
+          console.error("Failed to fetch invoices:", e);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchInvoices();
+    }
+  }, [customerId, market]); // Runs when customerId or market changes
+
+  if (isLoading) {
+    return <Page title={t('invoicesTitle')}><Text>{t('loading')}</Text></Page>;
+  }
+
+  if (error) {
+    return <Page title={t('invoicesTitle')}><Text appearance="critical">{t('errorFetching')}: {error}</Text></Page>;
+  }
+
+  const renderInvoices = () => {
+    return (
+      <Grid background="subdued" cornerRadius="loose" columns={['fill', 'fill', 'fill', 'fill']} padding="loose" spacing="loose">
+        <Text appearance="info">{t('invoiceNumber')}</Text>
+        <Text appearance="info">{t('date')}</Text>
+        <Text appearance="info">{t('amount')}</Text>
+        <Text appearance="info">{t('status')}</Text>
+        {/* Table rows: 4 columns per row, even cells subdued */}
+        {invoices.map((inv, rowIdx) => [
+          <Text key={`nr-${inv.inv_nr}`}>{inv.inv_nr}</Text>,
+          <Text key={`date-${inv.inv_nr}`}>{formatDate(inv.inv_date)}</Text>,
+          <Text key={`amount-${inv.inv_nr}`}>{formatMoney(inv.inv_amount)}</Text>,
+          <Text key={`status-${inv.inv_nr}`} appearance={inv.inv_status === 'Open' ? "warning" : "info"}>{t(inv.inv_status.toLowerCase())}</Text>,
+        ])}
+      </Grid>
+    )
+  }
 
   return (
     <Page title={t('invoicesTitle')}>
       <BlockStack>
-        <Grid background="subdued" cornerRadius="loose" columns={['fill', 'fill', 'fill', 'fill']} padding="loose" spacing="loose">
-          {/* Table header: 4 columns */}
-          <Text appearance="info">{t('invoiceNumber')}</Text>
-          <Text appearance="info">{t('date')}</Text>
-          <Text appearance="info">{t('amount')}</Text>
-          <Text appearance="info">{t('status')}</Text>
-          {/* Table rows: 4 columns per row, even cells subdued */}
-          {invoices.map((inv, rowIdx) => [
-            <Text key={`nr-${inv.inv_nr}`}>{inv.inv_nr}</Text>,
-            <Text key={`date-${inv.inv_nr}`}>{formatDate(inv.inv_date)}</Text>,
-            <Text key={`amount-${inv.inv_nr}`}>{formatMoney(inv.inv_amount)}</Text>,
-            <Text key={`status-${inv.inv_nr}`} appearance={inv.inv_status === 'Open' ? "warning" : "info"}>{t(inv.inv_status.toLowerCase())}</Text>,
-          ])}
-        </Grid>
+        {invoices.length > 0 ? renderInvoices() : <Text appearance="info">{t('noInvoicesFound')}</Text>}
       </BlockStack>
     </Page>
   );
