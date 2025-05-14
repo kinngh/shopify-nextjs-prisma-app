@@ -65,7 +65,6 @@ function InvoicesPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("GraphQL Data:", data);
         const companyNode = data?.data?.customer?.companyContacts?.nodes?.[0]?.company;
         if (companyNode) {
           const as400Metafield = companyNode.metafields.find(metafield => metafield.key === "as400_customer_id");
@@ -156,7 +155,6 @@ function InvoicesPage() {
         try {
           // Construct the dynamic URL
           const invoiceApiUrl = `${apiBaseUrl}/invoices/${market}/${customerId}`;
-          console.log("Fetching invoices from:", invoiceApiUrl);
 
           const response = await fetch(invoiceApiUrl, {
             method: 'POST',
@@ -171,7 +169,6 @@ function InvoicesPage() {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           const data = await response.json();
-          console.log("Invoices Data:", data);
           setInvoices(data.invoices);
         } catch (e) {
           setError(e.message);
