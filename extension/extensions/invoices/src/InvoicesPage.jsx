@@ -28,6 +28,8 @@ function InvoicesPage() {
   const [customerId, setCustomerId] = useState(null);
   const [market, setMarket] = useState(null);
 
+  const apiBaseUrl = "https://c7a4-94-247-4-243.ngrok-free.app";
+
   // Effect to fetch customerId and market
   useEffect(() => {
     const getCompanyMetafieldsQuery = {
@@ -153,7 +155,7 @@ function InvoicesPage() {
         setError(null); // Clear previous errors
         try {
           // Construct the dynamic URL
-          const invoiceApiUrl = `https://c7a4-94-247-4-243.ngrok-free.app/invoices/${market}/${customerId}`;
+          const invoiceApiUrl = `${apiBaseUrl}/invoices/${market}/${customerId}`;
           console.log("Fetching invoices from:", invoiceApiUrl);
 
           const response = await fetch(invoiceApiUrl, {
@@ -184,7 +186,7 @@ function InvoicesPage() {
   }, [customerId, market]); // Runs when customerId or market changes
 
   if (isLoading) {
-    return <Page title={translate('invoicesTitle')}><Spinner /></Page>;
+    return <Page title={translate('invoicesTitle')}><BlockStack inlineAlignment="center"><Spinner /></BlockStack></Page>;
   }
 
   if (error) {
