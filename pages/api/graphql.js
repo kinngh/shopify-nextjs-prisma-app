@@ -31,4 +31,4 @@ const handler = async (req, res) => {
   }
 };
 
-withMiddleware("verifyRequest")(handler);
+export default withMiddleware("verifyRequest")(handler);
