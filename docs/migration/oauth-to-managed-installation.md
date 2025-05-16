@@ -12,7 +12,7 @@ The older way of doing auth is still supported from Shopify but for embedded app
 
 2. Updates to `isShopAvailable` function
 
-`pages/index.jsx` now calls a new function, `isInitialLoad` instead of `isShopAvailable`. The new strait means on the first load we get `id_token` as a query param that is exchanged for online and offline session tokens. `isInitialLoad` checks if these params exist, exchanges them for online and offline tokens and saves them in the db. Note we do not await the `sessionHandler.storeSession()` function here because that's eating up time on initial load and we don't want the first time to take longer than ~3 seconds.
+`pages/index.jsx` now calls a new function, `isInitialLoad` instead of `isShopAvailable`. The new strait means on the first load we get `id_token` as a query param that is exchanged for online and offline session tokens. `isInitialLoad` checks if these params exist, exchanges them for online and offline tokens and saves them in the db.
 
 A new check also happens here, `isFreshInstall`. Since the database structure is kept the same to ensure smooth transition to the new auth, we can now check if the install was a fresh one. If the store doesn't exist in the `store` model, it's a new install, but if it does have a `Bool` value, that means it's either already installed or is a reinstall. While I've merged these in an if condition, you can break them apart and run your own checks if required.
 
