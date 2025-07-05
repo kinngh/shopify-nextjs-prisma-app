@@ -3,17 +3,14 @@
 This is an in-depth guide on using this repo. This goes over getting the base repo up and running, to understand how to add your own customizations server side like registering webhooks, routes, etc, refer to [Notes](/docs/NOTES.md).
 
 - [ ] Run `npm run g:install` to install global dependencies.
-
   - This isn't required to be run every single time, but is necessary for local development - Installing the Shopify/app and Shopify/cli packages. Please see `package.json` for more info.
 
 - [ ] Run `npm i --force` to install dependencies.
-
   - Substantial efforts have gone into ensuring we're using the latest package versions, and some incompatibility issues always pop up while installing. There are no negative effects on the functionality just yet, but if you find anything please open an issue.
 
 - [ ] Create a new app (Public or Custom) from your [Shopify Partner Dashboard](https://partners.shopify.com).
 
 - [ ] Build your `.env` file based on `.env.example`.
-
   - `SHOPIFY_API_KEY`: App API key.
   - `SHOPIFY_API_SECRET`: App secret.
   - `SHOPIFY_API_SCOPES`: Scopes required by your Shopify app. A list of access scopes can be found [here](https://shopify.dev/api/usage/access-scopes)
@@ -34,7 +31,6 @@ This is an in-depth guide on using this repo. This goes over getting the base re
   - `POS_EMBEDDED`: Boolean. If your app is embedded in Shopify Point of Sale.
 
 - [ ] NPM Scripts
-
   - `dev`: Run in dev mode
   - `build`: Build for production
   - `start`: Start in production mode. Requires `npm run build` before starting.
@@ -62,7 +58,6 @@ This is an in-depth guide on using this repo. This goes over getting the base re
   - `prepare`: Reserved script to generate `@prisma/client`.
 
 - [ ] Setup Partner Dashboard
-
   - Run `npm run ngrok` or `npm run cloudflare` to generate your subdomain. Copy the `https://<your-url>` domain and add it in `SHOPIFY_APP_URL` in your `.env` file.
   - Run `npm run update:config` to create and update your `shopify.app.toml` file and sync with Shopify.
   - GPDR handlers are available at `page/api/gdpr/` and the URLs that are auto registered via your toml are are:
@@ -70,7 +65,6 @@ This is an in-depth guide on using this repo. This goes over getting the base re
     - Customers Redact: `https://<your-url>/api/gdpr/customers_redact`
     - Shop Redact: `https://<your-url>/api/gdpr/shop_redact`
   - App Proxy routes are setup to allow accessing data from your app directly from the store. An example proxy route has been setup and is available at `/pages/api/proxy_route`. First you need to setup your base urls. Here's how to get it working:
-
     - Subpath Prefix: `apps` [fill in env]
     - Subpath: `next-proxy` [fill in env]
     - Proxy URL: `https://<your-url>/api/proxy_route` [auto filled by `_developer/tomlWriter.js`]
@@ -81,7 +75,6 @@ This is an in-depth guide on using this repo. This goes over getting the base re
     - A common _gotcha_ is if you're creating multiple apps that all use the same subpath (`next-proxy` in this case), all susbequent installs will throw a `404` error because Shopify serializes routes based on installation. To avoid this, please change the subpath to something that's unique to your app. I prefer using the format `<<appname>>-proxy`
 
 - [ ] Running App
-
   - If it's your first time connecting to said database, run `npx prisma db push` to get your database working.
   - Run `npm run dev`, your database and ngrok/cloudflare.
   - Install the app by heading over to `https://storename.myshopify.com/admin/oauth/install?client_id=SHOPIFY_API_KEY`.

@@ -6,6 +6,7 @@
       "@/utils": ["./utils/*"],
       "@/components": ["./components/*"],
       "@/hooks": ["./components/hooks/*"]
-    }
+    },
+    "types": ["@shopify/app-bridge-ui-types"]
   }
 }
