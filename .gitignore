@@ -5,6 +5,7 @@
 .shopify/
 database/
 shopify.*.toml
+prisma/client/*
 
 # dependencies
 package-lock.json
