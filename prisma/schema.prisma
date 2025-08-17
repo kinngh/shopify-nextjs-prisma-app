@@ -26,3 +26,16 @@ model session {
   @@index([id])
   @@index([shop])
 }
+
+model metrics {
+  appLoadId  String   @id
+  shop       String?
+  INP        Float?
+  FID        Float?
+  CLS        Float?
+  LCP        Float?
+  FCP        Float?
+  TTFB       Float?
+  raw_json   String?  @db.Text
+  created_at DateTime @default(now())
+}
