@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@shopify/app-bridge-ui-types": "^0.2.1",
+    "@shopify/polaris-types": "^1.0.0",
     "@shopify/cli-kit": "^3.84.1",
     "dotenv": "^17.2.2",
     "ngrok": "^5.0.0-beta.2",
