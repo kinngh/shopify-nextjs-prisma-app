@@ -7,6 +7,7 @@ console.log(`--> Running in ${process.env.NODE_ENV} mode`);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {},
   reactStrictMode: true,
   devIndicators: false,
   env: {

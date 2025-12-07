@@ -1,6 +1,6 @@
 {
   "name": "shopify-nextjs-prisma-app",
-  "version": "2025.10.01",
+  "version": "2025.12.06",
   "type": "module",
   "author": {
     "name": "Harshdeep Singh Hura",
@@ -24,7 +24,6 @@
     "g:install": "npm i -g @shopify/cli@latest",
     "shopify": "shopify",
     "update:config": "node _developer/tomlWriter.js; npm run pretty; shopify app deploy;",
-    "update:url": "node _developer/updateDashboard.js",
     "-----> Database <-----": "",
     "pg:create": "mkdir database; pg_ctl -D database init",
     "pg:start": "pg_ctl -D database start",
@@ -40,23 +39,25 @@
     "prepare": "npx prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^6.16.3",
+    "@prisma/adapter-pg": "^7.1.0",
+    "@prisma/client": "^7.1.0",
     "@shopify/polaris": "^13.9.5",
-    "@shopify/shopify-api": "^12.0.0",
+    "@shopify/shopify-api": "^12.1.2",
     "cryptr": "^6.4.0",
-    "next": "15.5.4",
+    "dotenv": "^17.2.3",
+    "next": "16.0.7",
     "next-api-middleware": "^3.0.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "pg": "^8.16.3",
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@shopify/polaris-types": "^1.0.0",
-    "@shopify/cli-kit": "^3.85.4",
-    "dotenv": "^17.2.3",
+    "@shopify/polaris-types": "^1.0.1",
+    "@shopify/cli-kit": "^3.88.0",
     "ngrok": "^5.0.0-beta.2",
-    "npm-check-updates": "^19.0.0",
-    "prettier": "^3.6.2",
-    "prisma": "^6.16.3"
+    "npm-check-updates": "^19.1.2",
+    "prettier": "^3.7.4",
+    "prisma": "^7.1.0"
   }
 }

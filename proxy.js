@@ -19,7 +19,7 @@ export const config = {
  * @param {NextRequest} request - The incoming request object.
  * @returns {NextResponse} The response object with modified headers.
  */
-export function middleware(request) {
+export function proxy(request) {
   const {
     nextUrl: { search },
   } = request;
