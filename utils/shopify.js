@@ -1,3 +1,5 @@
+//TODO Write a proper validation for metafields
+//TODO
 import { LogSeverity, shopifyApi } from "@shopify/shopify-api";
 import "@shopify/shopify-api/adapters/node";
 import appUninstallHandler from "./webhooks/app_uninstalled.js";
@@ -15,19 +17,6 @@ let shopify = shopifyApi({
   isEmbeddedApp: true,
   logger: { level: isDev ? LogSeverity.Info : LogSeverity.Error },
 });
-
-/*
-  Template for adding new topics:
-  ```
-    {
-      topics: ["",""] //Get this from `https://shopify.dev/docs/api/webhooks?reference=toml`
-      url: "/api/webhooks/topic_name" //this can be AWS, PubSub or HTTP routes.
-      callback: () //This HAS to be in utils/webhooks/ and created with the `createwebhook` snippet.
-      filter: "" //Optional - filter what webhooks you recieve
-      include_fields: ["",""] //Optional - decide what fields you want to recieve
-    }
-  ```
- */
 
 //Add custom user properties to base shopify obj
 shopify = {
@@ -48,6 +37,44 @@ shopify = {
         url: "/api/webhooks/app_uninstalled",
         callback: appUninstallHandler,
       },
+    ],
+
+    /**
+     * @type {import("@/_developer/types/declarative.js").DeclarativeMetafieldDefinition[]}
+     */
+    metafields: [
+      // {
+      //   owner_type: "product",
+      //   key: "key_name",
+      //   name: "Last synced",
+      //   description: "This is a description",
+      //   type: "number_integer",
+      //   access: {
+      //     admin: "merchant_read_write",
+      //     customer_account: "read_write",
+      //   },
+      //   capabilities: {
+      //     admin_filterable: true,
+      //     unique_values: false,
+      //   },
+      //   validations: [
+      //     {
+      //       //Docs: https://shopify.dev/docs/apps/build/metafields/list-of-validation-options
+      //       name: "max",
+      //       value: "10",
+      //     },
+      //     {
+      //       name: "min",
+      //       value: "1",
+      //     },
+      //   ],
+      // },
+    ],
+    /**
+     * @type {import("@/_developer/types/declarative.js").DeclarativeMetaobjectDefinition[]}
+     */
+    metaobjects: [
+      //Support is coming soon.
     ],
   },
 };

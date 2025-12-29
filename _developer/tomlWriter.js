@@ -3,6 +3,7 @@ import "dotenv/config";
 import fs from "fs";
 import path from "path";
 import setupCheck from "../utils/setupCheck.js";
+import declarativeWriter from "./declarativeWriter.js";
 import webhookWriter from "./webhookWriter.js";
 
 /** @typedef {import("@/_developer/types/toml.js").AppConfig} Config */
@@ -61,6 +62,7 @@ try {
 
   // Webhooks
   webhookWriter(config);
+  declarativeWriter(config);
 
   // GDPR URLs
   config.webhooks.privacy_compliance = {};
@@ -84,10 +86,6 @@ try {
     config.pos = {};
     config.pos.embedded = process.env.POS_EMBEDDED === "true";
   }
-
-  //Build
-  config.build = {};
-  config.build.include_config_on_deploy = true;
 
   //Write to toml
   let str = toml.stringify(config);
@@ -124,7 +122,7 @@ try {
       globalStr,
       (err) => {
         if (err) {
-          console.log("An error occured while writing to file", e);
+          console.log("An error occured while writing to file", err);
           return;
         }
 
