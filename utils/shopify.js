@@ -1,5 +1,3 @@
-//TODO Write a proper validation for metafields
-//TODO
 import { LogSeverity, shopifyApi } from "@shopify/shopify-api";
 import "@shopify/shopify-api/adapters/node";
 import appUninstallHandler from "./webhooks/app_uninstalled.js";

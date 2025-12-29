@@ -7,9 +7,6 @@ import shopify from "../utils/shopify.js";
 /**
  * Write declarative metafield definitions into the TOML config object.
  *
- * Output shape (example):
- *   config.product.metafields.app.last_synced = { name, description, type, access, capabilities, validations }
- *
  * @param {import("@/_developer/types/toml.js").AppConfig} config
  * @param {{ user?: { metafields?: DeclarativeMetafieldDefinition[] } }=} shopifyInstance
  */
