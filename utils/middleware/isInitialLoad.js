@@ -31,6 +31,7 @@ const isInitialLoad = async (context) => {
         sessionToken: idToken,
         shop,
         requestedTokenType: RequestedTokenType.OfflineAccessToken,
+        expiring: true,
       });
 
       const { session: onlineSession } = await shopify.auth.tokenExchange({

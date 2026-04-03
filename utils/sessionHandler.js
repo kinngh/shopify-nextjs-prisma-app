@@ -39,6 +39,14 @@ const loadSession = async (id) => {
   }
   if (sessionResult.content.length > 0) {
     const sessionObj = JSON.parse(cryption.decrypt(sessionResult.content));
+
+    //Convert date strings to usable dates
+    if (sessionObj?.expires) {
+      sessionObj.expires = new Date(sessionObj.expires);
+    }
+    if (sessionObj?.refreshTokenExpires) {
+      sessionObj.refreshTokenExpires = new Date(sessionObj.refreshTokenExpires);
+    }
     return new Session(sessionObj);
   }
   return undefined;

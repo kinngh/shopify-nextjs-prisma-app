@@ -89,6 +89,7 @@ async function getSession({ shop, authHeader }) {
       sessionToken,
       shop,
       requestedTokenType: RequestedTokenType.OfflineAccessToken,
+      expiring: true,
     });
 
     await sessionHandler.storeSession(offlineSession);

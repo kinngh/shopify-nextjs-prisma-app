@@ -2,14 +2,35 @@ import sessionHandler from "./sessionHandler.js";
 import shopify from "./shopify.js";
 
 /**
- * Fetches the offline session associated with a shop.
+ * Fetches the offline session associated with a shop and refreshes it when needed.
  * @async
  * @param {string} shop - The shop's domain.
  */
 const fetchOfflineSession = async (shop) => {
   const sessionID = shopify.session.getOfflineId(shop);
   const session = await sessionHandler.loadSession(sessionID);
-  return session;
+
+  //Legacy behavior
+  if (!session?.refreshToken) {
+    return session;
+  }
+
+  //If session token doesn't expire in a minute
+  if (
+    !session?.isExpired(60 * 1_000) ||
+    (session?.refreshTokenExpires &&
+      new Date(session?.refreshTokenExpires)?.getTime() <= Date.now())
+  ) {
+    return session;
+  }
+
+  const { session: refreshedSession } = await shopify.auth.refreshToken({
+    shop,
+    refreshToken: session.refreshToken,
+  });
+  await sessionHandler.storeSession(refreshedSession);
+
+  return refreshedSession;
 };
 
 /**
