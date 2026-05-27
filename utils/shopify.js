@@ -26,6 +26,7 @@ shopify = {
      *   url: string,
      *   callback: Function,
      *   filter?: string,
+     *   name?: string,
      *   include_fields?: string[]
      * }>}
      */
@@ -35,6 +36,33 @@ shopify = {
         url: "/api/webhooks/app_uninstalled",
         callback: appUninstallHandler,
       },
+    ],
+    /**
+     * @type {Array<{
+     *   topic: import("@/_developer/types/eventTopics.js").EventTopics["topic"],
+     *   actions: import("@/_developer/types/eventTopics.js").EventTopics["actions"],
+     *   uri: string,
+     *   handle: string,
+     *   callback: Function,
+     *   triggers?: string[],
+     *   query?: string,
+     *   query_filter?: string
+     * }>}
+     */
+    events: [
+      // {
+      //   topic: "Product",
+      //   actions: ["create", "update", "delete"],
+      //   uri: "/api/events/product",
+      //   handle: "this-is-my-handle",
+      //   callback: productEventHandler,
+      //   triggers: [""],
+      //   query: /* GraphQL */ `
+      //     query your_query {
+      //     }
+      //   `,
+      //   query_filter: "",
+      // },
     ],
 
     /**

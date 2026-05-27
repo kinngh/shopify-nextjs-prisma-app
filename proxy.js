@@ -8,10 +8,10 @@ export const config = {
   matcher: [
     /*
      * Exceptions:
-     * /api/auth, /api/webhooks, /api/proxy_route, /api/gdpr, /_next,
+     * /api/auth, /api/webhooks, /api/events, /api/proxy_route, /api/gdpr, /_next,
      * /_proxy, /_auth, /_static, /_vercel, /public (/favicon.ico, etc)
      */
-    "/((?!api/auth|api/webhooks|api/proxy_route|api/gdpr|_next|_proxy|_auth|_static|_vercel|[\\w-]+\\.\\w+).*)",
+    "/((?!api/auth|api/webhooks|api/events|api/proxy_route|api/gdpr|_next|_proxy|_auth|_static|_vercel|[\\w-]+\\.\\w+).*)",
   ],
 };
 

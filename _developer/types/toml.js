@@ -20,6 +20,7 @@
  * @property {AccessConfig} access - The access scopes required by the application.
  * @property {AuthConfig} auth - Authentication configuration details.
  * @property {WebhooksConfig} webhooks - Configuration for webhooks.
+ * @property {EventsConfig} events - Configuration for events.
  * @property {AppProxyConfig} app_proxy - Configuration for application proxy.
  * @property {POSConfig} pos - Point of Sale configuration.
  * @property {PreferencesConfig} preferences - App preferences configuration.
@@ -62,6 +63,25 @@
  * @property {string} url - The URL to receive webhook events.
  * @property {string} [filter] - Optional filter for webhook events.
  * @property {string[]} [include_fields] - Optional array of fields to include in the webhook payload.
+ */
+
+/**
+ * Event configuration
+ * @typedef {Object} EventsConfig
+ * @property {"unstable"} api_version - The API version to be used for events.
+ * @property {EventSubscription[]} subscription - Array of event subscriptions.
+ */
+
+/**
+ * Event subscription
+ * @typedef {Object} EventSubscription
+ * @property {('Product' | 'Customer')} topic - Event topic.
+ * @property {Array<('create' | 'update' | 'delete')>} actions - Event actions.
+ * @property {string} uri - The URI to receive events.
+ * @property {string} handle - Human readable event handle.
+ * @property {string[]} [triggers] - Optional event triggers.
+ * @property {string} [query] - Optional GraphQL query.
+ * @property {string} [query_filter] - Optional filter for the GraphQL query.
  */
 
 /**
