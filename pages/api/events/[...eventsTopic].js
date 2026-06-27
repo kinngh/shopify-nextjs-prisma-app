@@ -6,7 +6,6 @@
  */
 
 import shopify from "@/utils/shopify.js";
-import productEventHandler from "@/utils/events/product.js";
 
 async function buffer(readable) {
   const chunks = [];
@@ -46,16 +45,6 @@ export default async function handler(req, res) {
 
     //SWITCHCASE
     switch (eventHandle) {
-      case "this-is-my-handle":
-        await productEventHandler(
-          validateEvent.topic,
-          shop,
-          rawBody,
-          webhookId,
-          apiVersion,
-          eventHandle
-        );
-        break;
       default:
         throw new Error(`Can't find a handler for ${eventHandle}`);
     }

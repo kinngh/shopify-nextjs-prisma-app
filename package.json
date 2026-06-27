@@ -39,25 +39,24 @@
     "prepare": "npx prisma generate"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/adapter-mariadb": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@shopify/polaris": "^13.9.5",
-    "@shopify/shopify-api": "^13.0.0",
+    "@shopify/shopify-api": "^13.1.0",
     "cryptr": "^6.4.0",
     "dotenv": "^17.4.2",
-    "next": "16.2.6",
+    "next": "16.2.9",
     "next-api-middleware": "^3.0.0",
-    "pg": "^8.20.0",
-    "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
     "@shopify/polaris-types": "^1.0.7",
-    "@shopify/cli-kit": "^3.94.3",
+    "@shopify/cli-kit": "^4.3.0",
     "ngrok": "^5.0.0-beta.2",
-    "npm-check-updates": "^22.1.1",
-    "prettier": "^3.8.3",
+    "npm-check-updates": "^22.2.7",
+    "prettier": "^3.8.5",
     "prisma": "^7.8.0"
   }
 }

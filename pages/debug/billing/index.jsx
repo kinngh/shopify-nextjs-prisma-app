@@ -30,8 +30,8 @@ const BillingAPI = () => {
 
   return (
     <Page
-      title="Billing API"
-      subtitle="Ensure your app is set to `public distribution` to use Billing API"
+      title="App Pricing"
+      subtitle="Ensure your app is set to `public distribution` to use App Pricing"
       backAction={{
         onAction: () => router.push("/debug"),
       }}
@@ -40,23 +40,30 @@ const BillingAPI = () => {
         <Layout.Section>
           <Card>
             <BlockStack gap="200">
-              <Text>
-                Subscribe your merchant to a test $10.25 plan and redirect to
-                your home page.
+              <Text as="h2" variant="headingMd">
+                Plans and Pricing Page
               </Text>
-
-              {
-                /* If we have an error, it'll pop up here. */
-                responseData && <p>{responseData}</p>
-              }
+              <Text>
+                Ensure you've setup your plans in Partner Dashboard &gt; App
+                Distribution &gt; <code>Your App</code> &gt; Distribution &gt;
+                Manage Submission &gt; <code>Listing Language</code> &gt;
+                Pricing Details.
+              </Text>
+              <Text>
+                In <code>Redirect URL</code>, set to{" "}
+                <code>/debug/billing/landing</code>
+              </Text>
               <InlineStack align="end">
                 <Button
                   variant="primary"
                   onClick={() => {
-                    fetchContent();
+                    window?.open(
+                      `https://admin.shopify.com/store/${window?.shopify?.config?.shop?.replace(".myshopify.com", "")}/charges/${process.env.CONFIG_SHOPIFY_APP_HANDLE}/pricing_plans`,
+                      "_top"
+                    );
                   }}
                 >
-                  Subscribe Merchant
+                  To Pricing Plans Page
                 </Button>
               </InlineStack>
             </BlockStack>
