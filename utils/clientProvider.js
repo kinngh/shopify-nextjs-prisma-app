@@ -113,12 +113,46 @@ const online = {
 };
 
 /**
+ * Provides methods to create clients for Partner Org.
+ * @namespace partner
+ */
+const partner = {
+  graphqlClient: async () => {
+    const client = {
+      request: async (query, { variables }) => {
+        const response = await fetch(
+          `https://partners.shopify.com/${process.env.PARTNER_ORG_ID}/api/${process.env.PARTNER_API_VERSION}/graphql.json`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "X-Shopify-Access-Token": process.env.PARTNER_ACCESS_TOKEN,
+            },
+            method: "POST",
+            body: JSON.stringify({ query, variables }),
+          }
+        );
+        const result = await response?.json();
+
+        if (!response.ok) {
+          throw new Error(result.errors?.[0]?.message || response.statusText);
+        }
+
+        return result;
+      },
+    };
+
+    return { client };
+  },
+};
+/**
  * Provides GraphQL client providers for both online and offline access.
  * @namespace clientProvider
  */
 const clientProvider = {
   offline,
   online,
+  partner,
 };
 
 export default clientProvider;

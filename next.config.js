@@ -16,6 +16,7 @@ const nextConfig = {
     CONFIG_SHOPIFY_API_OPTIONAL_SCOPES: JSON.stringify(
       process?.env?.SHOPIFY_API_OPTIONAL_SCOPES
     ),
+    CONFIG_SHOPIFY_APP_HANDLE: process.env.APP_HANDLE,
   },
   allowedDevOrigins: [
     process.env.SHOPIFY_APP_URL.toString().replace("https://", ""),

@@ -7,7 +7,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
 }
 
 model stores {
@@ -24,4 +24,25 @@ model session {
 
   @@index([id])
   @@index([shop])
+}
+
+model subscriptions {
+  id          String              @id
+  shop        String
+  status      subscription_status @default(PENDING)
+  charge_id   String
+  plan_handle String
+  created_at  DateTime            @default(now())
+  updated_at  DateTime            @updatedAt
+
+  @@index([id])
+  @@index([shop])
+}
+
+enum subscription_status {
+  ACTIVE
+  PENDING
+  CANCELLED
+  ABANDONED
+  OTHER
 }

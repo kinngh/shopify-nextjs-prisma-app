@@ -69,7 +69,7 @@ const DebugIndex = () => {
             <Card>
               <BlockStack gap="200">
                 <Text as="h2" variant="headingMd">
-                  Billing API
+                  App Pricing
                 </Text>
                 <Text>
                   Subscribe merchant to a plan and explore existing plans.
