@@ -47,8 +47,6 @@ const handler = async (req, res) => {
       }
     `);
 
-    //MARK:- Error handle no shop ID
-
     const shopId = response?.data?.shop?.id;
     const appId = response?.data?.appInstallation?.app?.id;
 
@@ -156,7 +154,7 @@ const handler = async (req, res) => {
 
     return res.status(200).send({ text: "Success!" });
   } catch (e) {
-    console.error("---> An error occured at /api/apps/", e);
+    console.error("---> An error occured at /api/apps/billing/create", e);
     return res.status(403).send({ error: true });
   }
 };
