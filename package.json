@@ -1,6 +1,6 @@
 {
   "name": "shopify-nextjs-prisma-app",
-  "version": "2026.07.25",
+  "version": "2026.07.31",
   "type": "module",
   "author": {
     "name": "Harshdeep Singh Hura",
@@ -17,8 +17,6 @@
     "pretty": "prettier --write ./",
     "update": "ncu -u",
     "-----> Tunnel <-----": "",
-    "ngrok:auth": "ngrok authtoken <auth-token-goes-here>",
-    "ngrok": "ngrok http 3000",
     "cloudflare": "cloudflared tunnel --url localhost:3000",
     "-----> Shopify <-----": "",
     "g:install": "npm i -g @shopify/cli@latest",
@@ -54,7 +52,6 @@
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
     "@shopify/polaris-types": "^1.0.7",
-    "ngrok": "^5.0.0-beta.2",
     "npm-check-updates": "^22.2.9",
     "prettier": "^3.9.6",
     "prisma": "^7.9.0"

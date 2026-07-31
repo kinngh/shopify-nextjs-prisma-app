@@ -1,4 +1,4 @@
-//Ref: https://shopify.dev/docs/api/webhooks/2025-04?reference=toml
+//Ref: https://shopify.dev/docs/api/webhooks/2026-04?reference=toml
 /**
  * @typedef {Object} WebhookTopics
  * @property {Array<(
@@ -12,7 +12,6 @@
  * 'carts/create' |
  * 'carts/update' |
  * 'channels/delete' |
- * 'checkout_and_accounts_configurations/update' |
  * 'checkouts/create' |
  * 'checkouts/delete' |
  * 'checkouts/update' |
@@ -58,6 +57,7 @@
  * 'customers/update' |
  * 'customers_email_marketing_consent/update' |
  * 'customers_marketing_consent/update' |
+ * 'customers_whats_app_marketing_consent/update' |
  * 'delivery_promise_settings/update' |
  * 'discounts/create' |
  * 'discounts/delete' |
@@ -92,10 +92,12 @@
  * 'fulfillment_orders/hold_released' |
  * 'fulfillment_orders/line_items_prepared_for_local_delivery' |
  * 'fulfillment_orders/line_items_prepared_for_pickup' |
+ * 'fulfillment_orders/manually_reported_progress_stopped' |
  * 'fulfillment_orders/merged' |
  * 'fulfillment_orders/moved' |
  * 'fulfillment_orders/order_routing_complete' |
  * 'fulfillment_orders/placed_on_hold' |
+ * 'fulfillment_orders/progress_reported' |
  * 'fulfillment_orders/rescheduled' |
  * 'fulfillment_orders/scheduled_fulfillment_order_ready' |
  * 'fulfillment_orders/split' |
@@ -107,7 +109,23 @@
  * 'inventory_levels/connect' |
  * 'inventory_levels/disconnect' |
  * 'inventory_levels/update' |
+ * 'inventory_shipments/add_items' |
+ * 'inventory_shipments/create' |
+ * 'inventory_shipments/delete' |
+ * 'inventory_shipments/mark_in_transit' |
+ * 'inventory_shipments/receive_items' |
+ * 'inventory_shipments/remove_items' |
+ * 'inventory_shipments/update_item_quantities' |
+ * 'inventory_shipments/update_tracking' |
+ * 'inventory_transfers/add_items' |
+ * 'inventory_transfers/cancel' |
+ * 'inventory_transfers/complete' |
+ * 'inventory_transfers/ready_to_ship' |
+ * 'inventory_transfers/remove_items' |
+ * 'inventory_transfers/update_item_quantities' |
+ * 'inventory_transfers/updated' |
  * 'locales/create' |
+ * 'locales/destroy' |
  * 'locales/update' |
  * 'locations/activate' |
  * 'locations/create' |
@@ -130,6 +148,7 @@
  * 'orders/delete' |
  * 'orders/edited' |
  * 'orders/fulfilled' |
+ * 'orders/link_requested' |
  * 'orders/paid' |
  * 'orders/partially_fulfilled' |
  * 'orders/risk_assessment_changed' |
@@ -161,6 +180,7 @@
  * 'returns/cancel' |
  * 'returns/close' |
  * 'returns/decline' |
+ * 'returns/process' |
  * 'returns/reopen' |
  * 'returns/request' |
  * 'returns/update' |
@@ -175,6 +195,8 @@
  * 'selling_plan_groups/create' |
  * 'selling_plan_groups/delete' |
  * 'selling_plan_groups/update' |
+ * 'shipping_addresses/create' |
+ * 'shipping_addresses/update' |
  * 'shop/redact' |
  * 'shop/update' |
  * 'subscription_billing_attempts/challenged' |
@@ -192,6 +214,8 @@
  * 'subscription_contracts/fail' |
  * 'subscription_contracts/pause' |
  * 'subscription_contracts/update' |
+ * 'tax_services/create' |
+ * 'tax_services/update' |
  * 'tender_transactions/create' |
  * 'themes/create' |
  * 'themes/delete' |

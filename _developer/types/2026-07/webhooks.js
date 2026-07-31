@@ -1,37 +1,37 @@
 /**
- * @typedef {Object} RETURNS_APPROVE_order
+* @typedef {Object} RETURNS_APPROVE_order
  * @property {number} id
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} RETURNS_APPROVE_return_shipping_fees_price_shop_money
+* @typedef {Object} RETURNS_APPROVE_return_shipping_fees_price_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} RETURNS_APPROVE_return_shipping_fees_price_presentment_money
+* @typedef {Object} RETURNS_APPROVE_return_shipping_fees_price_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} RETURNS_APPROVE_return_shipping_fees_price
+* @typedef {Object} RETURNS_APPROVE_return_shipping_fees_price
  * @property {RETURNS_APPROVE_return_shipping_fees_price_shop_money} shop_money
  * @property {RETURNS_APPROVE_return_shipping_fees_price_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} RETURNS_APPROVE_return_shipping_fees
+* @typedef {Object} RETURNS_APPROVE_return_shipping_fees
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {RETURNS_APPROVE_return_shipping_fees_price} price
  */
 /**
- * @typedef {Object} RETURNS_APPROVE_exchange_line_items
+* @typedef {Object} RETURNS_APPROVE_exchange_line_items
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {null|string} line_item
  */
 /**
- * @typedef {Object} RETURNS_APPROVE
+* @typedef {Object} RETURNS_APPROVE
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {string} status
@@ -44,31 +44,47 @@
  * @property {number} total_exchange_line_items
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_REJECTED_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_REJECTED_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} request_status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_REJECTED
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_REJECTED
  * @property {FULFILLMENT_ORDERS_CANCELLATION_REQUEST_REJECTED_fulfillment_order} fulfillment_order
  * @property {string} message
  */
 /**
- * @typedef {Object} METAOBJECTS_DELETE
+* @typedef {Object} METAOBJECTS_DELETE
  * @property {string} id
  * @property {string} type
  * @property {string} handle
  * @property {string} created_by_app_id
  */
 /**
- * @typedef {Object} CUSTOMERS_MERGE_errors
+* @typedef {Object} INVENTORY_TRANSFERS_CANCEL_origin
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_CANCEL_destination
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_CANCEL
+ * @property {string} id
+ * @property {string} happened_at
+ * @property {INVENTORY_TRANSFERS_CANCEL_origin} origin
+ * @property {INVENTORY_TRANSFERS_CANCEL_destination} destination
+ * @property {string} status
+ */
+/**
+* @typedef {Object} CUSTOMERS_MERGE_errors
  * @property {Array<number>} customer_ids
  * @property {string} field
  * @property {string} message
  */
 /**
- * @typedef {Object} CUSTOMERS_MERGE
+* @typedef {Object} CUSTOMERS_MERGE
  * @property {string} admin_graphql_api_customer_kept_id
  * @property {string} admin_graphql_api_customer_deleted_id
  * @property {null|string} admin_graphql_api_job_id
@@ -76,29 +92,19 @@
  * @property {Array<CUSTOMERS_MERGE_errors>} errors
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_ATTEMPTS_CHALLENGED
- * @property {null|string} id
- * @property {null|string} admin_graphql_api_id
- * @property {string} idempotency_key
- * @property {number} order_id
- * @property {string} admin_graphql_api_order_id
- * @property {number} subscription_contract_id
- * @property {string} admin_graphql_api_subscription_contract_id
- * @property {boolean} ready
- * @property {null|string} error_message
- * @property {null|string} error_code
+* @typedef {Object} SUBSCRIPTION_BILLING_ATTEMPTS_CHALLENGED
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_HOLD_RELEASED_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_HOLD_RELEASED_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_HOLD_RELEASED
+* @typedef {Object} FULFILLMENT_ORDERS_HOLD_RELEASED
  * @property {FULFILLMENT_ORDERS_HOLD_RELEASED_fulfillment_order} fulfillment_order
  */
 /**
- * @typedef {Object} PAYMENT_TERMS_UPDATE_payment_schedules
+* @typedef {Object} PAYMENT_TERMS_UPDATE_payment_schedules
  * @property {string} amount
  * @property {string} balance_due
  * @property {string} completed_at
@@ -115,7 +121,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} PAYMENT_TERMS_UPDATE
+* @typedef {Object} PAYMENT_TERMS_UPDATE
  * @property {number} id
  * @property {string} payment_terms_name
  * @property {string} payment_terms_type
@@ -126,22 +132,56 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_SERVICE_FAILED_TO_COMPLETE_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_SERVICE_FAILED_TO_COMPLETE_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_SERVICE_FAILED_TO_COMPLETE
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_SERVICE_FAILED_TO_COMPLETE
  * @property {FULFILLMENT_ORDERS_FULFILLMENT_SERVICE_FAILED_TO_COMPLETE_fulfillment_order} fulfillment_order
  * @property {string} message
  */
 /**
- * @typedef {Object} INVENTORY_LEVELS_DISCONNECT
+* @typedef {Object} FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED_fulfillment_order
+ * @property {string} id
+ * @property {string} status
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED_progress_stopped_by_app
+ * @property {string} id
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED_progress_stopped_by_user
+ * @property {string} id
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED
+ * @property {FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED_fulfillment_order} fulfillment_order
+ * @property {FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED_progress_stopped_by_app} progress_stopped_by_app
+ * @property {FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED_progress_stopped_by_user} progress_stopped_by_user
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_UPDATED_origin
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_UPDATED_destination
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_UPDATED
+ * @property {string} id
+ * @property {string} happened_at
+ * @property {INVENTORY_TRANSFERS_UPDATED_origin} origin
+ * @property {INVENTORY_TRANSFERS_UPDATED_destination} destination
+ */
+/**
+* @typedef {Object} INVENTORY_LEVELS_DISCONNECT
  * @property {number} inventory_item_id
  * @property {number} location_id
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_line_items_tax_lines
+* @typedef {Object} CHECKOUTS_CREATE_line_items_tax_lines
  * @property {string} price
  * @property {number} position
  * @property {number} rate
@@ -164,7 +204,7 @@
  * @property {boolean} channel_liable
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_line_items_unit_price_measurement
+* @typedef {Object} CHECKOUTS_CREATE_line_items_unit_price_measurement
  * @property {null|string} measured_type
  * @property {null|string} quantity_value
  * @property {null|string} quantity_unit
@@ -172,7 +212,7 @@
  * @property {null|string} reference_unit
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_line_items
+* @typedef {Object} CHECKOUTS_CREATE_line_items
  * @property {Array} applied_discounts
  * @property {Array} discount_allocations
  * @property {string} key
@@ -203,14 +243,14 @@
  * @property {string} price
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_tax_lines
+* @typedef {Object} CHECKOUTS_CREATE_tax_lines
  * @property {string} price
  * @property {number} rate
  * @property {string} title
  * @property {boolean} channel_liable
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_billing_address
+* @typedef {Object} CHECKOUTS_CREATE_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -228,7 +268,7 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_shipping_address
+* @typedef {Object} CHECKOUTS_CREATE_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -246,11 +286,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_customer_default_address
+* @typedef {Object} CHECKOUTS_CREATE_customer_default_address
  * @property {null|string} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -266,9 +306,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE_customer
+* @typedef {Object} CHECKOUTS_CREATE_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -278,15 +317,15 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {CHECKOUTS_CREATE_customer_default_address} default_address
  */
 /**
- * @typedef {Object} CHECKOUTS_CREATE
- * @property {number} id
+* @typedef {Object} CHECKOUTS_CREATE
  * @property {string} token
  * @property {string} cart_token
  * @property {string} email
@@ -333,7 +372,7 @@
  * @property {CHECKOUTS_CREATE_customer} customer
  */
 /**
- * @typedef {Object} ORDERS_RISK_ASSESSMENT_CHANGED
+* @typedef {Object} ORDERS_RISK_ASSESSMENT_CHANGED
  * @property {null|string} provider_id
  * @property {null|string} provider_title
  * @property {string} risk_level
@@ -342,19 +381,25 @@
  * @property {null|string} admin_graphql_api_order_id
  */
 /**
- * @typedef {Object} RETURNS_DECLINE_decline
+* @typedef {Object} RETURNS_DECLINE_order
+ * @property {number} id
+ * @property {string} admin_graphql_api_id
+ */
+/**
+* @typedef {Object} RETURNS_DECLINE_decline
  * @property {string} reason
  * @property {string} note
  */
 /**
- * @typedef {Object} RETURNS_DECLINE
+* @typedef {Object} RETURNS_DECLINE
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {string} status
+ * @property {RETURNS_DECLINE_order} order
  * @property {RETURNS_DECLINE_decline} decline
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_metadata
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_metadata
  * @property {string} action
  * @property {string} type
  * @property {string} resource
@@ -363,56 +408,56 @@
  * @property {string} occurred_at
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_productFeed
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_productFeed
  * @property {string} id
  * @property {string} shop_id
- * @property {string} country
  * @property {string} language
+ * @property {string} country
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_images_edges_node
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_images_edges_node
  * @property {string} id
  * @property {string} url
  * @property {number} height
  * @property {number} width
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_images_edges
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_images_edges
  * @property {PRODUCT_FEEDS_FULL_SYNC_product_images_edges_node} node
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_images
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_images
  * @property {Array<PRODUCT_FEEDS_FULL_SYNC_product_images_edges>} edges
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_options
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_options
  * @property {string} name
  * @property {Array<string>} values
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_seo
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_seo
  * @property {string} title
  * @property {string} description
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_price
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_price
  * @property {string} amount
  * @property {string} currencyCode
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_image
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_image
  * @property {string} id
  * @property {string} url
  * @property {number} height
  * @property {number} width
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_selectedOptions
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_selectedOptions
  * @property {string} name
  * @property {string} value
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node
  * @property {string} id
  * @property {string} title
  * @property {PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_price} price
@@ -431,21 +476,22 @@
  * @property {Array<PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node_selectedOptions>} selectedOptions
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants_edges
  * @property {PRODUCT_FEEDS_FULL_SYNC_product_variants_edges_node} node
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product_variants
  * @property {Array<PRODUCT_FEEDS_FULL_SYNC_product_variants_edges>} edges
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_product
  * @property {string} id
  * @property {string} title
  * @property {string} description
  * @property {string} onlineStoreUrl
  * @property {string} createdAt
  * @property {string} updatedAt
+ * @property {string} status
  * @property {boolean} isPublished
  * @property {string} publishedAt
  * @property {string} productType
@@ -458,14 +504,14 @@
  * @property {PRODUCT_FEEDS_FULL_SYNC_product_variants} variants
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC
  * @property {PRODUCT_FEEDS_FULL_SYNC_metadata} metadata
  * @property {PRODUCT_FEEDS_FULL_SYNC_productFeed} productFeed
  * @property {PRODUCT_FEEDS_FULL_SYNC_product} product
  * @property {null|string} products
  */
 /**
- * @typedef {Object} THEMES_CREATE
+* @typedef {Object} THEMES_CREATE
  * @property {number} id
  * @property {string} name
  * @property {string} created_at
@@ -477,202 +523,202 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_current_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_current_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_shipping_price_set
+* @typedef {Object} ORDERS_PAID_current_shipping_price_set
  * @property {ORDERS_PAID_current_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_current_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_current_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_current_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_subtotal_price_set
+* @typedef {Object} ORDERS_PAID_current_subtotal_price_set
  * @property {ORDERS_PAID_current_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_current_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_PAID_current_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_PAID_current_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_discounts_set
+* @typedef {Object} ORDERS_PAID_current_total_discounts_set
  * @property {ORDERS_PAID_current_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_PAID_current_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_current_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_current_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_price_set
+* @typedef {Object} ORDERS_PAID_current_total_price_set
  * @property {ORDERS_PAID_current_total_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_current_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_tax_set_shop_money
+* @typedef {Object} ORDERS_PAID_current_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_PAID_current_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_current_total_tax_set
+* @typedef {Object} ORDERS_PAID_current_total_tax_set
  * @property {ORDERS_PAID_current_total_tax_set_shop_money} shop_money
  * @property {ORDERS_PAID_current_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_subtotal_price_set
+* @typedef {Object} ORDERS_PAID_subtotal_price_set
  * @property {ORDERS_PAID_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_cash_rounding_payment_adjustment_set_shop_money
+* @typedef {Object} ORDERS_PAID_total_cash_rounding_payment_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_cash_rounding_payment_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_PAID_total_cash_rounding_payment_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_cash_rounding_payment_adjustment_set
+* @typedef {Object} ORDERS_PAID_total_cash_rounding_payment_adjustment_set
  * @property {ORDERS_PAID_total_cash_rounding_payment_adjustment_set_shop_money} shop_money
  * @property {ORDERS_PAID_total_cash_rounding_payment_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_cash_rounding_refund_adjustment_set_shop_money
+* @typedef {Object} ORDERS_PAID_total_cash_rounding_refund_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_cash_rounding_refund_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_PAID_total_cash_rounding_refund_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_cash_rounding_refund_adjustment_set
+* @typedef {Object} ORDERS_PAID_total_cash_rounding_refund_adjustment_set
  * @property {ORDERS_PAID_total_cash_rounding_refund_adjustment_set_shop_money} shop_money
  * @property {ORDERS_PAID_total_cash_rounding_refund_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_PAID_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_PAID_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_discounts_set
+* @typedef {Object} ORDERS_PAID_total_discounts_set
  * @property {ORDERS_PAID_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_PAID_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_total_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_total_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_line_items_price_set
+* @typedef {Object} ORDERS_PAID_total_line_items_price_set
  * @property {ORDERS_PAID_total_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_total_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_price_set
+* @typedef {Object} ORDERS_PAID_total_price_set
  * @property {ORDERS_PAID_total_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_total_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_total_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_shipping_price_set
+* @typedef {Object} ORDERS_PAID_total_shipping_price_set
  * @property {ORDERS_PAID_total_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_total_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_tax_set_shop_money
+* @typedef {Object} ORDERS_PAID_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_PAID_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_total_tax_set
+* @typedef {Object} ORDERS_PAID_total_tax_set
  * @property {ORDERS_PAID_total_tax_set_shop_money} shop_money
  * @property {ORDERS_PAID_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_billing_address
+* @typedef {Object} ORDERS_PAID_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -690,11 +736,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_customer_default_address
+* @typedef {Object} ORDERS_PAID_customer_default_address
  * @property {number} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -710,9 +756,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} ORDERS_PAID_customer
+* @typedef {Object} ORDERS_PAID_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -722,6 +767,7 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
+ * @property {string} email
  * @property {null|string} phone
  * @property {string} currency
  * @property {Array} tax_exemptions
@@ -729,42 +775,42 @@
  * @property {ORDERS_PAID_customer_default_address} default_address
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items_attributed_staffs
+* @typedef {Object} ORDERS_PAID_line_items_attributed_staffs
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items_price_set
+* @typedef {Object} ORDERS_PAID_line_items_price_set
  * @property {ORDERS_PAID_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items_total_discount_set_shop_money
+* @typedef {Object} ORDERS_PAID_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items_total_discount_set_presentment_money
+* @typedef {Object} ORDERS_PAID_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items_total_discount_set
+* @typedef {Object} ORDERS_PAID_line_items_total_discount_set
  * @property {ORDERS_PAID_line_items_total_discount_set_shop_money} shop_money
  * @property {ORDERS_PAID_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_line_items
+* @typedef {Object} ORDERS_PAID_line_items
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {Array<ORDERS_PAID_line_items_attributed_staffs>} attributed_staffs
@@ -797,7 +843,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_address
+* @typedef {Object} ORDERS_PAID_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -815,52 +861,52 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_current_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_shipping_lines_current_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_current_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_shipping_lines_current_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_current_discounted_price_set
+* @typedef {Object} ORDERS_PAID_shipping_lines_current_discounted_price_set
  * @property {ORDERS_PAID_shipping_lines_current_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_shipping_lines_current_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_shipping_lines_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_shipping_lines_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_discounted_price_set
+* @typedef {Object} ORDERS_PAID_shipping_lines_discounted_price_set
  * @property {ORDERS_PAID_shipping_lines_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_shipping_lines_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_price_set_shop_money
+* @typedef {Object} ORDERS_PAID_shipping_lines_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_price_set_presentment_money
+* @typedef {Object} ORDERS_PAID_shipping_lines_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines_price_set
+* @typedef {Object} ORDERS_PAID_shipping_lines_price_set
  * @property {ORDERS_PAID_shipping_lines_price_set_shop_money} shop_money
  * @property {ORDERS_PAID_shipping_lines_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PAID_shipping_lines
+* @typedef {Object} ORDERS_PAID_shipping_lines
  * @property {number} id
  * @property {null|string} carrier_identifier
  * @property {null|string} code
@@ -878,7 +924,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_PAID
+* @typedef {Object} ORDERS_PAID
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {null|string} app_id
@@ -887,7 +933,6 @@
  * @property {string} cancel_reason
  * @property {string} cancelled_at
  * @property {null|string} cart_token
- * @property {null|string} checkout_id
  * @property {null|string} checkout_token
  * @property {null|string} client_details
  * @property {null|string} closed_at
@@ -972,9 +1017,10 @@
  * @property {ORDERS_PAID_shipping_address} shipping_address
  * @property {Array<ORDERS_PAID_shipping_lines>} shipping_lines
  * @property {Array} returns
+ * @property {Array} line_item_groups
  */
 /**
- * @typedef {Object} CUSTOMER_PAYMENT_METHODS_CREATE_payment_instrument
+* @typedef {Object} CUSTOMER_PAYMENT_METHODS_CREATE_payment_instrument
  * @property {string} last_digits
  * @property {number} month
  * @property {number} year
@@ -982,28 +1028,29 @@
  * @property {string} brand
  */
 /**
- * @typedef {Object} CUSTOMER_PAYMENT_METHODS_CREATE
+* @typedef {Object} CUSTOMER_PAYMENT_METHODS_CREATE
  * @property {string} admin_graphql_api_id
  * @property {string} token
  * @property {number} customer_id
  * @property {string} admin_graphql_api_customer_id
  * @property {string} instrument_type
  * @property {CUSTOMER_PAYMENT_METHODS_CREATE_payment_instrument} payment_instrument
+ * @property {string} resource_type
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_PAUSE_billing_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_PAUSE_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {number} min_cycles
  * @property {number} max_cycles
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_PAUSE_delivery_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_PAUSE_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_PAUSE
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_PAUSE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {SUBSCRIPTION_CONTRACTS_PAUSE_billing_policy} billing_policy
@@ -1017,7 +1064,7 @@
  * @property {string} revision_id
  */
 /**
- * @typedef {Object} COMPANIES_DELETE
+* @typedef {Object} COMPANIES_DELETE
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -1028,7 +1075,30 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACTS_CREATE_company
+* @typedef {Object} INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES_origin
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES_destination
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES_items_updated
+ * @property {string} line_item_id
+ * @property {number} old_quantity
+ * @property {number} new_quantity
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES
+ * @property {string} id
+ * @property {string} happened_at
+ * @property {INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES_origin} origin
+ * @property {INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES_destination} destination
+ * @property {string} status
+ * @property {Array<INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES_items_updated>} items_updated
+ */
+/**
+* @typedef {Object} COMPANY_CONTACTS_CREATE_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -1039,7 +1109,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACTS_CREATE
+* @typedef {Object} COMPANY_CONTACTS_CREATE
  * @property {string} customer_admin_graphql_api_id
  * @property {string} title
  * @property {string} locale
@@ -1049,36 +1119,36 @@
  * @property {COMPANY_CONTACTS_CREATE_company} company
  */
 /**
- * @typedef {Object} ORDERS_EDITED_order_edit_line_items_additions
+* @typedef {Object} ORDERS_EDITED_order_edit_line_items_additions
  * @property {number} id
  * @property {number} delta
  */
 /**
- * @typedef {Object} ORDERS_EDITED_order_edit_line_items_removals
+* @typedef {Object} ORDERS_EDITED_order_edit_line_items_removals
  * @property {number} id
  * @property {number} delta
  */
 /**
- * @typedef {Object} ORDERS_EDITED_order_edit_line_items
+* @typedef {Object} ORDERS_EDITED_order_edit_line_items
  * @property {Array<ORDERS_EDITED_order_edit_line_items_additions>} additions
  * @property {Array<ORDERS_EDITED_order_edit_line_items_removals>} removals
  */
 /**
- * @typedef {Object} ORDERS_EDITED_order_edit_discounts_line_item
+* @typedef {Object} ORDERS_EDITED_order_edit_discounts_line_item
  * @property {Array} additions
  * @property {Array} removals
  */
 /**
- * @typedef {Object} ORDERS_EDITED_order_edit_discounts
+* @typedef {Object} ORDERS_EDITED_order_edit_discounts
  * @property {ORDERS_EDITED_order_edit_discounts_line_item} line_item
  */
 /**
- * @typedef {Object} ORDERS_EDITED_order_edit_shipping_lines
+* @typedef {Object} ORDERS_EDITED_order_edit_shipping_lines
  * @property {Array} additions
  * @property {Array} removals
  */
 /**
- * @typedef {Object} ORDERS_EDITED_order_edit
+* @typedef {Object} ORDERS_EDITED_order_edit
  * @property {number} id
  * @property {null|string} app_id
  * @property {string} created_at
@@ -1092,14 +1162,14 @@
  * @property {ORDERS_EDITED_order_edit_shipping_lines} shipping_lines
  */
 /**
- * @typedef {Object} ORDERS_EDITED
+* @typedef {Object} ORDERS_EDITED
  * @property {ORDERS_EDITED_order_edit} order_edit
  */
 /**
- * @typedef {Object} FINANCE_APP_STAFF_MEMBER_UPDATE
+* @typedef {Object} FINANCE_APP_STAFF_MEMBER_UPDATE
  */
 /**
- * @typedef {Object} PAYMENT_SCHEDULES_DUE
+* @typedef {Object} PAYMENT_SCHEDULES_DUE
  * @property {string} amount
  * @property {string} balance_due
  * @property {string} completed_at
@@ -1116,7 +1186,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} APP_PURCHASES_ONE_TIME_UPDATE_app_purchase_one_time
+* @typedef {Object} APP_PURCHASES_ONE_TIME_UPDATE_app_purchase_one_time
  * @property {string} admin_graphql_api_id
  * @property {string} name
  * @property {string} status
@@ -1125,18 +1195,23 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} APP_PURCHASES_ONE_TIME_UPDATE
+* @typedef {Object} APP_PURCHASES_ONE_TIME_UPDATE
  * @property {APP_PURCHASES_ONE_TIME_UPDATE_app_purchase_one_time} app_purchase_one_time
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_CREATE_selling_plans_billing_policy
+* @typedef {Object} INVENTORY_SHIPMENTS_DELETE
+ * @property {string} id
+ * @property {string} happened_at
+ */
+/**
+* @typedef {Object} SELLING_PLAN_GROUPS_CREATE_selling_plans_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {null|string} min_cycles
  * @property {null|string} max_cycles
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_CREATE_selling_plans_delivery_policy
+* @typedef {Object} SELLING_PLAN_GROUPS_CREATE_selling_plans_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {Array} anchors
@@ -1144,7 +1219,7 @@
  * @property {string} pre_anchor_behavior
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_CREATE_selling_plans
+* @typedef {Object} SELLING_PLAN_GROUPS_CREATE_selling_plans
  * @property {string} name
  * @property {Array<string>} options
  * @property {null|string} position
@@ -1154,7 +1229,7 @@
  * @property {Array} pricing_policies
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_CREATE
+* @typedef {Object} SELLING_PLAN_GROUPS_CREATE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {string} name
@@ -1170,13 +1245,13 @@
  * @property {Array} products
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_DELETE_tax_settings
+* @typedef {Object} COMPANY_LOCATIONS_DELETE_tax_settings
  * @property {string} tax_registration_id
  * @property {null|string} tax_exempt
  * @property {Array<string>} tax_exemptions
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_DELETE_company
+* @typedef {Object} COMPANY_LOCATIONS_DELETE_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -1187,7 +1262,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_DELETE_billing_address
+* @typedef {Object} COMPANY_LOCATIONS_DELETE_billing_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -1206,7 +1281,7 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_DELETE_shipping_address
+* @typedef {Object} COMPANY_LOCATIONS_DELETE_shipping_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -1225,11 +1300,11 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_DELETE_tax_registration
+* @typedef {Object} COMPANY_LOCATIONS_DELETE_tax_registration
  * @property {string} tax_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_DELETE
+* @typedef {Object} COMPANY_LOCATIONS_DELETE
  * @property {string} name
  * @property {string} external_id
  * @property {string} phone
@@ -1247,205 +1322,205 @@
  * @property {COMPANY_LOCATIONS_DELETE_tax_registration} tax_registration
  */
 /**
- * @typedef {Object} SHIPPING_ADDRESSES_CREATE
+* @typedef {Object} SHIPPING_ADDRESSES_CREATE
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_current_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_current_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_shipping_price_set
+* @typedef {Object} ORDERS_FULFILLED_current_shipping_price_set
  * @property {ORDERS_FULFILLED_current_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_current_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_current_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_current_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_subtotal_price_set
+* @typedef {Object} ORDERS_FULFILLED_current_subtotal_price_set
  * @property {ORDERS_FULFILLED_current_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_current_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_current_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_current_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_discounts_set
+* @typedef {Object} ORDERS_FULFILLED_current_total_discounts_set
  * @property {ORDERS_FULFILLED_current_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_current_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_current_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_current_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_price_set
+* @typedef {Object} ORDERS_FULFILLED_current_total_price_set
  * @property {ORDERS_FULFILLED_current_total_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_current_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_tax_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_current_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_current_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_current_total_tax_set
+* @typedef {Object} ORDERS_FULFILLED_current_total_tax_set
  * @property {ORDERS_FULFILLED_current_total_tax_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_current_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_subtotal_price_set
+* @typedef {Object} ORDERS_FULFILLED_subtotal_price_set
  * @property {ORDERS_FULFILLED_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set
+* @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set
  * @property {ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_total_cash_rounding_payment_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set
+* @typedef {Object} ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set
  * @property {ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_total_cash_rounding_refund_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_discounts_set
+* @typedef {Object} ORDERS_FULFILLED_total_discounts_set
  * @property {ORDERS_FULFILLED_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_total_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_total_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_line_items_price_set
+* @typedef {Object} ORDERS_FULFILLED_total_line_items_price_set
  * @property {ORDERS_FULFILLED_total_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_total_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_price_set
+* @typedef {Object} ORDERS_FULFILLED_total_price_set
  * @property {ORDERS_FULFILLED_total_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_total_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_total_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_shipping_price_set
+* @typedef {Object} ORDERS_FULFILLED_total_shipping_price_set
  * @property {ORDERS_FULFILLED_total_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_total_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_tax_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_total_tax_set
+* @typedef {Object} ORDERS_FULFILLED_total_tax_set
  * @property {ORDERS_FULFILLED_total_tax_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_billing_address
+* @typedef {Object} ORDERS_FULFILLED_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -1463,11 +1538,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_customer_default_address
+* @typedef {Object} ORDERS_FULFILLED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -1483,9 +1558,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_customer
+* @typedef {Object} ORDERS_FULFILLED_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -1495,6 +1569,7 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
+ * @property {string} email
  * @property {null|string} phone
  * @property {string} currency
  * @property {Array} tax_exemptions
@@ -1502,42 +1577,42 @@
  * @property {ORDERS_FULFILLED_customer_default_address} default_address
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items_attributed_staffs
+* @typedef {Object} ORDERS_FULFILLED_line_items_attributed_staffs
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items_price_set
+* @typedef {Object} ORDERS_FULFILLED_line_items_price_set
  * @property {ORDERS_FULFILLED_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items_total_discount_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items_total_discount_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items_total_discount_set
+* @typedef {Object} ORDERS_FULFILLED_line_items_total_discount_set
  * @property {ORDERS_FULFILLED_line_items_total_discount_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_line_items
+* @typedef {Object} ORDERS_FULFILLED_line_items
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {Array<ORDERS_FULFILLED_line_items_attributed_staffs>} attributed_staffs
@@ -1570,7 +1645,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_address
+* @typedef {Object} ORDERS_FULFILLED_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -1588,52 +1663,52 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_current_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_current_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_current_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_current_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_current_discounted_price_set
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_current_discounted_price_set
  * @property {ORDERS_FULFILLED_shipping_lines_current_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_shipping_lines_current_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_discounted_price_set
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_discounted_price_set
  * @property {ORDERS_FULFILLED_shipping_lines_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_shipping_lines_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_price_set_shop_money
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_price_set_presentment_money
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines_price_set
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines_price_set
  * @property {ORDERS_FULFILLED_shipping_lines_price_set_shop_money} shop_money
  * @property {ORDERS_FULFILLED_shipping_lines_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED_shipping_lines
+* @typedef {Object} ORDERS_FULFILLED_shipping_lines
  * @property {number} id
  * @property {null|string} carrier_identifier
  * @property {null|string} code
@@ -1651,7 +1726,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_FULFILLED
+* @typedef {Object} ORDERS_FULFILLED
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {null|string} app_id
@@ -1660,7 +1735,6 @@
  * @property {string} cancel_reason
  * @property {string} cancelled_at
  * @property {null|string} cart_token
- * @property {null|string} checkout_id
  * @property {null|string} checkout_token
  * @property {null|string} client_details
  * @property {null|string} closed_at
@@ -1745,17 +1819,18 @@
  * @property {ORDERS_FULFILLED_shipping_address} shipping_address
  * @property {Array<ORDERS_FULFILLED_shipping_lines>} shipping_lines
  * @property {Array} returns
+ * @property {Array} line_item_groups
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_order
+* @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_order
  * @property {string} id
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_hold_held_by_app
+* @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_hold_held_by_app
  * @property {string} id
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_hold
+* @typedef {Object} FULFILLMENT_HOLDS_RELEASED_fulfillment_hold
  * @property {string} id
  * @property {string} reason
  * @property {string} reason_notes
@@ -1764,249 +1839,270 @@
  * @property {FULFILLMENT_HOLDS_RELEASED_fulfillment_hold_held_by_app} held_by_app
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_RELEASED
+* @typedef {Object} FULFILLMENT_HOLDS_RELEASED
  * @property {FULFILLMENT_HOLDS_RELEASED_fulfillment_order} fulfillment_order
  * @property {FULFILLMENT_HOLDS_RELEASED_fulfillment_hold} fulfillment_hold
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP_fulfillment_order_delivery_method
+* @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP_fulfillment_order_delivery_method
  * @property {string} method_type
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {boolean} preparable
  * @property {FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP_fulfillment_order_delivery_method} delivery_method
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP
+* @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP
  * @property {FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP_fulfillment_order} fulfillment_order
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_SPLIT_split_line_items
+* @typedef {Object} FULFILLMENT_ORDERS_SPLIT_split_line_items
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_SPLIT_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_SPLIT_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_SPLIT_remaining_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_SPLIT_remaining_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_SPLIT_replacement_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_SPLIT_replacement_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_SPLIT
+* @typedef {Object} FULFILLMENT_ORDERS_SPLIT
  * @property {Array<FULFILLMENT_ORDERS_SPLIT_split_line_items>} split_line_items
  * @property {FULFILLMENT_ORDERS_SPLIT_fulfillment_order} fulfillment_order
  * @property {FULFILLMENT_ORDERS_SPLIT_remaining_fulfillment_order} remaining_fulfillment_order
  * @property {FULFILLMENT_ORDERS_SPLIT_replacement_fulfillment_order} replacement_fulfillment_order
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set_shop_money
+* @typedef {Object} INVENTORY_TRANSFERS_ADD_ITEMS_origin
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_ADD_ITEMS_destination
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_ADD_ITEMS_items_added
+ * @property {string} line_item_id
+ * @property {number} quantity
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_ADD_ITEMS
+ * @property {string} id
+ * @property {string} happened_at
+ * @property {INVENTORY_TRANSFERS_ADD_ITEMS_origin} origin
+ * @property {INVENTORY_TRANSFERS_ADD_ITEMS_destination} destination
+ * @property {Array<INVENTORY_TRANSFERS_ADD_ITEMS_items_added>} items_added
+ */
+/**
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_current_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_current_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set
  * @property {ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_current_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_current_total_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_current_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_tax_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_tax_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_current_total_tax_set
  * @property {ORDERS_PARTIALLY_FULFILLED_current_total_tax_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_current_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_subtotal_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_subtotal_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set
  * @property {ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_payment_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set
  * @property {ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_total_cash_rounding_refund_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_discounts_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_discounts_set
  * @property {ORDERS_PARTIALLY_FULFILLED_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_total_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_total_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_total_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_tax_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_tax_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_total_tax_set
  * @property {ORDERS_PARTIALLY_FULFILLED_total_tax_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_billing_address
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -2024,11 +2120,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_customer_default_address
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -2044,9 +2140,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_customer
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -2056,6 +2151,7 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
+ * @property {string} email
  * @property {null|string} phone
  * @property {string} currency
  * @property {Array} tax_exemptions
@@ -2063,42 +2159,42 @@
  * @property {ORDERS_PARTIALLY_FULFILLED_customer_default_address} default_address
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_attributed_staffs
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_attributed_staffs
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set
  * @property {ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_line_items
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {Array<ORDERS_PARTIALLY_FULFILLED_line_items_attributed_staffs>} attributed_staffs
@@ -2131,7 +2227,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_address
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -2149,52 +2245,52 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_shipping_lines_current_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_shipping_lines_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set_shop_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set_presentment_money
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set
  * @property {ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set_shop_money} shop_money
  * @property {ORDERS_PARTIALLY_FULFILLED_shipping_lines_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED_shipping_lines
  * @property {number} id
  * @property {null|string} carrier_identifier
  * @property {null|string} code
@@ -2212,7 +2308,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_PARTIALLY_FULFILLED
+* @typedef {Object} ORDERS_PARTIALLY_FULFILLED
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {null|string} app_id
@@ -2221,7 +2317,6 @@
  * @property {string} cancel_reason
  * @property {string} cancelled_at
  * @property {null|string} cart_token
- * @property {null|string} checkout_id
  * @property {null|string} checkout_token
  * @property {null|string} client_details
  * @property {null|string} closed_at
@@ -2306,14 +2401,15 @@
  * @property {ORDERS_PARTIALLY_FULFILLED_shipping_address} shipping_address
  * @property {Array<ORDERS_PARTIALLY_FULFILLED_shipping_lines>} shipping_lines
  * @property {Array} returns
+ * @property {Array} line_item_groups
  */
 /**
- * @typedef {Object} LOCALES_CREATE
+* @typedef {Object} LOCALES_CREATE
  * @property {string} locale
  * @property {boolean} published
  */
 /**
- * @typedef {Object} DISPUTES_CREATE
+* @typedef {Object} DISPUTES_CREATE
  * @property {number} id
  * @property {number} order_id
  * @property {string} type
@@ -2328,7 +2424,7 @@
  * @property {string} initiated_at
  */
 /**
- * @typedef {Object} SEGMENTS_UPDATE
+* @typedef {Object} SEGMENTS_UPDATE
  * @property {number} id
  * @property {string} name
  * @property {string} query
@@ -2336,7 +2432,7 @@
  * @property {string} lastEditDate
  */
 /**
- * @typedef {Object} FULFILLMENT_EVENTS_CREATE
+* @typedef {Object} FULFILLMENT_EVENTS_CREATE
  * @property {number} id
  * @property {number} fulfillment_id
  * @property {string} status
@@ -2357,7 +2453,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_contact_company
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_contact_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -2368,7 +2464,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_contact
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_contact
  * @property {string} customer_admin_graphql_api_id
  * @property {string} title
  * @property {string} locale
@@ -2378,13 +2474,13 @@
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_contact_company} company
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_tax_settings
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_tax_settings
  * @property {string} tax_registration_id
  * @property {null|string} tax_exempt
  * @property {Array<string>} tax_exemptions
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_company
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -2395,7 +2491,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_billing_address
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_billing_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -2414,7 +2510,7 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_shipping_address
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_shipping_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -2433,11 +2529,11 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_tax_registration
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location_tax_registration
  * @property {string} tax_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_location
  * @property {string} name
  * @property {string} external_id
  * @property {string} phone
@@ -2455,17 +2551,17 @@
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_location_tax_registration} tax_registration
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_contact_role
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN_company_contact_role
  * @property {string} name
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN
+* @typedef {Object} COMPANY_CONTACT_ROLES_ASSIGN
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_contact} company_contact
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_location} company_location
  * @property {COMPANY_CONTACT_ROLES_ASSIGN_company_contact_role} company_contact_role
  */
 /**
- * @typedef {Object} CUSTOMER_GROUPS_CREATE
+* @typedef {Object} CUSTOMER_GROUPS_CREATE
  * @property {number} id
  * @property {string} name
  * @property {string} created_at
@@ -2473,29 +2569,29 @@
  * @property {string} query
  */
 /**
- * @typedef {Object} MARKETS_UPDATE
+* @typedef {Object} MARKETS_UPDATE
  * @property {number} id
  * @property {string} name
  * @property {string} type
  * @property {string} status
  */
 /**
- * @typedef {Object} PRODUCT_PUBLICATIONS_DELETE
+* @typedef {Object} PRODUCT_PUBLICATIONS_DELETE
  * @property {null|string} id
  */
 /**
- * @typedef {Object} METAFIELD_DEFINITIONS_DELETE
+* @typedef {Object} METAFIELD_DEFINITIONS_DELETE
  * @property {string} id
  * @property {string} type
  * @property {null|string} created_by_app_id
  */
 /**
- * @typedef {Object} RETURNS_REQUEST_order
+* @typedef {Object} RETURNS_REQUEST_order
  * @property {number} id
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} RETURNS_REQUEST
+* @typedef {Object} RETURNS_REQUEST
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {string} status
@@ -2508,14 +2604,15 @@
  * @property {number} total_exchange_line_items
  */
 /**
- * @typedef {Object} APP_SCOPES_UPDATE
+* @typedef {Object} APP_SCOPES_UPDATE
  * @property {number} id
+ * @property {string} shop_id
  * @property {Array<string>} previous
  * @property {Array<string>} current
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_line_items
+* @typedef {Object} DRAFT_ORDERS_CREATE_line_items
  * @property {number} id
  * @property {number} variant_id
  * @property {number} product_id
@@ -2538,7 +2635,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_shipping_address
+* @typedef {Object} DRAFT_ORDERS_CREATE_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -2556,7 +2653,7 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_billing_address
+* @typedef {Object} DRAFT_ORDERS_CREATE_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -2574,7 +2671,7 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_applied_discount
+* @typedef {Object} DRAFT_ORDERS_CREATE_applied_discount
  * @property {string} description
  * @property {string} value
  * @property {string} title
@@ -2582,20 +2679,20 @@
  * @property {string} value_type
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_shipping_line
- * @property {string} title
+* @typedef {Object} DRAFT_ORDERS_CREATE_shipping_line
  * @property {boolean} custom
  * @property {null|string} handle
+ * @property {string} title
  * @property {string} price
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_tax_lines
+* @typedef {Object} DRAFT_ORDERS_CREATE_tax_lines
  * @property {number} rate
  * @property {string} title
  * @property {string} price
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_payment_terms_payment_schedules
+* @typedef {Object} DRAFT_ORDERS_CREATE_payment_terms_payment_schedules
  * @property {number} id
  * @property {string} created_at
  * @property {string} updated_at
@@ -2617,7 +2714,7 @@
  * @property {string} outstanding_balance_currency
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_payment_terms
+* @typedef {Object} DRAFT_ORDERS_CREATE_payment_terms
  * @property {number} id
  * @property {string} payment_terms_name
  * @property {string} payment_terms_type
@@ -2628,11 +2725,11 @@
  * @property {boolean} can_pay_early
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_customer_default_address
+* @typedef {Object} DRAFT_ORDERS_CREATE_customer_default_address
  * @property {null|string} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -2648,9 +2745,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE_customer
+* @typedef {Object} DRAFT_ORDERS_CREATE_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -2660,14 +2756,15 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {DRAFT_ORDERS_CREATE_customer_default_address} default_address
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_CREATE
+* @typedef {Object} DRAFT_ORDERS_CREATE
  * @property {number} id
  * @property {null|string} note
  * @property {string} email
@@ -2702,7 +2799,7 @@
  * @property {DRAFT_ORDERS_CREATE_customer} customer
  */
 /**
- * @typedef {Object} VARIANTS_IN_STOCK
+* @typedef {Object} VARIANTS_IN_STOCK
  * @property {number} id
  * @property {number} product_id
  * @property {string} title
@@ -2724,202 +2821,202 @@
  * @property {null|string} image_id
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_current_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_current_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_shipping_price_set
+* @typedef {Object} ORDERS_CREATE_current_shipping_price_set
  * @property {ORDERS_CREATE_current_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_current_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_current_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_current_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_subtotal_price_set
+* @typedef {Object} ORDERS_CREATE_current_subtotal_price_set
  * @property {ORDERS_CREATE_current_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_current_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_CREATE_current_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_current_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_discounts_set
+* @typedef {Object} ORDERS_CREATE_current_total_discounts_set
  * @property {ORDERS_CREATE_current_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_CREATE_current_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_current_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_current_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_price_set
+* @typedef {Object} ORDERS_CREATE_current_total_price_set
  * @property {ORDERS_CREATE_current_total_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_current_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_tax_set_shop_money
+* @typedef {Object} ORDERS_CREATE_current_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_current_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_current_total_tax_set
+* @typedef {Object} ORDERS_CREATE_current_total_tax_set
  * @property {ORDERS_CREATE_current_total_tax_set_shop_money} shop_money
  * @property {ORDERS_CREATE_current_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_subtotal_price_set
+* @typedef {Object} ORDERS_CREATE_subtotal_price_set
  * @property {ORDERS_CREATE_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_cash_rounding_payment_adjustment_set_shop_money
+* @typedef {Object} ORDERS_CREATE_total_cash_rounding_payment_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_cash_rounding_payment_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_total_cash_rounding_payment_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_cash_rounding_payment_adjustment_set
+* @typedef {Object} ORDERS_CREATE_total_cash_rounding_payment_adjustment_set
  * @property {ORDERS_CREATE_total_cash_rounding_payment_adjustment_set_shop_money} shop_money
  * @property {ORDERS_CREATE_total_cash_rounding_payment_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_cash_rounding_refund_adjustment_set_shop_money
+* @typedef {Object} ORDERS_CREATE_total_cash_rounding_refund_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_cash_rounding_refund_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_total_cash_rounding_refund_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_cash_rounding_refund_adjustment_set
+* @typedef {Object} ORDERS_CREATE_total_cash_rounding_refund_adjustment_set
  * @property {ORDERS_CREATE_total_cash_rounding_refund_adjustment_set_shop_money} shop_money
  * @property {ORDERS_CREATE_total_cash_rounding_refund_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_CREATE_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_discounts_set
+* @typedef {Object} ORDERS_CREATE_total_discounts_set
  * @property {ORDERS_CREATE_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_CREATE_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_total_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_total_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_line_items_price_set
+* @typedef {Object} ORDERS_CREATE_total_line_items_price_set
  * @property {ORDERS_CREATE_total_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_total_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_price_set
+* @typedef {Object} ORDERS_CREATE_total_price_set
  * @property {ORDERS_CREATE_total_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_total_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_total_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_shipping_price_set
+* @typedef {Object} ORDERS_CREATE_total_shipping_price_set
  * @property {ORDERS_CREATE_total_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_total_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_tax_set_shop_money
+* @typedef {Object} ORDERS_CREATE_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_total_tax_set
+* @typedef {Object} ORDERS_CREATE_total_tax_set
  * @property {ORDERS_CREATE_total_tax_set_shop_money} shop_money
  * @property {ORDERS_CREATE_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_billing_address
+* @typedef {Object} ORDERS_CREATE_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -2937,11 +3034,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_customer_default_address
+* @typedef {Object} ORDERS_CREATE_customer_default_address
  * @property {number} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -2957,9 +3054,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} ORDERS_CREATE_customer
+* @typedef {Object} ORDERS_CREATE_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -2969,6 +3065,7 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
+ * @property {string} email
  * @property {null|string} phone
  * @property {string} currency
  * @property {Array} tax_exemptions
@@ -2976,42 +3073,42 @@
  * @property {ORDERS_CREATE_customer_default_address} default_address
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items_attributed_staffs
+* @typedef {Object} ORDERS_CREATE_line_items_attributed_staffs
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items_price_set
+* @typedef {Object} ORDERS_CREATE_line_items_price_set
  * @property {ORDERS_CREATE_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items_total_discount_set_shop_money
+* @typedef {Object} ORDERS_CREATE_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items_total_discount_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items_total_discount_set
+* @typedef {Object} ORDERS_CREATE_line_items_total_discount_set
  * @property {ORDERS_CREATE_line_items_total_discount_set_shop_money} shop_money
  * @property {ORDERS_CREATE_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_line_items
+* @typedef {Object} ORDERS_CREATE_line_items
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {Array<ORDERS_CREATE_line_items_attributed_staffs>} attributed_staffs
@@ -3044,7 +3141,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_address
+* @typedef {Object} ORDERS_CREATE_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -3062,52 +3159,52 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_current_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_shipping_lines_current_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_current_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_shipping_lines_current_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_current_discounted_price_set
+* @typedef {Object} ORDERS_CREATE_shipping_lines_current_discounted_price_set
  * @property {ORDERS_CREATE_shipping_lines_current_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_shipping_lines_current_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_shipping_lines_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_shipping_lines_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_discounted_price_set
+* @typedef {Object} ORDERS_CREATE_shipping_lines_discounted_price_set
  * @property {ORDERS_CREATE_shipping_lines_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_shipping_lines_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_price_set_shop_money
+* @typedef {Object} ORDERS_CREATE_shipping_lines_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_price_set_presentment_money
+* @typedef {Object} ORDERS_CREATE_shipping_lines_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines_price_set
+* @typedef {Object} ORDERS_CREATE_shipping_lines_price_set
  * @property {ORDERS_CREATE_shipping_lines_price_set_shop_money} shop_money
  * @property {ORDERS_CREATE_shipping_lines_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CREATE_shipping_lines
+* @typedef {Object} ORDERS_CREATE_shipping_lines
  * @property {number} id
  * @property {null|string} carrier_identifier
  * @property {null|string} code
@@ -3125,7 +3222,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_CREATE
+* @typedef {Object} ORDERS_CREATE
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {null|string} app_id
@@ -3134,7 +3231,6 @@
  * @property {string} cancel_reason
  * @property {string} cancelled_at
  * @property {null|string} cart_token
- * @property {null|string} checkout_id
  * @property {null|string} checkout_token
  * @property {null|string} client_details
  * @property {null|string} closed_at
@@ -3219,43 +3315,44 @@
  * @property {ORDERS_CREATE_shipping_address} shipping_address
  * @property {Array<ORDERS_CREATE_shipping_lines>} shipping_lines
  * @property {Array} returns
+ * @property {Array} line_item_groups
  */
 /**
- * @typedef {Object} DOMAINS_DESTROY_localization
+* @typedef {Object} DOMAINS_DESTROY_localization
  * @property {null|string} country
  * @property {string} default_locale
  * @property {Array} alternate_locales
  */
 /**
- * @typedef {Object} DOMAINS_DESTROY
+* @typedef {Object} DOMAINS_DESTROY
  * @property {number} id
  * @property {string} host
  * @property {boolean} ssl_enabled
  * @property {DOMAINS_DESTROY_localization} localization
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MOVED_original_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_MOVED_original_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} assigned_location_id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MOVED_moved_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_MOVED_moved_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} assigned_location_id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MOVED_fulfillment_order_line_items_requested
+* @typedef {Object} FULFILLMENT_ORDERS_MOVED_fulfillment_order_line_items_requested
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MOVED_source_location
+* @typedef {Object} FULFILLMENT_ORDERS_MOVED_source_location
  * @property {string} id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MOVED
+* @typedef {Object} FULFILLMENT_ORDERS_MOVED
  * @property {FULFILLMENT_ORDERS_MOVED_original_fulfillment_order} original_fulfillment_order
  * @property {FULFILLMENT_ORDERS_MOVED_moved_fulfillment_order} moved_fulfillment_order
  * @property {string} destination_location_id
@@ -3263,7 +3360,7 @@
  * @property {FULFILLMENT_ORDERS_MOVED_source_location} source_location
  */
 /**
- * @typedef {Object} APP_SUBSCRIPTIONS_APPROACHING_CAPPED_AMOUNT_app_subscription
+* @typedef {Object} APP_SUBSCRIPTIONS_APPROACHING_CAPPED_AMOUNT_app_subscription
  * @property {string} admin_graphql_api_id
  * @property {string} name
  * @property {number} balance_used
@@ -3274,206 +3371,212 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} APP_SUBSCRIPTIONS_APPROACHING_CAPPED_AMOUNT
+* @typedef {Object} APP_SUBSCRIPTIONS_APPROACHING_CAPPED_AMOUNT
  * @property {APP_SUBSCRIPTIONS_APPROACHING_CAPPED_AMOUNT_app_subscription} app_subscription
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_shipping_price_set_shop_money
+* @typedef {Object} INVENTORY_SHIPMENTS_MARK_IN_TRANSIT
+ * @property {string} id
+ * @property {string} status
+ * @property {string} happened_at
+ */
+/**
+* @typedef {Object} ORDERS_UPDATED_current_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_current_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_shipping_price_set
+* @typedef {Object} ORDERS_UPDATED_current_shipping_price_set
  * @property {ORDERS_UPDATED_current_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_current_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_current_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_current_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_subtotal_price_set
+* @typedef {Object} ORDERS_UPDATED_current_subtotal_price_set
  * @property {ORDERS_UPDATED_current_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_current_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_current_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_current_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_discounts_set
+* @typedef {Object} ORDERS_UPDATED_current_total_discounts_set
  * @property {ORDERS_UPDATED_current_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_current_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_current_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_current_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_price_set
+* @typedef {Object} ORDERS_UPDATED_current_total_price_set
  * @property {ORDERS_UPDATED_current_total_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_current_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_tax_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_current_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_current_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_current_total_tax_set
+* @typedef {Object} ORDERS_UPDATED_current_total_tax_set
  * @property {ORDERS_UPDATED_current_total_tax_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_current_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_subtotal_price_set
+* @typedef {Object} ORDERS_UPDATED_subtotal_price_set
  * @property {ORDERS_UPDATED_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set
+* @typedef {Object} ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set
  * @property {ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_total_cash_rounding_payment_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set
+* @typedef {Object} ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set
  * @property {ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_total_cash_rounding_refund_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_discounts_set
+* @typedef {Object} ORDERS_UPDATED_total_discounts_set
  * @property {ORDERS_UPDATED_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_total_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_total_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_line_items_price_set
+* @typedef {Object} ORDERS_UPDATED_total_line_items_price_set
  * @property {ORDERS_UPDATED_total_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_total_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_price_set
+* @typedef {Object} ORDERS_UPDATED_total_price_set
  * @property {ORDERS_UPDATED_total_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_total_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_total_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_shipping_price_set
+* @typedef {Object} ORDERS_UPDATED_total_shipping_price_set
  * @property {ORDERS_UPDATED_total_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_total_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_tax_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_total_tax_set
+* @typedef {Object} ORDERS_UPDATED_total_tax_set
  * @property {ORDERS_UPDATED_total_tax_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_billing_address
+* @typedef {Object} ORDERS_UPDATED_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -3491,11 +3594,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_customer_default_address
+* @typedef {Object} ORDERS_UPDATED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -3511,9 +3614,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_customer
+* @typedef {Object} ORDERS_UPDATED_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -3523,6 +3625,7 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
+ * @property {string} email
  * @property {null|string} phone
  * @property {string} currency
  * @property {Array} tax_exemptions
@@ -3530,42 +3633,42 @@
  * @property {ORDERS_UPDATED_customer_default_address} default_address
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items_attributed_staffs
+* @typedef {Object} ORDERS_UPDATED_line_items_attributed_staffs
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items_price_set
+* @typedef {Object} ORDERS_UPDATED_line_items_price_set
  * @property {ORDERS_UPDATED_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items_total_discount_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items_total_discount_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items_total_discount_set
+* @typedef {Object} ORDERS_UPDATED_line_items_total_discount_set
  * @property {ORDERS_UPDATED_line_items_total_discount_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_line_items
+* @typedef {Object} ORDERS_UPDATED_line_items
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {Array<ORDERS_UPDATED_line_items_attributed_staffs>} attributed_staffs
@@ -3598,7 +3701,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_address
+* @typedef {Object} ORDERS_UPDATED_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -3616,52 +3719,52 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_current_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_current_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_current_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_current_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_current_discounted_price_set
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_current_discounted_price_set
  * @property {ORDERS_UPDATED_shipping_lines_current_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_shipping_lines_current_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_discounted_price_set
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_discounted_price_set
  * @property {ORDERS_UPDATED_shipping_lines_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_shipping_lines_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_price_set_shop_money
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_price_set_presentment_money
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines_price_set
+* @typedef {Object} ORDERS_UPDATED_shipping_lines_price_set
  * @property {ORDERS_UPDATED_shipping_lines_price_set_shop_money} shop_money
  * @property {ORDERS_UPDATED_shipping_lines_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_UPDATED_shipping_lines
+* @typedef {Object} ORDERS_UPDATED_shipping_lines
  * @property {number} id
  * @property {null|string} carrier_identifier
  * @property {null|string} code
@@ -3679,7 +3782,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_UPDATED
+* @typedef {Object} ORDERS_UPDATED
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {null|string} app_id
@@ -3688,7 +3791,6 @@
  * @property {string} cancel_reason
  * @property {string} cancelled_at
  * @property {null|string} cart_token
- * @property {null|string} checkout_id
  * @property {null|string} checkout_token
  * @property {null|string} client_details
  * @property {null|string} closed_at
@@ -3773,9 +3875,10 @@
  * @property {ORDERS_UPDATED_shipping_address} shipping_address
  * @property {Array<ORDERS_UPDATED_shipping_lines>} shipping_lines
  * @property {Array} returns
+ * @property {Array} line_item_groups
  */
 /**
- * @typedef {Object} DISCOUNTS_CREATE
+* @typedef {Object} DISCOUNTS_CREATE
  * @property {string} admin_graphql_api_id
  * @property {string} title
  * @property {string} status
@@ -3783,7 +3886,7 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} ORDER_TRANSACTIONS_CREATE_payment_details
+* @typedef {Object} ORDER_TRANSACTIONS_CREATE_payment_details
  * @property {null|string} credit_card_bin
  * @property {null|string} avs_result_code
  * @property {null|string} cvv_result_code
@@ -3797,25 +3900,25 @@
  * @property {string} payment_method_name
  */
 /**
- * @typedef {Object} ORDER_TRANSACTIONS_CREATE_receipt
+* @typedef {Object} ORDER_TRANSACTIONS_CREATE_receipt
  */
 /**
- * @typedef {Object} ORDER_TRANSACTIONS_CREATE_total_unsettled_set_presentment_money
+* @typedef {Object} ORDER_TRANSACTIONS_CREATE_total_unsettled_set_presentment_money
  * @property {string} amount
  * @property {string} currency
  */
 /**
- * @typedef {Object} ORDER_TRANSACTIONS_CREATE_total_unsettled_set_shop_money
+* @typedef {Object} ORDER_TRANSACTIONS_CREATE_total_unsettled_set_shop_money
  * @property {string} amount
  * @property {string} currency
  */
 /**
- * @typedef {Object} ORDER_TRANSACTIONS_CREATE_total_unsettled_set
+* @typedef {Object} ORDER_TRANSACTIONS_CREATE_total_unsettled_set
  * @property {ORDER_TRANSACTIONS_CREATE_total_unsettled_set_presentment_money} presentment_money
  * @property {ORDER_TRANSACTIONS_CREATE_total_unsettled_set_shop_money} shop_money
  */
 /**
- * @typedef {Object} ORDER_TRANSACTIONS_CREATE
+* @typedef {Object} ORDER_TRANSACTIONS_CREATE
  * @property {number} id
  * @property {number} order_id
  * @property {string} kind
@@ -3843,20 +3946,20 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} DOMAINS_CREATE_localization
+* @typedef {Object} DOMAINS_CREATE_localization
  * @property {null|string} country
  * @property {string} default_locale
  * @property {Array} alternate_locales
  */
 /**
- * @typedef {Object} DOMAINS_CREATE
+* @typedef {Object} DOMAINS_CREATE
  * @property {number} id
  * @property {string} host
  * @property {boolean} ssl_enabled
  * @property {DOMAINS_CREATE_localization} localization
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH_metadata
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH_metadata
  * @property {string} action
  * @property {string} type
  * @property {string} resource
@@ -3865,14 +3968,14 @@
  * @property {string} occurred_at
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH_productFeed
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH_productFeed
  * @property {string} id
  * @property {string} shop_id
- * @property {string} country
  * @property {string} language
+ * @property {string} country
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH_fullSync
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH_fullSync
  * @property {string} createdAt
  * @property {null|string} errorCode
  * @property {string} status
@@ -3880,15 +3983,15 @@
  * @property {null|string} url
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH
+* @typedef {Object} PRODUCT_FEEDS_FULL_SYNC_FINISH
  * @property {PRODUCT_FEEDS_FULL_SYNC_FINISH_metadata} metadata
  * @property {PRODUCT_FEEDS_FULL_SYNC_FINISH_productFeed} productFeed
  * @property {PRODUCT_FEEDS_FULL_SYNC_FINISH_fullSync} fullSync
  */
 /**
- * @typedef {Object} COLLECTION_PUBLICATIONS_UPDATE
+* @typedef {Object} COLLECTION_PUBLICATIONS_UPDATE
  * @property {null|string} id
- * @property {null|string} publication_id
+ * @property {number} publication_id
  * @property {string} published_at
  * @property {boolean} published
  * @property {null|string} created_at
@@ -3896,11 +3999,11 @@
  * @property {number} collection_id
  */
 /**
- * @typedef {Object} LOCATIONS_DELETE
+* @typedef {Object} LOCATIONS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_destination
+* @typedef {Object} FULFILLMENTS_CREATE_destination
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -3918,37 +4021,37 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_line_items_price_set_shop_money
+* @typedef {Object} FULFILLMENTS_CREATE_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_line_items_price_set_presentment_money
+* @typedef {Object} FULFILLMENTS_CREATE_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_line_items_price_set
+* @typedef {Object} FULFILLMENTS_CREATE_line_items_price_set
  * @property {FULFILLMENTS_CREATE_line_items_price_set_shop_money} shop_money
  * @property {FULFILLMENTS_CREATE_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_line_items_total_discount_set_shop_money
+* @typedef {Object} FULFILLMENTS_CREATE_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_line_items_total_discount_set_presentment_money
+* @typedef {Object} FULFILLMENTS_CREATE_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_line_items_total_discount_set
+* @typedef {Object} FULFILLMENTS_CREATE_line_items_total_discount_set
  * @property {FULFILLMENTS_CREATE_line_items_total_discount_set_shop_money} shop_money
  * @property {FULFILLMENTS_CREATE_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_line_items
+* @typedef {Object} FULFILLMENTS_CREATE_line_items
  * @property {number} id
  * @property {null|string} variant_id
  * @property {string} title
@@ -3978,10 +4081,10 @@
  * @property {Array} tax_lines
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE_receipt
+* @typedef {Object} FULFILLMENTS_CREATE_receipt
  */
 /**
- * @typedef {Object} FULFILLMENTS_CREATE
+* @typedef {Object} FULFILLMENTS_CREATE
  * @property {number} id
  * @property {number} order_id
  * @property {string} status
@@ -4004,38 +4107,36 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} CUSTOMERS_DELETE
+* @typedef {Object} CUSTOMERS_DELETE
  * @property {number} id
- * @property {null|string} phone
- * @property {Array} addresses
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_original_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_original_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} request_status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_submitted_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_submitted_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} request_status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_fulfillment_order_merchant_request
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_fulfillment_order_merchant_request
  * @property {string} id
  * @property {string} message
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED
  * @property {FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_original_fulfillment_order} original_fulfillment_order
  * @property {FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_submitted_fulfillment_order} submitted_fulfillment_order
  * @property {FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_SUBMITTED_fulfillment_order_merchant_request} fulfillment_order_merchant_request
  */
 /**
- * @typedef {Object} CUSTOMERS_ENABLE_default_address
+* @typedef {Object} CUSTOMERS_ENABLE_default_address
  * @property {number} id
  * @property {number} customer_id
  * @property {string} first_name
@@ -4055,9 +4156,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} CUSTOMERS_ENABLE
+* @typedef {Object} CUSTOMERS_ENABLE
  * @property {number} id
- * @property {string} email
  * @property {string} created_at
  * @property {string} updated_at
  * @property {string} first_name
@@ -4067,15 +4167,16 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} addresses
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {CUSTOMERS_ENABLE_default_address} default_address
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_CYCLES_SKIP
+* @typedef {Object} SUBSCRIPTION_BILLING_CYCLES_SKIP
  * @property {number} subscription_contract_id
  * @property {string} cycle_start_at
  * @property {string} cycle_end_at
@@ -4086,13 +4187,13 @@
  * @property {boolean} edited
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_variants_option_values
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_variants_option_values
  * @property {number} option_id
  * @property {string} name
  * @property {string} value
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_variants
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_variants
  * @property {number} id
  * @property {string} title
  * @property {Array<SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_variants_option_values>} option_values
@@ -4117,7 +4218,7 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_options
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_options
  * @property {number} id
  * @property {string} name
  * @property {number} product_id
@@ -4125,7 +4226,7 @@
  * @property {Array<string>} values
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing
  * @property {number} product_id
  * @property {null|string} created_at
  * @property {string} updated_at
@@ -4142,25 +4243,30 @@
  * @property {Array<SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing_options>} options
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_ADD
  * @property {SCHEDULED_PRODUCT_LISTINGS_ADD_scheduled_product_listing} scheduled_product_listing
  */
 /**
- * @typedef {Object} PROFILES_DELETE
+* @typedef {Object} PROFILES_DELETE
  * @property {number} id
+ * @property {string} admin_graphql_api_id
+ * @property {string} name
+ * @property {boolean} default
+ * @property {null|string} profile_type
+ * @property {number} version
  */
 /**
- * @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions_reverse_fulfillment_order_line_item
+* @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions_reverse_fulfillment_order_line_item
  * @property {number} id
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions_location
+* @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions_location
  * @property {number} id
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions
+* @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions
  * @property {REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions_reverse_fulfillment_order_line_item} reverse_fulfillment_order_line_item
  * @property {null|string} reverse_delivery_line_item
  * @property {string} type
@@ -4168,14 +4274,14 @@
  * @property {number} quantity
  */
 /**
- * @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE
+* @typedef {Object} REVERSE_FULFILLMENT_ORDERS_DISPOSE
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {Array<REVERSE_FULFILLMENT_ORDERS_DISPOSE_dispositions>} dispositions
  * @property {number} total_dispositions
  */
 /**
- * @typedef {Object} PAYMENT_TERMS_CREATE_payment_schedules
+* @typedef {Object} PAYMENT_TERMS_CREATE_payment_schedules
  * @property {string} amount
  * @property {string} balance_due
  * @property {string} completed_at
@@ -4192,7 +4298,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} PAYMENT_TERMS_CREATE
+* @typedef {Object} PAYMENT_TERMS_CREATE
  * @property {number} id
  * @property {string} payment_terms_name
  * @property {string} payment_terms_type
@@ -4203,11 +4309,11 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} PRODUCTS_DELETE
+* @typedef {Object} PRODUCTS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_line_items_tax_lines
+* @typedef {Object} CHECKOUTS_UPDATE_line_items_tax_lines
  * @property {string} price
  * @property {number} position
  * @property {number} rate
@@ -4230,7 +4336,7 @@
  * @property {boolean} channel_liable
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_line_items_unit_price_measurement
+* @typedef {Object} CHECKOUTS_UPDATE_line_items_unit_price_measurement
  * @property {null|string} measured_type
  * @property {null|string} quantity_value
  * @property {null|string} quantity_unit
@@ -4238,7 +4344,7 @@
  * @property {null|string} reference_unit
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_line_items
+* @typedef {Object} CHECKOUTS_UPDATE_line_items
  * @property {Array} applied_discounts
  * @property {Array} discount_allocations
  * @property {string} key
@@ -4269,14 +4375,14 @@
  * @property {string} price
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_tax_lines
+* @typedef {Object} CHECKOUTS_UPDATE_tax_lines
  * @property {string} price
  * @property {number} rate
  * @property {string} title
  * @property {boolean} channel_liable
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_billing_address
+* @typedef {Object} CHECKOUTS_UPDATE_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -4294,7 +4400,7 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_shipping_address
+* @typedef {Object} CHECKOUTS_UPDATE_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -4312,11 +4418,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_customer_default_address
+* @typedef {Object} CHECKOUTS_UPDATE_customer_default_address
  * @property {null|string} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -4332,9 +4438,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE_customer
+* @typedef {Object} CHECKOUTS_UPDATE_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -4344,15 +4449,15 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {CHECKOUTS_UPDATE_customer_default_address} default_address
  */
 /**
- * @typedef {Object} CHECKOUTS_UPDATE
- * @property {number} id
+* @typedef {Object} CHECKOUTS_UPDATE
  * @property {string} token
  * @property {string} cart_token
  * @property {string} email
@@ -4399,7 +4504,7 @@
  * @property {CHECKOUTS_UPDATE_customer} customer
  */
 /**
- * @typedef {Object} APP_SUBSCRIPTIONS_UPDATE_app_subscription
+* @typedef {Object} APP_SUBSCRIPTIONS_UPDATE_app_subscription
  * @property {string} admin_graphql_api_id
  * @property {string} name
  * @property {string} status
@@ -4413,11 +4518,11 @@
  * @property {string} plan_handle
  */
 /**
- * @typedef {Object} APP_SUBSCRIPTIONS_UPDATE
+* @typedef {Object} APP_SUBSCRIPTIONS_UPDATE
  * @property {APP_SUBSCRIPTIONS_UPDATE_app_subscription} app_subscription
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_CYCLE_EDITS_DELETE
+* @typedef {Object} SUBSCRIPTION_BILLING_CYCLE_EDITS_DELETE
  * @property {number} subscription_contract_id
  * @property {string} cycle_start_at
  * @property {string} cycle_end_at
@@ -4428,18 +4533,34 @@
  * @property {boolean} edited
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_REJECTED_fulfillment_order
+* @typedef {Object} INVENTORY_TRANSFERS_COMPLETE_origin
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_COMPLETE_destination
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_COMPLETE
+ * @property {string} id
+ * @property {string} happened_at
+ * @property {INVENTORY_TRANSFERS_COMPLETE_origin} origin
+ * @property {INVENTORY_TRANSFERS_COMPLETE_destination} destination
+ * @property {string} status
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_REJECTED_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} request_status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_REJECTED
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_REJECTED
  * @property {FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_REJECTED_fulfillment_order} fulfillment_order
  * @property {string} message
  */
 /**
- * @typedef {Object} CUSTOMER_PAYMENT_METHODS_UPDATE_payment_instrument
+* @typedef {Object} CUSTOMER_PAYMENT_METHODS_UPDATE_payment_instrument
  * @property {string} last_digits
  * @property {number} month
  * @property {number} year
@@ -4447,16 +4568,17 @@
  * @property {string} brand
  */
 /**
- * @typedef {Object} CUSTOMER_PAYMENT_METHODS_UPDATE
+* @typedef {Object} CUSTOMER_PAYMENT_METHODS_UPDATE
  * @property {string} admin_graphql_api_id
  * @property {string} token
  * @property {number} customer_id
  * @property {string} admin_graphql_api_customer_id
  * @property {string} instrument_type
  * @property {CUSTOMER_PAYMENT_METHODS_UPDATE_payment_instrument} payment_instrument
+ * @property {string} resource_type
  */
 /**
- * @typedef {Object} COLLECTION_LISTINGS_ADD_collection_listing
+* @typedef {Object} COLLECTION_LISTINGS_ADD_collection_listing
  * @property {number} collection_id
  * @property {null|string} updated_at
  * @property {string} body_html
@@ -4468,27 +4590,27 @@
  * @property {string} published_at
  */
 /**
- * @typedef {Object} COLLECTION_LISTINGS_ADD
+* @typedef {Object} COLLECTION_LISTINGS_ADD
  * @property {COLLECTION_LISTINGS_ADD_collection_listing} collection_listing
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} request_status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED_fulfillment_order_merchant_request
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED_fulfillment_order_merchant_request
  * @property {string} id
  * @property {string} message
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED
  * @property {FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED_fulfillment_order} fulfillment_order
  * @property {FULFILLMENT_ORDERS_CANCELLATION_REQUEST_SUBMITTED_fulfillment_order_merchant_request} fulfillment_order_merchant_request
  */
 /**
- * @typedef {Object} COMPANY_CONTACTS_UPDATE_company
+* @typedef {Object} COMPANY_CONTACTS_UPDATE_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -4499,7 +4621,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACTS_UPDATE
+* @typedef {Object} COMPANY_CONTACTS_UPDATE
  * @property {string} customer_admin_graphql_api_id
  * @property {string} title
  * @property {string} locale
@@ -4509,7 +4631,7 @@
  * @property {COMPANY_CONTACTS_UPDATE_company} company
  */
 /**
- * @typedef {Object} THEMES_UPDATE
+* @typedef {Object} THEMES_UPDATE
  * @property {number} id
  * @property {string} name
  * @property {string} created_at
@@ -4521,53 +4643,43 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_ATTEMPTS_SUCCESS
- * @property {null|string} id
- * @property {null|string} admin_graphql_api_id
- * @property {string} idempotency_key
- * @property {number} order_id
- * @property {string} admin_graphql_api_order_id
- * @property {number} subscription_contract_id
- * @property {string} admin_graphql_api_subscription_contract_id
- * @property {boolean} ready
- * @property {null|string} error_message
- * @property {null|string} error_code
+* @typedef {Object} SUBSCRIPTION_BILLING_ATTEMPTS_SUCCESS
  */
 /**
- * @typedef {Object} DISCOUNTS_REDEEMCODE_REMOVED_redeem_code
+* @typedef {Object} DISCOUNTS_REDEEMCODE_REMOVED_redeem_code
  * @property {string} id
  * @property {string} code
  */
 /**
- * @typedef {Object} DISCOUNTS_REDEEMCODE_REMOVED
+* @typedef {Object} DISCOUNTS_REDEEMCODE_REMOVED
  * @property {string} admin_graphql_api_id
  * @property {DISCOUNTS_REDEEMCODE_REMOVED_redeem_code} redeem_code
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} LOCALES_UPDATE
+* @typedef {Object} LOCALES_UPDATE
  * @property {string} locale
  * @property {boolean} published
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_RESCHEDULED_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_RESCHEDULED_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} fulfill_at
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_RESCHEDULED
+* @typedef {Object} FULFILLMENT_ORDERS_RESCHEDULED
  * @property {FULFILLMENT_ORDERS_RESCHEDULED_fulfillment_order} fulfillment_order
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_UPDATE_selling_plans_billing_policy
+* @typedef {Object} SELLING_PLAN_GROUPS_UPDATE_selling_plans_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {null|string} min_cycles
  * @property {null|string} max_cycles
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_UPDATE_selling_plans_delivery_policy
+* @typedef {Object} SELLING_PLAN_GROUPS_UPDATE_selling_plans_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {Array} anchors
@@ -4575,7 +4687,7 @@
  * @property {string} pre_anchor_behavior
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_UPDATE_selling_plans
+* @typedef {Object} SELLING_PLAN_GROUPS_UPDATE_selling_plans
  * @property {string} name
  * @property {Array<string>} options
  * @property {null|string} position
@@ -4585,7 +4697,7 @@
  * @property {Array} pricing_policies
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_UPDATE
+* @typedef {Object} SELLING_PLAN_GROUPS_UPDATE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {string} name
@@ -4601,17 +4713,17 @@
  * @property {Array} products
  */
 /**
- * @typedef {Object} SHIPPING_ADDRESSES_UPDATE
+* @typedef {Object} SHIPPING_ADDRESSES_UPDATE
  */
 /**
- * @typedef {Object} MARKETS_CREATE
+* @typedef {Object} MARKETS_CREATE
  * @property {number} id
  * @property {string} name
  * @property {string} type
  * @property {string} status
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_line_items
+* @typedef {Object} DRAFT_ORDERS_UPDATE_line_items
  * @property {number} id
  * @property {number} variant_id
  * @property {number} product_id
@@ -4634,7 +4746,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_shipping_address
+* @typedef {Object} DRAFT_ORDERS_UPDATE_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -4652,7 +4764,7 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_billing_address
+* @typedef {Object} DRAFT_ORDERS_UPDATE_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -4670,7 +4782,7 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_applied_discount
+* @typedef {Object} DRAFT_ORDERS_UPDATE_applied_discount
  * @property {string} description
  * @property {string} value
  * @property {string} title
@@ -4678,20 +4790,20 @@
  * @property {string} value_type
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_shipping_line
- * @property {string} title
+* @typedef {Object} DRAFT_ORDERS_UPDATE_shipping_line
  * @property {boolean} custom
  * @property {null|string} handle
+ * @property {string} title
  * @property {string} price
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_tax_lines
+* @typedef {Object} DRAFT_ORDERS_UPDATE_tax_lines
  * @property {number} rate
  * @property {string} title
  * @property {string} price
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_payment_terms_payment_schedules
+* @typedef {Object} DRAFT_ORDERS_UPDATE_payment_terms_payment_schedules
  * @property {number} id
  * @property {string} created_at
  * @property {string} updated_at
@@ -4713,7 +4825,7 @@
  * @property {string} outstanding_balance_currency
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_payment_terms
+* @typedef {Object} DRAFT_ORDERS_UPDATE_payment_terms
  * @property {number} id
  * @property {string} payment_terms_name
  * @property {string} payment_terms_type
@@ -4724,11 +4836,11 @@
  * @property {boolean} can_pay_early
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_customer_default_address
+* @typedef {Object} DRAFT_ORDERS_UPDATE_customer_default_address
  * @property {null|string} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -4744,9 +4856,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE_customer
+* @typedef {Object} DRAFT_ORDERS_UPDATE_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -4756,14 +4867,15 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {DRAFT_ORDERS_UPDATE_customer_default_address} default_address
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_UPDATE
+* @typedef {Object} DRAFT_ORDERS_UPDATE
  * @property {number} id
  * @property {null|string} note
  * @property {string} email
@@ -4798,7 +4910,7 @@
  * @property {DRAFT_ORDERS_UPDATE_customer} customer
  */
 /**
- * @typedef {Object} INVENTORY_ITEMS_DELETE
+* @typedef {Object} INVENTORY_ITEMS_DELETE
  * @property {number} id
  * @property {null|string} country_code_of_origin
  * @property {null|string} province_code_of_origin
@@ -4807,7 +4919,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} DISPUTES_UPDATE
+* @typedef {Object} DISPUTES_UPDATE
  * @property {number} id
  * @property {number} order_id
  * @property {string} type
@@ -4822,7 +4934,7 @@
  * @property {string} initiated_at
  */
 /**
- * @typedef {Object} SEGMENTS_CREATE
+* @typedef {Object} SEGMENTS_CREATE
  * @property {number} id
  * @property {string} name
  * @property {string} query
@@ -4830,7 +4942,7 @@
  * @property {string} lastEditDate
  */
 /**
- * @typedef {Object} CUSTOMER_GROUPS_UPDATE
+* @typedef {Object} CUSTOMER_GROUPS_UPDATE
  * @property {number} id
  * @property {string} name
  * @property {string} created_at
@@ -4838,30 +4950,30 @@
  * @property {string} query
  */
 /**
- * @typedef {Object} CHANNELS_DELETE
+* @typedef {Object} CHANNELS_DELETE
  * @property {string} id
  */
 /**
- * @typedef {Object} CUSTOMER_ACCOUNT_SETTINGS_UPDATE
+* @typedef {Object} CUSTOMER_ACCOUNT_SETTINGS_UPDATE
  * @property {null|string} url
  * @property {string} customer_accounts_version
  * @property {boolean} login_required_at_checkout
  * @property {boolean} login_links_visible_on_storefront_and_checkout
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_ACTIVATE_billing_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_ACTIVATE_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {number} min_cycles
  * @property {number} max_cycles
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_ACTIVATE_delivery_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_ACTIVATE_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_ACTIVATE
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_ACTIVATE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {SUBSCRIPTION_CONTRACTS_ACTIVATE_billing_policy} billing_policy
@@ -4875,25 +4987,25 @@
  * @property {string} revision_id
  */
 /**
- * @typedef {Object} COLLECTIONS_DELETE
+* @typedef {Object} COLLECTIONS_DELETE
  * @property {number} id
  * @property {string} published_scope
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} CUSTOMERS_EMAIL_MARKETING_CONSENT_UPDATE_email_marketing_consent
- * @property {null|string} state
+* @typedef {Object} CUSTOMERS_EMAIL_MARKETING_CONSENT_UPDATE_email_marketing_consent
+ * @property {string} state
  * @property {null|string} opt_in_level
  * @property {null|string} consent_updated_at
  */
 /**
- * @typedef {Object} CUSTOMERS_EMAIL_MARKETING_CONSENT_UPDATE
+* @typedef {Object} CUSTOMERS_EMAIL_MARKETING_CONSENT_UPDATE
  * @property {number} customer_id
- * @property {null|string} email_address
+ * @property {string} email_address
  * @property {CUSTOMERS_EMAIL_MARKETING_CONSENT_UPDATE_email_marketing_consent} email_marketing_consent
  */
 /**
- * @typedef {Object} DISCOUNTS_UPDATE
+* @typedef {Object} DISCOUNTS_UPDATE
  * @property {string} admin_graphql_api_id
  * @property {string} title
  * @property {string} status
@@ -4901,9 +5013,9 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} COLLECTION_PUBLICATIONS_CREATE
+* @typedef {Object} COLLECTION_PUBLICATIONS_CREATE
  * @property {null|string} id
- * @property {null|string} publication_id
+ * @property {number} publication_id
  * @property {string} published_at
  * @property {boolean} published
  * @property {null|string} created_at
@@ -4911,34 +5023,34 @@
  * @property {number} collection_id
  */
 /**
- * @typedef {Object} DOMAINS_UPDATE_localization
+* @typedef {Object} DOMAINS_UPDATE_localization
  * @property {null|string} country
  * @property {string} default_locale
  * @property {Array} alternate_locales
  */
 /**
- * @typedef {Object} DOMAINS_UPDATE
+* @typedef {Object} DOMAINS_UPDATE
  * @property {number} id
  * @property {string} host
  * @property {boolean} ssl_enabled
  * @property {DOMAINS_UPDATE_localization} localization
  */
 /**
- * @typedef {Object} INVENTORY_LEVELS_CONNECT
+* @typedef {Object} INVENTORY_LEVELS_CONNECT
  * @property {number} inventory_item_id
  * @property {number} location_id
- * @property {null|string} available
+ * @property {number} available
  * @property {string} updated_at
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} CUSTOMER_TAGS_ADDED
+* @typedef {Object} CUSTOMER_TAGS_ADDED
  * @property {string} customerId
  * @property {Array<string>} tags
  * @property {string} occurredAt
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_destination
+* @typedef {Object} FULFILLMENTS_UPDATE_destination
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -4956,37 +5068,37 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_line_items_price_set_shop_money
+* @typedef {Object} FULFILLMENTS_UPDATE_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_line_items_price_set_presentment_money
+* @typedef {Object} FULFILLMENTS_UPDATE_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_line_items_price_set
+* @typedef {Object} FULFILLMENTS_UPDATE_line_items_price_set
  * @property {FULFILLMENTS_UPDATE_line_items_price_set_shop_money} shop_money
  * @property {FULFILLMENTS_UPDATE_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_line_items_total_discount_set_shop_money
+* @typedef {Object} FULFILLMENTS_UPDATE_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_line_items_total_discount_set_presentment_money
+* @typedef {Object} FULFILLMENTS_UPDATE_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_line_items_total_discount_set
+* @typedef {Object} FULFILLMENTS_UPDATE_line_items_total_discount_set
  * @property {FULFILLMENTS_UPDATE_line_items_total_discount_set_shop_money} shop_money
  * @property {FULFILLMENTS_UPDATE_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_line_items
+* @typedef {Object} FULFILLMENTS_UPDATE_line_items
  * @property {number} id
  * @property {null|string} variant_id
  * @property {string} title
@@ -5016,10 +5128,10 @@
  * @property {Array} tax_lines
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE_receipt
+* @typedef {Object} FULFILLMENTS_UPDATE_receipt
  */
 /**
- * @typedef {Object} FULFILLMENTS_UPDATE
+* @typedef {Object} FULFILLMENTS_UPDATE
  * @property {number} id
  * @property {number} order_id
  * @property {string} status
@@ -5042,7 +5154,20 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} LOCATIONS_DEACTIVATE
+* @typedef {Object} INVENTORY_SHIPMENTS_UPDATE_TRACKING_updated_tracking
+ * @property {string} tracking_number
+ * @property {string} tracking_url
+ * @property {string} company
+ * @property {string} arrives_at
+ */
+/**
+* @typedef {Object} INVENTORY_SHIPMENTS_UPDATE_TRACKING
+ * @property {string} shipment_id
+ * @property {INVENTORY_SHIPMENTS_UPDATE_TRACKING_updated_tracking} updated_tracking
+ * @property {string} happened_at
+ */
+/**
+* @typedef {Object} LOCATIONS_DEACTIVATE
  * @property {number} id
  * @property {string} name
  * @property {string} address1
@@ -5062,82 +5187,82 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_total_duties_set_shop_money
+* @typedef {Object} REFUNDS_CREATE_total_duties_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_total_duties_set_presentment_money
+* @typedef {Object} REFUNDS_CREATE_total_duties_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_total_duties_set
+* @typedef {Object} REFUNDS_CREATE_total_duties_set
  * @property {REFUNDS_CREATE_total_duties_set_shop_money} shop_money
  * @property {REFUNDS_CREATE_total_duties_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_subtotal_set_shop_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_subtotal_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_subtotal_set_presentment_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_subtotal_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_subtotal_set
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_subtotal_set
  * @property {REFUNDS_CREATE_refund_line_items_subtotal_set_shop_money} shop_money
  * @property {REFUNDS_CREATE_refund_line_items_subtotal_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_total_tax_set_shop_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_total_tax_set_presentment_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_total_tax_set
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_total_tax_set
  * @property {REFUNDS_CREATE_refund_line_items_total_tax_set_shop_money} shop_money
  * @property {REFUNDS_CREATE_refund_line_items_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_price_set_shop_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_price_set_presentment_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_price_set
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_price_set
  * @property {REFUNDS_CREATE_refund_line_items_line_item_price_set_shop_money} shop_money
  * @property {REFUNDS_CREATE_refund_line_items_line_item_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_total_discount_set_shop_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_total_discount_set_presentment_money
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_total_discount_set
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item_total_discount_set
  * @property {REFUNDS_CREATE_refund_line_items_line_item_total_discount_set_shop_money} shop_money
  * @property {REFUNDS_CREATE_refund_line_items_line_item_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item
+* @typedef {Object} REFUNDS_CREATE_refund_line_items_line_item
  * @property {number} id
  * @property {null|string} variant_id
  * @property {string} title
@@ -5167,7 +5292,7 @@
  * @property {Array} tax_lines
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_refund_line_items
+* @typedef {Object} REFUNDS_CREATE_refund_line_items
  * @property {number} id
  * @property {number} quantity
  * @property {number} line_item_id
@@ -5180,25 +5305,25 @@
  * @property {REFUNDS_CREATE_refund_line_items_line_item} line_item
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_transactions_receipt
+* @typedef {Object} REFUNDS_CREATE_transactions_receipt
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set_presentment_money
+* @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set_presentment_money
  * @property {string} amount
  * @property {string} currency
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set_shop_money
+* @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set_shop_money
  * @property {string} amount
  * @property {string} currency
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set
+* @typedef {Object} REFUNDS_CREATE_transactions_total_unsettled_set
  * @property {REFUNDS_CREATE_transactions_total_unsettled_set_presentment_money} presentment_money
  * @property {REFUNDS_CREATE_transactions_total_unsettled_set_shop_money} shop_money
  */
 /**
- * @typedef {Object} REFUNDS_CREATE_transactions
+* @typedef {Object} REFUNDS_CREATE_transactions
  * @property {number} id
  * @property {number} order_id
  * @property {string} kind
@@ -5225,7 +5350,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} REFUNDS_CREATE
+* @typedef {Object} REFUNDS_CREATE
  * @property {number} id
  * @property {number} order_id
  * @property {string} created_at
@@ -5235,15 +5360,15 @@
  * @property {Array} duties
  * @property {REFUNDS_CREATE_total_duties_set} total_duties_set
  * @property {null|string} return
- * @property {boolean} restock
  * @property {Array} refund_shipping_lines
+ * @property {boolean} restock
  * @property {string} admin_graphql_api_id
  * @property {Array} order_adjustments
  * @property {Array<REFUNDS_CREATE_refund_line_items>} refund_line_items
  * @property {Array<REFUNDS_CREATE_transactions>} transactions
  */
 /**
- * @typedef {Object} PRODUCTS_UPDATE_variants
+* @typedef {Object} PRODUCTS_UPDATE_variants
  * @property {string} admin_graphql_api_id
  * @property {null|string} barcode
  * @property {string} compare_at_price
@@ -5266,12 +5391,12 @@
  * @property {number} old_inventory_quantity
  */
 /**
- * @typedef {Object} PRODUCTS_UPDATE_variant_gids
+* @typedef {Object} PRODUCTS_UPDATE_variant_gids
  * @property {string} admin_graphql_api_id
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} PRODUCTS_UPDATE
+* @typedef {Object} PRODUCTS_UPDATE
  * @property {string} admin_graphql_api_id
  * @property {string} body_html
  * @property {null|string} created_at
@@ -5296,7 +5421,7 @@
  * @property {null|string} category
  */
 /**
- * @typedef {Object} CUSTOMERS_DISABLE_default_address
+* @typedef {Object} CUSTOMERS_DISABLE_default_address
  * @property {number} id
  * @property {number} customer_id
  * @property {string} first_name
@@ -5316,9 +5441,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} CUSTOMERS_DISABLE
+* @typedef {Object} CUSTOMERS_DISABLE
  * @property {number} id
- * @property {string} email
  * @property {string} created_at
  * @property {string} updated_at
  * @property {string} first_name
@@ -5328,15 +5452,513 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} addresses
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {CUSTOMERS_DISABLE_default_address} default_address
  */
 /**
- * @typedef {Object} CUSTOMER_PAYMENT_METHODS_REVOKE_payment_instrument
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_shipping_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_shipping_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_shipping_price_set
+ * @property {ORDERS_LINK_REQUESTED_current_shipping_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_current_shipping_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_subtotal_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_subtotal_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_subtotal_price_set
+ * @property {ORDERS_LINK_REQUESTED_current_subtotal_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_current_subtotal_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_discounts_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_discounts_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_discounts_set
+ * @property {ORDERS_LINK_REQUESTED_current_total_discounts_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_current_total_discounts_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_price_set
+ * @property {ORDERS_LINK_REQUESTED_current_total_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_current_total_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_tax_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_tax_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_current_total_tax_set
+ * @property {ORDERS_LINK_REQUESTED_current_total_tax_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_current_total_tax_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_subtotal_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_subtotal_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_subtotal_price_set
+ * @property {ORDERS_LINK_REQUESTED_subtotal_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_subtotal_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_cash_rounding_payment_adjustment_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_cash_rounding_payment_adjustment_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_cash_rounding_payment_adjustment_set
+ * @property {ORDERS_LINK_REQUESTED_total_cash_rounding_payment_adjustment_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_total_cash_rounding_payment_adjustment_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_cash_rounding_refund_adjustment_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_cash_rounding_refund_adjustment_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_cash_rounding_refund_adjustment_set
+ * @property {ORDERS_LINK_REQUESTED_total_cash_rounding_refund_adjustment_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_total_cash_rounding_refund_adjustment_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_discounts_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_discounts_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_discounts_set
+ * @property {ORDERS_LINK_REQUESTED_total_discounts_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_total_discounts_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_line_items_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_line_items_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_line_items_price_set
+ * @property {ORDERS_LINK_REQUESTED_total_line_items_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_total_line_items_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_price_set
+ * @property {ORDERS_LINK_REQUESTED_total_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_total_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_shipping_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_shipping_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_shipping_price_set
+ * @property {ORDERS_LINK_REQUESTED_total_shipping_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_total_shipping_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_tax_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_tax_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_total_tax_set
+ * @property {ORDERS_LINK_REQUESTED_total_tax_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_total_tax_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_billing_address
+ * @property {string} first_name
+ * @property {string} address1
+ * @property {string} phone
+ * @property {string} city
+ * @property {string} zip
+ * @property {string} province
+ * @property {string} country
+ * @property {string} last_name
+ * @property {null|string} address2
+ * @property {string} company
+ * @property {null|string} latitude
+ * @property {null|string} longitude
+ * @property {string} name
+ * @property {string} country_code
+ * @property {string} province_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_customer_default_address
+ * @property {number} id
+ * @property {number} customer_id
+ * @property {string} first_name
+ * @property {string} last_name
+ * @property {null|string} company
+ * @property {string} address1
+ * @property {null|string} address2
+ * @property {string} city
+ * @property {string} province
+ * @property {string} country
+ * @property {string} zip
+ * @property {string} phone
+ * @property {string} name
+ * @property {string} province_code
+ * @property {string} country_code
+ * @property {string} country_name
+ * @property {boolean} default
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_customer
+ * @property {number} id
+ * @property {null|string} created_at
+ * @property {null|string} updated_at
+ * @property {string} first_name
+ * @property {string} last_name
+ * @property {string} state
+ * @property {null|string} note
+ * @property {boolean} verified_email
+ * @property {null|string} multipass_identifier
+ * @property {boolean} tax_exempt
+ * @property {string} email
+ * @property {null|string} phone
+ * @property {string} currency
+ * @property {Array} tax_exemptions
+ * @property {string} admin_graphql_api_id
+ * @property {ORDERS_LINK_REQUESTED_customer_default_address} default_address
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items_attributed_staffs
+ * @property {string} id
+ * @property {number} quantity
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items_price_set
+ * @property {ORDERS_LINK_REQUESTED_line_items_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_line_items_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items_total_discount_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items_total_discount_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items_total_discount_set
+ * @property {ORDERS_LINK_REQUESTED_line_items_total_discount_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_line_items_total_discount_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_line_items
+ * @property {number} id
+ * @property {string} admin_graphql_api_id
+ * @property {Array<ORDERS_LINK_REQUESTED_line_items_attributed_staffs>} attributed_staffs
+ * @property {number} current_quantity
+ * @property {number} fulfillable_quantity
+ * @property {string} fulfillment_service
+ * @property {null|string} fulfillment_status
+ * @property {boolean} gift_card
+ * @property {number} grams
+ * @property {string} name
+ * @property {string} price
+ * @property {ORDERS_LINK_REQUESTED_line_items_price_set} price_set
+ * @property {boolean} product_exists
+ * @property {number} product_id
+ * @property {Array} properties
+ * @property {number} quantity
+ * @property {boolean} requires_shipping
+ * @property {null|string} sales_line_item_group_id
+ * @property {string} sku
+ * @property {boolean} taxable
+ * @property {string} title
+ * @property {string} total_discount
+ * @property {ORDERS_LINK_REQUESTED_line_items_total_discount_set} total_discount_set
+ * @property {null|string} variant_id
+ * @property {null|string} variant_inventory_management
+ * @property {null|string} variant_title
+ * @property {null|string} vendor
+ * @property {Array} tax_lines
+ * @property {Array} duties
+ * @property {Array} discount_allocations
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_address
+ * @property {string} first_name
+ * @property {string} address1
+ * @property {string} phone
+ * @property {string} city
+ * @property {string} zip
+ * @property {string} province
+ * @property {string} country
+ * @property {string} last_name
+ * @property {null|string} address2
+ * @property {string} company
+ * @property {null|string} latitude
+ * @property {null|string} longitude
+ * @property {string} name
+ * @property {string} country_code
+ * @property {string} province_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_current_discounted_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_current_discounted_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_current_discounted_price_set
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_current_discounted_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_current_discounted_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_discounted_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_discounted_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_discounted_price_set
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_discounted_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_discounted_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_price_set_shop_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_price_set_presentment_money
+ * @property {string} amount
+ * @property {string} currency_code
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines_price_set
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_price_set_shop_money} shop_money
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_price_set_presentment_money} presentment_money
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED_shipping_lines
+ * @property {number} id
+ * @property {null|string} carrier_identifier
+ * @property {null|string} code
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_current_discounted_price_set} current_discounted_price_set
+ * @property {string} discounted_price
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_discounted_price_set} discounted_price_set
+ * @property {boolean} is_removed
+ * @property {null|string} phone
+ * @property {string} price
+ * @property {ORDERS_LINK_REQUESTED_shipping_lines_price_set} price_set
+ * @property {null|string} requested_fulfillment_service_id
+ * @property {string} source
+ * @property {string} title
+ * @property {Array} tax_lines
+ * @property {Array} discount_allocations
+ */
+/**
+* @typedef {Object} ORDERS_LINK_REQUESTED
+ * @property {number} id
+ * @property {string} admin_graphql_api_id
+ * @property {null|string} app_id
+ * @property {null|string} browser_ip
+ * @property {boolean} buyer_accepts_marketing
+ * @property {string} cancel_reason
+ * @property {string} cancelled_at
+ * @property {null|string} cart_token
+ * @property {null|string} checkout_token
+ * @property {null|string} client_details
+ * @property {null|string} closed_at
+ * @property {null|string} confirmation_number
+ * @property {boolean} confirmed
+ * @property {string} contact_email
+ * @property {string} created_at
+ * @property {string} currency
+ * @property {ORDERS_LINK_REQUESTED_current_shipping_price_set} current_shipping_price_set
+ * @property {string} current_subtotal_price
+ * @property {ORDERS_LINK_REQUESTED_current_subtotal_price_set} current_subtotal_price_set
+ * @property {null|string} current_total_additional_fees_set
+ * @property {string} current_total_discounts
+ * @property {ORDERS_LINK_REQUESTED_current_total_discounts_set} current_total_discounts_set
+ * @property {null|string} current_total_duties_set
+ * @property {string} current_total_price
+ * @property {ORDERS_LINK_REQUESTED_current_total_price_set} current_total_price_set
+ * @property {string} current_total_tax
+ * @property {ORDERS_LINK_REQUESTED_current_total_tax_set} current_total_tax_set
+ * @property {string} customer_locale
+ * @property {null|string} device_id
+ * @property {Array} discount_codes
+ * @property {boolean} duties_included
+ * @property {string} email
+ * @property {boolean} estimated_taxes
+ * @property {string} financial_status
+ * @property {null|string} fulfillment_status
+ * @property {null|string} landing_site
+ * @property {null|string} landing_site_ref
+ * @property {null|string} location_id
+ * @property {string} merchant_business_entity_id
+ * @property {null|string} merchant_of_record_app_id
+ * @property {string} name
+ * @property {null|string} note
+ * @property {Array} note_attributes
+ * @property {number} number
+ * @property {number} order_number
+ * @property {string} order_status_url
+ * @property {null|string} original_total_additional_fees_set
+ * @property {null|string} original_total_duties_set
+ * @property {Array<string>} payment_gateway_names
+ * @property {null|string} phone
+ * @property {null|string} po_number
+ * @property {string} presentment_currency
+ * @property {string} processed_at
+ * @property {null|string} reference
+ * @property {null|string} referring_site
+ * @property {null|string} source_identifier
+ * @property {string} source_name
+ * @property {null|string} source_url
+ * @property {string} subtotal_price
+ * @property {ORDERS_LINK_REQUESTED_subtotal_price_set} subtotal_price_set
+ * @property {string} tags
+ * @property {boolean} tax_exempt
+ * @property {Array} tax_lines
+ * @property {boolean} taxes_included
+ * @property {boolean} test
+ * @property {string} token
+ * @property {ORDERS_LINK_REQUESTED_total_cash_rounding_payment_adjustment_set} total_cash_rounding_payment_adjustment_set
+ * @property {ORDERS_LINK_REQUESTED_total_cash_rounding_refund_adjustment_set} total_cash_rounding_refund_adjustment_set
+ * @property {string} total_discounts
+ * @property {ORDERS_LINK_REQUESTED_total_discounts_set} total_discounts_set
+ * @property {string} total_line_items_price
+ * @property {ORDERS_LINK_REQUESTED_total_line_items_price_set} total_line_items_price_set
+ * @property {string} total_outstanding
+ * @property {string} total_price
+ * @property {ORDERS_LINK_REQUESTED_total_price_set} total_price_set
+ * @property {ORDERS_LINK_REQUESTED_total_shipping_price_set} total_shipping_price_set
+ * @property {string} total_tax
+ * @property {ORDERS_LINK_REQUESTED_total_tax_set} total_tax_set
+ * @property {string} total_tip_received
+ * @property {number} total_weight
+ * @property {string} updated_at
+ * @property {null|string} user_id
+ * @property {ORDERS_LINK_REQUESTED_billing_address} billing_address
+ * @property {ORDERS_LINK_REQUESTED_customer} customer
+ * @property {Array} discount_applications
+ * @property {Array} fulfillments
+ * @property {Array<ORDERS_LINK_REQUESTED_line_items>} line_items
+ * @property {null|string} payment_terms
+ * @property {Array} refunds
+ * @property {ORDERS_LINK_REQUESTED_shipping_address} shipping_address
+ * @property {Array<ORDERS_LINK_REQUESTED_shipping_lines>} shipping_lines
+ * @property {Array} returns
+ * @property {Array} line_item_groups
+ */
+/**
+* @typedef {Object} CUSTOMER_PAYMENT_METHODS_REVOKE_payment_instrument
  * @property {string} last_digits
  * @property {number} month
  * @property {number} year
@@ -5344,32 +5966,38 @@
  * @property {string} brand
  */
 /**
- * @typedef {Object} CUSTOMER_PAYMENT_METHODS_REVOKE
+* @typedef {Object} CUSTOMER_PAYMENT_METHODS_REVOKE
  * @property {string} admin_graphql_api_id
  * @property {string} token
  * @property {number} customer_id
  * @property {string} admin_graphql_api_customer_id
  * @property {string} instrument_type
  * @property {CUSTOMER_PAYMENT_METHODS_REVOKE_payment_instrument} payment_instrument
+ * @property {string} resource_type
  */
 /**
- * @typedef {Object} PROFILES_UPDATE
+* @typedef {Object} PROFILES_UPDATE
  * @property {number} id
+ * @property {string} admin_graphql_api_id
+ * @property {string} name
+ * @property {boolean} default
+ * @property {null|string} profile_type
+ * @property {number} version
  */
 /**
- * @typedef {Object} METAOBJECTS_CREATE_fields
+* @typedef {Object} METAOBJECTS_CREATE_fields
  * @property {string} example-key
  */
 /**
- * @typedef {Object} METAOBJECTS_CREATE_capabilities_publishable
+* @typedef {Object} METAOBJECTS_CREATE_capabilities_publishable
  * @property {string} status
  */
 /**
- * @typedef {Object} METAOBJECTS_CREATE_capabilities
+* @typedef {Object} METAOBJECTS_CREATE_capabilities
  * @property {METAOBJECTS_CREATE_capabilities_publishable} publishable
  */
 /**
- * @typedef {Object} METAOBJECTS_CREATE
+* @typedef {Object} METAOBJECTS_CREATE
  * @property {string} type
  * @property {string} handle
  * @property {string} created_at
@@ -5383,14 +6011,34 @@
  * @property {METAOBJECTS_CREATE_capabilities} capabilities
  */
 /**
- * @typedef {Object} TAX_SERVICES_CREATE
- * @property {null|string} id
+* @typedef {Object} INVENTORY_TRANSFERS_REMOVE_ITEMS_origin
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_REMOVE_ITEMS_destination
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_REMOVE_ITEMS_items_removed
+ * @property {string} line_item_id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_REMOVE_ITEMS
+ * @property {string} id
+ * @property {string} happened_at
+ * @property {INVENTORY_TRANSFERS_REMOVE_ITEMS_origin} origin
+ * @property {INVENTORY_TRANSFERS_REMOVE_ITEMS_destination} destination
+ * @property {Array<INVENTORY_TRANSFERS_REMOVE_ITEMS_items_removed>} items_removed
+ */
+/**
+* @typedef {Object} TAX_SERVICES_CREATE
+ * @property {number} id
  * @property {string} name
  * @property {string} url
  * @property {boolean} active
  */
 /**
- * @typedef {Object} COLLECTION_LISTINGS_UPDATE_collection_listing
+* @typedef {Object} COLLECTION_LISTINGS_UPDATE_collection_listing
  * @property {number} collection_id
  * @property {null|string} updated_at
  * @property {string} body_html
@@ -5402,27 +6050,37 @@
  * @property {string} published_at
  */
 /**
- * @typedef {Object} COLLECTION_LISTINGS_UPDATE
+* @typedef {Object} COLLECTION_LISTINGS_UPDATE
  * @property {COLLECTION_LISTINGS_UPDATE_collection_listing} collection_listing
  */
 /**
- * @typedef {Object} THEMES_DELETE
+* @typedef {Object} INVENTORY_SHIPMENTS_REMOVE_ITEMS_items_removed
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_SHIPMENTS_REMOVE_ITEMS
+ * @property {string} id
+ * @property {Array<INVENTORY_SHIPMENTS_REMOVE_ITEMS_items_removed>} items_removed
+ * @property {string} happened_at
+ */
+/**
+* @typedef {Object} THEMES_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_FAIL_billing_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_FAIL_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {number} min_cycles
  * @property {number} max_cycles
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_FAIL_delivery_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_FAIL_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_FAIL
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_FAIL
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {SUBSCRIPTION_CONTRACTS_FAIL_billing_policy} billing_policy
@@ -5436,19 +6094,19 @@
  * @property {string} revision_id
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_UPDATE_billing_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_UPDATE_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {number} min_cycles
  * @property {number} max_cycles
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_UPDATE_delivery_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_UPDATE_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_UPDATE
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_UPDATE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {SUBSCRIPTION_CONTRACTS_UPDATE_billing_policy} billing_policy
@@ -5462,7 +6120,7 @@
  * @property {string} revision_id
  */
 /**
- * @typedef {Object} COMPANIES_CREATE
+* @typedef {Object} COMPANIES_CREATE
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -5473,13 +6131,13 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} CUSTOMER_LEFT_SEGMENT
+* @typedef {Object} CUSTOMER_LEFT_SEGMENT
  * @property {string} shop_id
  * @property {string} customer_id
  * @property {string} segment_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACTS_DELETE_company
+* @typedef {Object} COMPANY_CONTACTS_DELETE_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -5490,7 +6148,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACTS_DELETE
+* @typedef {Object} COMPANY_CONTACTS_DELETE
  * @property {string} customer_admin_graphql_api_id
  * @property {string} title
  * @property {string} locale
@@ -5500,7 +6158,7 @@
  * @property {COMPANY_CONTACTS_DELETE_company} company
  */
 /**
- * @typedef {Object} SHOP_UPDATE
+* @typedef {Object} SHOP_UPDATE
  * @property {number} id
  * @property {string} name
  * @property {string} email
@@ -5557,7 +6215,7 @@
  * @property {boolean} transactional_sms_disabled
  */
 /**
- * @typedef {Object} BULK_OPERATIONS_FINISH
+* @typedef {Object} BULK_OPERATIONS_FINISH
  * @property {string} admin_graphql_api_id
  * @property {string} completed_at
  * @property {string} created_at
@@ -5566,7 +6224,7 @@
  * @property {string} type
  */
 /**
- * @typedef {Object} CHECKOUTS_DELETE
+* @typedef {Object} CHECKOUTS_DELETE
  * @property {number} id
  * @property {string} presentment_currency
  * @property {boolean} buyer_accepts_sms_marketing
@@ -5581,7 +6239,7 @@
  * @property {null|string} reservation_token
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_CYCLE_EDITS_UPDATE
+* @typedef {Object} SUBSCRIPTION_BILLING_CYCLE_EDITS_UPDATE
  * @property {number} subscription_contract_id
  * @property {string} cycle_start_at
  * @property {string} cycle_end_at
@@ -5592,12 +6250,12 @@
  * @property {boolean} edited
  */
 /**
- * @typedef {Object} MARKETS_BACKUP_REGION_UPDATE
+* @typedef {Object} MARKETS_BACKUP_REGION_UPDATE
  * @property {string} admin_graphql_api_id
  * @property {string} code
  */
 /**
- * @typedef {Object} FULFILLMENT_EVENTS_DELETE
+* @typedef {Object} FULFILLMENT_EVENTS_DELETE
  * @property {number} id
  * @property {number} fulfillment_id
  * @property {string} status
@@ -5618,19 +6276,19 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} DELIVERY_PROMISE_SETTINGS_UPDATE
+* @typedef {Object} DELIVERY_PROMISE_SETTINGS_UPDATE
  * @property {string} shop_id
  * @property {string} processing_time
  * @property {boolean} delivery_dates_enabled
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing_variants_option_values
+* @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing_variants_option_values
  * @property {number} option_id
  * @property {string} name
  * @property {string} value
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing_variants
+* @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing_variants
  * @property {number} id
  * @property {string} title
  * @property {Array<PRODUCT_LISTINGS_UPDATE_product_listing_variants_option_values>} option_values
@@ -5655,7 +6313,7 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing_options
+* @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing_options
  * @property {number} id
  * @property {string} name
  * @property {number} product_id
@@ -5663,7 +6321,7 @@
  * @property {Array<string>} values
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing
+* @typedef {Object} PRODUCT_LISTINGS_UPDATE_product_listing
  * @property {number} product_id
  * @property {null|string} created_at
  * @property {string} updated_at
@@ -5680,23 +6338,23 @@
  * @property {Array<PRODUCT_LISTINGS_UPDATE_product_listing_options>} options
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_UPDATE
+* @typedef {Object} PRODUCT_LISTINGS_UPDATE
  * @property {PRODUCT_LISTINGS_UPDATE_product_listing} product_listing
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_EXPIRE_billing_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_EXPIRE_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {number} min_cycles
  * @property {number} max_cycles
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_EXPIRE_delivery_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_EXPIRE_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_EXPIRE
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_EXPIRE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {SUBSCRIPTION_CONTRACTS_EXPIRE_billing_policy} billing_policy
@@ -5710,23 +6368,23 @@
  * @property {string} revision_id
  */
 /**
- * @typedef {Object} ORDERS_SHOPIFY_PROTECT_ELIGIBILITY_CHANGED_eligibility
+* @typedef {Object} ORDERS_SHOPIFY_PROTECT_ELIGIBILITY_CHANGED_eligibility
  * @property {string} status
  */
 /**
- * @typedef {Object} ORDERS_SHOPIFY_PROTECT_ELIGIBILITY_CHANGED
+* @typedef {Object} ORDERS_SHOPIFY_PROTECT_ELIGIBILITY_CHANGED
  * @property {number} order_id
  * @property {string} status
  * @property {ORDERS_SHOPIFY_PROTECT_ELIGIBILITY_CHANGED_eligibility} eligibility
  */
 /**
- * @typedef {Object} CUSTOMER_GROUPS_DELETE
+* @typedef {Object} CUSTOMER_GROUPS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} PRODUCT_PUBLICATIONS_CREATE
+* @typedef {Object} PRODUCT_PUBLICATIONS_CREATE
  * @property {null|string} id
- * @property {null|string} publication_id
+ * @property {number} publication_id
  * @property {string} published_at
  * @property {boolean} published
  * @property {null|string} created_at
@@ -5734,7 +6392,7 @@
  * @property {number} product_id
  */
 /**
- * @typedef {Object} METAFIELD_DEFINITIONS_CREATE
+* @typedef {Object} METAFIELD_DEFINITIONS_CREATE
  * @property {null|string} id
  * @property {number} shop_id
  * @property {string} namespace
@@ -5751,18 +6409,22 @@
  * @property {string} validation_status
  * @property {number} pinned_position
  * @property {null|string} standard_template_id
- * @property {boolean} use_as_collection_condition
- * @property {string} access
- * @property {string} admin_filter_status
+ * @property {null|string} merchant_writeable
+ * @property {null|string} storefront_readable
+ * @property {null|string} customer_access
+ * @property {null|string} namespace_owner_api_client_id
  * @property {boolean} unique_values
  * @property {boolean} smart_collection_condition
  * @property {boolean} option_linkable
  * @property {boolean} admin_filterable
  * @property {null|string} admin_filterable_status
  * @property {boolean} app_config_managed
+ * @property {boolean} access_only
+ * @property {string} admin_filter_status
+ * @property {boolean} use_as_collection_condition
  */
 /**
- * @typedef {Object} INVENTORY_ITEMS_UPDATE
+* @typedef {Object} INVENTORY_ITEMS_UPDATE
  * @property {number} id
  * @property {string} sku
  * @property {string} created_at
@@ -5779,87 +6441,84 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_properties
- */
-/**
- * @typedef {Object} CARTS_UPDATE_line_items_discounted_price_set_shop_money
+* @typedef {Object} CARTS_UPDATE_line_items_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_discounted_price_set_presentment_money
+* @typedef {Object} CARTS_UPDATE_line_items_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_discounted_price_set
+* @typedef {Object} CARTS_UPDATE_line_items_discounted_price_set
  * @property {CARTS_UPDATE_line_items_discounted_price_set_shop_money} shop_money
  * @property {CARTS_UPDATE_line_items_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_line_price_set_shop_money
+* @typedef {Object} CARTS_UPDATE_line_items_line_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_line_price_set_presentment_money
+* @typedef {Object} CARTS_UPDATE_line_items_line_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_line_price_set
+* @typedef {Object} CARTS_UPDATE_line_items_line_price_set
  * @property {CARTS_UPDATE_line_items_line_price_set_shop_money} shop_money
  * @property {CARTS_UPDATE_line_items_line_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_original_line_price_set_shop_money
+* @typedef {Object} CARTS_UPDATE_line_items_original_line_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_original_line_price_set_presentment_money
+* @typedef {Object} CARTS_UPDATE_line_items_original_line_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_original_line_price_set
+* @typedef {Object} CARTS_UPDATE_line_items_original_line_price_set
  * @property {CARTS_UPDATE_line_items_original_line_price_set_shop_money} shop_money
  * @property {CARTS_UPDATE_line_items_original_line_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_price_set_shop_money
+* @typedef {Object} CARTS_UPDATE_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_price_set_presentment_money
+* @typedef {Object} CARTS_UPDATE_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_price_set
+* @typedef {Object} CARTS_UPDATE_line_items_price_set
  * @property {CARTS_UPDATE_line_items_price_set_shop_money} shop_money
  * @property {CARTS_UPDATE_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_total_discount_set_shop_money
+* @typedef {Object} CARTS_UPDATE_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_total_discount_set_presentment_money
+* @typedef {Object} CARTS_UPDATE_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items_total_discount_set
+* @typedef {Object} CARTS_UPDATE_line_items_total_discount_set
  * @property {CARTS_UPDATE_line_items_total_discount_set_shop_money} shop_money
  * @property {CARTS_UPDATE_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_UPDATE_line_items
+* @typedef {Object} CARTS_UPDATE_line_items
  * @property {number} id
- * @property {CARTS_UPDATE_line_items_properties} properties
+ * @property {null|string} properties
  * @property {number} quantity
  * @property {number} variant_id
  * @property {string} key
@@ -5882,9 +6541,10 @@
  * @property {CARTS_UPDATE_line_items_original_line_price_set} original_line_price_set
  * @property {CARTS_UPDATE_line_items_price_set} price_set
  * @property {CARTS_UPDATE_line_items_total_discount_set} total_discount_set
+ * @property {null|string} parent_relationship
  */
 /**
- * @typedef {Object} CARTS_UPDATE
+* @typedef {Object} CARTS_UPDATE
  * @property {string} id
  * @property {string} token
  * @property {Array<CARTS_UPDATE_line_items>} line_items
@@ -5893,19 +6553,19 @@
  * @property {string} created_at
  */
 /**
- * @typedef {Object} DRAFT_ORDERS_DELETE
+* @typedef {Object} DRAFT_ORDERS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_order
+* @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_order
  * @property {string} id
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_hold_held_by_app
+* @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_hold_held_by_app
  * @property {string} id
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_hold
+* @typedef {Object} FULFILLMENT_HOLDS_ADDED_fulfillment_hold
  * @property {string} id
  * @property {string} reason
  * @property {string} reason_notes
@@ -5914,23 +6574,43 @@
  * @property {FULFILLMENT_HOLDS_ADDED_fulfillment_hold_held_by_app} held_by_app
  */
 /**
- * @typedef {Object} FULFILLMENT_HOLDS_ADDED
+* @typedef {Object} FULFILLMENT_HOLDS_ADDED
  * @property {FULFILLMENT_HOLDS_ADDED_fulfillment_order} fulfillment_order
  * @property {FULFILLMENT_HOLDS_ADDED_fulfillment_hold} fulfillment_hold
  */
 /**
- * @typedef {Object} SELLING_PLAN_GROUPS_DELETE
+* @typedef {Object} SELLING_PLAN_GROUPS_DELETE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_CREATE_tax_settings
+* @typedef {Object} INVENTORY_SHIPMENTS_CREATE_tracking
+ * @property {string} arrives_at
+ * @property {string} tracking_number
+ * @property {string} tracking_url
+ * @property {string} company
+ */
+/**
+* @typedef {Object} INVENTORY_SHIPMENTS_CREATE_line_items
+ * @property {string} id
+ * @property {number} quantity
+ */
+/**
+* @typedef {Object} INVENTORY_SHIPMENTS_CREATE
+ * @property {string} id
+ * @property {string} status
+ * @property {string} happened_at
+ * @property {INVENTORY_SHIPMENTS_CREATE_tracking} tracking
+ * @property {Array<INVENTORY_SHIPMENTS_CREATE_line_items>} line_items
+ */
+/**
+* @typedef {Object} COMPANY_LOCATIONS_CREATE_tax_settings
  * @property {string} tax_registration_id
  * @property {null|string} tax_exempt
  * @property {Array<string>} tax_exemptions
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_CREATE_company
+* @typedef {Object} COMPANY_LOCATIONS_CREATE_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -5941,7 +6621,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_CREATE_billing_address
+* @typedef {Object} COMPANY_LOCATIONS_CREATE_billing_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -5960,7 +6640,7 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_CREATE_shipping_address
+* @typedef {Object} COMPANY_LOCATIONS_CREATE_shipping_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -5979,11 +6659,11 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_CREATE_tax_registration
+* @typedef {Object} COMPANY_LOCATIONS_CREATE_tax_registration
  * @property {string} tax_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_CREATE
+* @typedef {Object} COMPANY_LOCATIONS_CREATE
  * @property {string} name
  * @property {string} external_id
  * @property {string} phone
@@ -6001,11 +6681,24 @@
  * @property {COMPANY_LOCATIONS_CREATE_tax_registration} tax_registration
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds_held_by_app
+* @typedef {Object} CUSTOMERS_WHATS_APP_MARKETING_CONSENT_UPDATE_whats_app_marketing_consent
+ * @property {null|string} state
+ * @property {null|string} opt_in_level
+ * @property {null|string} updated_at
+ * @property {string} collected_from
+ */
+/**
+* @typedef {Object} CUSTOMERS_WHATS_APP_MARKETING_CONSENT_UPDATE
+ * @property {number} customer_id
+ * @property {null|string} phone_number
+ * @property {CUSTOMERS_WHATS_APP_MARKETING_CONSENT_UPDATE_whats_app_marketing_consent} whats_app_marketing_consent
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds_held_by_app
  * @property {string} id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds
  * @property {string} id
  * @property {string} reason
  * @property {string} reason_notes
@@ -6014,27 +6707,27 @@
  * @property {FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds_held_by_app} held_by_app
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {Array<FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order_fulfillment_holds>} fulfillment_holds
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_remaining_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_remaining_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_held_fulfillment_order_line_items
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_held_fulfillment_order_line_items
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold_held_by_app
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold_held_by_app
  * @property {string} id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold
  * @property {string} id
  * @property {string} reason
  * @property {string} reason_notes
@@ -6043,21 +6736,21 @@
  * @property {FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold_held_by_app} held_by_app
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD
+* @typedef {Object} FULFILLMENT_ORDERS_PLACED_ON_HOLD
  * @property {FULFILLMENT_ORDERS_PLACED_ON_HOLD_fulfillment_order} fulfillment_order
  * @property {FULFILLMENT_ORDERS_PLACED_ON_HOLD_remaining_fulfillment_order} remaining_fulfillment_order
  * @property {Array<FULFILLMENT_ORDERS_PLACED_ON_HOLD_held_fulfillment_order_line_items>} held_fulfillment_order_line_items
  * @property {FULFILLMENT_ORDERS_PLACED_ON_HOLD_created_fulfillment_hold} created_fulfillment_hold
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_CREATE
+* @typedef {Object} PRODUCT_FEEDS_CREATE
  * @property {string} id
  * @property {string} country
  * @property {string} language
  * @property {string} status
  */
 /**
- * @typedef {Object} TENDER_TRANSACTIONS_CREATE
+* @typedef {Object} TENDER_TRANSACTIONS_CREATE
  * @property {number} id
  * @property {number} order_id
  * @property {string} amount
@@ -6070,7 +6763,7 @@
  * @property {string} payment_method
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_metadata
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_metadata
  * @property {string} action
  * @property {string} type
  * @property {string} resource
@@ -6078,56 +6771,56 @@
  * @property {string} occured_at
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_productFeed
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_productFeed
  * @property {string} id
  * @property {string} shop_id
- * @property {string} country
  * @property {string} language
+ * @property {string} country
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images_edges_node
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images_edges_node
  * @property {string} id
  * @property {string} url
  * @property {number} height
  * @property {number} width
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images_edges
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images_edges
  * @property {PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images_edges_node} node
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images
  * @property {Array<PRODUCT_FEEDS_INCREMENTAL_SYNC_product_images_edges>} edges
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_options
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_options
  * @property {string} name
  * @property {Array<string>} values
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_seo
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_seo
  * @property {string} title
  * @property {string} description
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_price
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_price
  * @property {string} amount
  * @property {string} currencyCode
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_image
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_image
  * @property {string} id
  * @property {string} url
  * @property {number} height
  * @property {number} width
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_selectedOptions
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_selectedOptions
  * @property {string} name
  * @property {string} value
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node
  * @property {string} id
  * @property {string} title
  * @property {PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_price} price
@@ -6146,21 +6839,22 @@
  * @property {Array<PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node_selectedOptions>} selectedOptions
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges
  * @property {PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges_node} node
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants
  * @property {Array<PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants_edges>} edges
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC_product
  * @property {string} id
  * @property {string} title
  * @property {string} description
  * @property {string} onlineStoreUrl
  * @property {string} createdAt
  * @property {string} updatedAt
+ * @property {string} status
  * @property {boolean} isPublished
  * @property {string} publishedAt
  * @property {string} productType
@@ -6173,32 +6867,38 @@
  * @property {PRODUCT_FEEDS_INCREMENTAL_SYNC_product_variants} variants
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC
+* @typedef {Object} PRODUCT_FEEDS_INCREMENTAL_SYNC
  * @property {PRODUCT_FEEDS_INCREMENTAL_SYNC_metadata} metadata
  * @property {PRODUCT_FEEDS_INCREMENTAL_SYNC_productFeed} productFeed
  * @property {PRODUCT_FEEDS_INCREMENTAL_SYNC_product} product
  * @property {null|string} products
  */
 /**
- * @typedef {Object} DISCOUNTS_DELETE
+* @typedef {Object} INVENTORY_SHIPMENTS_RECEIVE_ITEMS_items_received
+ * @property {string} id
+ * @property {number} old_accepted_quantity
+ * @property {number} old_rejected_quantity
+ * @property {number} new_accepted_quantity
+ * @property {number} new_rejected_quantity
+ * @property {number} remaining_quantity_to_receive
+ */
+/**
+* @typedef {Object} INVENTORY_SHIPMENTS_RECEIVE_ITEMS
+ * @property {string} id
+ * @property {string} status
+ * @property {Array<INVENTORY_SHIPMENTS_RECEIVE_ITEMS_items_received>} items_received
+ * @property {string} happened_at
+ */
+/**
+* @typedef {Object} DISCOUNTS_DELETE
  * @property {string} admin_graphql_api_id
  * @property {string} deleted_at
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_ATTEMPTS_FAILURE
- * @property {null|string} id
- * @property {null|string} admin_graphql_api_id
- * @property {string} idempotency_key
- * @property {number} order_id
- * @property {string} admin_graphql_api_order_id
- * @property {number} subscription_contract_id
- * @property {string} admin_graphql_api_subscription_contract_id
- * @property {boolean} ready
- * @property {null|string} error_message
- * @property {null|string} error_code
+* @typedef {Object} SUBSCRIPTION_BILLING_ATTEMPTS_FAILURE
  */
 /**
- * @typedef {Object} LOCATIONS_CREATE
+* @typedef {Object} LOCATIONS_CREATE
  * @property {number} id
  * @property {string} name
  * @property {string} address1
@@ -6218,7 +6918,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} VARIANTS_OUT_OF_STOCK
+* @typedef {Object} VARIANTS_OUT_OF_STOCK
  * @property {number} id
  * @property {number} product_id
  * @property {string} title
@@ -6240,7 +6940,7 @@
  * @property {null|string} image_id
  */
 /**
- * @typedef {Object} CUSTOMERS_CREATE_default_address
+* @typedef {Object} CUSTOMERS_CREATE_default_address
  * @property {number} id
  * @property {number} customer_id
  * @property {string} first_name
@@ -6260,9 +6960,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} CUSTOMERS_CREATE
+* @typedef {Object} CUSTOMERS_CREATE
  * @property {number} id
- * @property {string} email
  * @property {string} created_at
  * @property {string} updated_at
  * @property {string} first_name
@@ -6272,34 +6971,35 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} addresses
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {CUSTOMERS_CREATE_default_address} default_address
  */
 /**
- * @typedef {Object} RETURNS_REOPEN
+* @typedef {Object} RETURNS_REOPEN
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {number} order_id
  * @property {string} status
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_CANCEL_billing_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_CANCEL_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {number} min_cycles
  * @property {number} max_cycles
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_CANCEL_delivery_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_CANCEL_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_CANCEL
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_CANCEL
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {SUBSCRIPTION_CONTRACTS_CANCEL_billing_policy} billing_policy
@@ -6313,7 +7013,7 @@
  * @property {string} revision_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_contact_company
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_contact_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -6324,7 +7024,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_contact
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_contact
  * @property {string} customer_admin_graphql_api_id
  * @property {string} title
  * @property {string} locale
@@ -6334,13 +7034,13 @@
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_contact_company} company
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_tax_settings
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_tax_settings
  * @property {string} tax_registration_id
  * @property {null|string} tax_exempt
  * @property {Array<string>} tax_exemptions
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_company
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -6351,7 +7051,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_billing_address
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_billing_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -6370,7 +7070,7 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_shipping_address
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_shipping_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -6389,11 +7089,11 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_tax_registration
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location_tax_registration
  * @property {string} tax_id
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_location
  * @property {string} name
  * @property {string} external_id
  * @property {string} phone
@@ -6411,17 +7111,17 @@
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_location_tax_registration} tax_registration
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_contact_role
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE_company_contact_role
  * @property {string} name
  */
 /**
- * @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE
+* @typedef {Object} COMPANY_CONTACT_ROLES_REVOKE
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_contact} company_contact
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_location} company_location
  * @property {COMPANY_CONTACT_ROLES_REVOKE_company_contact_role} company_contact_role
  */
 /**
- * @typedef {Object} COLLECTIONS_UPDATE
+* @typedef {Object} COLLECTIONS_UPDATE
  * @property {number} id
  * @property {string} handle
  * @property {string} title
@@ -6434,50 +7134,50 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} ORDERS_DELETE
+* @typedef {Object} ORDERS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_ACCEPTED_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_ACCEPTED_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {string} request_status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_ACCEPTED
+* @typedef {Object} FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_ACCEPTED
  * @property {FULFILLMENT_ORDERS_FULFILLMENT_REQUEST_ACCEPTED_fulfillment_order} fulfillment_order
  * @property {string} message
  */
 /**
- * @typedef {Object} SHOP_REDACT
+* @typedef {Object} SHOP_REDACT
  * @property {number} shop_id
  * @property {string} shop_domain
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY_fulfillment_order_delivery_method
+* @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY_fulfillment_order_delivery_method
  * @property {string} method_type
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY_fulfillment_order
  * @property {string} id
  * @property {string} status
  * @property {boolean} preparable
  * @property {FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY_fulfillment_order_delivery_method} delivery_method
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY
+* @typedef {Object} FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY
  * @property {FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_LOCAL_DELIVERY_fulfillment_order} fulfillment_order
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_REMOVE_scheduled_product_listing
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_REMOVE_scheduled_product_listing
  * @property {number} product_id
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_REMOVE
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_REMOVE
  * @property {SCHEDULED_PRODUCT_LISTINGS_REMOVE_scheduled_product_listing} scheduled_product_listing
  */
 /**
- * @typedef {Object} LOCATIONS_ACTIVATE
+* @typedef {Object} LOCATIONS_ACTIVATE
  * @property {number} id
  * @property {string} name
  * @property {string} address1
@@ -6497,52 +7197,52 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} PAYMENT_TERMS_DELETE
+* @typedef {Object} PAYMENT_TERMS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} RETURNS_CLOSE
+* @typedef {Object} RETURNS_CLOSE
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {number} order_id
  * @property {string} status
  */
 /**
- * @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_return
+* @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_return
  * @property {number} id
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable_tracking
+* @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable_tracking
  * @property {string} carrier_name
  * @property {string} tracking_number
  * @property {null|string} tracking_url
  */
 /**
- * @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable_label
+* @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable_label
  * @property {null|string} public_file_url
  * @property {null|string} created_at
  */
 /**
- * @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable
+* @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable
  * @property {REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable_tracking} tracking
  * @property {REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable_label} label
  */
 /**
- * @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE
+* @typedef {Object} REVERSE_DELIVERIES_ATTACH_DELIVERABLE
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {REVERSE_DELIVERIES_ATTACH_DELIVERABLE_return} return
  * @property {REVERSE_DELIVERIES_ATTACH_DELIVERABLE_shipping_deliverable} shipping_deliverable
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_variants_option_values
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_variants_option_values
  * @property {number} option_id
  * @property {string} name
  * @property {string} value
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_variants
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_variants
  * @property {number} id
  * @property {string} title
  * @property {Array<SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_variants_option_values>} option_values
@@ -6567,7 +7267,7 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_options
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_options
  * @property {number} id
  * @property {string} name
  * @property {number} product_id
@@ -6575,7 +7275,7 @@
  * @property {Array<string>} values
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing
  * @property {number} product_id
  * @property {null|string} created_at
  * @property {string} updated_at
@@ -6592,11 +7292,22 @@
  * @property {Array<SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing_options>} options
  */
 /**
- * @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE
+* @typedef {Object} SCHEDULED_PRODUCT_LISTINGS_UPDATE
  * @property {SCHEDULED_PRODUCT_LISTINGS_UPDATE_scheduled_product_listing} scheduled_product_listing
  */
 /**
- * @typedef {Object} PRODUCTS_CREATE_variants
+* @typedef {Object} INVENTORY_SHIPMENTS_ADD_ITEMS_items_added
+ * @property {string} id
+ * @property {number} quantity
+ */
+/**
+* @typedef {Object} INVENTORY_SHIPMENTS_ADD_ITEMS
+ * @property {string} id
+ * @property {Array<INVENTORY_SHIPMENTS_ADD_ITEMS_items_added>} items_added
+ * @property {string} happened_at
+ */
+/**
+* @typedef {Object} PRODUCTS_CREATE_variants
  * @property {string} admin_graphql_api_id
  * @property {null|string} barcode
  * @property {string} compare_at_price
@@ -6619,12 +7330,12 @@
  * @property {number} old_inventory_quantity
  */
 /**
- * @typedef {Object} PRODUCTS_CREATE_variant_gids
+* @typedef {Object} PRODUCTS_CREATE_variant_gids
  * @property {string} admin_graphql_api_id
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} PRODUCTS_CREATE
+* @typedef {Object} PRODUCTS_CREATE
  * @property {string} admin_graphql_api_id
  * @property {string} body_html
  * @property {null|string} created_at
@@ -6649,202 +7360,202 @@
  * @property {null|string} category
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_current_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_current_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_shipping_price_set
+* @typedef {Object} ORDERS_CANCELLED_current_shipping_price_set
  * @property {ORDERS_CANCELLED_current_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_current_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_current_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_current_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_subtotal_price_set
+* @typedef {Object} ORDERS_CANCELLED_current_subtotal_price_set
  * @property {ORDERS_CANCELLED_current_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_current_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_current_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_current_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_discounts_set
+* @typedef {Object} ORDERS_CANCELLED_current_total_discounts_set
  * @property {ORDERS_CANCELLED_current_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_current_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_current_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_current_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_price_set
+* @typedef {Object} ORDERS_CANCELLED_current_total_price_set
  * @property {ORDERS_CANCELLED_current_total_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_current_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_tax_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_current_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_current_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_current_total_tax_set
+* @typedef {Object} ORDERS_CANCELLED_current_total_tax_set
  * @property {ORDERS_CANCELLED_current_total_tax_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_current_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_subtotal_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_subtotal_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_subtotal_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_subtotal_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_subtotal_price_set
+* @typedef {Object} ORDERS_CANCELLED_subtotal_price_set
  * @property {ORDERS_CANCELLED_subtotal_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_subtotal_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set
+* @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set
  * @property {ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_total_cash_rounding_payment_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set
+* @typedef {Object} ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set
  * @property {ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_total_cash_rounding_refund_adjustment_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_discounts_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_total_discounts_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_discounts_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_total_discounts_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_discounts_set
+* @typedef {Object} ORDERS_CANCELLED_total_discounts_set
  * @property {ORDERS_CANCELLED_total_discounts_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_total_discounts_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_total_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_total_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_line_items_price_set
+* @typedef {Object} ORDERS_CANCELLED_total_line_items_price_set
  * @property {ORDERS_CANCELLED_total_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_total_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_total_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_total_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_price_set
+* @typedef {Object} ORDERS_CANCELLED_total_price_set
  * @property {ORDERS_CANCELLED_total_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_total_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_shipping_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_total_shipping_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_shipping_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_total_shipping_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_shipping_price_set
+* @typedef {Object} ORDERS_CANCELLED_total_shipping_price_set
  * @property {ORDERS_CANCELLED_total_shipping_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_total_shipping_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_tax_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_total_tax_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_tax_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_total_tax_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_total_tax_set
+* @typedef {Object} ORDERS_CANCELLED_total_tax_set
  * @property {ORDERS_CANCELLED_total_tax_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_total_tax_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_billing_address
+* @typedef {Object} ORDERS_CANCELLED_billing_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -6862,11 +7573,11 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_customer_default_address
+* @typedef {Object} ORDERS_CANCELLED_customer_default_address
  * @property {number} id
  * @property {number} customer_id
- * @property {null|string} first_name
- * @property {null|string} last_name
+ * @property {string} first_name
+ * @property {string} last_name
  * @property {null|string} company
  * @property {string} address1
  * @property {null|string} address2
@@ -6882,9 +7593,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_customer
+* @typedef {Object} ORDERS_CANCELLED_customer
  * @property {number} id
- * @property {string} email
  * @property {null|string} created_at
  * @property {null|string} updated_at
  * @property {string} first_name
@@ -6894,6 +7604,7 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
+ * @property {string} email
  * @property {null|string} phone
  * @property {string} currency
  * @property {Array} tax_exemptions
@@ -6901,42 +7612,42 @@
  * @property {ORDERS_CANCELLED_customer_default_address} default_address
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items_attributed_staffs
+* @typedef {Object} ORDERS_CANCELLED_line_items_attributed_staffs
  * @property {string} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items_price_set
+* @typedef {Object} ORDERS_CANCELLED_line_items_price_set
  * @property {ORDERS_CANCELLED_line_items_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items_total_discount_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items_total_discount_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items_total_discount_set
+* @typedef {Object} ORDERS_CANCELLED_line_items_total_discount_set
  * @property {ORDERS_CANCELLED_line_items_total_discount_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_line_items
+* @typedef {Object} ORDERS_CANCELLED_line_items
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {Array<ORDERS_CANCELLED_line_items_attributed_staffs>} attributed_staffs
@@ -6969,7 +7680,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_address
+* @typedef {Object} ORDERS_CANCELLED_shipping_address
  * @property {string} first_name
  * @property {string} address1
  * @property {string} phone
@@ -6987,52 +7698,52 @@
  * @property {string} province_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_current_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_current_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_current_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_current_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_current_discounted_price_set
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_current_discounted_price_set
  * @property {ORDERS_CANCELLED_shipping_lines_current_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_shipping_lines_current_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_discounted_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_discounted_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_discounted_price_set
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_discounted_price_set
  * @property {ORDERS_CANCELLED_shipping_lines_discounted_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_shipping_lines_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_price_set_shop_money
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_price_set_presentment_money
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines_price_set
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines_price_set
  * @property {ORDERS_CANCELLED_shipping_lines_price_set_shop_money} shop_money
  * @property {ORDERS_CANCELLED_shipping_lines_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED_shipping_lines
+* @typedef {Object} ORDERS_CANCELLED_shipping_lines
  * @property {number} id
  * @property {null|string} carrier_identifier
  * @property {null|string} code
@@ -7050,7 +7761,7 @@
  * @property {Array} discount_allocations
  */
 /**
- * @typedef {Object} ORDERS_CANCELLED
+* @typedef {Object} ORDERS_CANCELLED
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {null|string} app_id
@@ -7059,7 +7770,6 @@
  * @property {string} cancel_reason
  * @property {string} cancelled_at
  * @property {null|string} cart_token
- * @property {null|string} checkout_id
  * @property {null|string} checkout_token
  * @property {null|string} client_details
  * @property {null|string} closed_at
@@ -7144,42 +7854,77 @@
  * @property {ORDERS_CANCELLED_shipping_address} shipping_address
  * @property {Array<ORDERS_CANCELLED_shipping_lines>} shipping_lines
  * @property {Array} returns
+ * @property {Array} line_item_groups
  */
 /**
- * @typedef {Object} CUSTOMER_TAGS_REMOVED
+* @typedef {Object} CUSTOMER_TAGS_REMOVED
  * @property {string} customerId
  * @property {Array<string>} tags
  * @property {string} occurredAt
  */
 /**
- * @typedef {Object} TAX_SERVICES_UPDATE
- * @property {null|string} id
+* @typedef {Object} INVENTORY_TRANSFERS_READY_TO_SHIP_origin
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_READY_TO_SHIP_destination
+ * @property {string} id
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_READY_TO_SHIP_line_items
+ * @property {string} id
+ * @property {number} quantity
+ */
+/**
+* @typedef {Object} INVENTORY_TRANSFERS_READY_TO_SHIP
+ * @property {string} id
+ * @property {string} happened_at
+ * @property {INVENTORY_TRANSFERS_READY_TO_SHIP_origin} origin
+ * @property {INVENTORY_TRANSFERS_READY_TO_SHIP_destination} destination
+ * @property {string} status
+ * @property {Array<INVENTORY_TRANSFERS_READY_TO_SHIP_line_items>} line_items
+ */
+/**
+* @typedef {Object} TAX_SERVICES_UPDATE
+ * @property {number} id
  * @property {string} name
  * @property {string} url
  * @property {boolean} active
  */
 /**
- * @typedef {Object} INVENTORY_LEVELS_UPDATE
+* @typedef {Object} INVENTORY_SHIPMENTS_UPDATE_ITEM_QUANTITIES_items_updated
+ * @property {string} id
+ * @property {number} old_quantity
+ * @property {number} new_quantity
+ */
+/**
+* @typedef {Object} INVENTORY_SHIPMENTS_UPDATE_ITEM_QUANTITIES
+ * @property {string} id
+ * @property {Array<INVENTORY_SHIPMENTS_UPDATE_ITEM_QUANTITIES_items_updated>} items_updated
+ * @property {string} happened_at
+ */
+/**
+* @typedef {Object} INVENTORY_LEVELS_UPDATE
  * @property {number} inventory_item_id
  * @property {number} location_id
- * @property {null|string} available
+ * @property {number} available
  * @property {string} updated_at
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} METAOBJECTS_UPDATE_fields
+* @typedef {Object} METAOBJECTS_UPDATE_fields
  * @property {string} example-key
  */
 /**
- * @typedef {Object} METAOBJECTS_UPDATE_capabilities_publishable
+* @typedef {Object} METAOBJECTS_UPDATE_capabilities_publishable
  * @property {string} status
  */
 /**
- * @typedef {Object} METAOBJECTS_UPDATE_capabilities
+* @typedef {Object} METAOBJECTS_UPDATE_capabilities
  * @property {METAOBJECTS_UPDATE_capabilities_publishable} publishable
  */
 /**
- * @typedef {Object} METAOBJECTS_UPDATE
+* @typedef {Object} METAOBJECTS_UPDATE
  * @property {string} type
  * @property {string} handle
  * @property {string} created_at
@@ -7193,14 +7938,19 @@
  * @property {METAOBJECTS_UPDATE_capabilities} capabilities
  */
 /**
- * @typedef {Object} PROFILES_CREATE
+* @typedef {Object} PROFILES_CREATE
  * @property {number} id
+ * @property {string} admin_graphql_api_id
+ * @property {string} name
+ * @property {boolean} default
+ * @property {null|string} profile_type
+ * @property {number} version
  */
 /**
- * @typedef {Object} FINANCE_APP_STAFF_MEMBER_REVOKE
+* @typedef {Object} FINANCE_APP_STAFF_MEMBER_REVOKE
  */
 /**
- * @typedef {Object} THEMES_PUBLISH
+* @typedef {Object} THEMES_PUBLISH
  * @property {number} id
  * @property {string} name
  * @property {string} created_at
@@ -7212,7 +7962,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANIES_UPDATE
+* @typedef {Object} COMPANIES_UPDATE
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -7223,13 +7973,13 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing_variants_option_values
+* @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing_variants_option_values
  * @property {number} option_id
  * @property {string} name
  * @property {string} value
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing_variants
+* @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing_variants
  * @property {number} id
  * @property {string} title
  * @property {Array<PRODUCT_LISTINGS_ADD_product_listing_variants_option_values>} option_values
@@ -7254,7 +8004,7 @@
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing_options
+* @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing_options
  * @property {number} id
  * @property {string} name
  * @property {number} product_id
@@ -7262,7 +8012,7 @@
  * @property {Array<string>} values
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing
+* @typedef {Object} PRODUCT_LISTINGS_ADD_product_listing
  * @property {number} product_id
  * @property {null|string} created_at
  * @property {string} updated_at
@@ -7279,11 +8029,11 @@
  * @property {Array<PRODUCT_LISTINGS_ADD_product_listing_options>} options
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_ADD
+* @typedef {Object} PRODUCT_LISTINGS_ADD
  * @property {PRODUCT_LISTINGS_ADD_product_listing} product_listing
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_CYCLES_UNSKIP
+* @typedef {Object} SUBSCRIPTION_BILLING_CYCLES_UNSKIP
  * @property {number} subscription_contract_id
  * @property {string} cycle_start_at
  * @property {string} cycle_end_at
@@ -7294,28 +8044,28 @@
  * @property {boolean} edited
  */
 /**
- * @typedef {Object} FINANCE_APP_STAFF_MEMBER_DELETE
+* @typedef {Object} FINANCE_APP_STAFF_MEMBER_DELETE
  */
 /**
- * @typedef {Object} CUSTOMER_JOINED_SEGMENT
+* @typedef {Object} CUSTOMER_JOINED_SEGMENT
  * @property {string} shop_id
  * @property {string} customer_id
  * @property {string} segment_id
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_CREATE_billing_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_CREATE_billing_policy
  * @property {string} interval
  * @property {number} interval_count
  * @property {number} min_cycles
  * @property {number} max_cycles
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_CREATE_delivery_policy
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_CREATE_delivery_policy
  * @property {string} interval
  * @property {number} interval_count
  */
 /**
- * @typedef {Object} SUBSCRIPTION_CONTRACTS_CREATE
+* @typedef {Object} SUBSCRIPTION_CONTRACTS_CREATE
  * @property {string} admin_graphql_api_id
  * @property {number} id
  * @property {SUBSCRIPTION_CONTRACTS_CREATE_billing_policy} billing_policy
@@ -7329,10 +8079,10 @@
  * @property {string} revision_id
  */
 /**
- * @typedef {Object} FINANCE_APP_STAFF_MEMBER_GRANT
+* @typedef {Object} FINANCE_APP_STAFF_MEMBER_GRANT
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_context_context_metadata
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_context_context_metadata
  * @property {string} client_ip
  * @property {string} content_type
  * @property {number} response_time_ms
@@ -7341,44 +8091,44 @@
  * @property {number} response_code
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_context
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_context
  * @property {string} context_type
  * @property {string} context_identifier
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_context_context_metadata} context_metadata
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor_actor_metadata
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor_actor_metadata
  * @property {string} app_name
  * @property {string} api_version_requested
  * @property {string} api_version_served
  * @property {string} ecosystem_category
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor_on_behalf_of
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor_on_behalf_of
  * @property {string} user_email
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor
  * @property {string} actor_type
  * @property {number} actor_identifier
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor_actor_metadata} actor_metadata
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor_on_behalf_of} on_behalf_of
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_subject_subject_metadata
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_subject_subject_metadata
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_subject
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_subject
  * @property {string} subject_type
  * @property {string} subject_identifier
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_subject_subject_metadata} subject_metadata
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_additional_metadata_variables
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_additional_metadata_variables
  * @property {number} first
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_additional_metadata
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_additional_metadata
  * @property {string} request_type
  * @property {Array} mutation_names
  * @property {string} query
@@ -7386,7 +8136,7 @@
  * @property {Array} error_codes
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_context} context
  * @property {string} action
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_actor} actor
@@ -7395,29 +8145,29 @@
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event_additional_metadata} additional_metadata
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY_events
  * @property {number} time
  * @property {AUDIT_EVENTS_ADMIN_API_ACTIVITY_events_event} event
  */
 /**
- * @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY
+* @typedef {Object} AUDIT_EVENTS_ADMIN_API_ACTIVITY
  * @property {Array<AUDIT_EVENTS_ADMIN_API_ACTIVITY_events>} events
  */
 /**
- * @typedef {Object} CUSTOMERS_REDACT_customer
+* @typedef {Object} CUSTOMERS_REDACT_customer
  * @property {number} id
  * @property {string} email
  * @property {string} phone
  */
 /**
- * @typedef {Object} CUSTOMERS_REDACT
+* @typedef {Object} CUSTOMERS_REDACT
  * @property {number} shop_id
  * @property {string} shop_domain
  * @property {CUSTOMERS_REDACT_customer} customer
  * @property {Array<number>} orders_to_redact
  */
 /**
- * @typedef {Object} SUBSCRIPTION_BILLING_CYCLE_EDITS_CREATE
+* @typedef {Object} SUBSCRIPTION_BILLING_CYCLE_EDITS_CREATE
  * @property {number} subscription_contract_id
  * @property {string} cycle_start_at
  * @property {string} cycle_end_at
@@ -7428,47 +8178,47 @@
  * @property {boolean} edited
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_REMOVE_product_listing
+* @typedef {Object} PRODUCT_LISTINGS_REMOVE_product_listing
  * @property {number} product_id
  */
 /**
- * @typedef {Object} PRODUCT_LISTINGS_REMOVE
+* @typedef {Object} PRODUCT_LISTINGS_REMOVE
  * @property {PRODUCT_LISTINGS_REMOVE_product_listing} product_listing
  */
 /**
- * @typedef {Object} RETURNS_UPDATE_return_line_items_removals
+* @typedef {Object} RETURNS_UPDATE_return_line_items_removals
  * @property {string} admin_graphql_api_id
  * @property {number} delta
  */
 /**
- * @typedef {Object} RETURNS_UPDATE_return_line_items
+* @typedef {Object} RETURNS_UPDATE_return_line_items
  * @property {Array<RETURNS_UPDATE_return_line_items_removals>} removals
  */
 /**
- * @typedef {Object} RETURNS_UPDATE_restocking_fees
+* @typedef {Object} RETURNS_UPDATE_restocking_fees
  * @property {Array} updates
  * @property {Array} removals
  */
 /**
- * @typedef {Object} RETURNS_UPDATE_return_shipping_fees
+* @typedef {Object} RETURNS_UPDATE_return_shipping_fees
  * @property {Array} updates
  * @property {Array} removals
  */
 /**
- * @typedef {Object} RETURNS_UPDATE
+* @typedef {Object} RETURNS_UPDATE
  * @property {string} admin_graphql_api_id
  * @property {RETURNS_UPDATE_return_line_items} return_line_items
  * @property {RETURNS_UPDATE_restocking_fees} restocking_fees
  * @property {RETURNS_UPDATE_return_shipping_fees} return_shipping_fees
  */
 /**
- * @typedef {Object} MARKETS_DELETE
+* @typedef {Object} MARKETS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} PRODUCT_PUBLICATIONS_UPDATE
+* @typedef {Object} PRODUCT_PUBLICATIONS_UPDATE
  * @property {null|string} id
- * @property {null|string} publication_id
+ * @property {number} publication_id
  * @property {string} published_at
  * @property {boolean} published
  * @property {null|string} created_at
@@ -7476,7 +8226,7 @@
  * @property {number} product_id
  */
 /**
- * @typedef {Object} METAFIELD_DEFINITIONS_UPDATE
+* @typedef {Object} METAFIELD_DEFINITIONS_UPDATE
  * @property {null|string} id
  * @property {number} shop_id
  * @property {string} namespace
@@ -7493,98 +8243,102 @@
  * @property {string} validation_status
  * @property {number} pinned_position
  * @property {null|string} standard_template_id
- * @property {boolean} use_as_collection_condition
- * @property {string} access
- * @property {string} admin_filter_status
+ * @property {null|string} merchant_writeable
+ * @property {null|string} storefront_readable
+ * @property {null|string} customer_access
+ * @property {null|string} namespace_owner_api_client_id
  * @property {boolean} unique_values
  * @property {boolean} smart_collection_condition
  * @property {boolean} option_linkable
  * @property {boolean} admin_filterable
  * @property {null|string} admin_filterable_status
  * @property {boolean} app_config_managed
+ * @property {boolean} access_only
+ * @property {string} admin_filter_status
+ * @property {boolean} use_as_collection_condition
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_properties
+* @typedef {Object} RETURNS_PROCESS
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_discounted_price_set_shop_money
+* @typedef {Object} CARTS_CREATE_line_items_discounted_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_discounted_price_set_presentment_money
+* @typedef {Object} CARTS_CREATE_line_items_discounted_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_discounted_price_set
+* @typedef {Object} CARTS_CREATE_line_items_discounted_price_set
  * @property {CARTS_CREATE_line_items_discounted_price_set_shop_money} shop_money
  * @property {CARTS_CREATE_line_items_discounted_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_line_price_set_shop_money
+* @typedef {Object} CARTS_CREATE_line_items_line_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_line_price_set_presentment_money
+* @typedef {Object} CARTS_CREATE_line_items_line_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_line_price_set
+* @typedef {Object} CARTS_CREATE_line_items_line_price_set
  * @property {CARTS_CREATE_line_items_line_price_set_shop_money} shop_money
  * @property {CARTS_CREATE_line_items_line_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_original_line_price_set_shop_money
+* @typedef {Object} CARTS_CREATE_line_items_original_line_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_original_line_price_set_presentment_money
+* @typedef {Object} CARTS_CREATE_line_items_original_line_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_original_line_price_set
+* @typedef {Object} CARTS_CREATE_line_items_original_line_price_set
  * @property {CARTS_CREATE_line_items_original_line_price_set_shop_money} shop_money
  * @property {CARTS_CREATE_line_items_original_line_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_price_set_shop_money
+* @typedef {Object} CARTS_CREATE_line_items_price_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_price_set_presentment_money
+* @typedef {Object} CARTS_CREATE_line_items_price_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_price_set
+* @typedef {Object} CARTS_CREATE_line_items_price_set
  * @property {CARTS_CREATE_line_items_price_set_shop_money} shop_money
  * @property {CARTS_CREATE_line_items_price_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_total_discount_set_shop_money
+* @typedef {Object} CARTS_CREATE_line_items_total_discount_set_shop_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_total_discount_set_presentment_money
+* @typedef {Object} CARTS_CREATE_line_items_total_discount_set_presentment_money
  * @property {string} amount
  * @property {string} currency_code
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items_total_discount_set
+* @typedef {Object} CARTS_CREATE_line_items_total_discount_set
  * @property {CARTS_CREATE_line_items_total_discount_set_shop_money} shop_money
  * @property {CARTS_CREATE_line_items_total_discount_set_presentment_money} presentment_money
  */
 /**
- * @typedef {Object} CARTS_CREATE_line_items
+* @typedef {Object} CARTS_CREATE_line_items
  * @property {number} id
- * @property {CARTS_CREATE_line_items_properties} properties
+ * @property {null|string} properties
  * @property {number} quantity
  * @property {number} variant_id
  * @property {string} key
@@ -7607,9 +8361,10 @@
  * @property {CARTS_CREATE_line_items_original_line_price_set} original_line_price_set
  * @property {CARTS_CREATE_line_items_price_set} price_set
  * @property {CARTS_CREATE_line_items_total_discount_set} total_discount_set
+ * @property {null|string} parent_relationship
  */
 /**
- * @typedef {Object} CARTS_CREATE
+* @typedef {Object} CARTS_CREATE
  * @property {string} id
  * @property {string} token
  * @property {Array<CARTS_CREATE_line_items>} line_items
@@ -7618,7 +8373,7 @@
  * @property {string} created_at
  */
 /**
- * @typedef {Object} INVENTORY_ITEMS_CREATE
+* @typedef {Object} INVENTORY_ITEMS_CREATE
  * @property {number} id
  * @property {string} sku
  * @property {string} created_at
@@ -7635,20 +8390,20 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_ORDER_ROUTING_COMPLETE_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_ORDER_ROUTING_COMPLETE_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_ORDER_ROUTING_COMPLETE
+* @typedef {Object} FULFILLMENT_ORDERS_ORDER_ROUTING_COMPLETE
  * @property {FULFILLMENT_ORDERS_ORDER_ROUTING_COMPLETE_fulfillment_order} fulfillment_order
  */
 /**
- * @typedef {Object} SEGMENTS_DELETE
+* @typedef {Object} SEGMENTS_DELETE
  * @property {number} id
  */
 /**
- * @typedef {Object} APP_UNINSTALLED
+* @typedef {Object} APP_UNINSTALLED
  * @property {number} id
  * @property {string} name
  * @property {string} email
@@ -7705,33 +8460,58 @@
  * @property {boolean} transactional_sms_disabled
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_SCHEDULED_FULFILLMENT_ORDER_READY_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_SCHEDULED_FULFILLMENT_ORDER_READY_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_SCHEDULED_FULFILLMENT_ORDER_READY
+* @typedef {Object} FULFILLMENT_ORDERS_SCHEDULED_FULFILLMENT_ORDER_READY
  * @property {FULFILLMENT_ORDERS_SCHEDULED_FULFILLMENT_ORDER_READY_fulfillment_order} fulfillment_order
  */
 /**
- * @typedef {Object} DISCOUNTS_REDEEMCODE_ADDED_redeem_code
+* @typedef {Object} FULFILLMENT_ORDERS_PROGRESS_REPORTED_fulfillment_order
+ * @property {string} id
+ * @property {string} status
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_PROGRESS_REPORTED_progress_report_progress_reported_by_app
+ * @property {string} id
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_PROGRESS_REPORTED_progress_report_progress_reported_by_user
+ * @property {string} id
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_PROGRESS_REPORTED_progress_report
+ * @property {string} reason_notes
+ * @property {FULFILLMENT_ORDERS_PROGRESS_REPORTED_progress_report_progress_reported_by_app} progress_reported_by_app
+ * @property {FULFILLMENT_ORDERS_PROGRESS_REPORTED_progress_report_progress_reported_by_user} progress_reported_by_user
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_PROGRESS_REPORTED
+ * @property {FULFILLMENT_ORDERS_PROGRESS_REPORTED_fulfillment_order} fulfillment_order
+ * @property {FULFILLMENT_ORDERS_PROGRESS_REPORTED_progress_report} progress_report
+ * @property {string} initial_status
+ */
+/**
+* @typedef {Object} DISCOUNTS_REDEEMCODE_ADDED_redeem_code
  * @property {string} id
  * @property {string} code
  */
 /**
- * @typedef {Object} DISCOUNTS_REDEEMCODE_ADDED
+* @typedef {Object} DISCOUNTS_REDEEMCODE_ADDED
  * @property {string} admin_graphql_api_id
  * @property {DISCOUNTS_REDEEMCODE_ADDED_redeem_code} redeem_code
  * @property {string} updated_at
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_UPDATE_tax_settings
+* @typedef {Object} COMPANY_LOCATIONS_UPDATE_tax_settings
  * @property {string} tax_registration_id
  * @property {null|string} tax_exempt
  * @property {Array<string>} tax_exemptions
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_UPDATE_company
+* @typedef {Object} COMPANY_LOCATIONS_UPDATE_company
  * @property {string} name
  * @property {string} note
  * @property {string} external_id
@@ -7742,7 +8522,7 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_UPDATE_billing_address
+* @typedef {Object} COMPANY_LOCATIONS_UPDATE_billing_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -7761,7 +8541,7 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_UPDATE_shipping_address
+* @typedef {Object} COMPANY_LOCATIONS_UPDATE_shipping_address
  * @property {string} address1
  * @property {string} city
  * @property {string} province
@@ -7780,11 +8560,11 @@
  * @property {string} company_admin_graphql_api_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_UPDATE_tax_registration
+* @typedef {Object} COMPANY_LOCATIONS_UPDATE_tax_registration
  * @property {string} tax_id
  */
 /**
- * @typedef {Object} COMPANY_LOCATIONS_UPDATE
+* @typedef {Object} COMPANY_LOCATIONS_UPDATE
  * @property {string} name
  * @property {string} external_id
  * @property {string} phone
@@ -7802,29 +8582,34 @@
  * @property {COMPANY_LOCATIONS_UPDATE_tax_registration} tax_registration
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_ACCEPTED_fulfillment_order
+* @typedef {Object} LOCALES_DESTROY
+ * @property {string} locale
+ * @property {boolean} published
+ */
+/**
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_ACCEPTED_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_ACCEPTED
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLATION_REQUEST_ACCEPTED
  * @property {FULFILLMENT_ORDERS_CANCELLATION_REQUEST_ACCEPTED_fulfillment_order} fulfillment_order
  * @property {string} message
  */
 /**
- * @typedef {Object} PRODUCT_FEEDS_UPDATE
+* @typedef {Object} PRODUCT_FEEDS_UPDATE
  * @property {string} id
  * @property {string} country
  * @property {string} language
  * @property {string} status
  */
 /**
- * @typedef {Object} CUSTOMERS_PURCHASING_SUMMARY_amountSpent
+* @typedef {Object} CUSTOMERS_PURCHASING_SUMMARY_amountSpent
  * @property {string} amount
  * @property {string} currencyCode
  */
 /**
- * @typedef {Object} CUSTOMERS_PURCHASING_SUMMARY
+* @typedef {Object} CUSTOMERS_PURCHASING_SUMMARY
  * @property {string} customerId
  * @property {number} numberOfOrders
  * @property {CUSTOMERS_PURCHASING_SUMMARY_amountSpent} amountSpent
@@ -7832,17 +8617,17 @@
  * @property {string} occurredAt
  */
 /**
- * @typedef {Object} CUSTOMERS_DATA_REQUEST_customer
+* @typedef {Object} CUSTOMERS_DATA_REQUEST_customer
  * @property {number} id
  * @property {string} email
  * @property {string} phone
  */
 /**
- * @typedef {Object} CUSTOMERS_DATA_REQUEST_data_request
+* @typedef {Object} CUSTOMERS_DATA_REQUEST_data_request
  * @property {number} id
  */
 /**
- * @typedef {Object} CUSTOMERS_DATA_REQUEST
+* @typedef {Object} CUSTOMERS_DATA_REQUEST
  * @property {number} shop_id
  * @property {string} shop_domain
  * @property {CUSTOMERS_DATA_REQUEST_customer} customer
@@ -7850,24 +8635,24 @@
  * @property {CUSTOMERS_DATA_REQUEST_data_request} data_request
  */
 /**
- * @typedef {Object} CUSTOMERS_MARKETING_CONSENT_UPDATE_sms_marketing_consent
+* @typedef {Object} CUSTOMERS_MARKETING_CONSENT_UPDATE_sms_marketing_consent
  * @property {null|string} state
  * @property {null|string} opt_in_level
  * @property {null|string} consent_updated_at
  * @property {string} consent_collected_from
  */
 /**
- * @typedef {Object} CUSTOMERS_MARKETING_CONSENT_UPDATE
+* @typedef {Object} CUSTOMERS_MARKETING_CONSENT_UPDATE
  * @property {number} id
  * @property {null|string} phone
  * @property {CUSTOMERS_MARKETING_CONSENT_UPDATE_sms_marketing_consent} sms_marketing_consent
  */
 /**
- * @typedef {Object} COLLECTION_PUBLICATIONS_DELETE
+* @typedef {Object} COLLECTION_PUBLICATIONS_DELETE
  * @property {null|string} id
  */
 /**
- * @typedef {Object} LOCATIONS_UPDATE
+* @typedef {Object} LOCATIONS_UPDATE
  * @property {number} id
  * @property {string} name
  * @property {string} address1
@@ -7887,15 +8672,15 @@
  * @property {string} admin_graphql_api_id
  */
 /**
- * @typedef {Object} COLLECTION_LISTINGS_REMOVE_collection_listing
+* @typedef {Object} COLLECTION_LISTINGS_REMOVE_collection_listing
  * @property {number} collection_id
  */
 /**
- * @typedef {Object} COLLECTION_LISTINGS_REMOVE
+* @typedef {Object} COLLECTION_LISTINGS_REMOVE
  * @property {COLLECTION_LISTINGS_REMOVE_collection_listing} collection_listing
  */
 /**
- * @typedef {Object} CUSTOMERS_UPDATE_default_address
+* @typedef {Object} CUSTOMERS_UPDATE_default_address
  * @property {number} id
  * @property {number} customer_id
  * @property {string} first_name
@@ -7915,9 +8700,8 @@
  * @property {boolean} default
  */
 /**
- * @typedef {Object} CUSTOMERS_UPDATE
+* @typedef {Object} CUSTOMERS_UPDATE
  * @property {number} id
- * @property {string} email
  * @property {string} created_at
  * @property {string} updated_at
  * @property {string} first_name
@@ -7927,64 +8711,65 @@
  * @property {boolean} verified_email
  * @property {null|string} multipass_identifier
  * @property {boolean} tax_exempt
- * @property {string} currency
+ * @property {string} email
  * @property {null|string} phone
+ * @property {string} currency
  * @property {Array} addresses
  * @property {Array} tax_exemptions
  * @property {string} admin_graphql_api_id
  * @property {CUSTOMERS_UPDATE_default_address} default_address
  */
 /**
- * @typedef {Object} FINANCE_KYC_INFORMATION_UPDATE
+* @typedef {Object} FINANCE_KYC_INFORMATION_UPDATE
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MERGED_merge_intents_fulfillment_order_line_items
+* @typedef {Object} FULFILLMENT_ORDERS_MERGED_merge_intents_fulfillment_order_line_items
  * @property {number} id
  * @property {number} quantity
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MERGED_merge_intents
+* @typedef {Object} FULFILLMENT_ORDERS_MERGED_merge_intents
  * @property {number} fulfillment_order_id
  * @property {Array<FULFILLMENT_ORDERS_MERGED_merge_intents_fulfillment_order_line_items>} fulfillment_order_line_items
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MERGED_fulfillment_order_merges_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_MERGED_fulfillment_order_merges_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MERGED_fulfillment_order_merges
+* @typedef {Object} FULFILLMENT_ORDERS_MERGED_fulfillment_order_merges
  * @property {FULFILLMENT_ORDERS_MERGED_fulfillment_order_merges_fulfillment_order} fulfillment_order
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_MERGED
+* @typedef {Object} FULFILLMENT_ORDERS_MERGED
  * @property {Array<FULFILLMENT_ORDERS_MERGED_merge_intents>} merge_intents
  * @property {FULFILLMENT_ORDERS_MERGED_fulfillment_order_merges} fulfillment_order_merges
  */
 /**
- * @typedef {Object} RETURNS_CANCEL
+* @typedef {Object} RETURNS_CANCEL
  * @property {number} id
  * @property {string} admin_graphql_api_id
  * @property {number} order_id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLED_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLED_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLED_replacement_fulfillment_order
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLED_replacement_fulfillment_order
  * @property {string} id
  * @property {string} status
  */
 /**
- * @typedef {Object} FULFILLMENT_ORDERS_CANCELLED
+* @typedef {Object} FULFILLMENT_ORDERS_CANCELLED
  * @property {FULFILLMENT_ORDERS_CANCELLED_fulfillment_order} fulfillment_order
  * @property {FULFILLMENT_ORDERS_CANCELLED_replacement_fulfillment_order} replacement_fulfillment_order
  */
 /**
- * @typedef {Object} COLLECTIONS_CREATE
+* @typedef {Object} COLLECTIONS_CREATE
  * @property {number} id
  * @property {string} handle
  * @property {string} title
@@ -7996,19 +8781,6 @@
  * @property {string} published_scope
  * @property {string} admin_graphql_api_id
  */
-/**
- * @typedef {Object} CHECKOUT_AND_ACCOUNTS_CONFIGURATIONS_UPDATE_settings
- * @property {boolean} typ_osp_pages_enabled
- */
-/**
- * @typedef {Object} CHECKOUT_AND_ACCOUNTS_CONFIGURATIONS_UPDATE
- * @property {string} admin_graphql_api_id
- * @property {string} name
- * @property {string} created_at
- * @property {string} edited_at
- * @property {string} updated_at
- * @property {boolean} is_published
- * @property {CHECKOUT_AND_ACCOUNTS_CONFIGURATIONS_UPDATE_settings} settings
- */
+
 
 export {};

@@ -51,7 +51,7 @@
 /**
  * Webhook configuration
  * @typedef {Object} WebhooksConfig
- * @property {('2024-07' | '2024-10' | '2025-01' | '2025-04')} api_version - The API version to be used for webhooks.
+ * @property {('2026-07' | '2025-10' | '2026-01' | '2026-04')} api_version - The API version to be used for webhooks.
  * @property {WebhookSubscription[]} subscriptions - Array of webhook subscriptions.
  * @property {PrivacyComplianceConfig} privacy_compliance - Configuration for privacy compliance.
  */

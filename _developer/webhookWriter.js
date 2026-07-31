@@ -8,7 +8,7 @@ import shopify from "../utils/shopify.js";
  * @property {string} graphql_topic - The topic's GraphQL topic name.
  */
 
-//Ref: https://shopify.dev/docs/api/webhooks/2025-04?reference=toml
+//Ref: https://shopify.dev/docs/api/webhooks/2026-07?reference=toml
 /**
  * @type {ApiEndpoint[]}
  */
@@ -154,6 +154,10 @@ const availableTopics = [
     topic: "customers_marketing_consent/update",
     graphql_topic: "CUSTOMERS_MARKETING_CONSENT_UPDATE",
   },
+  {
+    topic: "customers_whats_app_marketing_consent/update",
+    graphql_topic: "CUSTOMERS_WHATS_APP_MARKETING_CONSENT_UPDATE",
+  },
   { topic: "discounts/create", graphql_topic: "DISCOUNTS_CREATE" },
   { topic: "discounts/delete", graphql_topic: "DISCOUNTS_DELETE" },
   {
@@ -254,6 +258,10 @@ const availableTopics = [
     graphql_topic: "FULFILLMENT_ORDERS_LINE_ITEMS_PREPARED_FOR_PICKUP",
   },
   {
+    topic: "fulfillment_orders/manually_reported_progress_stopped",
+    graphql_topic: "FULFILLMENT_ORDERS_MANUALLY_REPORTED_PROGRESS_STOPPED",
+  },
+  {
     topic: "fulfillment_orders/merged",
     graphql_topic: "FULFILLMENT_ORDERS_MERGED",
   },
@@ -268,6 +276,10 @@ const availableTopics = [
   {
     topic: "fulfillment_orders/placed_on_hold",
     graphql_topic: "FULFILLMENT_ORDERS_PLACED_ON_HOLD",
+  },
+  {
+    topic: "fulfillment_orders/progress_reported",
+    graphql_topic: "FULFILLMENT_ORDERS_PROGRESS_REPORTED",
   },
   {
     topic: "fulfillment_orders/rescheduled",
@@ -298,7 +310,68 @@ const availableTopics = [
     topic: "inventory_levels/update",
     graphql_topic: "INVENTORY_LEVELS_UPDATE",
   },
+  {
+    topic: "inventory_shipments/add_items",
+    graphql_topic: "INVENTORY_SHIPMENTS_ADD_ITEMS",
+  },
+  {
+    topic: "inventory_shipments/create",
+    graphql_topic: "INVENTORY_SHIPMENTS_CREATE",
+  },
+  {
+    topic: "inventory_shipments/delete",
+    graphql_topic: "INVENTORY_SHIPMENTS_DELETE",
+  },
+  {
+    topic: "inventory_shipments/mark_in_transit",
+    graphql_topic: "INVENTORY_SHIPMENTS_MARK_IN_TRANSIT",
+  },
+  {
+    topic: "inventory_shipments/receive_items",
+    graphql_topic: "INVENTORY_SHIPMENTS_RECEIVE_ITEMS",
+  },
+  {
+    topic: "inventory_shipments/remove_items",
+    graphql_topic: "INVENTORY_SHIPMENTS_REMOVE_ITEMS",
+  },
+  {
+    topic: "inventory_shipments/update_item_quantities",
+    graphql_topic: "INVENTORY_SHIPMENTS_UPDATE_ITEM_QUANTITIES",
+  },
+  {
+    topic: "inventory_shipments/update_tracking",
+    graphql_topic: "INVENTORY_SHIPMENTS_UPDATE_TRACKING",
+  },
+  {
+    topic: "inventory_transfers/add_items",
+    graphql_topic: "INVENTORY_TRANSFERS_ADD_ITEMS",
+  },
+  {
+    topic: "inventory_transfers/cancel",
+    graphql_topic: "INVENTORY_TRANSFERS_CANCEL",
+  },
+  {
+    topic: "inventory_transfers/complete",
+    graphql_topic: "INVENTORY_TRANSFERS_COMPLETE",
+  },
+  {
+    topic: "inventory_transfers/ready_to_ship",
+    graphql_topic: "INVENTORY_TRANSFERS_READY_TO_SHIP",
+  },
+  {
+    topic: "inventory_transfers/remove_items",
+    graphql_topic: "INVENTORY_TRANSFERS_REMOVE_ITEMS",
+  },
+  {
+    topic: "inventory_transfers/update_item_quantities",
+    graphql_topic: "INVENTORY_TRANSFERS_UPDATE_ITEM_QUANTITIES",
+  },
+  {
+    topic: "inventory_transfers/updated",
+    graphql_topic: "INVENTORY_TRANSFERS_UPDATED",
+  },
   { topic: "locales/create", graphql_topic: "LOCALES_CREATE" },
+  { topic: "locales/destroy", graphql_topic: "LOCALES_DESTROY" },
   { topic: "locales/update", graphql_topic: "LOCALES_UPDATE" },
   { topic: "locations/activate", graphql_topic: "LOCATIONS_ACTIVATE" },
   { topic: "locations/create", graphql_topic: "LOCATIONS_CREATE" },
@@ -332,6 +405,7 @@ const availableTopics = [
   { topic: "orders/delete", graphql_topic: "ORDERS_DELETE" },
   { topic: "orders/edited", graphql_topic: "ORDERS_EDITED" },
   { topic: "orders/fulfilled", graphql_topic: "ORDERS_FULFILLED" },
+  { topic: "orders/link_requested", graphql_topic: "ORDERS_LINK_REQUESTED" },
   { topic: "orders/paid", graphql_topic: "ORDERS_PAID" },
   {
     topic: "orders/partially_fulfilled",
@@ -396,6 +470,7 @@ const availableTopics = [
   { topic: "returns/cancel", graphql_topic: "RETURNS_CANCEL" },
   { topic: "returns/close", graphql_topic: "RETURNS_CLOSE" },
   { topic: "returns/decline", graphql_topic: "RETURNS_DECLINE" },
+  { topic: "returns/process", graphql_topic: "RETURNS_PROCESS" },
   { topic: "returns/reopen", graphql_topic: "RETURNS_REOPEN" },
   { topic: "returns/request", graphql_topic: "RETURNS_REQUEST" },
   { topic: "returns/update", graphql_topic: "RETURNS_UPDATE" },
@@ -433,6 +508,14 @@ const availableTopics = [
   {
     topic: "selling_plan_groups/update",
     graphql_topic: "SELLING_PLAN_GROUPS_UPDATE",
+  },
+  {
+    topic: "shipping_addresses/create",
+    graphql_topic: "SHIPPING_ADDRESSES_CREATE",
+  },
+  {
+    topic: "shipping_addresses/update",
+    graphql_topic: "SHIPPING_ADDRESSES_UPDATE",
   },
   { topic: "shop/redact", graphql_topic: "SHOP_REDACT" },
   { topic: "shop/update", graphql_topic: "SHOP_UPDATE" },
@@ -496,6 +579,8 @@ const availableTopics = [
     topic: "subscription_contracts/update",
     graphql_topic: "SUBSCRIPTION_CONTRACTS_UPDATE",
   },
+  { topic: "tax_services/create", graphql_topic: "TAX_SERVICES_CREATE" },
+  { topic: "tax_services/update", graphql_topic: "TAX_SERVICES_UPDATE" },
   {
     topic: "tender_transactions/create",
     graphql_topic: "TENDER_TRANSACTIONS_CREATE",
