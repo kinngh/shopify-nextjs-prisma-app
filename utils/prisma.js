@@ -17,6 +17,7 @@ const adapter = new PrismaPg({ connectionString });
  *   `bun install @prisma/adapter-mariadb; bun uninstall pg @prisma/adapter-pg`
  */
 
+// import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 // const regex = /^mysql:\/\/([^:]+):([^@]*)@([^:]+):(\d+)\/(.+)$/;
 // const match = connectionString.match(regex);
 // if (!match) {
