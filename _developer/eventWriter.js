@@ -3,10 +3,17 @@ import path from "path";
 import shopify from "../utils/shopify.js";
 
 const eventWriter = (config) => {
-  const events = shopify.user.events || [];
+  const events = shopify.user.events?.subscriptions || [];
   if (!events.length) {
     writeToApi();
     return;
+  }
+
+  const apiVersion = shopify.user.events.api_version;
+  if (typeof apiVersion !== "string" || !apiVersion.trim()) {
+    throw new Error(
+      "events.api_version must be a non-empty string when configuring event subscriptions."
+    );
   }
 
   const handles = new Set();
@@ -26,6 +33,18 @@ const eventWriter = (config) => {
       handle: events[entry].handle,
     };
 
+    if (events[entry].api_version !== undefined) {
+      if (
+        typeof events[entry].api_version !== "string" ||
+        !events[entry].api_version.trim()
+      ) {
+        throw new Error(
+          `Event subscription ${events[entry].handle}: api_version must be a non-empty string when provided.`
+        );
+      }
+      subscription.api_version = events[entry].api_version;
+    }
+
     if (events[entry].triggers) {
       subscription.triggers = events[entry].triggers;
     }
@@ -42,7 +61,7 @@ const eventWriter = (config) => {
   }
 
   config.events = {};
-  config.events.api_version = "unstable"; //MARK:- At a later stage, once Events goes GA, update this to follow versioning with override support in `utils/shopify.js`
+  config.events.api_version = apiVersion;
   config.events.subscription = [...subscriptionsArray];
 
   writeToApi();
@@ -103,7 +122,7 @@ async function writeToApi() {
     // Combine everything
     eventsTopicFileContent = newFileContent + mainContent;
 
-    const events = shopify.user.events || [];
+    const events = shopify.user.events?.subscriptions || [];
 
     // Generate the switch/case statement
     let switchCaseStatement = "switch (eventHandle) {\n";

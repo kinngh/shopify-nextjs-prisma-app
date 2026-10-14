@@ -68,13 +68,14 @@
 /**
  * Event configuration
  * @typedef {Object} EventsConfig
- * @property {"unstable"} api_version - The API version to be used for events.
+ * @property {string} api_version - The API version to be used for events.
  * @property {EventSubscription[]} subscription - Array of event subscriptions.
  */
 
 /**
  * Event subscription
  * @typedef {Object} EventSubscription
+ * @property {string} [api_version] - Optional non-empty API version override; when omitted, uses events.api_version.
  * @property {('Product' | 'Customer')} topic - Event topic.
  * @property {Array<('create' | 'update' | 'delete')>} actions - Event actions.
  * @property {string} uri - The URI to receive events.

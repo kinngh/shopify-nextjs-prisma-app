@@ -38,32 +38,39 @@ shopify = {
       },
     ],
     /**
-     * @type {Array<{
-     *   topic: import("@/_developer/types/eventTopics.js").EventTopics["topic"],
-     *   actions: import("@/_developer/types/eventTopics.js").EventTopics["actions"],
-     *   uri: string,
-     *   handle: string,
-     *   callback: Function,
-     *   triggers?: string[],
-     *   query?: string,
-     *   query_filter?: string
-     * }>}
+     * @type {{
+     *   api_version: string,
+     *   subscriptions: Array<{
+     *     api_version?: string,
+     *     topic: import("@/_developer/types/eventTopics.js").EventTopics["topic"],
+     *     actions: import("@/_developer/types/eventTopics.js").EventTopics["actions"],
+     *     uri: string,
+     *     handle: string,
+     *     callback: Function,
+     *     triggers?: string[],
+     *     query?: string,
+     *     query_filter?: string
+     *   }>
+     * }}
      */
-    events: [
-      // {
-      //   topic: "Product",
-      //   actions: ["create", "update", "delete"],
-      //   uri: "/api/events/product",
-      //   handle: "this-is-my-handle",
-      //   callback: productEventHandler,
-      //   triggers: [""],
-      //   query: /* GraphQL */ `
-      //     query your_query {
-      //     }
-      //   `,
-      //   query_filter: "",
-      // },
-    ],
+    events: {
+      api_version: process.env.SHOPIFY_API_VERSION,
+      subscriptions: [
+        // {
+        //   topic: "Product",
+        //   actions: ["create", "update", "delete"],
+        //   uri: "/api/events/product",
+        //   handle: "this-is-my-handle",
+        //   callback: productEventHandler,
+        //   triggers: [""],
+        //   query: /* GraphQL */ `
+        //     query your_query {
+        //     }
+        //   `,
+        //   query_filter: "",
+        // },
+      ],
+    },
 
     /**
      * @type {import("@/_developer/types/declarative.js").DeclarativeMetafieldDefinition[]}
