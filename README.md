@@ -27,3 +27,4 @@ Building with Express and React was great but eventually there comes a time wher
 - Shopify Managed Installation migration guide is available [here](/docs/migration/oauth-to-managed-installation.md)
 - Client Provider abstraction update guide is available [here](/docs/migration/clientProvider.md)
 - GraphQL to Managed Webhooks migration guide is available [here](/docs/migration/managed-webhooks.md)
+- GDPR callbacks now use the regular webhook route; see the [URL and callback migration](/docs/migration/managed-webhooks.md#gdpr-webhooks).

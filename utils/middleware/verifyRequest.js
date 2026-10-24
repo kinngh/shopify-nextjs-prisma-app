@@ -1,7 +1,6 @@
 import sessionHandler from "@/utils/sessionHandler.js";
 import shopify from "@/utils/shopify.js";
 import { RequestedTokenType, Session } from "@shopify/shopify-api";
-import validateJWT from "../validateJWT.js";
 
 /**
  *
@@ -15,26 +14,34 @@ import validateJWT from "../validateJWT.js";
 const verifyRequest = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
-    if (!authHeader) {
-      throw Error("No authorization header found.");
+    const match =
+      typeof authHeader === "string" && authHeader.match(/^Bearer (\S+)$/);
+    if (!match) {
+      throw Error("No valid bearer token found.");
     }
 
-    const payload = validateJWT(authHeader.split(" ")[1]);
+    const sessionToken = match[1];
+    const payload = await shopify.session.decodeSessionToken(sessionToken);
 
-    let shop = shopify.utils.sanitizeShop(payload.dest.replace("https://", ""));
+    if (!Number.isFinite(payload.exp) || !Number.isFinite(payload.nbf)) {
+      throw Error("Session token is missing required timestamps.");
+    }
+    if (typeof payload.sub !== "string" || !payload.sub) {
+      throw Error("Session token is missing the admin user.");
+    }
+
+    const shop =
+      typeof payload.dest === "string" &&
+      shopify.utils.sanitizeShop(payload.dest.replace(/^https:\/\//, ""));
     if (!shop) {
       throw Error("No shop found, not a valid request");
     }
 
-    const sessionId = await shopify.session.getCurrentId({
-      isOnline: true,
-      rawRequest: req,
-      rawResponse: res,
-    });
+    const sessionId = shopify.session.getJwtSessionId(shop, payload.sub);
 
     let session = await sessionHandler.loadSession(sessionId);
     if (!session) {
-      session = await getSession({ shop, authHeader });
+      session = await getSession({ shop, sessionToken });
     }
 
     if (
@@ -42,7 +49,7 @@ const verifyRequest = async (req, res, next) => {
       shopify.config.scopes.equals(session?.scope)
     ) {
     } else {
-      session = await getSession({ shop, authHeader });
+      session = await getSession({ shop, sessionToken });
     }
 
     //Add session and shop to the request object so any subsequent routes that use this middleware can access it
@@ -52,10 +59,8 @@ const verifyRequest = async (req, res, next) => {
     await next();
 
     return;
-  } catch (e) {
-    console.error(
-      `---> An error happened at verifyRequest middleware: ${e.message}`
-    );
+  } catch {
+    console.error("---> An error happened at verifyRequest middleware.");
     return res.status(401).send({ error: "Unauthorized call" });
   }
 };
@@ -63,20 +68,18 @@ const verifyRequest = async (req, res, next) => {
 export default verifyRequest;
 
 /**
- * Retrieves and stores session information based on the provided authentication header and offline flag.
+ * Exchanges the verified session token for online and expiring offline sessions.
  *
  * @async
  * @function getSession
  * @param {Object} params - The function parameters.
  * @param {string} params.shop - The xxx.myshopify.com url of the requesting store.
- * @param {string} params.authHeader - The authorization header containing the session token.
+ * @param {string} params.sessionToken - The verified Shopify session token.
  * @returns {Promise<Session>} The online session object
  */
 
-async function getSession({ shop, authHeader }) {
+async function getSession({ shop, sessionToken }) {
   try {
-    const sessionToken = authHeader.split(" ")[1];
-
     const { session: onlineSession } = await shopify.auth.tokenExchange({
       sessionToken,
       shop,
@@ -95,9 +98,7 @@ async function getSession({ shop, authHeader }) {
     await sessionHandler.storeSession(offlineSession);
 
     return new Session(onlineSession);
-  } catch (e) {
-    console.error(
-      `---> Error happened while pulling session from Shopify: ${e.message}`
-    );
+  } catch {
+    console.error("---> Error happened while pulling session from Shopify.");
   }
 }

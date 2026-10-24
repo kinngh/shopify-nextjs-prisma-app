@@ -8,7 +8,13 @@
  */
 
 import shopify from "@/utils/shopify.js";
+import customersDataRequestHandler from "@/utils/webhooks/gdpr/customers_data_request.js";
+import customersRedactHandler from "@/utils/webhooks/gdpr/customers_redact.js";
+import shopRedactHandler from "@/utils/webhooks/gdpr/shop_redact.js";
+
+//WEBHOOK IMPORTS
 import appUninstallHandler from "@/utils/webhooks/app_uninstalled.js";
+//WEBHOOK IMPORTS END
 
 async function buffer(readable) {
   const chunks = [];
@@ -28,8 +34,16 @@ export default async function handler(req, res) {
   const apiVersion = req.headers["x-shopify-api-version"] || "";
   const webhookId = req.headers["x-shopify-webhook-id"] || "";
 
-  const buff = await buffer(req);
-  const rawBody = buff.toString("utf8");
+  let rawBody;
+  try {
+    // Preserve the original UTF-8 bytes for HMAC validation.
+    rawBody = new TextDecoder("utf-8", {
+      fatal: true,
+      ignoreBOM: true,
+    }).decode(await buffer(req));
+  } catch {
+    return res.status(400).send({ error: "Invalid webhook body" });
+  }
 
   try {
     const validateWebhook = await shopify.webhooks.validate({
@@ -38,15 +52,32 @@ export default async function handler(req, res) {
       rawResponse: res,
     });
 
-    if (validateWebhook.valid) {
-    } else {
-      return res.status(400).send({ error: true });
+    if (!validateWebhook.valid) {
+      return res.status(401).send({ error: true });
     }
 
-    //SWITCHCASE
+    // Required privacy webhooks remain present when custom hooks are regenerated.
     switch (validateWebhook.topic) {
-      case "APP_UNINSTALLED":
-        await appUninstallHandler(
+      case "CUSTOMERS_DATA_REQUEST":
+        await customersDataRequestHandler(
+          validateWebhook.topic,
+          shop,
+          rawBody,
+          webhookId,
+          apiVersion
+        );
+        break;
+      case "CUSTOMERS_REDACT":
+        await customersRedactHandler(
+          validateWebhook.topic,
+          shop,
+          rawBody,
+          webhookId,
+          apiVersion
+        );
+        break;
+      case "SHOP_REDACT":
+        await shopRedactHandler(
           validateWebhook.topic,
           shop,
           rawBody,
@@ -55,9 +86,22 @@ export default async function handler(req, res) {
         );
         break;
       default:
-        throw new Error(`Can't find a handler for ${topic}`);
+        //SWITCHCASE
+        switch (validateWebhook.topic) {
+          case "APP_UNINSTALLED":
+            await appUninstallHandler(
+              validateWebhook.topic,
+              shop,
+              rawBody,
+              webhookId,
+              apiVersion
+            );
+            break;
+          default:
+            throw new Error(`Can't find a handler for ${topic}`);
+        }
+      //SWITCHCASE END
     }
-    //SWITCHCASE END
 
     console.log(`--> Processed ${topic} from ${shop}`);
     return res.status(200).send({ message: "ok" });

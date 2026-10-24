@@ -68,9 +68,9 @@ try {
 
   // GDPR URLs
   config.webhooks.privacy_compliance = {};
-  config.webhooks.privacy_compliance.customer_data_request_url = `${appUrl}/api/gdpr/customers_data_request`;
-  config.webhooks.privacy_compliance.customer_deletion_url = `${appUrl}/api/gdpr/customers_redact`;
-  config.webhooks.privacy_compliance.shop_deletion_url = `${appUrl}/api/gdpr/shop_redact`;
+  config.webhooks.privacy_compliance.customer_data_request_url = `${appUrl}/api/webhooks/gdpr/customers_data_request`;
+  config.webhooks.privacy_compliance.customer_deletion_url = `${appUrl}/api/webhooks/gdpr/customers_redact`;
+  config.webhooks.privacy_compliance.shop_deletion_url = `${appUrl}/api/webhooks/gdpr/shop_redact`;
 
   // App Proxy
   if (

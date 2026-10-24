@@ -60,10 +60,11 @@ This is an in-depth guide on using this repo. This goes over getting the base re
 - [ ] Setup Partner Dashboard
   - Run `npm run ngrok` or `npm run cloudflare` to generate your subdomain. Copy the `https://<your-url>` domain and add it in `SHOPIFY_APP_URL` in your `.env` file.
   - Run `npm run update:config` to create and update your `shopify.app.toml` file and sync with Shopify.
-  - GPDR handlers are available at `page/api/gdpr/` and the URLs that are auto registered via your toml are are:
-    - Customers Data Request: `https://<your-url>/api/gdpr/customers_data_request`
-    - Customers Redact: `https://<your-url>/api/gdpr/customers_redact`
-    - Shop Redact: `https://<your-url>/api/gdpr/shop_redact`
+  - GDPR callbacks live in `utils/webhooks/gdpr/`. The shared `pages/api/webhooks/[...webhookTopic].js` route always imports and dispatches them after verifying signatures with `shopify.webhooks.validate`. You don't need to add them to `utils/shopify.js`; setup declares these URLs directly under `[webhooks.privacy_compliance]` in your TOML:
+    - Customers Data Request: `https://<your-url>/api/webhooks/gdpr/customers_data_request`
+    - Customers Redact: `https://<your-url>/api/webhooks/gdpr/customers_redact`
+    - Shop Redact: `https://<your-url>/api/webhooks/gdpr/shop_redact`
+  - Implement your app's data export/deletion logic in those callbacks; the boilerplate currently logs the payloads.
   - App Proxy routes are setup to allow accessing data from your app directly from the store. An example proxy route has been setup and is available at `/pages/api/proxy_route`. First you need to setup your base urls. Here's how to get it working:
     - Subpath Prefix: `apps` [fill in env]
     - Subpath: `next-proxy` [fill in env]

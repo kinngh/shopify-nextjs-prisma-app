@@ -7,7 +7,7 @@ export default function Document() {
         <script
           src={`https://cdn.shopify.com/shopifycloud/app-bridge.js?apiKey=${process.env.CONFIG_SHOPIFY_API_KEY}`}
         ></script>
-        <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+        <script src="https://cdn.shopify.com/shopifycloud/polaris-2.js"></script>
       </Head>
       <body>
         <Main />

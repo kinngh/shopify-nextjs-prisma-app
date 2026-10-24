@@ -646,35 +646,19 @@ async function writeToApi() {
  * To update this file, run \`npm run update:config\` or \`bun run update:config\`
  */\n\n`;
 
-    // Remove the existing comment if it's already there
+    // Update the instructions while preserving the fixed GDPR imports and cases.
     webhookTopicFileContent = webhookTopicFileContent.replace(
       /\/\*\*[\s\S]*?\*\/\s*/,
-      ""
+      topComment
     );
 
-    // Start with the comment and shopify import
-    let newFileContent =
-      topComment + 'import shopify from "@/utils/shopify.js";\n';
-
-    // Add new imports from webhook handlers
-    if (webhookImports) {
-      webhookImports.forEach((importStatement) => {
-        const formattedImportStatement = importStatement.replace(
-          "./webhooks",
-          "@/utils/webhooks"
-        );
-        newFileContent += formattedImportStatement + "\n";
-      });
-    }
-
-    // Get the rest of the file content after imports
-    const mainContent = webhookTopicFileContent.replace(
-      /^([\s\S]*?^import[^\n]*\n)+/m,
-      ""
+    const generatedImports = (webhookImports || [])
+      .map((statement) => statement.replace("./webhooks", "@/utils/webhooks"))
+      .join("\n");
+    webhookTopicFileContent = webhookTopicFileContent.replace(
+      /\/\/WEBHOOK IMPORTS\n[\s\S]*?\/\/WEBHOOK IMPORTS END/,
+      `//WEBHOOK IMPORTS\n${generatedImports}\n//WEBHOOK IMPORTS END`
     );
-
-    // Combine everything
-    webhookTopicFileContent = newFileContent + mainContent;
 
     // Check for duplicate topics
     const topicCounts = {};
